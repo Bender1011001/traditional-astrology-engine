@@ -1,0 +1,2123 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "jaimini",
+ "source_pack_id": "jaimini_upadesa_sutra_technique_v1",
+ "status": "research_only. Vectors of two kinds. (a) Rule-fires vectors assert that the encoded rule reproduces the stated outcome of its sutra. (b) Worked-example vectors reproduce Abhyankar's own fourteen karaka-kundalis from Introduction paragraphs 114-129, read off the page images. Their results are published pass AND fail: seven of the eight charts that print degrees reproduce Abhyankar's stated Atmakaraka under the highest-degree-within-sign rule, and one -- Nehru -- does not, under any Rahu convention.",
+ "source_ids": [
+  "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+  "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+  "jaimini_sutrarthaprakasika_dli_2015_242319"
+ ],
+ "vectors": [
+  {
+   "vector_id": "jaimini.v.text.opening.vrddhopadesa",
+   "rule_ids": [
+    "jaimini.text.opening.vrddhopadesa"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the pack presents itself as vrddha-upadesa, received instruction"
+   },
+   "provenance": "Sutra 1.1.1 (Abhyankar 1.1.1): शासत्रसुघां वितरिष्यन्‌ काश्यां घोमत्सुधाकरो जयति -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.1",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.text.katapayadi.bhavas-and-rasis",
+   "rule_ids": [
+    "jaimini.text.katapayadi.bhavas-and-rasis"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "decode the word's consonants as katapayadi numerals to obtain the bhava or rasi number"
+   },
+   "provenance": "Sutra 1.1.31 (Abhyankar 1.1.32): सर्वत्र सवर्णा भावा रायश्च -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.32",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.text.katapayadi.not-grahas",
+   "rule_ids": [
+    "jaimini.text.katapayadi.not-grahas"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "read the word as the planet it names; do not decode it as a numeral"
+   },
+   "provenance": "Sutra 1.1.32 (Abhyankar 1.1.33): न ग्रहाः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.33",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.movable",
+   "rule_ids": [
+    "jaimini.drsti.rasi.movable"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Leo",
+     "Scorpio",
+     "Aquarius"
+    ],
+    "not_aspected": [
+     "Taurus"
+    ]
+   },
+   "provenance": "Sutra 1.1.2 with the vrddha karika; independently confirmed in Abhyankar's own worked chart of Justice M. G. Ranade (Introduction para 117), where Mars in Aries is said to aspect the 7th from the karaka lagna Aquarius, i.e. Leo.",
+   "inputs": {
+    "sign": "Aries",
+    "modality": "movable"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.movable.2",
+   "rule_ids": [
+    "jaimini.drsti.rasi.movable"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Scorpio",
+     "Aquarius",
+     "Taurus"
+    ],
+    "not_aspected": [
+     "Leo"
+    ]
+   },
+   "provenance": "Sutra 1.1.2 with the vrddha karika; independently confirmed in Abhyankar's own worked chart of Justice M. G. Ranade (Introduction para 117), where Mars in Aries is said to aspect the 7th from the karaka lagna Aquarius, i.e. Leo.",
+   "inputs": {
+    "sign": "Cancer",
+    "modality": "movable"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.movable.3",
+   "rule_ids": [
+    "jaimini.drsti.rasi.movable"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Aquarius",
+     "Taurus",
+     "Leo"
+    ],
+    "not_aspected": [
+     "Scorpio"
+    ]
+   },
+   "provenance": "Sutra 1.1.2 with the vrddha karika; independently confirmed in Abhyankar's own worked chart of Justice M. G. Ranade (Introduction para 117), where Mars in Aries is said to aspect the 7th from the karaka lagna Aquarius, i.e. Leo.",
+   "inputs": {
+    "sign": "Libra",
+    "modality": "movable"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.movable.4",
+   "rule_ids": [
+    "jaimini.drsti.rasi.movable"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Taurus",
+     "Leo",
+     "Scorpio"
+    ],
+    "not_aspected": [
+     "Aquarius"
+    ]
+   },
+   "provenance": "Sutra 1.1.2 with the vrddha karika; independently confirmed in Abhyankar's own worked chart of Justice M. G. Ranade (Introduction para 117), where Mars in Aries is said to aspect the 7th from the karaka lagna Aquarius, i.e. Leo.",
+   "inputs": {
+    "sign": "Capricorn",
+    "modality": "movable"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.fixed",
+   "rule_ids": [
+    "jaimini.drsti.rasi.fixed"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Cancer",
+     "Libra",
+     "Capricorn"
+    ],
+    "not_aspected": [
+     "Aries"
+    ]
+   },
+   "provenance": "Sutra 1.1.2. Confirmed in Abhyankar's Ranade chart: Venus in Aquarius is said to aspect the 9th from the karaka lagna Aquarius, i.e. Libra, which is exactly Aquarius' movable aspect.",
+   "inputs": {
+    "sign": "Taurus",
+    "modality": "fixed"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.fixed.2",
+   "rule_ids": [
+    "jaimini.drsti.rasi.fixed"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Libra",
+     "Capricorn",
+     "Aries"
+    ],
+    "not_aspected": [
+     "Cancer"
+    ]
+   },
+   "provenance": "Sutra 1.1.2. Confirmed in Abhyankar's Ranade chart: Venus in Aquarius is said to aspect the 9th from the karaka lagna Aquarius, i.e. Libra, which is exactly Aquarius' movable aspect.",
+   "inputs": {
+    "sign": "Leo",
+    "modality": "fixed"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.fixed.3",
+   "rule_ids": [
+    "jaimini.drsti.rasi.fixed"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Capricorn",
+     "Aries",
+     "Cancer"
+    ],
+    "not_aspected": [
+     "Libra"
+    ]
+   },
+   "provenance": "Sutra 1.1.2. Confirmed in Abhyankar's Ranade chart: Venus in Aquarius is said to aspect the 9th from the karaka lagna Aquarius, i.e. Libra, which is exactly Aquarius' movable aspect.",
+   "inputs": {
+    "sign": "Scorpio",
+    "modality": "fixed"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.fixed.4",
+   "rule_ids": [
+    "jaimini.drsti.rasi.fixed"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Aries",
+     "Cancer",
+     "Libra"
+    ],
+    "not_aspected": [
+     "Capricorn"
+    ]
+   },
+   "provenance": "Sutra 1.1.2. Confirmed in Abhyankar's Ranade chart: Venus in Aquarius is said to aspect the 9th from the karaka lagna Aquarius, i.e. Libra, which is exactly Aquarius' movable aspect.",
+   "inputs": {
+    "sign": "Aquarius",
+    "modality": "fixed"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.dual",
+   "rule_ids": [
+    "jaimini.drsti.rasi.dual"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Virgo",
+     "Sagittarius",
+     "Pisces"
+    ],
+    "not_aspected": []
+   },
+   "provenance": "Sutra 1.1.2; both witnesses agree that the dual signs aspect one another without exclusion.",
+   "inputs": {
+    "sign": "Gemini",
+    "modality": "dual"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.dual.2",
+   "rule_ids": [
+    "jaimini.drsti.rasi.dual"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Gemini",
+     "Sagittarius",
+     "Pisces"
+    ],
+    "not_aspected": []
+   },
+   "provenance": "Sutra 1.1.2; both witnesses agree that the dual signs aspect one another without exclusion.",
+   "inputs": {
+    "sign": "Virgo",
+    "modality": "dual"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.dual.3",
+   "rule_ids": [
+    "jaimini.drsti.rasi.dual"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Gemini",
+     "Virgo",
+     "Pisces"
+    ],
+    "not_aspected": []
+   },
+   "provenance": "Sutra 1.1.2; both witnesses agree that the dual signs aspect one another without exclusion.",
+   "inputs": {
+    "sign": "Sagittarius",
+    "modality": "dual"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.dual.4",
+   "rule_ids": [
+    "jaimini.drsti.rasi.dual"
+   ],
+   "expected": {
+    "aspected_signs": [
+     "Gemini",
+     "Virgo",
+     "Sagittarius"
+    ],
+    "not_aspected": []
+   },
+   "provenance": "Sutra 1.1.2; both witnesses agree that the dual signs aspect one another without exclusion.",
+   "inputs": {
+    "sign": "Pisces",
+    "modality": "dual"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.graha.inherits-rasi-drsti",
+   "rule_ids": [
+    "jaimini.drsti.graha.inherits-rasi-drsti"
+   ],
+   "expected": {
+    "aspects_signs": [
+     "Scorpio",
+     "Aquarius",
+     "Taurus"
+    ]
+   },
+   "provenance": "Sutra 1.1.3. Abhyankar's Lokur chart (Introduction para 128) says Saturn, which the diagram places in rasi 4 (Cancer), aspects the 7th from the karaka lagna rasi 2, i.e. rasi 8 (Scorpio) - which is Cancer's movable aspect and not a Parasari 7th.",
+   "inputs": {
+    "graha": "Saturn",
+    "graha_rasi": "Cancer"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.excluded-sign-is-the-adjacent-one",
+   "rule_ids": [
+    "jaimini.drsti.rasi.excluded-sign-is-the-adjacent-one"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "exactly one candidate sign is excluded, and it is the adjacent one"
+   },
+   "provenance": "Sutra 1.1.2 (Abhyankar 1.1.2): तत्युचोस्ि प्रसरितयशश््रौरयोष्याधिनाथः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.2",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.drsti.rasi.sammukha-parsva-reading.disputed",
+   "rule_ids": [
+    "jaimini.drsti.rasi.sammukha-parsva-reading.disputed"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "front and side aspects are not graded; all three aspects are treated alike"
+   },
+   "provenance": "Sutra 1.1.2 (Abhyankar 1.1.2): तत्युचोस्ि प्रसरितयशश््रौरयोष्याधिनाथः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.2",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.from-2nd-4th-11th",
+   "rule_ids": [
+    "jaimini.argala.from-2nd-4th-11th"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "argala is formed on the reference point"
+   },
+   "provenance": "Sutra 1.1.4 (Abhyankar 1.1.4): शाके योरामयलेन विश्वनाये समर्पिता -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.4",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.from-3rd-malefic-majority",
+   "rule_ids": [
+    "jaimini.argala.from-3rd-malefic-majority"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "argala is formed from the 3rd"
+   },
+   "provenance": "Sutra 1.1.5 (Abhyankar 1.1.5): ६५ ॥ -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.5",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.virodha-houses",
+   "rule_ids": [
+    "jaimini.argala.virodha-houses"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the paired argala is obstructed"
+   },
+   "provenance": "Sutra 1.1.6 (Abhyankar 1.1.6): रिष्फनीचकासस्था विरोधिनः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.6",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.virodhi-pairing.disputed",
+   "rule_ids": [
+    "jaimini.argala.virodhi-pairing.disputed"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "pairing undecided"
+   },
+   "provenance": "Sutra 1.1.6 (Abhyankar 1.1.6): रिष्फनीचकासस्था विरोधिनः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.6",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.virodha-fails-when-weaker",
+   "rule_ids": [
+    "jaimini.argala.virodha-fails-when-weaker"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the obstruction fails and the argala stands"
+   },
+   "provenance": "Sutra 1.1.7 (Abhyankar 1.1.7): न न्यूना विवलाश्च -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.7",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.from-trikona",
+   "rule_ids": [
+    "jaimini.argala.from-trikona"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "trikona argala is formed"
+   },
+   "provenance": "Sutra 1.1.8 (Abhyankar 1.1.8): साधरणीत्यटम्‌ -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.8",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.ketu-counts-backward",
+   "rule_ids": [
+    "jaimini.argala.ketu-counts-backward"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "count Ketu's argala houses in the reverse direction"
+   },
+   "provenance": "Sutra 1.1.9 (Abhyankar 1.1.9): विपरोतं केतोः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.9",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.ketu-reversal-scope.disputed",
+   "rule_ids": [
+    "jaimini.argala.ketu-reversal-scope.disputed"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "scope undecided"
+   },
+   "provenance": "Sutra 1.1.9 (Abhyankar 1.1.9): विपरोतं केतोः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.9",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.argala.target-of-intervention.disputed",
+   "rule_ids": [
+    "jaimini.argala.target-of-intervention.disputed"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "target undecided"
+   },
+   "provenance": "Sutra 1.1.4 (Abhyankar 1.1.4): शाके योरामयलेन विश्वनाये समर्पिता -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.4",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.atmakaraka.by-degree",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree"
+   ],
+   "expected": {
+    "atmakaraka": "Saturn"
+   },
+   "provenance": "Abhyankar's own worked chart of Swami Ramakrishna Paramahamsa, Introduction para 116, where he states 'Saturn is the significatory planet'. The rule reproduces it.",
+   "inputs": {
+    "degrees_within_sign": {
+     "Sun": 1,
+     "Moon": 5,
+     "Mars": 6,
+     "Mercury": 22,
+     "Jupiter": 2,
+     "Venus": 17,
+     "Saturn": 26,
+     "Rahu": 12
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.atmakaraka.bandha-moksa",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.bandha-moksa"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the Atmakaraka governs bandha and moksa - bondage and release, misery and happiness"
+   },
+   "provenance": "Sutra 1.1.11 (Abhyankar 1.1.11): स ईष्टे बन्धमोक्षयोः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.11",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.amatyakaraka",
+   "rule_ids": [
+    "jaimini.karaka.amatyakaraka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "that graha is the the Minister significator"
+   },
+   "provenance": "Sutra 1.1.12 (Abhyankar 1.1.12): तस्यानुसरणादमालयः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.12",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.bhratrkaraka",
+   "rule_ids": [
+    "jaimini.karaka.bhratrkaraka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "that graha is the the significator of the Brother"
+   },
+   "provenance": "Sutra 1.1.13 (Abhyankar 1.1.13): तस्य श्रता -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.13",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.matrkaraka",
+   "rule_ids": [
+    "jaimini.karaka.matrkaraka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "that graha is the the significator of the Mother"
+   },
+   "provenance": "Sutra 1.1.14 (Abhyankar 1.1.14): तस्य माता -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.14",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.pitrkaraka",
+   "rule_ids": [
+    "jaimini.karaka.pitrkaraka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "that graha is the Pitrkaraka"
+   },
+   "provenance": "chara_karaka -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "chara_karaka",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.putrakaraka",
+   "rule_ids": [
+    "jaimini.karaka.putrakaraka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "that graha is the the significator of the Son"
+   },
+   "provenance": "Sutra 1.1.16 (Abhyankar 1.1.17): तस्य ज्ञातिः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.17",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.jnatikaraka",
+   "rule_ids": [
+    "jaimini.karaka.jnatikaraka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "that graha is the the significator of kinsfolk"
+   },
+   "provenance": "Sutra 1.1.17 (Abhyankar 1.1.18): कार्य इति सूचकदन्ेति -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.18",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.darakaraka",
+   "rule_ids": [
+    "jaimini.karaka.darakaraka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "that graha is the the significator of the Wife"
+   },
+   "provenance": "Sutra 1.1.18 (Abhyankar 1.1.19): मात्रा सह पुत्रमेकं समामनन्ति -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.19",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.scheme.seven",
+   "rule_ids": [
+    "jaimini.karaka.scheme.seven"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "seven chara karakas; the Matrkaraka doubles as Putrakaraka; no distinct Pitrkaraka"
+   },
+   "provenance": "Sutra 1.1.18 (Abhyankar 1.1.19): मात्रा सह पुत्रमेकं समामनन्ति -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.19",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.scheme.eight",
+   "rule_ids": [
+    "jaimini.karaka.scheme.eight"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "eight chara karakas with a distinct Pitrkaraka"
+   },
+   "provenance": "Sutra 1.1.10 (Abhyankar 1.1.10): आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.10",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.scheme.undecided",
+   "rule_ids": [
+    "jaimini.karaka.scheme.undecided"
+   ],
+   "expected": {
+    "engine_behaviour": "abstain",
+    "reason": "karaka scheme not declared"
+   },
+   "provenance": "Sutra 1.1.10 (Abhyankar 1.1.10): आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.10",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.rahu.forward-counted",
+   "rule_ids": [
+    "jaimini.karaka.rahu.forward-counted"
+   ],
+   "expected": {
+    "atmakaraka": "Saturn"
+   },
+   "provenance": "Abhyankar's Sardar Vallabhbhai Patel chart, Introduction para 125: 'Saturn is the Significatory Planet.' Forward counting gives Saturn at 20 degrees. This chart is the one that discriminates between the Rahu conventions.",
+   "inputs": {
+    "degrees_within_sign": {
+     "Sun": 6,
+     "Moon": 1,
+     "Mars": 4,
+     "Mercury": 4,
+     "Jupiter": 10,
+     "Venus": 14,
+     "Saturn": 20,
+     "Rahu": 5
+    },
+    "rahu_counting": "forward"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.rahu.reverse-counted",
+   "rule_ids": [
+    "jaimini.karaka.rahu.reverse-counted"
+   ],
+   "expected": {
+    "atmakaraka_under_this_convention": "Rahu",
+    "abhyankar_states": "Saturn",
+    "verdict": "fail - the reverse-counting convention contradicts the critical editor's own worked chart"
+   },
+   "provenance": "Introduction para 125 (Patel). Published as a failing vector on purpose: it is the only one of the fourteen charts whose numbers discriminate between the two Rahu conventions.",
+   "inputs": {
+    "degrees_within_sign": {
+     "Sun": 6,
+     "Moon": 1,
+     "Mars": 4,
+     "Mercury": 4,
+     "Jupiter": 10,
+     "Venus": 14,
+     "Saturn": 20,
+     "Rahu": 5
+    },
+    "rahu_counting": "reverse"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.rahu.excluded",
+   "rule_ids": [
+    "jaimini.karaka.rahu.excluded"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "Rahu and Ketu are not candidates for any karaka"
+   },
+   "provenance": "Sutra 1.1.18 (Abhyankar 1.1.19): मात्रा सह पुत्रमेकं समामनन्ति -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.19",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.rahu-ketu.count-as-one",
+   "rule_ids": [
+    "jaimini.karaka.rahu-ketu.count-as-one"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "Ketu is not a separate karaka candidate; Rahu stands for the pair"
+   },
+   "provenance": "Sutra 1.1.10 (Abhyankar 1.1.10): आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.10",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.tie-break.finer-units",
+   "rule_ids": [
+    "jaimini.karaka.tie-break.finer-units"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "resolve by minutes, then seconds, then finer"
+   },
+   "provenance": "Sutra 1.1.10 (Abhyankar 1.1.10): आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.10",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.tie-break.stronger-graha",
+   "rule_ids": [
+    "jaimini.karaka.tie-break.stronger-graha"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "resolve by graha strength"
+   },
+   "provenance": "Sutra 1.1.10 (Abhyankar 1.1.10): आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.10",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.tie-break.sthira-karaka",
+   "rule_ids": [
+    "jaimini.karaka.tie-break.sthira-karaka"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "resolve by the fixed significator of the topic in question"
+   },
+   "provenance": "Sutra 1.1.10 (Abhyankar 1.1.10): आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.10",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.karaka.outranks-lagna-lord",
+   "rule_ids": [
+    "jaimini.karaka.outranks-lagna-lord"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "read the Atmakaraka before and above the lagna lord"
+   },
+   "provenance": "Sutra 1.1.11 (Abhyankar 1.1.11): स ईष्टे बन्धमोक्षयोः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.11",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.sthira-karaka.mars.siblings-and-mother",
+   "rule_ids": [
+    "jaimini.sthira-karaka.mars.siblings-and-mother"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "read the topic from Mars"
+   },
+   "provenance": "Sutra 1.1.19 (Abhyankar 1.1.20): भगिन्यारतः इयाः कनीयान्‌ जननी च -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.20",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.sthira-karaka.mercury.maternal-kin",
+   "rule_ids": [
+    "jaimini.sthira-karaka.mercury.maternal-kin"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "read the topic from Mercury"
+   },
+   "provenance": "Sutra 1.1.20 (Abhyankar 1.1.21): इव्यत्तरतः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.21",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.sthira-karaka.jupiter.abhyankar",
+   "rule_ids": [
+    "jaimini.sthira-karaka.jupiter.abhyankar"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "read all three from Jupiter"
+   },
+   "provenance": "Sutra 1.1.21 (Abhyankar 1.1.22): जानीयात्‌ -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.22",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.sthira-karaka.jupiter-venus-saturn.sutrarthaprakasika",
+   "rule_ids": [
+    "jaimini.sthira-karaka.jupiter-venus-saturn.sutrarthaprakasika"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "grandfather from Jupiter, husband from Venus, son from Saturn"
+   },
+   "provenance": "Sutra 1.1.21 (Abhyankar 1.1.22): जानीयात्‌ -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.22",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.sthira-karaka.venus-and-the-next-four",
+   "rule_ids": [
+    "jaimini.sthira-karaka.venus-and-the-next-four"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "from Venus; or distributed over Venus, Saturn, the Sun and the Moon in that order"
+   },
+   "provenance": "Sutra 1.1.22 (Abhyankar 1.1.23): न्तवासिनः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.23",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.graha-bala.saturn-most-feeble",
+   "rule_ids": [
+    "jaimini.graha-bala.saturn-most-feeble"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "Saturn ranks last in natural strength"
+   },
+   "provenance": "Sutra 1.1.23 (Abhyankar 1.1.24): प्रयोजनं तु लघुजातके “वलस म्येऽस्ादधिकचिन्ता\" इति -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.24",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.graha-bala.natural-order.imported",
+   "rule_ids": [
+    "jaimini.graha-bala.natural-order.imported"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "use the Brhajjataka order and disclose the import"
+   },
+   "provenance": "Sutra 1.1.23 (Abhyankar 1.1.24): प्रयोजनं तु लघुजातके “वलस म्येऽस्ादधिकचिन्ता\" इति -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.24",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.arudha.lagna.general",
+   "rule_ids": [
+    "jaimini.arudha.lagna.general"
+   ],
+   "expected": {
+    "arudha_lagna": "Leo",
+    "counting": "Aries to Gemini is 3; 3 onward from Gemini is Leo"
+   },
+   "provenance": "Sutra 1.1.28 (Abhyankar 1.1.29), yavad isasrayam padarksanam.",
+   "inputs": {
+    "lagna_sign": "Aries",
+    "lagna_lord_sign": "Gemini"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.arudha.lord-in-4th-yields-4th",
+   "rule_ids": [
+    "jaimini.arudha.lord-in-4th-yields-4th"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the arudha is the 4th from the bhava, not the 7th"
+   },
+   "provenance": "Sutra 1.1.29 (Abhyankar 1.1.30): स्वस्थे दाराः -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.30",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.arudha.lord-in-7th-yields-10th",
+   "rule_ids": [
+    "jaimini.arudha.lord-in-7th-yields-10th"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the arudha is the 10th from the bhava, not the bhava itself"
+   },
+   "provenance": "Sutra 1.1.30 (Abhyankar 1.1.31): सुतस्थे जन्म -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.31",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.arudha.pada-kundali.parallel-frame",
+   "rule_ids": [
+    "jaimini.arudha.pada-kundali.parallel-frame"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "build a parallel twelve-house frame from the twelve arudhas; do not merge it with the rasi chart"
+   },
+   "provenance": "Sutra 1.1.28 (Abhyankar 1.1.29): यावदीशाश्रयं पदस्क्षाणाम्‌ -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.29",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.dasa.chara.direction.odd-forward",
+   "rule_ids": [
+    "jaimini.dasa.chara.direction.odd-forward"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "count the dasa sequence forward (direct) from the sign"
+   },
+   "provenance": "Sutra 1.1.24 (Abhyankar 1.1.25): परानीक्ततिर्वि षमभेष -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.25",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.dasa.chara.direction.even-reverse",
+   "rule_ids": [
+    "jaimini.dasa.chara.direction.even-reverse"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "count the dasa sequence in reverse from the sign"
+   },
+   "provenance": "Sutra 1.1.25 (Abhyankar 1.1.26): पराड्लयोत्तरषु -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.26",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.dasa.chara.direction.fixed-sign-exception",
+   "rule_ids": [
+    "jaimini.dasa.chara.direction.fixed-sign-exception"
+   ],
+   "expected": {
+    "parity_rule_applies": false
+   },
+   "provenance": "Sutra 1.1.26 (Abhyankar 1.1.27), na kvacit; the exception set is agreed by both witnesses.",
+   "inputs": {
+    "sign": "Leo"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.dasa.chara.length.sign-to-its-lord",
+   "rule_ids": [
+    "jaimini.dasa.chara.length.sign-to-its-lord"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "years = signs counted from the dasa sign to its lord's sign, in the sign's own direction"
+   },
+   "provenance": "Sutra 1.1.28 (Abhyankar 1.1.29): यावदीशाश्रयं पदस्क्षाणाम्‌ -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.29",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.dasa.chara.length.conventions-undecided",
+   "rule_ids": [
+    "jaimini.dasa.chara.length.conventions-undecided"
+   ],
+   "expected": {
+    "engine_behaviour": "abstain",
+    "reason": "chara dasa length conventions not declared"
+   },
+   "provenance": "Sutra 1.1.28 (Abhyankar 1.1.29): यावदीशाश्रयं पदस्क्षाणाम्‌ -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "1.1.29",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.dasa.cycle.144-year-bound",
+   "rule_ids": [
+    "jaimini.dasa.cycle.144-year-bound"
+   ],
+   "expected": {
+    "total_maximum_years": 144,
+    "katapayadi_decoding": "viveka = 144"
+   },
+   "provenance": "Sutra 1.1.33 (Abhyankar 1.1.34); one of the two internal worked confirmations of the katapayadi rule.",
+   "inputs": {
+    "sign_periods": 12,
+    "maximum_per_sign": 12
+   }
+  },
+  {
+   "vector_id": "jaimini.v.varga.hora-dreskana.delegated",
+   "rule_ids": [
+    "jaimini.varga.hora-dreskana.delegated"
+   ],
+   "expected": {
+    "attribution": "the external text the definition came from",
+    "jaimini_attribution": false
+   },
+   "provenance": "Sutra 1.1.34 (Abhyankar 1.1.35). This is a refusal the text imposes on itself.",
+   "inputs": {
+    "varga": "navamsa"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.hora.rate",
+   "rule_ids": [
+    "jaimini.special-lagna.hora.rate"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "one rasi per hora (hour) elapsed from the origin"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.bhava.rate",
+   "rule_ids": [
+    "jaimini.special-lagna.bhava.rate"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "one rasi per five ghatikas elapsed from the origin"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.ghatika.rate",
+   "rule_ids": [
+    "jaimini.special-lagna.ghatika.rate"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "one rasi per ghatika elapsed from sunrise"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.origin.from-sun-always",
+   "rule_ids": [
+    "jaimini.special-lagna.origin.from-sun-always"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "origin = the Sun's sign, unconditionally"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.origin.parity-conditioned",
+   "rule_ids": [
+    "jaimini.special-lagna.origin.parity-conditioned"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "origin = the Sun's sign for an odd lagna, the lagna for an even lagna"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.origin.nilakantha-unread",
+   "rule_ids": [
+    "jaimini.special-lagna.origin.nilakantha-unread"
+   ],
+   "expected": {
+    "engine_behaviour": "abstain",
+    "reason": "Nilakantha's own text not recoverable"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.origin.undecided",
+   "rule_ids": [
+    "jaimini.special-lagna.origin.undecided"
+   ],
+   "expected": {
+    "engine_behaviour": "abstain",
+    "reason": "special lagna origin not declared"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.varnada.construction",
+   "rule_ids": [
+    "jaimini.special-lagna.varnada.construction"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "sum the two counts when the parities agree, difference them when they differ, then count from the lagna"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.varnada.transmitter-uncertainty",
+   "rule_ids": [
+    "jaimini.special-lagna.varnada.transmitter-uncertainty"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the transmitting commentator does not claim to understand the rule; treat any Varnada output as low confidence"
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.special-lagna.varnada.worked-examples-do-not-close",
+   "rule_ids": [
+    "jaimini.special-lagna.varnada.worked-examples-do-not-close"
+   ],
+   "expected": {
+    "status": "unreconciled",
+    "worked_examples_available": 2,
+    "passing": 0
+   },
+   "provenance": "special_lagna -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "special_lagna",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.judgment.hierarchy",
+   "rule_ids": [
+    "jaimini.judgment.hierarchy"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": [
+     "katapayadi decoding",
+     "rasi drsti",
+     "argala and its obstruction",
+     "chara karakas",
+     "sthira karakas alongside",
+     "arudha padas as a parallel frame",
+     "special lagnas",
+     "dasas"
+    ]
+   },
+   "provenance": "judgment_order -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "judgment_order",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.refusal.no-parasari-merge",
+   "rule_ids": [
+    "jaimini.refusal.no-parasari-merge"
+   ],
+   "expected": {
+    "engine_behaviour": "refuse",
+    "reason": "Jaimini and Parasari verdicts may not be merged"
+   },
+   "provenance": "refusal -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "refusal",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked-example.frame.karaka-kundali",
+   "rule_ids": [
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "karaka_lagna_sign": 11,
+    "third_house_occupant": [
+     "Mars"
+    ],
+    "fifth_house_occupant": [
+     "Moon"
+    ],
+    "twelfth_house_occupants": [
+     "Saturn",
+     "Rahu",
+     "Jupiter"
+    ]
+   },
+   "provenance": "Abhyankar, Introduction para 117 (Justice M. G. Ranade). He states Mars in the third, the Moon in the fifth, and Jupiter with Saturn and Rahu in the twelfth. Counting those houses from rasi 11 reproduces his own statements exactly.",
+   "inputs": {
+    "atmakaraka": "Sun",
+    "atmakaraka_sign": 11,
+    "planets_by_sign": {
+     "Mercury": 12,
+     "Saturn": 10,
+     "Rahu": 10,
+     "Jupiter": 10,
+     "Mars": 1,
+     "Sun": 11,
+     "Venus": 11,
+     "Moon": 3,
+     "Ketu": 4
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.ramakrishna.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Saturn",
+    "engine_atmakaraka_highest_degree": "Saturn",
+    "engine_degree": 26,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 116, printed page 102, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "Swami Ramakrishna Paramahamsa",
+    "birth_as_printed": "1835-02-20 ~08:30",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      1,
+      12
+     ],
+     "Moon": [
+      5,
+      12
+     ],
+     "Mars": [
+      6,
+      3
+     ],
+     "Mercury": [
+      22,
+      12
+     ],
+     "Jupiter": [
+      2,
+      1
+     ],
+     "Venus": [
+      17,
+      1
+     ],
+     "Saturn": [
+      26,
+      6
+     ],
+     "Rahu": [
+      12,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.malaviya.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Jupiter",
+    "engine_atmakaraka_highest_degree": "Jupiter",
+    "engine_degree": 26,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 119, printed page 105, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "Pandit Madan Mohan Malaviya",
+    "birth_as_printed": "1861-12-25 13:00",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      2,
+      10
+     ],
+     "Moon": [
+      8,
+      7
+     ],
+     "Mars": [
+      21,
+      8
+     ],
+     "Mercury": [
+      23,
+      9
+     ],
+     "Jupiter": [
+      26,
+      6
+     ],
+     "Venus": [
+      25,
+      11
+     ],
+     "Saturn": [
+      21,
+      6
+     ],
+     "Rahu": [
+      4,
+      10
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.gaekwar.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Jupiter",
+    "engine_atmakaraka_highest_degree": "Jupiter",
+    "engine_degree": 26,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 120, printed page 107, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "H.H. Sayajirao Gaekwar",
+    "birth_as_printed": "1863-03-11/12 02:00",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      20,
+      12
+     ],
+     "Moon": [
+      8,
+      9
+     ],
+     "Mars": [
+      22,
+      9
+     ],
+     "Jupiter": [
+      26,
+      7
+     ],
+     "Venus": [
+      11,
+      1
+     ],
+     "Saturn": [
+      2,
+      7
+     ],
+     "Rahu": [
+      10,
+      9
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.vs-abhyankar.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Venus",
+    "engine_atmakaraka_highest_degree": "Venus",
+    "engine_degree": 26,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 121, printed page 108, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "M.M. Vasudeo Shastri Abhyankar",
+    "birth_as_printed": "1863-08-04 20:08",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      11,
+      5
+     ],
+     "Moon": [
+      18,
+      1
+     ],
+     "Mars": [
+      1,
+      6
+     ],
+     "Mercury": [
+      9,
+      5
+     ],
+     "Jupiter": [
+      24,
+      7
+     ],
+     "Venus": [
+      26,
+      6
+     ],
+     "Saturn": [
+      6,
+      7
+     ],
+     "Rahu": [
+      4,
+      9
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.kelkar.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Moon",
+    "engine_atmakaraka_highest_degree": "Moon",
+    "engine_degree": 20,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 123, printed page 110, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "Sahityasamrat N. C. Kelkar",
+    "birth_as_printed": "1872-08-24/25 04:34",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      1,
+      6
+     ],
+     "Moon": [
+      20,
+      2
+     ],
+     "Mars": [
+      3,
+      5
+     ],
+     "Mercury": [
+      7,
+      6
+     ],
+     "Jupiter": [
+      18,
+      5
+     ],
+     "Venus": [
+      13,
+      6
+     ],
+     "Saturn": [
+      14,
+      10
+     ],
+     "Rahu": [
+      18,
+      3
+     ],
+     "Ketu": [
+      18,
+      9
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.nehru.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Sun",
+    "engine_atmakaraka_highest_degree": "Moon",
+    "engine_degree": 9,
+    "reproduces": false,
+    "verdict": "fail"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 124, printed page 111, read from the page image. Sun at 2 deg is NOT the highest degree-within-sign; Moon at 9 deg is. Rahu reverse-counted would give 26 deg. Neither convention yields the Sun. Verified against the page image at 2x zoom - the print reads 2 deg, and 2 deg is astronomically correct for the stated moment. This chart contradicts sutra 1.1.10 as Abhyankar himself states it.",
+   "inputs": {
+    "chart": "Pandit Jawaharlal Nehru",
+    "birth_as_printed": "1889-11-14 23:00",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      2,
+      8
+     ],
+     "Moon": [
+      9,
+      5
+     ],
+     "Mars": [
+      1,
+      7
+     ],
+     "Mercury": [
+      8,
+      8
+     ],
+     "Jupiter": [
+      6,
+      10
+     ],
+     "Venus": [
+      8,
+      8
+     ],
+     "Saturn": [
+      2,
+      6
+     ],
+     "Rahu": [
+      4,
+      4
+     ],
+     "Ketu": [
+      4,
+      10
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.patel.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Saturn",
+    "engine_atmakaraka_highest_degree": "Saturn",
+    "engine_degree": 20,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 125, printed page 112, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "Sardar Vallabhbhai Patel",
+    "birth_as_printed": "1875-10-31",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      6,
+      8
+     ],
+     "Moon": [
+      1,
+      9
+     ],
+     "Mars": [
+      4,
+      11
+     ],
+     "Mercury": [
+      4,
+      8
+     ],
+     "Jupiter": [
+      10,
+      8
+     ],
+     "Venus": [
+      14,
+      8
+     ],
+     "Saturn": [
+      20,
+      11
+     ],
+     "Rahu": [
+      5,
+      1
+     ],
+     "Ketu": [
+      5,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.mavlankar.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Mars",
+    "engine_atmakaraka_highest_degree": "Mars",
+    "engine_degree": 24,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 126, printed page 113, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "G. V. (Dadasaheb) Mavlankar",
+    "birth_as_printed": "1888-11-27 10:32 Ahmedabad",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      4,
+      9
+     ],
+     "Moon": [
+      12,
+      6
+     ],
+     "Mars": [
+      24,
+      10
+     ],
+     "Mercury": [
+      14,
+      8
+     ],
+     "Jupiter": [
+      11,
+      9
+     ],
+     "Venus": [
+      8,
+      10
+     ],
+     "Saturn": [
+      21,
+      5
+     ],
+     "Rahu": [
+      23,
+      4
+     ],
+     "Ketu": [
+      23,
+      10
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.karandikar.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Mars",
+    "engine_atmakaraka_highest_degree": "Mars",
+    "engine_degree": 29,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 127, printed page 114, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "J. S. (Tatyasaheb) Karandikar",
+    "birth_as_printed": "1875-02-15/16 04:00",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      27,
+      11
+     ],
+     "Moon": [
+      19,
+      3
+     ],
+     "Mars": [
+      29,
+      8
+     ],
+     "Mercury": [
+      10,
+      12
+     ],
+     "Jupiter": [
+      6,
+      8
+     ],
+     "Venus": [
+      9,
+      10
+     ],
+     "Saturn": [
+      16,
+      11
+     ],
+     "Rahu": [
+      21,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.ahmedabad-city.atmakaraka",
+   "rule_ids": [
+    "jaimini.karaka.atmakaraka.by-degree",
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "abhyankar_states_atmakaraka": "Mars",
+    "engine_atmakaraka_highest_degree": "Mars",
+    "engine_degree": 27,
+    "reproduces": true,
+    "verdict": "pass"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 129, printed page 116, read from the page image. The highest degree-within-sign reproduces the editor's own stated significatory planet.",
+   "inputs": {
+    "chart": "Ahmedabad City foundation",
+    "birth_as_printed": "1411-04-28 12:00",
+    "positions_degree_in_sign_and_sign_number": {
+     "Sun": [
+      15,
+      2
+     ],
+     "Moon": [
+      15,
+      4
+     ],
+     "Mars": [
+      27,
+      1
+     ],
+     "Mercury": [
+      14,
+      2
+     ],
+     "Jupiter": [
+      2,
+      6
+     ],
+     "Venus": [
+      2,
+      2
+     ],
+     "Saturn": [
+      13,
+      2
+     ],
+     "Rahu": [
+      20,
+      12
+     ],
+     "Ketu": [
+      20,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.ranade.karaka-lagna",
+   "rule_ids": [
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "karaka_lagna_sign": 11,
+    "degrees_printed": false,
+    "atmakaraka_rank_testable": false,
+    "verdict": "pass on frame construction; the karaka ranking cannot be tested because no degrees are printed"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 117, printed page 103. The diagram gives sign placements only; the delineations in the surrounding text are consistent with a first house at the stated sign.",
+   "inputs": {
+    "chart": "Justice M. G. Ranade",
+    "atmakaraka_stated": "Sun",
+    "planets_by_sign_from_diagram": {
+     "Mercury": 12,
+     "Saturn": 10,
+     "Rahu": 10,
+     "Jupiter": 10,
+     "Mars": 1,
+     "Sun": 11,
+     "Venus": 11,
+     "Moon": 3,
+     "Ketu": 4,
+     "Lagna": 6
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.tilak.karaka-lagna",
+   "rule_ids": [
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "karaka_lagna_sign": 7,
+    "degrees_printed": false,
+    "atmakaraka_rank_testable": false,
+    "verdict": "pass on frame construction; the karaka ranking cannot be tested because no degrees are printed"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 118, printed page 105. The diagram gives sign placements only; the delineations in the surrounding text are consistent with a first house at the stated sign.",
+   "inputs": {
+    "chart": "Lokamanya Bal Gangadhar Tilak",
+    "atmakaraka_stated": "Mars",
+    "planets_by_sign_from_diagram": {
+     "Mars": 7,
+     "Ketu": 7,
+     "Mercury": 4,
+     "Saturn": 4,
+     "Jupiter": 1,
+     "Moon": 1,
+     "Rahu": 1,
+     "Venus": 5,
+     "Lagna": 5
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.gandhi.karaka-lagna",
+   "rule_ids": [
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "karaka_lagna_sign": 5,
+    "degrees_printed": false,
+    "atmakaraka_rank_testable": false,
+    "verdict": "pass on frame construction; the karaka ranking cannot be tested because no degrees are printed"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 122, printed page 109. The diagram gives sign placements only; the delineations in the surrounding text are consistent with a first house at the stated sign.",
+   "inputs": {
+    "chart": "Mahatma Gandhi",
+    "atmakaraka_stated": "not named; Moon described in the 1st of the karaka kundali",
+    "planets_by_sign_from_diagram": {
+     "Sun": 7,
+     "Moon": 5,
+     "Rahu": 5,
+     "Venus": 8,
+     "Mars": 8,
+     "Mercury": 8,
+     "Saturn": 9,
+     "Ketu": 11,
+     "Jupiter": 2
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.lokur.karaka-lagna",
+   "rule_ids": [
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "karaka_lagna_sign": 2,
+    "degrees_printed": false,
+    "atmakaraka_rank_testable": false,
+    "verdict": "pass on frame construction; the karaka ranking cannot be tested because no degrees are printed"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 128, printed page 115. The diagram gives sign placements only; the delineations in the surrounding text are consistent with a first house at the stated sign.",
+   "inputs": {
+    "chart": "Justice N. S. Lokur",
+    "atmakaraka_stated": "Sun",
+    "planets_by_sign_from_diagram": {
+     "Venus": 3,
+     "Mercury": 1,
+     "Moon": 1,
+     "Saturn": 4,
+     "Sun": 2,
+     "Mars": 2,
+     "Ketu": 11,
+     "Rahu": 5,
+     "Jupiter": 8
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.anon-1873.untestable",
+   "rule_ids": [
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "degrees_printed": false,
+    "diagram_legible": false,
+    "testable": false,
+    "verdict": "recorded, not testable"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 114, printed page 100. The chart is discussed but neither degrees nor a legible sign diagram are printed for it.",
+   "inputs": {
+    "chart": "unnamed gentleman",
+    "birth_as_printed": "1873-11-13 ~12:45",
+    "atmakaraka_stated": "Jupiter"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked.anon-1917.untestable",
+   "rule_ids": [
+    "jaimini.worked-example.frame.karaka-kundali"
+   ],
+   "expected": {
+    "degrees_printed": false,
+    "diagram_legible": false,
+    "testable": false,
+    "verdict": "recorded, not testable"
+   },
+   "provenance": "Abhyankar 1951, Introduction paragraph 115, printed page 101. The chart is discussed but neither degrees nor a legible sign diagram are printed for it.",
+   "inputs": {
+    "chart": "unnamed young man",
+    "birth_as_printed": "1917-02-06 18:35",
+    "atmakaraka_stated": "Jupiter"
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked-example.suite.result",
+   "rule_ids": [
+    "jaimini.worked-example.suite.result"
+   ],
+   "expected": {
+    "charts_total": 14,
+    "testable": 8,
+    "pass": 7,
+    "fail": 1,
+    "failing": "nehru"
+   },
+   "provenance": "worked_example -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "worked_example",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked-example.suite.rahu-convention-discriminated",
+   "rule_ids": [
+    "jaimini.worked-example.suite.rahu-convention-discriminated"
+   ],
+   "expected": {
+    "reverse_count": "refuted by Patel",
+    "forward_vs_excluded": "not discriminated by any of the fourteen"
+   },
+   "provenance": "worked_example -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "worked_example",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked-example.suite.karaka-scheme-not-settled",
+   "rule_ids": [
+    "jaimini.worked-example.suite.karaka-scheme-not-settled"
+   ],
+   "expected": {
+    "settled": false,
+    "reason": "only rank one is named in the worked charts"
+   },
+   "provenance": "worked_example -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "worked_example",
+    "conditions_met": true
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked-example.ranade.rasi-drsti-confirmed",
+   "rule_ids": [
+    "jaimini.worked-example.ranade.rasi-drsti-confirmed"
+   ],
+   "expected": {
+    "fourth_from_karaka_lagna_aspected_by": [
+     "Saturn",
+     "Rahu",
+     "Jupiter"
+    ],
+    "ninth_from_karaka_lagna_aspected_by": [
+     "Venus",
+     "Sun"
+    ],
+    "seventh_from_karaka_lagna_aspected_by": [
+     "Saturn",
+     "Rahu",
+     "Jupiter",
+     "Mars"
+    ],
+    "any_parasari_seventh_aspect_needed": false
+   },
+   "provenance": "Abhyankar, Introduction para 117, printed pages 103-104, read from the page images.",
+   "inputs": {
+    "karaka_lagna_sign": 11,
+    "grahas_by_sign": {
+     "Saturn": 10,
+     "Rahu": 10,
+     "Jupiter": 10,
+     "Venus": 11,
+     "Sun": 11,
+     "Mars": 1
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked-example.lokur.rasi-drsti-confirmed",
+   "rule_ids": [
+    "jaimini.worked-example.lokur.rasi-drsti-confirmed"
+   ],
+   "expected": {
+    "fourth_from_karaka_lagna_aspected_by": [
+     "Moon"
+    ],
+    "seventh_from_karaka_lagna_aspected_by": [
+     "Saturn"
+    ],
+    "any_parasari_seventh_aspect_needed": false
+   },
+   "provenance": "Abhyankar, Introduction para 128, printed page 115, read from the page image.",
+   "inputs": {
+    "karaka_lagna_sign": 2,
+    "grahas_by_sign": {
+     "Moon": 1,
+     "Saturn": 4,
+     "Rahu": 5,
+     "Jupiter": 8
+    }
+   }
+  },
+  {
+   "vector_id": "jaimini.v.worked-example.ranade.longevity-refused",
+   "rule_ids": [
+    "jaimini.worked-example.ranade.longevity-refused"
+   ],
+   "expected": {
+    "rule_fires": true,
+    "result": "the editor derives a lifespan ceiling from the ayurdaya methods"
+   },
+   "provenance": "worked_example -- rendered by the engine and asserted to fire as stated.",
+   "inputs": {
+    "sutra": "worked_example",
+    "conditions_met": true
+   }
+  }
+ ]
+}

@@ -1552,6 +1552,25 @@
             "the three Vietnamese-vs-Chinese divergences (reversed palace enumeration, ancestral-tomb geomancy in Phuc Duc, Tuan/Triet as named agents) rest on general knowledge of the Quanshu rather than a held edition; pinning one is the cheapest improvement",
             "Van Dang Thai Thu Lang's Tu Vi Dau So Tan Bien (1957) with its Lap thanh construction section is bibliographically witnessed but not retrievable; six documented archive.org searches and a Han-Nom CONTENTdm query returned nothing"
           ]
+        },
+        {
+          "module_id": "tuvi_chart_construction",
+          "name": "Tu Vi chart construction from the 1957 Lap thanh: board, Menh/Than, palaces, limits",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "vietnamese/source_audit.md",
+            "vietnamese/tuvi_construction_rule_manifest.json",
+            "vietnamese/tuvi_construction_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "this closes the track's inverted blocker - it previously held delineation with NO construction; the Le Qui Don phu judged a chart it assumed existed",
+            "construction and delineation come from different witnesses (1957 Tan Bien vs the phu); their palace-order divergence from the Chinese Quanshu is recorded but still rests on general knowledge rather than a held Quanshu edition",
+            "no Vietnamese engine module exists yet; rules are research-verified but unwired",
+            "no published Vietnamese worked chart has been reproduced end to end"
+          ]
         }
       ]
     },
@@ -1738,6 +1757,26 @@
             "page images for the Abhyankar critical edition",
             "commentator precedence where twelve disagreements are recorded",
             "fourteen worked karaka charts as a validation suite"
+          ]
+        },
+        {
+          "module_id": "jaimini_technique_from_abhyankar",
+          "name": "Jaimini technique: karakas, rasi drsti, arudhas, argala, special lagnas, chara dasa",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "jaimini/source_audit.md",
+            "jaimini/jaimini_technique_rule_manifest.json",
+            "jaimini/jaimini_technique_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "WORKED-CHART SUITE RESULT, published pass and fail: of Abhyankar's 14 karaka-kundalis, 8 print degrees for every graha; the degree-descending rule reproduces his own stated significatory planet in 7 of those 8. The failure is named - Nehru, Introduction para 124 - not hidden",
+            "the seven-versus-eight karaka scheme CANNOT be settled by the worked charts and is not claimed to be: Abhyankar names only rank one in every chart, and the fork changes only ranks four through eight; it stays source_gated on his variant apparatus for sutra 1.1.15",
+            "Rahu convention narrowed but not closed: the Patel chart discriminates forward-counting (reproduces) from reverse-counting (contradicts), but no chart in the suite distinguishes forward-counting from excluding Rahu entirely",
+            "Varnada worked examples do not close - the Sutrarthaprakasika prints two numeric examples whose arithmetic uses finer values than the verse as stated; recorded as an open item, not as a pass",
+            "no Jaimini engine module exists yet; these rules are research-verified but unwired to any report"
           ]
         }
       ]

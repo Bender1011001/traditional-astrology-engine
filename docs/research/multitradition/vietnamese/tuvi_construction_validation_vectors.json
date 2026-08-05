@@ -1,0 +1,849 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "tradition_id": "vietnamese_tu_vi",
+  "source_pack_id": "vietnam_tu_vi_dau_so_tan_bien_v1",
+  "status": "research_vectors_awaiting_independent_vietnamese_review; every rendering is the encoder's own unreviewed translation of the quoted Vietnamese and each rule carries that Vietnamese so the rendering can be checked rather than trusted",
+  "source_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+  "required_expansion_before_implementation": [
+    "independent Vietnamese review of every quoted passage and every rendering before any rule leaves research_only",
+    "a scan of the 1957 Tín Đức Thư Xã printing, to collate this searchable digital edition against the edition it claims to reproduce",
+    "the Tính Mệnh Vạn Niên Lịch, or any Vietnamese almanac series, so that a civil birth date can reach these rules at all",
+    "a pinned edition of the Chinese 紫微斗數全書, so the palace-order reversal and the cell-by-cell status of the shared tables rest on a held text",
+    "a published Vietnamese worked chart with its judgement, to test the construction end to end against a practitioner's own board"
+  ],
+  "vectors": [
+    {
+      "vector_id": "vietnam.tuvi.lt.v.board_branch_order",
+      "rule_ids": [
+        "vietnam.tuvi.lt.board.twelve_fixed_branch_palaces"
+      ],
+      "inputs": {
+        "chart_stage": "board_setup"
+      },
+      "expected": {
+        "branch_order": [
+          "Tý",
+          "Sửu",
+          "Dần",
+          "Mão",
+          "Thìn",
+          "Tỵ",
+          "Ngọ",
+          "Mùi",
+          "Thân",
+          "Dậu",
+          "Tuất",
+          "Hợi"
+        ],
+        "direction": "forward_is_clockwise",
+        "palaces": 12,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.5, section 1 DINH CUNG"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.hour_table_closes",
+      "rule_ids": [
+        "vietnam.tuvi.lt.hour.clock_to_branch_hour"
+      ],
+      "inputs": {
+        "clock_hour_local": 14
+      },
+      "expected": {
+        "branch_hour": "Mùi",
+        "table_entries": 12,
+        "covers_24h_without_gap_or_overlap": true,
+        "day_starts_at": "23:00 local, in the branch hour Tý",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.6, section 4 DINH GIO"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.menh_than_from_month_and_hour",
+      "rule_ids": [
+        "vietnam.tuvi.lt.menh.life_palace_from_lunar_month_and_hour",
+        "vietnam.tuvi.lt.than.body_palace_from_lunar_month_and_hour"
+      ],
+      "inputs": {
+        "lunar_month": 8,
+        "branch_hour": "Ngọ"
+      },
+      "expected": {
+        "cung_menh": "Mão",
+        "cung_than": "Mão",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.6-7, sections 5 AN MENH and 6 AN THAN"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.than_lands_only_in_six_palaces",
+      "rule_ids": [
+        "vietnam.tuvi.lt.than.body_palace_from_lunar_month_and_hour"
+      ],
+      "inputs": {
+        "exhaustive_over": "all 12 lunar months x 12 branch hours"
+      },
+      "expected": {
+        "pairs_tested": 144,
+        "violations": 0,
+        "palaces_reachable_by_than": [
+          "Huynh Đệ",
+          "Mệnh",
+          "Nô Bộc",
+          "Tật Ách",
+          "Tử Tức",
+          "Điền Trạch"
+        ],
+        "book_states_reachable": [
+          "Mệnh Viên",
+          "Phúc Đức",
+          "Quan Lộc",
+          "Thiên Di",
+          "Tài Bạch",
+          "Thê Thiếp"
+        ],
+        "agrees_with_the_books_own_self_check": true,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.7 — the book's own stated invariant, verified exhaustively"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.palace_order_reversal_confirmed_at_construction_level",
+      "rule_ids": [
+        "vietnam.tuvi.lt.palaces.enumeration_runs_reverse_of_the_chinese_order"
+      ],
+      "inputs": {
+        "start": "Mệnh",
+        "direction": "forward"
+      },
+      "expected": {
+        "vietnamese_order": [
+          "Mệnh",
+          "Phúc Đức",
+          "Điền Trạch",
+          "Quan Lộc",
+          "Nô Bộc",
+          "Thiên Di",
+          "Tật Ách",
+          "Tài Bạch",
+          "Tử Tức",
+          "Thê Thiếp (hay Phu Quân)",
+          "Huynh Đệ",
+          "Phụ Mẫu"
+        ],
+        "reverses_chinese_order": true,
+        "palaces_named_in_the_sentence": 11,
+        "twelfth_palace": "Phụ Mẫu",
+        "second_witness_agrees_with": "vietnam.tuvi.palace_enumeration_is_reverse_of_the_chinese_order",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.6 (instruction) and p.20 (worked example naming cung Phu Mau)"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.yin_yang_two_methods_never_disagree",
+      "rule_ids": [
+        "vietnam.tuvi.lt.native.yin_yang_by_year_stem_and_by_year_branch"
+      ],
+      "inputs": {
+        "exhaustive_over": "all sixty sexagenary year pillars"
+      },
+      "expected": {
+        "pairs_tested": 60,
+        "disagreements": 0,
+        "reason": "stem parity and branch parity are locked together by the sexagenary cycle",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.6, section 3 PHAN AM DUONG — both printed methods checked against each other"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.cuc_grid_is_a_latin_square",
+      "rule_ids": [
+        "vietnam.tuvi.lt.cuc.five_phase_bureau_from_year_stem_and_menh_palace"
+      ],
+      "inputs": {
+        "grid": "5 Mệnh-palace groups x 5 stem pairs"
+      },
+      "expected": {
+        "cells": 25,
+        "distinct_cuc": 5,
+        "each_cuc_once_per_row": true,
+        "each_cuc_once_per_column": true,
+        "generating_cycle": [
+          "Thủy nhị cục",
+          "Hỏa lục cục",
+          "Thổ ngũ cục",
+          "Mộc tam cục",
+          "Kim tứ cục"
+        ],
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.7, section 7 LAP CUC"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.cuc_lookup_giap_menh_at_than",
+      "rule_ids": [
+        "vietnam.tuvi.lt.cuc.five_phase_bureau_from_year_stem_and_menh_palace"
+      ],
+      "inputs": {
+        "year_stem": "Giáp",
+        "cung_menh": "Thân"
+      },
+      "expected": {
+        "cuc": "Kim tứ cục",
+        "cuc_number": 4,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.7, LAP CUC table, row 'Than Dau', column 'Giap Ky'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.tuvi_tables_collate_148_of_150",
+      "rule_ids": [
+        "vietnam.tuvi.lt.tuvi.placement_table_by_cuc_and_lunar_day",
+        "vietnam.tuvi.lt.tuvi.printed_table_carries_one_transcription_defect"
+      ],
+      "inputs": {
+        "collation": "all five printed cục tables against the closed form"
+      },
+      "expected": {
+        "printed_day_entries": 150,
+        "agreements": 148,
+        "mismatches": 2,
+        "mismatch_detail": [
+          {
+            "cuc": "Kim tứ cục",
+            "day": 21,
+            "printed": "duplicated in Mùi and Thìn",
+            "closed_form": "Thìn"
+          },
+          {
+            "cuc": "Kim tứ cục",
+            "day": 24,
+            "printed": null,
+            "closed_form": "Mùi"
+          }
+        ],
+        "predicted_correction": "Kim tứ cục, palace Mùi: printed '14 - 21 - 27' should read '14 - 24 - 27'",
+        "table_left_unemended": true,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.7-8, section 8.1 Tu Vi tinh he"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.tuvi_seat_thuy_nhi_cuc_day_one",
+      "rule_ids": [
+        "vietnam.tuvi.lt.tuvi.placement_table_by_cuc_and_lunar_day"
+      ],
+      "inputs": {
+        "cuc": "Thủy nhị cục",
+        "lunar_day": 1
+      },
+      "expected": {
+        "palace_of_tu_vi": "Sửu",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.7, Thuy nhi cuc ring table"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.tuvi_series_offsets",
+      "rule_ids": [
+        "vietnam.tuvi.lt.tuvi.series_offsets_from_tu_vi"
+      ],
+      "inputs": {
+        "palace_of_tu_vi": "Sửu"
+      },
+      "expected": {
+        "placements": {
+          "Tử Vi": "Sửu",
+          "Liêm Trinh": "Tỵ",
+          "Thiên Đồng": "Thân",
+          "Vũ Khúc": "Dậu",
+          "Thái Dương": "Tuất",
+          "Thiên Cơ": "Tý"
+        },
+        "stars_named_in_the_list": 5,
+        "stars_actually_placed": 6,
+        "star_placed_but_not_listed": "Thái Dương",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.7, section 8.1"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.thienphu_mirror_closes",
+      "rule_ids": [
+        "vietnam.tuvi.lt.thienphu.mirror_of_tu_vi_and_series"
+      ],
+      "inputs": {
+        "exhaustive_over": "all twelve possible seats of Tử Vi"
+      },
+      "expected": {
+        "pairing": {
+          "Tý": "Thìn",
+          "Sửu": "Mão",
+          "Dần": "Dần",
+          "Mão": "Sửu",
+          "Thìn": "Tý",
+          "Tỵ": "Hợi",
+          "Ngọ": "Tuất",
+          "Mùi": "Dậu",
+          "Thân": "Thân",
+          "Dậu": "Mùi",
+          "Tuất": "Ngọ",
+          "Hợi": "Tỵ"
+        },
+        "is_an_involution": true,
+        "fixed_points": [
+          "Dần",
+          "Thân"
+        ],
+        "fixed_point_count": 2,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.9, section 8.2, both ring diagrams"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.thaitue_series_year_ty",
+      "rule_ids": [
+        "vietnam.tuvi.lt.thaitue.series_from_the_year_branch"
+      ],
+      "inputs": {
+        "year_branch": "Tý"
+      },
+      "expected": {
+        "placements": {
+          "Thái Tuế": "Tý",
+          "Thiếu Dương": "Sửu",
+          "Tang Môn": "Dần",
+          "Thiếu Âm": "Mão",
+          "Quan Phù": "Thìn",
+          "Tử Phù": "Tỵ",
+          "Tuế Phá": "Ngọ",
+          "Long Đức": "Mùi",
+          "Bạch Hổ": "Thân",
+          "Phúc Đức": "Dậu",
+          "Điếu Khách": "Tuất",
+          "Trực Phù": "Hợi"
+        },
+        "direction_depends_on_sex_or_polarity": false,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.9, section 8.3, with the book's own example 'Sinh nam Ty, an Thai Tue o cung Ty'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.locton_seat_and_series",
+      "rule_ids": [
+        "vietnam.tuvi.lt.locton.seat_by_year_stem_and_directional_series"
+      ],
+      "inputs": {
+        "year_stem": "Kỷ",
+        "year_branch": "Hợi",
+        "sex": "male"
+      },
+      "expected": {
+        "palace_of_loc_ton": "Ngọ",
+        "native_class": "âm nam",
+        "series_direction": "backward",
+        "placements": {
+          "Bác Sỹ": "Ngọ",
+          "Lực Sỹ": "Tỵ",
+          "Thanh Long": "Thìn",
+          "Tiểu Hao": "Mão",
+          "Tướng Quân": "Dần",
+          "Tấu Thư": "Sửu",
+          "Phi Liêm": "Tý",
+          "Hỷ Thần": "Hợi",
+          "Bệnh Phù": "Tuất",
+          "Đại Hao": "Dậu",
+          "Phục Binh": "Thân",
+          "Quan Phù": "Mùi"
+        },
+        "no_stem_seats_loc_ton_in": [
+          "Mùi",
+          "Sửu",
+          "Thìn",
+          "Tuất"
+        ],
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.9-10, sections 8.4 and 8.34; the book's own example is 'Sinh nam Ky Hoi, phai an Loc Ton o Ngo'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.trangsinh_seat_and_series_length",
+      "rule_ids": [
+        "vietnam.tuvi.lt.trangsinh.seat_by_cuc_and_directional_series"
+      ],
+      "inputs": {
+        "cuc": "Mộc tam cục",
+        "native_class": "dương nam"
+      },
+      "expected": {
+        "palace_of_trang_sinh": "Hợi",
+        "series_direction": "forward",
+        "placements": {
+          "Tràng Sinh": "Hợi",
+          "Mộc Dục": "Tý",
+          "Quan Đới": "Sửu",
+          "Lâm Quan": "Dần",
+          "Đế Vượng": "Mão",
+          "Bệnh": "Thìn",
+          "Tử": "Tỵ",
+          "Mộ": "Ngọ",
+          "Tuyệt": "Mùi",
+          "Thai": "Thân",
+          "Dưỡng": "Dậu"
+        },
+        "stars_in_printed_series": 11,
+        "classical_cycle_length": 12,
+        "stage_absent_from_the_printed_list": "Suy",
+        "supplied_by_the_pack": false,
+        "distinct_seats_across_the_five_cuc": 4,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.10, section 8.5; the book's own example is 'So thuoc Moc Tam Cuc, phai an Trang Sinh o Hoi'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.lucsat_placements",
+      "rule_ids": [
+        "vietnam.tuvi.lt.lucsat.six_malefics"
+      ],
+      "inputs": {
+        "palace_of_loc_ton": "Tý",
+        "branch_hour": "Mão",
+        "year_branch": "Dần",
+        "native_class": "dương nam"
+      },
+      "expected": {
+        "Kình Dương": "Sửu",
+        "Đà La": "Hợi",
+        "Địa Kiếp": "Dần",
+        "Địa Không": "Thân",
+        "Hỏa Tinh": "Thìn",
+        "Linh Tinh": "Tý",
+        "kinh_da_always_flank_loc_ton": true,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.10-11, sections 8.6.1-8.6.3; the book's own Kinh/Da example is 'Loc Ton o Ty, Kinh Duong an o Suu, Da La an o Hoi'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.counted_group_worked",
+      "rule_ids": [
+        "vietnam.tuvi.lt.counted.stars_counted_from_a_fixed_palace"
+      ],
+      "inputs": {
+        "lunar_month": 3,
+        "branch_hour": "Tỵ",
+        "year_branch": "Ngọ"
+      },
+      "expected": {
+        "Tả Phụ": "Ngọ",
+        "Hữu Bật": "Thân",
+        "Văn Xương": "Tỵ",
+        "Văn Khúc": "Dậu",
+        "Long Trì": "Tuất",
+        "Phượng Các": "Thìn",
+        "Thiên Khốc": "Tý",
+        "Thiên Hư": "Tý",
+        "Giải Thần": "Thìn",
+        "stars_placed_by_this_rule": 20,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.11-13, sections 8.7-8.19"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.day_counted_group",
+      "rule_ids": [
+        "vietnam.tuvi.lt.counted.stars_counted_by_lunar_day_from_another_star"
+      ],
+      "inputs": {
+        "lunar_day": 7,
+        "palace_of_ta_phu": "Ngọ",
+        "palace_of_huu_bat": "Thân",
+        "palace_of_van_xuong": "Tý",
+        "palace_of_van_khuc": "Tuất"
+      },
+      "expected": {
+        "Tam Thai": "Tý",
+        "Bát Tọa": "Dần",
+        "Ân Quang": "Tỵ",
+        "Thiên Quý": "Tỵ",
+        "requires_prior_placement_of": [
+          "Tả Phụ",
+          "Hữu Bật",
+          "Văn Xương",
+          "Văn Khúc"
+        ],
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.12, sections 8.12-8.13"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.stem_tables_lookup",
+      "rule_ids": [
+        "vietnam.tuvi.lt.stemtables.stars_seated_by_the_year_stem"
+      ],
+      "inputs": {
+        "year_stem": "Bính"
+      },
+      "expected": {
+        "Thiên Khôi": "Hợi",
+        "Thiên Việt": "Dậu",
+        "Thiên Quan Qúy Nhân": "Tỵ",
+        "Thiên Phúc Qúy Nhân": "Tý",
+        "Lưu Hà": "Mùi",
+        "Thiên Trù": "Tý",
+        "Lưu Niên Văn Tinh": "Thân",
+        "khoi_viet_stem_pairing": "Giáp-Mậu, Ất-Kỷ, Canh-Tân, Bính-Đinh, Nhâm-Quý",
+        "lap_cuc_stem_pairing": "Giáp-Kỷ, Ất-Canh, Bính-Tân, Đinh-Nhâm, Mậu-Quý",
+        "pairings_are_different": true,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.12-16, sections 8.10, 8.24, 8.31-8.33; the book's own examples are 'Tuoi At Mui an Thien Khoi o cung Ty' and 'Sinh nam Binh Ty an Thien Quan o cung Ty'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.branch_tables_lookup",
+      "rule_ids": [
+        "vietnam.tuvi.lt.branchtables.stars_seated_by_the_year_branch"
+      ],
+      "inputs": {
+        "year_branch": "Ngọ"
+      },
+      "expected": {
+        "triad_of_the_year": "Dần, Ngọ, Tuất",
+        "season_group": "Tỵ, Ngọ, Mùi",
+        "Cô Thần": "Thân",
+        "Quả Tú": "Thìn",
+        "Đào Hoa": "Mão",
+        "Thiên Mã": "Thân",
+        "Kiếp Sát": "Hợi",
+        "Phá Toái": "Tỵ",
+        "Hoa Cái": "Tuất",
+        "distinct_groupings_used_in_one_section": 3,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.14-15, sections 8.25-8.30; the book's own example is 'Sinh nam Ngo an Hoa Cai o cung Tuat'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.tu_hoa_table",
+      "rule_ids": [
+        "vietnam.tuvi.lt.tuhoa.four_transformations_by_year_stem"
+      ],
+      "inputs": {
+        "year_stem": "Đinh"
+      },
+      "expected": {
+        "Hóa Lộc": "Thái Âm",
+        "Hóa Quyền": "Thiên Đồng",
+        "Hóa Khoa": "Thiên Cơ",
+        "Hóa Kỵ": "Cự Môn",
+        "rows": 10,
+        "distinct_carrier_stars": 15,
+        "carrier_stars": [
+          "Cự Môn",
+          "Hữu Bật",
+          "Liêm Trinh",
+          "Phá Quân",
+          "Tham Lang",
+          "Thiên Cơ",
+          "Thiên Lương",
+          "Thiên Đồng",
+          "Thái Dương",
+          "Thái Âm",
+          "Tả Phụ",
+          "Tử Vi",
+          "Văn Khúc",
+          "Văn Xương",
+          "Vũ Khúc"
+        ],
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.14, section 8.23; the book's own example is 'Sinh nam Dinh Mao an Hoa Loc o cung da an Thai Am...'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.fixed_and_derived_seats",
+      "rule_ids": [
+        "vietnam.tuvi.lt.fixed.stars_with_a_fixed_or_derived_seat"
+      ],
+      "inputs": {
+        "palace_of_loc_ton": "Dần",
+        "palace_of_thai_tue": "Mùi",
+        "cung_menh": "Tý"
+      },
+      "expected": {
+        "Thiên La": "Thìn",
+        "Địa Võng": "Tuất",
+        "Quốc Ấn": "Tuất",
+        "Đường Phù": "Mùi",
+        "Bác Sỹ": "Dần",
+        "Thiên Không": "Thân",
+        "Thiên Thương_palace_role": "Nô Bộc",
+        "Thiên Thương_board_palace": "Thìn",
+        "Thiên Sứ_palace_role": "Tật Ách",
+        "Thiên Sứ_board_palace": "Ngọ",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.13-16, sections 8.17-8.22 and 8.34-8.36; the book's own Thien Khong example is 'Thai Tue o cung Mui an Thien Khong o cung Than'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.thai_cao_methods_agree",
+      "rule_ids": [
+        "vietnam.tuvi.lt.thaicao.two_methods_preserved"
+      ],
+      "inputs": {
+        "exhaustive_over": "all twelve branch hours"
+      },
+      "expected": {
+        "hours_tested": 12,
+        "methods_agree_in_every_case": true,
+        "reason": "Văn Khúc is seated at Thìn + hour, and Ngọ = Thìn + 2, Dần = Thìn - 2",
+        "example_from_the_book": {
+          "Văn Khúc": "Thìn",
+          "Thai Phụ": "Ngọ",
+          "Phong Cáo": "Dần"
+        },
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.13, section 8.19, both printed methods"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.tuan_marks_the_branches_the_decade_misses",
+      "rule_ids": [
+        "vietnam.tuvi.lt.nhikhong.tuan_and_triet_placement"
+      ],
+      "inputs": {
+        "exhaustive_over": "all six decades of the sexagenary cycle"
+      },
+      "expected": {
+        "decades_tested": 6,
+        "rows_where_tuan_is_exactly_the_uncovered_pair": 6,
+        "tuan_table": {
+          "từ Giáp Tý đến Qúy Dậu": [
+            "Tuất",
+            "Hợi"
+          ],
+          "từ Giáp Tuất đến Qúy Mùi": [
+            "Thân",
+            "Dậu"
+          ],
+          "từ Giáp Thân đến Qúy Tỵ": [
+            "Ngọ",
+            "Mùi"
+          ],
+          "từ Giáp Ngọ đến Qúy Mão": [
+            "Thìn",
+            "Tỵ"
+          ],
+          "từ Giáp Thìn đến Qúy Sửu": [
+            "Dần",
+            "Mão"
+          ],
+          "từ Giáp Dần đến Qúy Hợi": [
+            "Tý",
+            "Sửu"
+          ]
+        },
+        "triet_table": {
+          "Giáp Kỷ": [
+            "Thân",
+            "Dậu"
+          ],
+          "Ất Canh": [
+            "Mùi",
+            "Ngọ"
+          ],
+          "Bính Tân": [
+            "Thìn",
+            "Tỵ"
+          ],
+          "Đinh Nhâm": [
+            "Dần",
+            "Mão"
+          ],
+          "Mậu Qúy": [
+            "Tý",
+            "Sửu"
+          ]
+        },
+        "placed_between_two_palaces_not_in_one": true,
+        "closes_defensibility_row": "vietnamese checklist row 2 — placement of Tuần and Triệt",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.16-17, sections 8.37.1-8.37.2; the book's own examples are 'Sinh nam Binh Dan ... an Tuan o giua cung Tuat va cung Hoi' and 'Sinh nam Canh Ngo an Triet o giua cung Than va cung Dau'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.aspect_example_is_defective",
+      "rule_ids": [
+        "vietnam.tuvi.lt.chieu.the_four_palaces_read_with_any_palace",
+        "vietnam.tuvi.lt.chieu.the_printed_worked_example_contradicts_the_books_own_tables"
+      ],
+      "inputs": {
+        "palace": "Sửu"
+      },
+      "expected": {
+        "from_the_tables": {
+          "xung_chieu": "Mùi",
+          "tam_hop": [
+            "Dậu",
+            "Tỵ"
+          ],
+          "nhi_hop": "Tý"
+        },
+        "from_the_printed_example": {
+          "xung_chieu": "Tý",
+          "tam_hop": [
+            "Dậu",
+            "Mùi"
+          ],
+          "nhi_hop": "Tý"
+        },
+        "agree": false,
+        "example_left_unrepaired": true,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.18-20 sections 9.1-9.4, collated against p.26 section 11.3.3"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.dai_han_ladder_and_the_phu_mau_step",
+      "rule_ids": [
+        "vietnam.tuvi.lt.han.dai_han_two_methods_preserved"
+      ],
+      "inputs": {
+        "native_class": "dương nam",
+        "cuc": "Hỏa lục cục",
+        "cuc_number": 6
+      },
+      "expected": {
+        "first_decade_starts_at_age": 6,
+        "palace_of_first_decade": "Mệnh",
+        "palace_of_second_decade": "Phụ Mẫu",
+        "second_decade_starts_at_age": 16,
+        "third_decade_palace": "Phúc Đức",
+        "third_decade_starts_at_age": 26,
+        "chinese_enumeration_would_give_second_decade_at": "Huynh Đệ",
+        "the_books_example_agrees_with_the_vietnamese_enumeration": true,
+        "methods_recorded": 2,
+        "method_preferred_by_the_source": 1,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.20-21, section 10.1, both methods and the book's own worked example"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.tieu_han_start_and_the_month_fork",
+      "rule_ids": [
+        "vietnam.tuvi.lt.han.annual_and_finer_periods"
+      ],
+      "inputs": {
+        "year_branch": "Tý",
+        "sex": "male"
+      },
+      "expected": {
+        "tieu_han_triad": "Thân, Tý, Thìn",
+        "tieu_han_start_palace": "Tuất",
+        "direction": "forward",
+        "annual_branch_written_beside": {
+          "Tý": "Tuất",
+          "Sửu": "Hợi",
+          "Dần": "Tý"
+        },
+        "luu_nguyet_methods_printed": 3,
+        "author_settles_the_fork": false,
+        "tieu_han_direction_depends_on": "sex alone, not the yin/yang class",
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.22-24, sections 10.3-10.4; the book's own example is 'Con trai sinh nam Ty, vay phai khoi Ty tu cung Tuat'"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.construction_order_is_a_dependency_graph",
+      "rule_ids": [
+        "vietnam.tuvi.lt.order.the_construction_sequence_the_book_imposes"
+      ],
+      "inputs": {
+        "question": "what must be seated before Tứ Hóa"
+      },
+      "expected": {
+        "stages": 22,
+        "tu_hoa_prerequisites": [
+          "Tử Vi series",
+          "Thiên Phủ series",
+          "Văn Xương",
+          "Văn Khúc",
+          "Tả Phụ",
+          "Hữu Bật"
+        ],
+        "tu_hoa_is_the_last_star_step": true,
+        "printed_section_order_differs_from_dependency_order": true,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien pp.5-24, Phan 1 read as a whole"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.calendar_is_outsourced",
+      "rule_ids": [
+        "vietnam.tuvi.lt.calendar.the_book_outsources_the_calendar"
+      ],
+      "inputs": {
+        "question": "can a civil birth date be converted to the inputs these rules require"
+      },
+      "expected": {
+        "lunar_month_supplied": false,
+        "lunar_day_supplied": false,
+        "leap_month_rule_supplied": false,
+        "civil_time_offset_supplied": false,
+        "month_stem_table_supplied": true,
+        "hour_stem_table_supplied": true,
+        "named_external_authority": "Tính Mệnh Vạn Niên Lịch",
+        "authority_held_in_this_repository": false,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.29, section 11.5"
+    },
+    {
+      "vector_id": "vietnam.tuvi.lt.v.boundary_author_states_chinese_descent_and_vietnamese_disagreement",
+      "rule_ids": [
+        "vietnam.tuvi.lt.boundary.vietnamese_practice_versus_reprinted_chinese_doctrine"
+      ],
+      "inputs": {
+        "question": "does the witness claim Vietnamese origin"
+      },
+      "expected": {
+        "claims_vietnamese_origin": false,
+        "names_chen_tuan_as_founder": true,
+        "records_disagreement_among_vietnamese_readers": true,
+        "vietnamese_distinctive_features_identified": 4,
+        "quanshu_edition_pinned_in_this_repository": false,
+        "shares_rules_with_the_ziwei_track": false,
+        "customer_prediction": false,
+        "output_policy": "renderable_with_source"
+      },
+      "provenance": "Tu Vi dau so tan bien p.4, LOI NOI DAU"
+    }
+  ]
+}

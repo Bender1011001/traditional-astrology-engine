@@ -1,0 +1,2775 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "tradition_id": "vietnamese_tu_vi",
+  "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+  "source_pack_id": "vietnam_tu_vi_dau_so_tan_bien_v1",
+  "source_edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+  "source_registry_ids": [
+    "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition"
+  ],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Chart CONSTRUCTION for Vietnamese Tử Vi Đẩu Số, read directly from the Vietnamese of Vân Đằng Thái Thứ Lang, *Tử Vi đẩu số tân biên*, Phần 1 'Lập thành', printed pp. 5-30. Until this pass the Vietnamese track had delineation without construction: the Lê Quí Đôn phú at vietnam_tu_vi_phu_le_quy_don_v1 judges a chart it assumes already exists and never says how to find the life palace, the body palace, the ngũ hành cục, the seat of Tử Vi, or where Tuần and Triệt fall. Its defensibility spec named the one acquisition that could close that gap — the Lập thành section of this book — and recorded it as not held. It is now held and this pack is that section. Every rule quotes the Vietnamese verbatim as the publisher's text layer reads it, with an engine_rendering graded engine_translation_unreviewed beside it and the printed page number cited; where a printed grid is flattened by the text layer the PDF page was rendered at 170 dpi and the table read from the page image, which is stated in the verification field of every passage. The pack does four things beyond transcription. It CONFIRMS, from a second and independent construction-level witness, the palace-enumeration reversal the phú pack had recorded from a verse delineation — and it confirms it twice, once in the an Mệnh instruction and once in the đại hạn worked example, which steps from Mệnh to Phụ Mẫu where the Chinese order would step to Huynh Đệ. It PLACES Tuần and Triệt, which the track's checklist row 2 recorded as unplaceable from any held source. It COLLATES the five printed Tử Vi day tables against a closed form and finds 148 of 150 cells exact, with the two failures isolated to one printed cell whose correction the closed form predicts. And it records seven further textual and internal defects rather than repairing them, including a worked example of the aspect frame that contradicts the book's own tables. Nothing here is promoted out of research_only. No Vietnamese specialist has reviewed the extraction; the witness is a searchable digital edition rather than a scan of the 1957 Tín Đức Thư Xã printing, and is flagged RIGHTS-CHECK; and every rule that takes a lunar month, a lunar day or a branch hour is downstream of a calendar this book explicitly outsources to an almanac nobody here holds. Construction rules are never a claim about a person and carry customer_prediction false throughout.",
+  "rules": [
+    {
+      "rule_id": "vietnam.tuvi.lt.board.twelve_fixed_branch_palaces",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "other",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "định cung — the fixed twelve-branch board",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "board_setup"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Mỗi ô là một cung. Bắt đầu từ một là cung thứ nhất, gọi là cung Tý, đếm theo chiều thuận (thuận chiều kim đồng hồ) lần lượt Tý, Sửu, Dần, Mão, Thìn, Tỵ, Ngọ, Mùi, Thân, Dậu, Tuất, Hợi. Mỗi chữ trên đây là tên riêng của một cung, 12 chữ này gọi là Thập Nhị Địa Chi. Vị trí và tên của mỗi cung ở trên bản đồ không bao giờ thay đổi.",
+        "engine_rendering": "Each cell is a palace. Beginning from the first, called the palace Tý, count in the forward direction (clockwise) in turn Tý, Sửu, Dần, Mão, Thìn, Tỵ, Ngọ, Mùi, Thân, Dậu, Tuất, Hợi. Each of these words is the proper name of a palace, and the twelve are called the Twelve Earthly Branches. The position and the name of each palace on the board never change.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "fixed_board",
+        "unit": "twelve_palaces_named_by_earthly_branch",
+        "customer_prediction": false,
+        "branch_order": [
+          "Tý",
+          "Sửu",
+          "Dần",
+          "Mão",
+          "Thìn",
+          "Tỵ",
+          "Ngọ",
+          "Mùi",
+          "Thân",
+          "Dậu",
+          "Tuất",
+          "Hợi"
+        ],
+        "centre": {
+          "vietnamese": "Khoảng trống ở giữa bản đồ là cung Thiên bàn, chỗ để ghi năm, tháng, ngày và giờ sinh.",
+          "engine_rendering": "The empty space in the middle of the board is the Thiên bàn palace, where the year, month, day and hour of birth are written.",
+          "rendering_grade": "engine_translation_unreviewed"
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành (chart construction)",
+          "location": "printed p.5; section 1 ĐỊNH CUNG; PDF part dv01 pdfpage 5",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.hour.clock_to_branch_hour",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "calendar",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "định giờ — converting clock time to the branch hour",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "birth_clock_time",
+            "operator": "exists",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Lập thành một lá số, điều quan trọng nhất là phải định đúng giờ sinh. Phải đổi giờ đồng hồ ra giờ hàng Chi. Một ngày có 24 giờ đồng hồ. Hai giờ đồng hồ bằng một giờ hàng Chi.",
+        "engine_rendering": "In setting up a chart the most important thing is to fix the hour of birth correctly. The clock hour must be converted into the branch hour. A day has 24 clock hours. Two clock hours make one branch hour.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "lookup_table",
+        "unit": "branch_hour_of_birth",
+        "customer_prediction": false,
+        "table": [
+          {
+            "clock_range_vietnamese": "23 giờ - 1 giờ",
+            "branch_hour": "Tý"
+          },
+          {
+            "clock_range_vietnamese": "1 giờ - 3 giờ",
+            "branch_hour": "Sửu"
+          },
+          {
+            "clock_range_vietnamese": "3 giờ - 5 giờ",
+            "branch_hour": "Dần"
+          },
+          {
+            "clock_range_vietnamese": "5 giờ - 7 giờ",
+            "branch_hour": "Mão"
+          },
+          {
+            "clock_range_vietnamese": "7 giờ - 9 giờ",
+            "branch_hour": "Thìn"
+          },
+          {
+            "clock_range_vietnamese": "9 giờ - 11 giờ",
+            "branch_hour": "Tỵ"
+          },
+          {
+            "clock_range_vietnamese": "11 giờ - 13 giờ",
+            "branch_hour": "Ngọ"
+          },
+          {
+            "clock_range_vietnamese": "13 giờ - 15 giờ",
+            "branch_hour": "Mùi"
+          },
+          {
+            "clock_range_vietnamese": "15 giờ - 17 giờ",
+            "branch_hour": "Thân"
+          },
+          {
+            "clock_range_vietnamese": "17 giờ - 19 giờ",
+            "branch_hour": "Dậu"
+          },
+          {
+            "clock_range_vietnamese": "19 giờ - 21 giờ",
+            "branch_hour": "Tuất"
+          },
+          {
+            "clock_range_vietnamese": "21 giờ - 23 giờ",
+            "branch_hour": "Hợi"
+          }
+        ],
+        "undisclosed_by_the_source": "The book gives no rule for which clock — local mean time, zone time, or a war-time offset — and Vietnam changed its civil offset repeatedly in the twentieth century. Any engine applying this table must name the clock it used."
+      },
+      "priority": null,
+      "exceptions": [
+        "The Tý hour straddles midnight, so a birth between 23:00 and 24:00 falls in the Tý hour of the following day by this table; the book does not say whether the calendar day advances with it, and this pack does not decide the question."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành (chart construction)",
+          "location": "printed p.6; section 4 ĐỊNH GIỜ; PDF part dv01 pdfpage 6",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.menh.life_palace_from_lunar_month_and_hour",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "an Mệnh — placing the life palace",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "lunar_month_of_birth",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "fact": "branch_hour_of_birth",
+            "operator": "exists",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Bắt đầu từ cung Dần là tháng Giêng, đếm theo chiều thuận đến tháng sinh, ngừng tại cung nào gọi là giờ Tý, đếm theo chiều nghịch đến giờ sinh, ngừng tại cung nào an Mệnh Viên ở cung đó.",
+        "engine_rendering": "Beginning from the palace Dần as the first lunar month, count forward to the month of birth; call the palace you stop at the hour Tý, then count backward to the hour of birth, and place the Mệnh Viên at the palace you stop at.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "counting_procedure",
+        "unit": "palace_of_cung_Mệnh",
+        "customer_prediction": false,
+        "closed_form": "menh_index = (2 + (lunar_month - 1) - hour_index) mod 12, with Dần = 2 and hour_index 0 for Tý",
+        "closed_form_status": "configured_method — an engine restatement of the printed counting procedure; the book prints the procedure, never a formula"
+      },
+      "priority": 1,
+      "exceptions": [
+        "The month is the LUNAR month. The book gives no lunisolar calendar of its own and refers the reader to an almanac (Tính Mệnh Vạn Niên Lịch) at p.29 for day stems and branches. Leap-month handling is not stated anywhere in Lập thành, and this pack does not supply one."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành (chart construction)",
+          "location": "printed p.6; section 5 AN MỆNH; PDF part dv01 pdfpage 6",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.than.body_palace_from_lunar_month_and_hour",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "an Thân — placing the body palace",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "lunar_month_of_birth",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "fact": "branch_hour_of_birth",
+            "operator": "exists",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Bắt đầu từ cung Dần là tháng Giêng, đếm theo chiều thuận đến tháng sinh, ngừng tại cung nào gọi là giờ Tý, đếm theo chiều thuận đến giờ sinh ngừng tại cung nào an Thân ở cung đó.",
+        "engine_rendering": "Beginning from the palace Dần as the first lunar month, count forward to the month of birth; call the palace you stop at the hour Tý, then count FORWARD to the hour of birth, and place Thân at the palace you stop at.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "counting_procedure",
+        "unit": "palace_of_cung_Thân",
+        "customer_prediction": false,
+        "closed_form": "than_index = (2 + (lunar_month - 1) + hour_index) mod 12",
+        "closed_form_status": "configured_method — engine restatement",
+        "self_check": {
+          "vietnamese": "Thân chỉ có thể an vào Mệnh Viên, Phúc Đức, Quan Lộc, Thiên Di, Tài Bạch, Thê Thiếp (hay Phu Quân). Nếu khi an Thân thấy Thân lạc vào những cung khác các cung kể trên, như vậy là đã nhầm lẫn, cần phải soát lại ngay.",
+          "engine_rendering": "Thân can only fall in Mệnh Viên, Phúc Đức, Quan Lộc, Thiên Di, Tài Bạch or Thê Thiếp (or Phu Quân). If on placing Thân you find it in any palace other than those, you have made a mistake and must check again at once.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "why_the_self_check_holds": "Mệnh and Thân differ by twice the hour index, which is always even, so Thân lands an even number of palaces from Mệnh. On the Vietnamese enumeration those six even positions are exactly the six palaces the book names."
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành (chart construction)",
+          "location": "printed p.7; section 6 AN THÂN; PDF part dv01 pdfpage 7",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.palaces.enumeration_runs_reverse_of_the_chinese_order",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the twelve palaces are laid out from Mệnh in the reverse of the Chinese order",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "cung_menh",
+            "operator": "exists",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Sau khi đã an Mệnh, bắt đầu theo chiều thuận, thứ tự an các cung: Phúc Đức, Điền Trạch, Quan Lộc, Nô Bộc, Thiên Di, Tật Ách, Tài Bạch, Tử Tức, Thê Thiếp (hay Phu Quân nếu là số đàn bà), Huynh Đệ.",
+        "engine_rendering": "After placing Mệnh, beginning in the forward direction, place the palaces in order: Phúc Đức, Điền Trạch, Quan Lộc, Nô Bộc, Thiên Di, Tật Ách, Tài Bạch, Tử Tức, Thê Thiếp (or Phu Quân for a woman's chart), Huynh Đệ.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "palace_enumeration",
+        "unit": "order_of_the_twelve_palaces_from_Mệnh",
+        "customer_prediction": false,
+        "vietnamese_forward_order_from_menh": [
+          "Mệnh",
+          "Phúc Đức",
+          "Điền Trạch",
+          "Quan Lộc",
+          "Nô Bộc",
+          "Thiên Di",
+          "Tật Ách",
+          "Tài Bạch",
+          "Tử Tức",
+          "Thê Thiếp (hay Phu Quân)",
+          "Huynh Đệ",
+          "Phụ Mẫu"
+        ],
+        "chinese_forward_order_from_ming": [
+          "命 Mệnh",
+          "兄弟 Huynh Đệ",
+          "夫妻 Thê Thiếp",
+          "子女 Tử Tức",
+          "財帛 Tài Bạch",
+          "疾厄 Tật Ách",
+          "遷移 Thiên Di",
+          "奴僕 Nô Bộc",
+          "官祿 Quan Lộc",
+          "田宅 Điền Trạch",
+          "福德 Phúc Đức",
+          "父母 Phụ Mẫu"
+        ],
+        "relation": "the Vietnamese forward sequence is the Chinese forward sequence reversed; equivalently, this chart runs the same palace names anticlockwise on the same clockwise board",
+        "phu_mau_note": "The sentence names only eleven palaces after Mệnh. Phụ Mẫu is the twelfth and takes the one remaining cell, immediately forward of Mệnh. The book confirms this itself at p.20, where the đại hạn worked example writes the second decade 'ở cung Phụ Mẫu' for a dương nam counting forward from Mệnh.",
+        "independence": "This is a SECOND, construction-level Vietnamese witness to the reversal that vietnam.tuvi.palace_enumeration_is_reverse_of_the_chinese_order recorded from the Lê Quí Đôn phú. The two are independent — different genre, different transmission, one a verse delineation stating the order by ordinal and the other a construction manual stating it as an instruction."
+      },
+      "priority": 3,
+      "exceptions": [
+        "The book never presents the reversal as a Vietnamese peculiarity and never mentions the Chinese order. The comparison is the encoder's, and its Chinese side still rests on general knowledge of the 紫微斗數全書 rather than on an edition pinned in this repository. That open item is the same one the Lê Quí Đôn pack records, and it is now the only thing standing between this finding and grade A."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành (chart construction)",
+          "location": "printed p.6, 20; section 5 AN MỆNH, second paragraph; and section 10.1, worked example; PDF part dv01 pdfpages 6 and 20",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.native.yin_yang_by_year_stem_and_by_year_branch",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "other",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "phân âm dương — the native's yin/yang class, stated twice",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "year_stem",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "fact": "sex",
+            "operator": "exists",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Nam hay nữ đều có thể hoặc âm nam, dương nam, hoặc âm nữ, dương nữ, tùy theo hàng Can Chi của tuổi. Như vậy, đã biết tuổi, lại cần phải phân định âm dương cho rõ rệt. Có hai cách:",
+        "engine_rendering": "A man or a woman may be either âm nam or dương nam, âm nữ or dương nữ, according to the stem and branch of the year. So once the year is known, yin and yang must also be clearly determined. There are two methods:",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "classification",
+        "unit": "duong_nam_am_nam_duong_nu_am_nu",
+        "customer_prediction": false,
+        "method_1_by_stem": {
+          "Dương": [
+            "Giáp",
+            "Bính",
+            "Mậu",
+            "Canh",
+            "Nhâm"
+          ],
+          "Âm": [
+            "Ất",
+            "Đinh",
+            "Kỷ",
+            "Tân",
+            "Qúy"
+          ]
+        },
+        "method_2_by_branch": {
+          "Dương": [
+            "Tý",
+            "Dần",
+            "Thìn",
+            "Ngọ",
+            "Thân",
+            "Tuất"
+          ],
+          "Âm": [
+            "Sửu",
+            "Mão",
+            "Tỵ",
+            "Mùi",
+            "Dậu",
+            "Hợi"
+          ]
+        },
+        "fork": "The book prints BOTH methods and does not choose between them. This pack does not choose either: it records both and proves that over the sexagenary cycle they never disagree, because a Dương stem only ever pairs with a Dương branch. The fork is apparent, not real — but it is preserved rather than collapsed, because the reason it closes is a fact about the cycle and not about the doctrine.",
+        "role": "This class is a construction input. It decides the direction of counting for the Lộc Tồn, Tràng Sinh, Hỏa/Linh series and for the đại hạn. It is never a statement about the person."
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành (chart construction)",
+          "location": "printed p.6; section 3 PHÂN ÂM DƯƠNG; PDF part dv01 pdfpage 6",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.cuc.five_phase_bureau_from_year_stem_and_menh_palace",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "lập cục — the ngũ hành cục from the year stem and the palace of Mệnh",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "year_stem",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "fact": "cung_menh",
+            "operator": "exists",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Trước khi an Tử Vi tinh hệ, cần phải căn cứ và Can của tuổi và cung an Mệnh để lập Cục.",
+        "engine_rendering": "Before placing the Tử Vi star series, the cục must be set from the stem of the year and from the palace in which Mệnh was placed.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "two_way_lookup",
+        "unit": "ngu_hanh_cuc",
+        "customer_prediction": false,
+        "columns_by_stem_pair": [
+          "Giáp Kỷ",
+          "Ất Canh",
+          "Bính Tân",
+          "Đinh Nhâm",
+          "Mậu Qúy"
+        ],
+        "table": [
+          {
+            "menh_palaces": "Tý Sửu",
+            "by_stem_pair": {
+              "Giáp Kỷ": "Thủy nhị cục",
+              "Ất Canh": "Hỏa lục cục",
+              "Bính Tân": "Thổ ngũ cục",
+              "Đinh Nhâm": "Mộc tam cục",
+              "Mậu Qúy": "Kim tứ cục"
+            }
+          },
+          {
+            "menh_palaces": "Dần Mão Tuất Hợi",
+            "by_stem_pair": {
+              "Giáp Kỷ": "Hỏa lục cục",
+              "Ất Canh": "Thổ ngũ cục",
+              "Bính Tân": "Mộc tam cục",
+              "Đinh Nhâm": "Kim tứ cục",
+              "Mậu Qúy": "Thủy nhị cục"
+            }
+          },
+          {
+            "menh_palaces": "Thìn Tỵ",
+            "by_stem_pair": {
+              "Giáp Kỷ": "Mộc tam cục",
+              "Ất Canh": "Kim tứ cục",
+              "Bính Tân": "Thủy nhị cục",
+              "Đinh Nhâm": "Hỏa lục cục",
+              "Mậu Qúy": "Thổ ngũ cục"
+            }
+          },
+          {
+            "menh_palaces": "Ngọ Mùi",
+            "by_stem_pair": {
+              "Giáp Kỷ": "Thổ ngũ cục",
+              "Ất Canh": "Mộc tam cục",
+              "Bính Tân": "Kim tứ cục",
+              "Đinh Nhâm": "Thủy nhị cục",
+              "Mậu Qúy": "Hỏa lục cục"
+            }
+          },
+          {
+            "menh_palaces": "Thân Dậu",
+            "by_stem_pair": {
+              "Giáp Kỷ": "Kim tứ cục",
+              "Ất Canh": "Thủy nhị cục",
+              "Bính Tân": "Hỏa lục cục",
+              "Đinh Nhâm": "Thổ ngũ cục",
+              "Mậu Qúy": "Mộc tam cục"
+            }
+          }
+        ],
+        "cuc_numbers": {
+          "Thủy nhị cục": 2,
+          "Mộc tam cục": 3,
+          "Kim tứ cục": 4,
+          "Thổ ngũ cục": 5,
+          "Hỏa lục cục": 6
+        },
+        "structure_note": "Each successive printed row is the previous row's sequence rotated by one, so the whole grid is generated by the single cyclic order Thủy(2), Hỏa(6), Thổ(5), Mộc(3), Kim(4). Every cục appears exactly once in every row and every column — the grid is a Latin square, which is a strong internal check that no cell was mis-set in transcription."
+      },
+      "priority": 4,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành (chart construction)",
+          "location": "printed p.7; section 7 LẬP CỤC, table read from the page image; PDF part dv01 pdfpage 7",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.tuvi.placement_table_by_cuc_and_lunar_day",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "an Tử Vi — the seat of Tử Vi from the cục and the lunar day of birth",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Trước hết phải an Tử Vi bắt đầu từ một cung đã định trước. … Những cung đã định trước để từ đấy, an Tử Vi được ghi trong bảng dưới đây (tùy theo cục và ngày sinh).",
+        "engine_rendering": "First Tử Vi must be placed, beginning from a palace fixed in advance. … The palaces fixed in advance, from which Tử Vi is placed, are recorded in the table below (according to the cục and the day of birth).",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "five_tables_by_cuc",
+        "unit": "palace_of_Tử_Vi",
+        "table_by_cuc": {
+          "Thủy nhị cục": {
+            "Tỵ": [
+              8,
+              9
+            ],
+            "Ngọ": [
+              10,
+              11
+            ],
+            "Mùi": [
+              12,
+              13
+            ],
+            "Thân": [
+              14,
+              15
+            ],
+            "Thìn": [
+              6,
+              7,
+              30
+            ],
+            "Dậu": [
+              16,
+              17
+            ],
+            "Mão": [
+              4,
+              5,
+              28,
+              29
+            ],
+            "Tuất": [
+              18,
+              19
+            ],
+            "Dần": [
+              2,
+              3,
+              26,
+              27
+            ],
+            "Sửu": [
+              1,
+              24,
+              25
+            ],
+            "Tý": [
+              22,
+              23
+            ],
+            "Hợi": [
+              20,
+              21
+            ]
+          },
+          "Mộc tam cục": {
+            "Tỵ": [
+              4,
+              12,
+              14
+            ],
+            "Ngọ": [
+              7,
+              15,
+              17
+            ],
+            "Mùi": [
+              10,
+              18,
+              20
+            ],
+            "Thân": [
+              13,
+              21,
+              23
+            ],
+            "Thìn": [
+              1,
+              9,
+              11
+            ],
+            "Dậu": [
+              16,
+              24,
+              26
+            ],
+            "Mão": [
+              6,
+              8
+            ],
+            "Tuất": [
+              19,
+              27,
+              29
+            ],
+            "Dần": [
+              3,
+              5
+            ],
+            "Sửu": [
+              2,
+              28
+            ],
+            "Tý": [
+              25
+            ],
+            "Hợi": [
+              22,
+              30
+            ]
+          },
+          "Kim tứ cục": {
+            "Tỵ": [
+              6,
+              16,
+              19,
+              25
+            ],
+            "Ngọ": [
+              10,
+              20,
+              23,
+              29
+            ],
+            "Mùi": [
+              14,
+              21,
+              27
+            ],
+            "Thân": [
+              18,
+              28
+            ],
+            "Thìn": [
+              2,
+              12,
+              15,
+              21
+            ],
+            "Dậu": [
+              22
+            ],
+            "Mão": [
+              8,
+              11,
+              17
+            ],
+            "Tuất": [
+              26
+            ],
+            "Dần": [
+              4,
+              7,
+              13
+            ],
+            "Sửu": [
+              3,
+              9
+            ],
+            "Tý": [
+              5
+            ],
+            "Hợi": [
+              1,
+              30
+            ]
+          },
+          "Thổ ngũ cục": {
+            "Tỵ": [
+              8,
+              20,
+              24
+            ],
+            "Ngọ": [
+              1,
+              13,
+              25,
+              29
+            ],
+            "Mùi": [
+              6,
+              18,
+              30
+            ],
+            "Thân": [
+              11,
+              23
+            ],
+            "Thìn": [
+              3,
+              15,
+              19,
+              27
+            ],
+            "Dậu": [
+              16,
+              28
+            ],
+            "Mão": [
+              10,
+              14,
+              22
+            ],
+            "Tuất": [
+              21
+            ],
+            "Dần": [
+              5,
+              9,
+              17
+            ],
+            "Sửu": [
+              4,
+              12
+            ],
+            "Tý": [
+              7
+            ],
+            "Hợi": [
+              2,
+              26
+            ]
+          },
+          "Hỏa lục cục": {
+            "Tỵ": [
+              10,
+              24,
+              29
+            ],
+            "Ngọ": [
+              2,
+              16,
+              30
+            ],
+            "Mùi": [
+              8,
+              22
+            ],
+            "Thân": [
+              14,
+              28
+            ],
+            "Thìn": [
+              4,
+              18,
+              23
+            ],
+            "Dậu": [
+              1,
+              20
+            ],
+            "Mão": [
+              12,
+              17,
+              27
+            ],
+            "Tuất": [
+              7,
+              26
+            ],
+            "Dần": [
+              6,
+              11,
+              21
+            ],
+            "Sửu": [
+              5,
+              15,
+              25
+            ],
+            "Tý": [
+              9,
+              19
+            ],
+            "Hợi": [
+              3,
+              13
+            ]
+          }
+        },
+        "printed_cells": 150,
+        "layout_note": "Each of the five tables is printed as a ring around the twelve-palace board, not as a list: top row Tỵ Ngọ Mùi Thân, right column Dậu Tuất, bottom row read right to left Hợi Tý Sửu Dần, left column Mão Thìn. The text layer of the PDF flattens the ring into a single column and is unusable for this table; the five tables here were read from the rendered page images of printed pp. 7-8.",
+        "customer_prediction": false
+      },
+      "priority": 5,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.7-8; section 8.1 Tử Vi tinh hệ, five ring tables read from the page images; PDF part dv01 pdfpages 7-8",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.tuvi.printed_table_carries_one_transcription_defect",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "collation of the five printed Tử Vi tables against a closed form",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "table_integrity_finding",
+        "unit": "defect_report",
+        "finding": "Of the 150 printed day-entries across the five cục tables, 148 agree exactly with a single closed-form placement. The two failures are in Kim tứ cục alone: the day 21 appears twice (at Mùi and at Thìn) and the day 24 appears nowhere. The closed form assigns 21 to Thìn and 24 to Mùi, so the printed Mùi cell '14 - 21 - 27' should read '14 - 24 - 27'.",
+        "mismatches": [
+          {
+            "cuc": "Kim tứ cục",
+            "day": 21,
+            "printed": "duplicated in Mùi and Thìn",
+            "closed_form": "Thìn"
+          },
+          {
+            "cuc": "Kim tứ cục",
+            "day": 24,
+            "printed": null,
+            "closed_form": "Mùi"
+          }
+        ],
+        "closed_form": "Let n be the cục number and d the lunar day. Put q = ceil(d/n) and m = q*n - d. Count q-1 palaces forward from Dần; then move m palaces forward if m is even, or m palaces backward if m is odd.",
+        "closed_form_status": "configured_method — the closed form is the ENGINE'S reconstruction. The book prints tables and never states a formula. The reconstruction is offered as a collation instrument, not as the source's doctrine, and the tables remain the authority.",
+        "policy": "The pack does NOT emend the printed table. The printed reading is kept, the defect is recorded, and the correction the closed form predicts is stated as a prediction — the same discipline the Sukuyōdō pack applies to its two corrupt 羅剎日 graphs and the Vietnamese Lê Quí Đôn pack applies to its unreadable photographic tail.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.8; section 8.1, Kim tứ cục ring table; PDF part dv01 pdfpage 8",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.tuvi.series_offsets_from_tu_vi",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the Tử Vi star series — Liêm Trinh, Thiên Đồng, Vũ Khúc, Thái Dương, Thiên Cơ",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Chùm sao này gồm có Tử Vi, Liêm Trinh, Thiên Đồng, Vũ Khúc và Thiên Cơ. … Sau khi an Tử Vi, đếm theo chiều thuận bỏ qua ba cung an Liêm Trinh, bỏ qua hai cung an Thiên Đồng, an Vũ Khúc, an Thái Dương, bỏ qua một cung an Thiên Cơ.",
+        "engine_rendering": "This cluster comprises Tử Vi, Liêm Trinh, Thiên Đồng, Vũ Khúc and Thiên Cơ. … After placing Tử Vi, counting forward, skip three palaces and place Liêm Trinh; skip two palaces and place Thiên Đồng; place Vũ Khúc; place Thái Dương; skip one palace and place Thiên Cơ.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "offset_series",
+        "unit": "palaces_forward_from_Tử_Vi",
+        "offsets_from_tu_vi": {
+          "Tử Vi": 0,
+          "Liêm Trinh": 4,
+          "Thiên Đồng": 7,
+          "Vũ Khúc": 8,
+          "Thái Dương": 9,
+          "Thiên Cơ": 11
+        },
+        "textual_note": "The opening sentence names five stars but the placement instruction places six: Thái Dương is placed and is not in the list. The pack records the discrepancy and does not resolve it; the instruction is the operative statement because it is the one that places a star.",
+        "customer_prediction": false
+      },
+      "priority": 6,
+      "exceptions": [
+        "The list of members and the placement instruction disagree: five stars are named, six are placed."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.7; section 8.1, second paragraph; PDF part dv01 pdfpage 7",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.thienphu.mirror_of_tu_vi_and_series",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "an Thiên Phủ — the Thiên Phủ seat mirrors Tử Vi, and its series follows",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Chùm sao này gồm có: Thiên Phủ, Thái Âm, Tham Lang, Cự Môn, Thiên Tướng, Thiên Lương, Thất Sát, Phá Quân. … Sau khi an Thiên Phủ, theo chiều thuận lần lượt mỗi cung an một sao thứ tự: Thái Âm, Tham Lang, Cự Môn, Thiên Tướng, Thiên Lương, Thất Sát, bỏ qua ba cung an Phá Quân. Những cung đã định trước để từ đấy, an Thiên Phủ được ghi trong bảng dưới đây (tùy theo vị trí của Tử Vi).",
+        "engine_rendering": "This cluster comprises Thiên Phủ, Thái Âm, Tham Lang, Cự Môn, Thiên Tướng, Thiên Lương, Thất Sát and Phá Quân. … After placing Thiên Phủ, going forward, place one star in each successive palace in the order Thái Âm, Tham Lang, Cự Môn, Thiên Tướng, Thiên Lương, Thất Sát; then skip three palaces and place Phá Quân. The palaces fixed in advance, from which Thiên Phủ is placed, are recorded in the table below (according to the position of Tử Vi).",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "mirror_and_offset_series",
+        "unit": "palace_of_Thiên_Phủ_and_its_series",
+        "printed_as": "two ring diagrams, each pairing the palaces holding Tử Vi with the palaces holding Thiên Phủ; the two diagrams together cover all twelve seats",
+        "pairing_table": {
+          "Tý": "Thìn",
+          "Sửu": "Mão",
+          "Dần": "Dần",
+          "Mão": "Sửu",
+          "Thìn": "Tý",
+          "Tỵ": "Hợi",
+          "Ngọ": "Tuất",
+          "Mùi": "Dậu",
+          "Thân": "Thân",
+          "Dậu": "Mùi",
+          "Tuất": "Ngọ",
+          "Hợi": "Tỵ"
+        },
+        "closed_form": "thien_phu_index = (4 - tu_vi_index) mod 12 — a reflection of the board whose two fixed points are Dần and Thân",
+        "closed_form_status": "configured_method — engine restatement of the two printed diagrams",
+        "series_offsets_from_thien_phu": {
+          "Thiên Phủ": 0,
+          "Thái Âm": 1,
+          "Tham Lang": 2,
+          "Cự Môn": 3,
+          "Thiên Tướng": 4,
+          "Thiên Lương": 5,
+          "Thất Sát": 6,
+          "Phá Quân": 10
+        },
+        "customer_prediction": false
+      },
+      "priority": 7,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.9; section 8.2 Thiên Phủ tinh hệ, two ring diagrams read from the page image; PDF part dv01 pdfpage 9",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.thaitue.series_from_the_year_branch",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "an Thái Tuế — the annual series, always forward",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Trước hết phải an Thái Tuế ở cung có tên hàng Chi của năm sinh. … Sau khi an Thái Tuế dù là nam số hay nữ số, cứ theo chiều thuận lần lượt mỗi cung an một sao theo thứ tự: Thiếu Dương, Tang Môn, Thiếu Âm, Quan Phù, Tử Phù, Tuế Phá, Long Đức, Bạch Hổ, Phúc Đức, Điếu Khách, Trực Phù.",
+        "engine_rendering": "First Thái Tuế must be placed in the palace bearing the branch of the year of birth. … After placing Thái Tuế, whether the chart is a man's or a woman's, going forward place one star in each successive palace in the order Thiếu Dương, Tang Môn, Thiếu Âm, Quan Phù, Tử Phù, Tuế Phá, Long Đức, Bạch Hổ, Phúc Đức, Điếu Khách, Trực Phù.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "offset_series",
+        "unit": "twelve_annual_stars",
+        "seat_rule": "Thái Tuế sits in the palace named by the branch of the birth year",
+        "series": [
+          "Thái Tuế",
+          "Thiếu Dương",
+          "Tang Môn",
+          "Thiếu Âm",
+          "Quan Phù",
+          "Tử Phù",
+          "Tuế Phá",
+          "Long Đức",
+          "Bạch Hổ",
+          "Phúc Đức",
+          "Điếu Khách",
+          "Trực Phù"
+        ],
+        "direction_note": "This is the one twelve-star series the book explicitly declares direction-invariant: 'dù là nam số hay nữ số' — whether a man's or a woman's chart. Contrast the Lộc Tồn and Tràng Sinh series, whose direction depends on the native's yin/yang class.",
+        "customer_prediction": false
+      },
+      "priority": 8,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.9; section 8.3 Thái Tuế tinh hệ; PDF part dv01 pdfpage 9",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.locton.seat_by_year_stem_and_directional_series",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "an Lộc Tồn — its seat by year stem, and the twelve-star series whose direction turns on polarity",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Trước hết phải an Lộc Tồn, theo hàng Can của năm sinh. … Sau khi an Lộc Tồn, dương nam, âm nữ theo chiều thuận còn âm nam, dương nữ theo chiều nghịch, lần lượt mỗi cung an một sao theo thứ tự Lực Sỹ, Thanh Long, Tiểu Hao, Tướng Quân, Tấu Thư, Phi Liêm, Hỷ Thần, Bệnh Phù, Đại Hao, Phục Binh, Quan Phù.",
+        "engine_rendering": "First Lộc Tồn must be placed according to the stem of the year of birth. … After placing Lộc Tồn, a dương nam or âm nữ counts forward while an âm nam or dương nữ counts backward, placing one star in each successive palace in the order Lực Sỹ, Thanh Long, Tiểu Hao, Tướng Quân, Tấu Thư, Phi Liêm, Hỷ Thần, Bệnh Phù, Đại Hao, Phục Binh, Quan Phù.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "stem_lookup_plus_directional_series",
+        "unit": "palace_of_Lộc_Tồn_and_the_Bác_Sỹ_series",
+        "seat_by_year_stem": {
+          "Giáp": "Dần",
+          "Ất": "Mão",
+          "Bính": "Tỵ",
+          "Đinh": "Ngọ",
+          "Mậu": "Tỵ",
+          "Kỷ": "Ngọ",
+          "Canh": "Thân",
+          "Tân": "Dậu",
+          "Nhâm": "Hợi",
+          "Qúy": "Tý"
+        },
+        "series_from_loc_ton": [
+          "Bác Sỹ",
+          "Lực Sỹ",
+          "Thanh Long",
+          "Tiểu Hao",
+          "Tướng Quân",
+          "Tấu Thư",
+          "Phi Liêm",
+          "Hỷ Thần",
+          "Bệnh Phù",
+          "Đại Hao",
+          "Phục Binh",
+          "Quan Phù"
+        ],
+        "direction_rule": {
+          "forward": [
+            "dương nam",
+            "âm nữ"
+          ],
+          "backward": [
+            "âm nam",
+            "dương nữ"
+          ]
+        },
+        "bac_sy_note": "Section 8.34 adds that Bác Sỹ always sits with Lộc Tồn — 'An Lộc Tồn ở cung nào an Bác Sỹ ở cung đó' — so the series is a twelve-star ring headed by Bác Sỹ at the Lộc Tồn seat.",
+        "stem_pattern_note": "The seats are not arbitrary: they run Dần Mão — then skip the earth palace Thìn — Tỵ Ngọ, repeat Tỵ Ngọ for the second earth pair, then Thân Dậu — skip Tuất — Hợi Tý. No stem seats Lộc Tồn in Thìn, Tuất, Sửu or Mùi.",
+        "customer_prediction": false
+      },
+      "priority": 9,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.9-10; sections 8.4 and 8.34; PDF part dv01 pdfpages 9-10",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.trangsinh.seat_by_cuc_and_directional_series",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "an Tràng Sinh — the life-stage series",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Trước hết phải an Tràng Sinh tùy theo Cục. … Sau khi an Tràng Sinh dương nam, âm nữ, theo chiều thuận còn âm nam, dương nữ theo chiều nghịch lần lượt mỗi cung an một sao theo thứ tự: Mộc Dục, Quan Đới, Lâm Quan, Đế Vượng, Bệnh, Tử, Mộ, Tuyệt, Thai, Dưỡng.",
+        "engine_rendering": "First Tràng Sinh must be placed according to the cục. … After placing Tràng Sinh, a dương nam or âm nữ counts forward while an âm nam or dương nữ counts backward, placing one star in each successive palace in the order Mộc Dục, Quan Đới, Lâm Quan, Đế Vượng, Bệnh, Tử, Mộ, Tuyệt, Thai, Dưỡng.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "cuc_lookup_plus_directional_series",
+        "unit": "palace_of_Tràng_Sinh_and_its_series",
+        "seat_by_cuc": {
+          "Thủy": "Thân",
+          "Mộc": "Hợi",
+          "Kim": "Tỵ",
+          "Thổ": "Thân",
+          "Hỏa": "Dần"
+        },
+        "series": [
+          "Tràng Sinh",
+          "Mộc Dục",
+          "Quan Đới",
+          "Lâm Quan",
+          "Đế Vượng",
+          "Bệnh",
+          "Tử",
+          "Mộ",
+          "Tuyệt",
+          "Thai",
+          "Dưỡng"
+        ],
+        "direction_rule": {
+          "forward": [
+            "dương nam",
+            "âm nữ"
+          ],
+          "backward": [
+            "âm nam",
+            "dương nữ"
+          ]
+        },
+        "printed_series_length": "The printed list gives eleven names after Tràng Sinh's own seat, so the ring is eleven long, not the twelve of the classical life-stage cycle. The book prints Mộc Dục, Quan Đới, Lâm Quan, Đế Vượng, Bệnh, Tử, Mộ, Tuyệt, Thai, Dưỡng — ten — and omits Suy between Đế Vượng and Bệnh. The pack records the omission and does not supply the missing stage.",
+        "seat_note": "Thủy and Thổ share the seat Thân, so the five cục occupy only four distinct seats.",
+        "customer_prediction": false
+      },
+      "priority": 10,
+      "exceptions": [
+        "The printed series omits Suy, the stage that in the classical twelve-stage cycle stands between Đế Vượng and Bệnh. This is recorded, not repaired."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.10; section 8.5 Tràng Sinh tinh hệ; PDF part dv01 pdfpage 10",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.lucsat.six_malefics",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "bộ sao Lục sát — Kình Dương, Đà La, Địa Không, Địa Kiếp, Hỏa Tinh, Linh Tinh",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "six_placement_rules",
+        "unit": "the_six_malefic_seats",
+        "kinh_da": {
+          "vietnamese": "An Kình Dương ở cung đằng trước cung đã an Lộc Tồn. An Đà La ở cung đằng sau cung đã an Lộc Tồn.",
+          "engine_rendering": "Place Kình Dương in the palace ahead of the palace where Lộc Tồn was placed. Place Đà La in the palace behind the palace where Lộc Tồn was placed.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "kinh_da_form": {
+          "Kình Dương": "one palace forward of Lộc Tồn",
+          "Đà La": "one palace backward of Lộc Tồn"
+        },
+        "khong_kiep": {
+          "vietnamese": "Bắt đầu từ cung Hợi, kể là giờ Tý, đếm theo chiều thuận đến giờ sinh, ngừng lại ở cung nào an Địa Kiếp ở cung đó. Bắt đầu từ cung Hợi, kể là giờ Tý, đếm theo chiều nghịch, đến giờ sinh ngừng lại ở cung nào là an Địa Không ở cung đó.",
+          "engine_rendering": "Beginning from the palace Hợi as the hour Tý, count forward to the hour of birth and place Địa Kiếp where you stop. Beginning from the palace Hợi as the hour Tý, count backward to the hour of birth and place Địa Không where you stop.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "khong_kiep_form": {
+          "Địa Kiếp": "Hợi + hour_index, forward",
+          "Địa Không": "Hợi - hour_index, backward"
+        },
+        "hoa_linh_seats_by_year_branch_triad": {
+          "Dần, Ngọ, Tuất": {
+            "Hỏa Tinh": "Sửu",
+            "Linh Tinh": "Mão"
+          },
+          "Thân, Tý, Thìn": {
+            "Hỏa Tinh": "Dần",
+            "Linh Tinh": "Tuất"
+          },
+          "Tỵ, Dậu, Sửu": {
+            "Hỏa Tinh": "Mão",
+            "Linh Tinh": "Tuất"
+          },
+          "Hợi, Mão, Mùi": {
+            "Hỏa Tinh": "Dần",
+            "Linh Tinh": "Tuất"
+          }
+        },
+        "hoa_linh_direction": {
+          "dương nam, âm nữ": {
+            "Hỏa Tinh": "forward",
+            "Linh Tinh": "backward"
+          },
+          "âm nam, dương nữ": {
+            "Hỏa Tinh": "backward",
+            "Linh Tinh": "forward"
+          }
+        },
+        "hoa_linh_note": "Two of the four triad rows print the identical pair Dần / Tuất — the rows 'Thân, Tý, Thìn' and 'Hợi, Mão, Mùi'. The pack records the printed reading and does not decide whether the repetition is doctrine or a compositor's slip; the Linh Tinh seat is the single most disputed cell between Vietnamese schools, which is exactly why this pack refuses to borrow a Chinese reading to settle it.",
+        "customer_prediction": false
+      },
+      "priority": 11,
+      "exceptions": [
+        "The Hỏa/Linh triad table prints the same seats for two different triads. Left unresolved."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.10-11; sections 8.6.1, 8.6.2, 8.6.3; PDF part dv01 pdfpages 10-11",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.counted.stars_counted_from_a_fixed_palace",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the star group placed by counting a month, an hour or a year branch from a fixed palace",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "counting_rules_table",
+        "unit": "seventeen_star_seats",
+        "pattern": "Begin from a named palace, call it the first month / the hour Tý / the year Tý, count forward or backward to the month, hour or year of birth, and place the star where you stop.",
+        "stars": [
+          {
+            "star": "Tả Phụ",
+            "argument": "lunar_month",
+            "start_palace": "Thìn",
+            "direction": "forward",
+            "book_section": "8.7"
+          },
+          {
+            "star": "Hữu Bật",
+            "argument": "lunar_month",
+            "start_palace": "Tuất",
+            "direction": "backward",
+            "book_section": "8.7"
+          },
+          {
+            "star": "Văn Xương",
+            "argument": "branch_hour",
+            "start_palace": "Tuất",
+            "direction": "backward",
+            "book_section": "8.8"
+          },
+          {
+            "star": "Văn Khúc",
+            "argument": "branch_hour",
+            "start_palace": "Thìn",
+            "direction": "forward",
+            "book_section": "8.8"
+          },
+          {
+            "star": "Long Trì",
+            "argument": "year_branch",
+            "start_palace": "Thìn",
+            "direction": "forward",
+            "book_section": "8.9"
+          },
+          {
+            "star": "Phượng Các",
+            "argument": "year_branch",
+            "start_palace": "Tuất",
+            "direction": "backward",
+            "book_section": "8.9"
+          },
+          {
+            "star": "Thiên Khốc",
+            "argument": "year_branch",
+            "start_palace": "Ngọ",
+            "direction": "backward",
+            "book_section": "8.11"
+          },
+          {
+            "star": "Thiên Hư",
+            "argument": "year_branch",
+            "start_palace": "Ngọ",
+            "direction": "forward",
+            "book_section": "8.11"
+          },
+          {
+            "star": "Thiên Đức",
+            "argument": "year_branch",
+            "start_palace": "Dậu",
+            "direction": "forward",
+            "book_section": "8.14"
+          },
+          {
+            "star": "Nguyệt Đức",
+            "argument": "year_branch",
+            "start_palace": "Tỵ",
+            "direction": "forward",
+            "book_section": "8.14"
+          },
+          {
+            "star": "Thiên Hình",
+            "argument": "lunar_month",
+            "start_palace": "Dậu",
+            "direction": "forward",
+            "book_section": "8.15"
+          },
+          {
+            "star": "Thiên Riêu",
+            "argument": "lunar_month",
+            "start_palace": "Sửu",
+            "direction": "forward",
+            "book_section": "8.15"
+          },
+          {
+            "star": "Hồng Loan",
+            "argument": "year_branch",
+            "start_palace": "Mão",
+            "direction": "backward",
+            "book_section": "8.16"
+          },
+          {
+            "star": "Thiên Giải",
+            "argument": "lunar_month",
+            "start_palace": "Thân",
+            "direction": "forward",
+            "book_section": "8.18"
+          },
+          {
+            "star": "Địa Giải",
+            "argument": "lunar_month",
+            "start_palace": "Mùi",
+            "direction": "forward",
+            "book_section": "8.18"
+          },
+          {
+            "star": "Thai Phụ",
+            "argument": "branch_hour",
+            "start_palace": "Ngọ",
+            "direction": "forward",
+            "book_section": "8.19 method 1"
+          },
+          {
+            "star": "Phong Cáo",
+            "argument": "branch_hour",
+            "start_palace": "Dần",
+            "direction": "forward",
+            "book_section": "8.19 method 1"
+          }
+        ],
+        "derived": [
+          {
+            "star": "Thiên Y",
+            "rule": "placed in the same palace as Thiên Riêu",
+            "vietnamese": "Thiên Y: Thiên Riêu ở cung nào an Thiên Y ngay ở cung đó.",
+            "book_section": "8.15"
+          },
+          {
+            "star": "Thiên Hỷ",
+            "rule": "placed in the palace opposite Hồng Loan",
+            "vietnamese": "Thiên Hỷ an ở cung đối với cung an Hồng Loan.",
+            "book_section": "8.16"
+          },
+          {
+            "star": "Giải Thần",
+            "rule": "placed in the same palace as Phượng Các",
+            "vietnamese": "Giải Thần: Phượng Các ở cung nào an Giải Thần ở cung đó.",
+            "book_section": "8.18"
+          }
+        ],
+        "textual_defect": "The Hồng Loan instruction is printed 'Bắt đầu từ cung Mão kể là năm sinh, đếm theo chiều nghịch đến năm sinh' — 'beginning from the palace Mão, called the year OF BIRTH, count backward to the year of birth', which is circular. Every parallel instruction in the same section reads 'kể là năm Tý' (called the year Tý). The pack records the printed reading and marks it defective; it does not silently substitute the parallel.",
+        "customer_prediction": false
+      },
+      "priority": 12,
+      "exceptions": [
+        "The Hồng Loan start-label is printed circularly and is recorded unrepaired."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.11-13; sections 8.7 through 8.19; PDF part dv01 pdfpages 11-13",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.counted.stars_counted_by_lunar_day_from_another_star",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "Tam Thai, Bát Tọa, Ân Quang, Thiên Quý — counted by the day of birth from a star already placed",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "counting_rules_table",
+        "unit": "four_star_seats",
+        "rules_": [
+          {
+            "star": "Tam Thai",
+            "from": "Tả Phụ",
+            "direction": "forward",
+            "offset": "day - 1",
+            "vietnamese": "Tam Thai: Xem Tả Phụ ở cung nào kể cung ấy là mồng một, bắt đầu đếm theo chiều thuận đến ngày sinh, ngừng lại ở cung nào an Tam Thai ở cung đó."
+          },
+          {
+            "star": "Bát Tọa",
+            "from": "Hữu Bật",
+            "direction": "backward",
+            "offset": "day - 1",
+            "vietnamese": "Bát Tọa: Xem Hữu Bật ở cung nào kể cung ấy là mồng một, bắt đầu đếm theo chiều nghịch đến ngày sinh, ngừng lại ở cung nào an Bát Tọa ở cung đó."
+          },
+          {
+            "star": "Ân Quang",
+            "from": "Văn Xương",
+            "direction": "forward",
+            "offset": "day - 2",
+            "vietnamese": "Ân Quang: Xem Văn Xương ở cung nào kể cung ấy là mồng một, bắt đầu đếm theo chiều thuận đến ngày sinh, lùi lại một cung an Ân Quang."
+          },
+          {
+            "star": "Thiên Quý",
+            "from": "Văn Khúc",
+            "direction": "backward",
+            "offset": "day - 2",
+            "vietnamese": "Thiên Qúy: Xem Văn Khúc ở cung nào kể cung ấy là mồng một, bắt đầu đếm theo chiều nghịch đến ngày sinh, lùi lại một cung an Thiên Qúy."
+          }
+        ],
+        "engine_rendering": "Tam Thai and Bát Tọa count the lunar day from Tả Phụ and Hữu Bật respectively, the starting palace counted as the first day. Ân Quang and Thiên Quý do the same from Văn Xương and Văn Khúc and then step back one palace.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "dependency_note": "These four are the only stars in Lập thành placed from a star rather than from a birth datum, which fixes part of the placement ORDER: Tả Phụ, Hữu Bật, Văn Xương and Văn Khúc must be seated before them.",
+        "customer_prediction": false
+      },
+      "priority": 13,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.12; section 8.12 and 8.13; PDF part dv01 pdfpage 12",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.stemtables.stars_seated_by_the_year_stem",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the stars seated directly by the stem of the birth year",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "stem_lookup_tables",
+        "unit": "five_star_tables",
+        "thien_khoi_thien_viet": {
+          "Giáp": {
+            "Thiên Khôi": "Sửu",
+            "Thiên Việt": "Mùi"
+          },
+          "Mậu": {
+            "Thiên Khôi": "Sửu",
+            "Thiên Việt": "Mùi"
+          },
+          "Ất": {
+            "Thiên Khôi": "Tý",
+            "Thiên Việt": "Thân"
+          },
+          "Kỷ": {
+            "Thiên Khôi": "Tý",
+            "Thiên Việt": "Thân"
+          },
+          "Canh": {
+            "Thiên Khôi": "Ngọ",
+            "Thiên Việt": "Dần"
+          },
+          "Tân": {
+            "Thiên Khôi": "Ngọ",
+            "Thiên Việt": "Dần"
+          },
+          "Bính": {
+            "Thiên Khôi": "Hợi",
+            "Thiên Việt": "Dậu"
+          },
+          "Đinh": {
+            "Thiên Khôi": "Hợi",
+            "Thiên Việt": "Dậu"
+          },
+          "Nhâm": {
+            "Thiên Khôi": "Mão",
+            "Thiên Việt": "Tỵ"
+          },
+          "Qúy": {
+            "Thiên Khôi": "Mão",
+            "Thiên Việt": "Tỵ"
+          }
+        },
+        "thien_quan_thien_phuc": {
+          "Giáp": {
+            "Thiên Quan Qúy Nhân": "Mùi",
+            "Thiên Phúc Qúy Nhân": "Dậu"
+          },
+          "Ất": {
+            "Thiên Quan Qúy Nhân": "Thìn",
+            "Thiên Phúc Qúy Nhân": "Thân"
+          },
+          "Bính": {
+            "Thiên Quan Qúy Nhân": "Tỵ",
+            "Thiên Phúc Qúy Nhân": "Tý"
+          },
+          "Đinh": {
+            "Thiên Quan Qúy Nhân": "Dần",
+            "Thiên Phúc Qúy Nhân": "Hợi"
+          },
+          "Mậu": {
+            "Thiên Quan Qúy Nhân": "Mão",
+            "Thiên Phúc Qúy Nhân": "Mão"
+          },
+          "Kỷ": {
+            "Thiên Quan Qúy Nhân": "Dậu",
+            "Thiên Phúc Qúy Nhân": "Dần"
+          },
+          "Canh": {
+            "Thiên Quan Qúy Nhân": "Hợi",
+            "Thiên Phúc Qúy Nhân": "Ngọ"
+          },
+          "Tân": {
+            "Thiên Quan Qúy Nhân": "Dậu",
+            "Thiên Phúc Qúy Nhân": "Tỵ"
+          },
+          "Nhâm": {
+            "Thiên Quan Qúy Nhân": "Tuất",
+            "Thiên Phúc Qúy Nhân": "Ngọ"
+          },
+          "Qúy": {
+            "Thiên Quan Qúy Nhân": "Ngọ",
+            "Thiên Phúc Qúy Nhân": "Tỵ"
+          }
+        },
+        "luu_ha": {
+          "Giáp": "Dậu",
+          "Ất": "Tuất",
+          "Bính": "Mùi",
+          "Đinh": "Thìn",
+          "Mậu": "Tỵ",
+          "Kỷ": "Ngọ",
+          "Canh": "Thân",
+          "Tân": "Mão",
+          "Nhâm": "Hợi",
+          "Qúy": "Dần"
+        },
+        "thien_tru": {
+          "Giáp": "Tỵ",
+          "Ất": "Ngọ",
+          "Bính": "Tý",
+          "Đinh": "Tỵ",
+          "Mậu": "Ngọ",
+          "Kỷ": "Thân",
+          "Canh": "Dần",
+          "Tân": "Ngọ",
+          "Nhâm": "Dậu",
+          "Qúy": "Tuất"
+        },
+        "luu_nien_van_tinh": {
+          "Giáp": "Tỵ",
+          "Ất": "Ngọ",
+          "Bính": "Thân",
+          "Đinh": "Dậu",
+          "Mậu": "Thân",
+          "Kỷ": "Dậu",
+          "Canh": "Hợi",
+          "Tân": "Tý",
+          "Nhâm": "Dần",
+          "Qúy": "Mão"
+        },
+        "vietnamese_sample": "An bộ sao Khôi Việt, phải tùy theo hàng Can của năm sinh.",
+        "engine_rendering": "The Khôi–Việt pair is placed according to the stem of the year of birth.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "structure_note": "Khôi/Việt pairs the ten stems into five groups (Giáp with Mậu, Ất with Kỷ, Canh with Tân, Bính with Đinh, Nhâm with Quý) — a pairing that is NOT the Giáp-Kỷ / Ất-Canh / Bính-Tân / Đinh-Nhâm / Mậu-Quý combination used by lập cục and by Triệt. The book uses two different stem pairings in the same chapter and does not remark on it.",
+        "customer_prediction": false
+      },
+      "priority": 14,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.12-16; sections 8.10, 8.24, 8.31, 8.32, 8.33; PDF part dv01 pdfpages 12-16",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.branchtables.stars_seated_by_the_year_branch",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the stars seated by the branch of the birth year, mostly through its triad",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "branch_lookup_tables",
+        "unit": "six_star_tables",
+        "co_than_qua_tu": {
+          "Hợi, Tý, Sửu": {
+            "Cô Thần": "Dần",
+            "Quả Tú": "Tuất"
+          },
+          "Dần, Mão, Thìn": {
+            "Cô Thần": "Tỵ",
+            "Quả Tú": "Sửu"
+          },
+          "Tỵ, Ngọ, Mùi": {
+            "Cô Thần": "Thân",
+            "Quả Tú": "Thìn"
+          },
+          "Thân, Dậu, Tuất": {
+            "Cô Thần": "Hợi",
+            "Quả Tú": "Mùi"
+          }
+        },
+        "dao_hoa": {
+          "Tỵ, Dậu, Sửu": "Ngọ",
+          "Thân, Tý, Thìn": "Dậu",
+          "Hợi, Mão, Mùi": "Tý",
+          "Dần, Ngọ, Tuất": "Mão"
+        },
+        "thien_ma": {
+          "Tỵ, Dậu, Sửu": "Hợi",
+          "Tân, Tý, Thìn": "Dần",
+          "Hợi, Mão, Mùi": "Tỵ",
+          "Dần, Ngọ, Tuất": "Thân"
+        },
+        "kiep_sat": {
+          "Tỵ, Dậu, Sửu": "Dần",
+          "Dần, Ngọ, Tuất": "Hợi",
+          "Hợi, Mão, Mùi": "Thân",
+          "Thân, Tý, Thìn": "Tỵ"
+        },
+        "pha_toai": {
+          "Tý, Ngọ, Mão, Dậu": "Tỵ",
+          "Dần, Thân, Tỵ, Hợi": "Dậu",
+          "Thìn, Tuất, Sửu, Mùi": "Sửu"
+        },
+        "hoa_cai": {
+          "Tỵ, Dậu, Sửu": "Sửu",
+          "Dần, Ngọ, Tuất": "Tuất",
+          "Hợi, Mão, Mùi": "Mùi",
+          "Thân, Tý, Thìn": "Thìn"
+        },
+        "grouping_note": "Cô Thần and Quả Tú group the branches by SEASON (Hợi-Tý-Sửu, Dần-Mão-Thìn, Tỵ-Ngọ-Mùi, Thân-Dậu-Tuất). The others group them by the tam hợp TRIAD (Dần-Ngọ-Tuất and the rest). Phá Toái groups them a third way, by the four cardinal, four cornerstone and four earth branches. Three different groupings of the same twelve branches inside one section.",
+        "textual_defect": "The Thiên Mã table prints one triad as 'Tân, Tý, Thìn'. Tân is a STEM and cannot head a branch triad; every parallel table in the same pages reads 'Thân, Tý, Thìn'. The printed reading is retained and marked defective.",
+        "customer_prediction": false
+      },
+      "priority": 15,
+      "exceptions": [
+        "The Thiên Mã triad row is printed with a stem in place of a branch and is recorded unrepaired."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.14-15; sections 8.25 through 8.30; PDF part dv01 pdfpages 14-15",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.tuhoa.four_transformations_by_year_stem",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "bộ sao Tứ Hóa — Hóa Lộc, Hóa Quyền, Hóa Khoa, Hóa Kỵ",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Theo hàng Can của năm sinh an Tứ Hóa theo thứ tự: Lộc, Quyền, Khoa, Kỵ, vào những cung đã an sao kê trong bảng dưới đây.",
+        "engine_rendering": "According to the stem of the year of birth, place the Four Transformations in the order Lộc, Quyền, Khoa, Kỵ upon the stars listed in the table below, in whichever palaces those stars already occupy.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "stem_lookup_onto_existing_stars",
+        "unit": "four_transformations",
+        "table": {
+          "Giáp": {
+            "Hóa Lộc": "Liêm Trinh",
+            "Hóa Quyền": "Phá Quân",
+            "Hóa Khoa": "Vũ Khúc",
+            "Hóa Kỵ": "Thái Dương"
+          },
+          "Ất": {
+            "Hóa Lộc": "Thiên Cơ",
+            "Hóa Quyền": "Thiên Lương",
+            "Hóa Khoa": "Tử Vi",
+            "Hóa Kỵ": "Thái Âm"
+          },
+          "Bính": {
+            "Hóa Lộc": "Thiên Đồng",
+            "Hóa Quyền": "Thiên Cơ",
+            "Hóa Khoa": "Văn Xương",
+            "Hóa Kỵ": "Liêm Trinh"
+          },
+          "Đinh": {
+            "Hóa Lộc": "Thái Âm",
+            "Hóa Quyền": "Thiên Đồng",
+            "Hóa Khoa": "Thiên Cơ",
+            "Hóa Kỵ": "Cự Môn"
+          },
+          "Mậu": {
+            "Hóa Lộc": "Tham Lang",
+            "Hóa Quyền": "Thái Âm",
+            "Hóa Khoa": "Hữu Bật",
+            "Hóa Kỵ": "Thiên Cơ"
+          },
+          "Kỷ": {
+            "Hóa Lộc": "Vũ Khúc",
+            "Hóa Quyền": "Tham Lang",
+            "Hóa Khoa": "Thiên Lương",
+            "Hóa Kỵ": "Văn Khúc"
+          },
+          "Canh": {
+            "Hóa Lộc": "Thái Dương",
+            "Hóa Quyền": "Vũ Khúc",
+            "Hóa Khoa": "Thái Âm",
+            "Hóa Kỵ": "Thiên Đồng"
+          },
+          "Tân": {
+            "Hóa Lộc": "Cự Môn",
+            "Hóa Quyền": "Thiên Lương",
+            "Hóa Khoa": "Văn Khúc",
+            "Hóa Kỵ": "Văn Xương"
+          },
+          "Nhâm": {
+            "Hóa Lộc": "Thiên Lương",
+            "Hóa Quyền": "Tử Vi",
+            "Hóa Khoa": "Tả Phụ",
+            "Hóa Kỵ": "Vũ Khúc"
+          },
+          "Qúy": {
+            "Hóa Lộc": "Phá Quân",
+            "Hóa Quyền": "Cự Môn",
+            "Hóa Khoa": "Thái Âm",
+            "Hóa Kỵ": "Tham Lang"
+          }
+        },
+        "dependency_note": "Tứ Hóa attach to stars, not to palaces, so the whole Tử Vi and Thiên Phủ series plus Văn Xương, Văn Khúc, Tả Phụ and Hữu Bật must be seated first. This makes Tứ Hóa the last step of an sao and fixes the tail of the placement order.",
+        "customer_prediction": false
+      },
+      "priority": 16,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.14; section 8.23, table; PDF part dv01 pdfpage 14",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.fixed.stars_with_a_fixed_or_derived_seat",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the stars whose seat is fixed on the board or derived from one already placed",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "fixed_and_derived_seats",
+        "unit": "eight_star_seats",
+        "fixed_on_the_board": [
+          {
+            "star": "Thiên La",
+            "palace": "Thìn",
+            "vietnamese": "Thiên La: Bao giờ cũng an ở cung Thìn."
+          },
+          {
+            "star": "Địa Võng",
+            "palace": "Tuất",
+            "vietnamese": "Địa Võng: Bao giờ cũng an ở cung Tuất."
+          }
+        ],
+        "fixed_on_a_palace_role": [
+          {
+            "star": "Thiên Thương",
+            "palace_role": "Nô Bộc",
+            "vietnamese": "Thiên Thương: Bao giờ cũng an ở cung Nô Bộc."
+          },
+          {
+            "star": "Thiên Sứ",
+            "palace_role": "Tật Ách",
+            "vietnamese": "Thiên Sứ: Bao giờ cũng an ở cung Tật Ách."
+          }
+        ],
+        "derived_from_another_star": [
+          {
+            "star": "Quốc Ấn",
+            "rule": "the ninth palace counting forward from Lộc Tồn, Lộc Tồn counted first"
+          },
+          {
+            "star": "Đường Phù",
+            "rule": "the eighth palace counting backward from Lộc Tồn, Lộc Tồn counted first"
+          },
+          {
+            "star": "Bác Sỹ",
+            "rule": "the same palace as Lộc Tồn"
+          },
+          {
+            "star": "Thiên Không",
+            "rule": "the palace ahead of Thái Tuế",
+            "vietnamese": "An Thiên Không ở cung đằng trước cung đã an Thái Tuế."
+          },
+          {
+            "star": "Thiên Tài",
+            "rule": "count the year branch forward from the palace of Mệnh, Mệnh as the year Tý"
+          },
+          {
+            "star": "Thiên Thọ",
+            "rule": "count the year branch forward from the palace of Thân, Thân as the year Tý"
+          }
+        ],
+        "dau_quan": {
+          "vietnamese": "Bắt đầu từ cung đã an Thái Tuế kể là tháng Giêng, đếm theo chiều nghịch đến tháng sinh, ngừng tại cung nào kể đó là giờ Tý, đếm theo chiều thuận đến giờ sinh ngừng tại cung nào an Đẩu Quân ở cung đó.",
+          "engine_rendering": "Beginning from the palace of Thái Tuế as the first month, count backward to the month of birth; call that palace the hour Tý and count forward to the hour of birth; place Đẩu Quân where you stop.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "structural_note": "Thiên Thương and Thiên Sứ are seated by palace ROLE rather than by branch, so their board position moves with Mệnh. On the Vietnamese enumeration Nô Bộc is the fourth palace forward of Mệnh and Tật Ách the sixth — under the Chinese enumeration they would be the eighth and the sixth. The reversal therefore moves Thiên Thương and leaves Thiên Sứ where it was, which is a mechanically checkable consequence of the divergence rather than a restatement of it.",
+        "customer_prediction": false
+      },
+      "priority": 17,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.13-16; sections 8.17, 8.20, 8.21, 8.22, 8.34, 8.35, 8.36; PDF part dv01 pdfpages 13-16",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.thaicao.two_methods_preserved",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "bộ sao Thai Cáo — the book prints two placement methods and chooses neither",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "preserved_fork",
+        "unit": "seats_of_Thai_Phụ_and_Phong_Cáo",
+        "method_1": {
+          "vietnamese": "Cách thứ nhất: Theo giờ sinh. Thai Phụ: Bắt đầu từ cung Ngọ là giờ Tý, tính thuận tới giờ sinh, ngưng tại cung nào, an Thai Phụ tại cung ấy. Phong Cáo: Bắt đầu từ cung Dần là giờ Tý, tính thuận tới giờ sinh, ngưng tại cung nào, an Phong Cáo tại cung ấy.",
+          "engine_rendering": "First method: by the hour of birth. Thai Phụ: begin from the palace Ngọ as the hour Tý, count forward to the hour of birth, and place Thai Phụ where you stop. Phong Cáo: begin from the palace Dần as the hour Tý, count forward to the hour of birth, and place Phong Cáo where you stop.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "method_2": {
+          "vietnamese": "Cách thứ hai: Căn cứ vào cung của sao Văn Khúc, sau hai cung là sao Thai Phụ, trước hai cung là sao Phong Cáo.",
+          "engine_rendering": "Second method: taking the palace of Văn Khúc, two palaces after it is Thai Phụ and two palaces before it is Phong Cáo.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "equivalence": "The two methods agree identically. Văn Khúc itself is Thìn plus the hour index (section 8.8), so Văn Khúc + 2 = Ngọ + hour and Văn Khúc - 2 = Dần + hour. The second method is the first re-expressed through a star already on the board.",
+        "policy": "Both are recorded. The pack proves they agree rather than declaring one canonical, because the agreement is a fact about this book's arithmetic and not a choice the book made.",
+        "customer_prediction": false
+      },
+      "priority": 18,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.13; section 8.19; PDF part dv01 pdfpage 13",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.nhikhong.tuan_and_triet_placement",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "bộ sao Nhị Không — the placement of Tuần and Triệt, on the boundary between two palaces",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "star_placement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "boundary_placement",
+        "unit": "the_two_void_agents",
+        "tuan": {
+          "vietnamese": "Tuần Trung không vong: Tùy theo năm sinh, trong khoảng mười năm đã được giới hạn theo Can từ Giáp đến Qúy.",
+          "engine_rendering": "Tuần Trung không vong: according to the year of birth, within the decade bounded by the stems from Giáp to Quý.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "tuan_table": {
+          "từ Giáp Tý đến Qúy Dậu": [
+            "Tuất",
+            "Hợi"
+          ],
+          "từ Giáp Tuất đến Qúy Mùi": [
+            "Thân",
+            "Dậu"
+          ],
+          "từ Giáp Thân đến Qúy Tỵ": [
+            "Ngọ",
+            "Mùi"
+          ],
+          "từ Giáp Ngọ đến Qúy Mão": [
+            "Thìn",
+            "Tỵ"
+          ],
+          "từ Giáp Thìn đến Qúy Sửu": [
+            "Dần",
+            "Mão"
+          ],
+          "từ Giáp Dần đến Qúy Hợi": [
+            "Tý",
+            "Sửu"
+          ]
+        },
+        "tuan_structure": "The decade beginning Giáp Tý runs Tý through Dậu, and Tuần falls on the two branches the decade does not reach — Tuất and Hợi. The same holds for every row: Tuần marks the two branches left over by the native's own decade of the sexagenary cycle.",
+        "triet": {
+          "vietnamese": "Triệt Lộ không vong: Tùy theo hàng Can của năm sinh.",
+          "engine_rendering": "Triệt Lộ không vong: according to the stem of the year of birth.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "triet_table": {
+          "Giáp Kỷ": [
+            "Thân",
+            "Dậu"
+          ],
+          "Ất Canh": [
+            "Mùi",
+            "Ngọ"
+          ],
+          "Bính Tân": [
+            "Thìn",
+            "Tỵ"
+          ],
+          "Đinh Nhâm": [
+            "Dần",
+            "Mão"
+          ],
+          "Mậu Qúy": [
+            "Tý",
+            "Sửu"
+          ]
+        },
+        "triet_structure": "Triệt uses the same stem pairing as lập cục — Giáp-Kỷ, Ất-Canh, Bính-Tân, Đinh-Nhâm, Mậu-Quý — and steps its pair back two palaces at each successive pairing, from Thân-Dậu down to Tý-Sửu. No stem pair seats Triệt on Tuất-Hợi.",
+        "placement_note": "Both are placed BETWEEN two palaces, not in one: 'an Tuần ở giữa cung Tuất và cung Hợi'. The printed diagrams draw the label across the border line. An engine that seats them in a single palace has changed the doctrine.",
+        "textual_defect": "The Ất Canh row of the Triệt table is printed 'Mùi - Ngọ', reading backward along the board, where every other row reads forward. The pair is the same either way; the inconsistency is recorded because the pack does not silently normalise printed order.",
+        "significance": "Checklist row 2 of this track's defensibility spec recorded that Tuần and Triệt operate as named agents in the Lê Quí Đôn phú and that NO held source could place them. These two tables place them.",
+        "customer_prediction": false
+      },
+      "priority": 19,
+      "exceptions": [
+        "The Ất Canh row of the Triệt table is printed in reverse board order."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, section 8 AN SAO (star placement)",
+          "location": "printed p.16-17; sections 8.37.1 and 8.37.2 with their two board diagrams; PDF part dv01 pdfpages 16-17",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.chieu.the_four_palaces_read_with_any_palace",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "định hướng chiếu — no palace is read alone",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "judgement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Sau khi an sao, phải định hướng chiếu của các cung số. Xem một cung, phải xem cả cung chiếu của nó. … Muốn xem cung số, phải xem cả hai cung tam hợp chiếu của nó, cùng với một cung xung chiếu và một cung nhị hợp.",
+        "engine_rendering": "After placing the stars, the directions of aspect between the palaces must be fixed. To read a palace you must read the palaces that shine upon it. … To read a palace you must read both of its triad palaces together with its one opposition palace and its one nhị hợp palace.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "aspect_frame",
+        "unit": "the_reading_unit_of_a_palace",
+        "tam_hop": [
+          [
+            "Thân",
+            "Tý",
+            "Thìn"
+          ],
+          [
+            "Tỵ",
+            "Dậu",
+            "Sửu"
+          ],
+          [
+            "Dần",
+            "Ngọ",
+            "Tuất"
+          ],
+          [
+            "Hợi",
+            "Mão",
+            "Mùi"
+          ]
+        ],
+        "xung_chieu": "the palace six positions away",
+        "nhi_hop": [
+          [
+            "Tý",
+            "Sửu"
+          ],
+          [
+            "Dần",
+            "Hợi"
+          ],
+          [
+            "Mão",
+            "Tuất"
+          ],
+          [
+            "Thìn",
+            "Dậu"
+          ],
+          [
+            "Tỵ",
+            "Thân"
+          ],
+          [
+            "Ngọ",
+            "Mùi"
+          ]
+        ],
+        "reading_unit": "five palaces: the palace itself, its two triad palaces, its opposition and its nhị hợp",
+        "hierarchy_note": "This is a judgement rule, not a construction rule, and it is the reason this pack cannot be used one palace at a time. It is placed here because the book places it here — inside Lập thành, before any delineation.",
+        "customer_prediction": false
+      },
+      "priority": 20,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, sections 9-11 (ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI)",
+          "location": "printed p.18-20; section 9 ĐỊNH HƯỚNG CHIẾU with 9.1-9.4; PDF part dv01 pdfpages 18-20",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.chieu.the_printed_worked_example_contradicts_the_books_own_tables",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the aspect worked example at 9.4 disagrees with the tables at 9.1 and 11.3",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "judgement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "internal_contradiction",
+        "unit": "defect_report",
+        "printed": {
+          "vietnamese": "Thí dụ: Xem cung Sửu, phải xem cả cung Tý (xung chiếu), cung Dậu, cung Mùi (tam hợp chiếu) và cung Tý (nhị hợp).",
+          "engine_rendering": "Example: to read the palace Sửu you must read the palace Tý (opposition), the palaces Dậu and Mùi (triad) and the palace Tý (nhị hợp).",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "what_the_books_own_tables_give": {
+          "xung_chiếu_of_Sửu": "Mùi",
+          "tam_hợp_of_Sửu": [
+            "Tỵ",
+            "Dậu"
+          ],
+          "nhị_hợp_of_Sửu": "Tý"
+        },
+        "analysis": "The example names Tý twice, once correctly as the nhị hợp and once wrongly as the opposition; and it names Mùi as a triad palace when section 11.3.3 lists the triad as Sửu-Tỵ-Dậu. Mùi is in fact the opposition. The example appears to have swapped Mùi and Tý between the two roles and lost Tỵ.",
+        "policy": "Recorded, not repaired. The tables are the operative statement because they are internally consistent and the example is not; but the pack does not delete the example, and any engine built on this witness must carry the discrepancy forward.",
+        "why_it_matters": "The reading unit is five palaces. An engine that inherited the printed example would read the wrong four.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, sections 9-11 (ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI)",
+          "location": "printed p.20; section 9.4 Tóm tắt, worked example; PDF part dv01 pdfpage 20",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.han.dai_han_two_methods_preserved",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "timing",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "khởi đại hạn — the ten-year period, with the book's two methods and its own preference",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "judgement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "preserved_fork",
+        "unit": "the_ten_year_period_ladder",
+        "domain_note": "timing",
+        "method_1": {
+          "vietnamese": "Bắt đầu ghi số Cục ở cung an Mệnh, đoạn dương nam, âm nữ theo chiều thuận, âm nam, dương nữ theo chiều nghịch, lần lượt ghi số tiếp theo, từ cung này chuyển sang cung khác phải cộng thêm mười.",
+          "engine_rendering": "Begin by writing the cục number at the palace of Mệnh; then a dương nam or âm nữ goes forward and an âm nam or dương nữ goes backward, writing the following numbers in turn, adding ten at each move from one palace to the next.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "method_1_example": {
+          "vietnamese": "Thí dụ: Dương nam, Hỏa lục cục, bắt đầu ghi số 6 ở cung Mệnh, rồi ghi số 16 ở cung Phụ Mẫu, 26 ở cung Phúc Đức...",
+          "engine_rendering": "Example: a dương nam with Hỏa lục cục begins by writing 6 at the palace of Mệnh, then 16 at Phụ Mẫu, 26 at Phúc Đức...",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "method_2": {
+          "vietnamese": "Không ghi số Cục ở cung an Mệnh, dương nam, âm nữ theo chiều thuận, ghi liên tiếp … âm nam, dương nữ theo chiều nghịch, ghi số Cục ở cung Huynh Đệ, đoạn ghi liên tiếp…",
+          "engine_rendering": "Do not write the cục number at the palace of Mệnh; a dương nam or âm nữ goes forward writing successively … an âm nam or dương nữ goes backward, writing the cục number at the palace of Huynh Đệ and then successively on…",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "the_books_own_choice": {
+          "vietnamese": "Đây là hai cách khởi đại hạn. Nhưng thường người ta hay dùng cách thứ nhất vì nó chính xác hơn.",
+          "engine_rendering": "These are the two ways of starting the đại hạn. But people usually use the first, because it is more accurate.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "policy": "The book states a preference and does not suppress the alternative, so neither does this pack. Method 1 is marked preferred BY THE SOURCE, which is a different thing from being chosen by the product.",
+        "reading_rule": {
+          "vietnamese": "Một cung đã được ghi đại hạn, tức là vận hạn trong mười năm phải được xem trong cung đó.",
+          "engine_rendering": "Once a palace carries a đại hạn number, the fortunes of that ten-year span must be read in that palace.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "divergence_note": "Method 1's own example steps from Mệnh to PHỤ MẪU going forward. Under the Chinese enumeration the palace forward of Mệnh is Huynh Đệ. This is the palace-order reversal showing up inside the timing system, which is where a wrongly borrowed enumeration would do the most damage.",
+        "customer_prediction": false
+      },
+      "priority": 21,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, sections 9-11 (ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI)",
+          "location": "printed p.20-21; section 10.1 Đại hạn; PDF part dv01 pdfpages 20-21",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.han.annual_and_finer_periods",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "timing",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "lưu đại hạn, lưu niên tiểu hạn, lưu nguyệt, lưu nhật, lưu thời — the finer timing ladders",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "judgement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "nested_timing_ladders",
+        "unit": "year_month_day_hour_periods",
+        "luu_dai_han": {
+          "vietnamese": "Cung đã ghi đại hạn, gọi là cung gốc của đại hạn mười năm. Muốn xem vận hạn tường tận hơn, phải lưu đại hạn hàng năm.",
+          "engine_rendering": "The palace carrying a đại hạn is called the root palace of that ten-year span. To read the fortunes in finer detail the đại hạn must be run year by year.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "tieu_han_start_by_year_triad": {
+          "Dần, Ngọ, Tuất": "Thìn",
+          "Tỵ, Dậu, Sửu": "Mùi",
+          "Thân, Tý, Thìn": "Tuất",
+          "Hợi, Mão, Mùi": "Sửu"
+        },
+        "tieu_han_direction": {
+          "vietnamese": "Nam khởi lưu theo chiều thuận. Nữ khởi lưu theo chiều nghịch.",
+          "engine_rendering": "A man's annual count runs forward. A woman's runs backward.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "tieu_han_direction_note": "This is the ONE rule in Lập thành that turns on sex alone rather than on the yin/yang class. Every other directional rule in the chapter reads 'dương nam, âm nữ' against 'âm nam, dương nữ'. The pack records the difference and does not harmonise it.",
+        "luu_nguyet_three_methods": [
+          "from the tiểu hạn palace as the first month, count BACKWARD to the birth month; call that palace the hour Tý and count forward to the birth hour; call that palace the first month and run forward",
+          "from the tiểu hạn palace as the first month, count FORWARD to the birth month; call that palace the hour Tý and count forward to the birth hour; call that palace the first month and run forward",
+          "from the tiểu hạn palace as the first month, simply run forward one palace per month"
+        ],
+        "luu_nguyet_the_books_own_position": {
+          "vietnamese": "Trên đây là khởi lưu nguyệt hạn. Nhưng thường người ta hay dùng cách thứ nhất. Biên giả mong các vị nghiên cứu Tử Vi đẩu số thử nghiệm cả ba cách để xem cách nào chính xác hơn.",
+          "engine_rendering": "Those are the ways of starting the monthly period. But people usually use the first. The compiler hopes that students of Tử Vi đẩu số will test all three to see which is the more accurate.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "luu_nhat": "from the monthly palace as the first day of the month, one palace per day, forward",
+        "luu_thoi": "from the daily palace as the hour Tý, one palace per branch hour, forward",
+        "fork_policy": "Three methods for the month are printed, the author states a usage preference and then explicitly declines to settle the question, asking his readers to test all three. That is an unusually clean case of a source leaving a fork open, and the pack leaves it open.",
+        "customer_prediction": false
+      },
+      "priority": 22,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, sections 9-11 (ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI)",
+          "location": "printed p.21-24; sections 10.2 through 10.6; PDF part dv01 pdfpages 21-24",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.order.the_construction_sequence_the_book_imposes",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "natal",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the order in which a chart must be built, as the book's own dependencies impose it",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "judgement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "construction_order",
+        "unit": "ordered_stages",
+        "stages": [
+          "định cung (the fixed board)",
+          "tìm bản Mệnh (nạp âm of the year pillar)",
+          "phân âm dương",
+          "định giờ",
+          "an Mệnh",
+          "an Thân",
+          "the twelve palaces from Mệnh",
+          "lập cục",
+          "an Tử Vi and its series",
+          "an Thiên Phủ and its series",
+          "an Thái Tuế series",
+          "an Lộc Tồn and the Bác Sỹ series",
+          "an Tràng Sinh series",
+          "the Lục sát",
+          "the month-, hour- and year-counted stars",
+          "the day-counted stars (require Tả Hữu and Xương Khúc)",
+          "the stem and branch tables",
+          "the fixed and derived seats",
+          "Tứ Hóa (requires the star series)",
+          "Tuần and Triệt",
+          "định hướng chiếu",
+          "khởi hạn"
+        ],
+        "how_it_is_established": "The book numbers its sections 1 to 11 and each numbered star group in section 8 in turn, but the binding order is not the numbering — it is the dependency graph the instructions create. Lập cục needs the palace of Mệnh; the Tử Vi seat needs the cục; Thiên Phủ needs Tử Vi; Tam Thai and Bát Tọa need Tả Phụ and Hữu Bật; Ân Quang and Thiên Quý need Văn Xương and Văn Khúc; Kình Dương, Đà La, Quốc Ấn, Đường Phù and Bác Sỹ need Lộc Tồn; Thiên Không needs Thái Tuế; Thiên Tài and Thiên Thọ need Mệnh and Thân; Tứ Hóa needs every carrier star already seated; and the đại hạn needs both the cục and the palace enumeration.",
+        "consequence": "Any engine that runs these rules in the printed section order rather than in dependency order will attempt to seat Tứ Hóa before its carriers exist.",
+        "customer_prediction": false
+      },
+      "priority": 0,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, sections 9-11 (ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI)",
+          "location": "printed p.5-24; the whole of Phần 1, read as a dependency graph; PDF part dv01 pdfpages 5-24",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.calendar.the_book_outsources_the_calendar",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "calendar",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "the book supplies no calendar and names an almanac instead",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "judgement"
+          }
+        ]
+      },
+      "conclusion": {
+        "vietnamese": "Muốn biết rõ sự phối hợp của mỗi ngày trong tháng, với 10 Can và 12 Chi, phải coi trong Tính Mệnh Vạn Niên Lịch.",
+        "engine_rendering": "To know how each day of the month combines with the ten stems and the twelve branches, you must look in the Tính Mệnh Vạn Niên Lịch.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "type": "external_dependency",
+        "unit": "calendar_authority",
+        "what_the_book_does_supply": [
+          "the month-stem table from the year stem, Dần through Sửu",
+          "the hour-stem table from the day stem",
+          "the branch of each month, Giêng = Dần"
+        ],
+        "what_it_does_not_supply": [
+          "any rule for finding the lunar month and day of a civil date",
+          "any treatment of leap months",
+          "any statement of which meridian or civil time offset the hour table assumes"
+        ],
+        "consequence": "Every rule in this pack that takes a lunar month, a lunar day or a branch hour is downstream of a calendar this book does not contain. The track's separate vietnam_modern_lunisolar_rules_uhm_candidate_v1 pack is grade D and is not a substitute, and no proleptic use of it is permitted.",
+        "named_almanac": "Tính Mệnh Vạn Niên Lịch — named, not held. This is now the single highest-leverage acquisition for the track, exactly as the Lập thành section itself was before this pass.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, sections 9-11 (ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI)",
+          "location": "printed p.29; section 11.5 Ngày và Giờ; PDF part dv01 pdfpage 29",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    },
+    {
+      "rule_id": "vietnam.tuvi.lt.boundary.vietnamese_practice_versus_reprinted_chinese_doctrine",
+      "tradition_id": "vietnamese_tu_vi",
+      "school_id": "van_dang_thai_thu_lang_tu_vi_dau_so_tan_bien_1957",
+      "period": "twentieth_century_vietnamese_tu_vi_dau_so_van_dang_thai_thu_lang_1957",
+      "domain": "other",
+      "scope": {
+        "work": "Tử Vi đẩu số tân biên",
+        "technique": "what in this witness is Vietnamese practice and what is inherited Chinese doctrine",
+        "part": "Lập thành",
+        "layer": "chart_construction"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_stage",
+            "operator": "equals",
+            "value": "judgement"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "boundary_rule",
+        "unit": "attribution_policy",
+        "the_authors_own_statement": {
+          "vietnamese": "Môn cổ học này do một nhà Lý học uyên thâm đời Tống là Trần Đoàn tức là Hi Di Tử lập ra. Sau lại được nhiều nhà Lý học khác bổ sung, diễn dịch, triển khai và xếp đặt thành một môn học có hệ thống rành mạch. Ở nước ta, từ xưa đến nay, đã có nhiều người nghiên cứu Tử Vi đẩu số. Nhưng mỗi người hiểu một cách khác.",
+          "engine_rendering": "This old science was founded by a profound Song-dynasty scholar of principle, Trần Đoàn, that is Hi Di Tử. Later many other scholars supplemented, interpreted, developed and arranged it into a clearly systematic study. In our country, from of old until now, many people have studied Tử Vi đẩu số. But each understands it differently.",
+          "rendering_grade": "engine_translation_unreviewed"
+        },
+        "what_this_settles": "The book is explicit that the system descends from Chen Tuan and equally explicit that Vietnamese readings of it disagree among themselves. It therefore supports neither of the two errors the track guards against: it is not a translation of the Quanshu, and it is not an independent invention.",
+        "vietnamese_distinctive_in_this_witness": [
+          "the palace enumeration reversed against the Chinese order, stated as a construction instruction and confirmed by the đại hạn worked example",
+          "Vietnamese star nomenclature throughout, with no Chinese characters anywhere in the chapter",
+          "Tuần and Triệt given full placement tables and board diagrams as first-class agents",
+          "the author's own admission of disagreement among Vietnamese readers, and his invitation to test the three lưu nguyệt methods empirically"
+        ],
+        "shared_with_the_chinese_tradition": [
+          "the twelve-branch board and the counting idioms",
+          "the five cục and the Tử Vi day tables",
+          "the Thiên Phủ mirror",
+          "the Tứ Hóa stem table",
+          "the tam hợp / xung / nhị hợp aspect frame"
+        ],
+        "not_established": "Whether any of the shared items agrees CELL BY CELL with the 紫微斗數全書 is not established here, because no Quanshu edition is pinned in this repository. Until one is, this pack labels the shared items 'shared with the Chinese tradition' and not 'identical to it'.",
+        "standing_refusal": "No rule from this pack may be relabelled Chinese, and no rule from ziwei/ may be relabelled Vietnamese. The tracks share no source, no rule and no vector.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+          "work": "Tử Vi đẩu số tân biên",
+          "section": "Phần 1 — Lập thành, sections 9-11 (ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI)",
+          "location": "printed p.4; LỜI NÓI ĐẦU (author's preface); PDF part dv01 pdfpage 4",
+          "verification": "vietnamese_read_directly_from_the_publisher_text_layer_of_the_digital_edition; where the text layer collapses a printed grid the PDF page was rendered at 170 dpi and the table read from the page image"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Vietnamese read without independent native-speaker review, and construction rules are never rendered as a claim about a person",
+      "review_status": "engine_translation_unreviewed; no Vietnamese specialist has checked this extraction"
+    }
+  ]
+}

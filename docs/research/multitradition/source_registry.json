@@ -3459,6 +3459,36 @@
       "verified_scope": "Item metadata and file list inspected. The item is a 15.7 MB PDF of manuscript images in the patron-library collection; its OCR text layer is 27 kB, which is consistent with images of colonial Yucatec handwriting and not with a usable transcription. No transcription of the day-augury section is present in this item.",
       "rights_note": "Patron-library collection; access restricted. Sibling Ixil item carries CC BY-NC-ND 4.0.",
       "next_action": "The day auguries of this manuscript are edited in Bricker and Miram, An Encounter of Two Worlds: The Book of Chilam Balam of Kaua (Tulane, 2002), which is in copyright. The other open route is the Berendt Linguistic Collection copies at the University of Pennsylvania. Pursue the Penn copies before assuming the section is unavailable."
+    },
+    {
+      "id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+      "tradition": "jaimini",
+      "branch": "upadesa_sutra",
+      "title": "The Upadesa Sutra of Jaimini, critically edited with commentary, introduction, English translation and appendices - JP2 page-image set (377 images)",
+      "author": "K. V. Abhyankar (editor)",
+      "repository": "Internet Archive",
+      "url": "https://archive.org/details/jaimini-kva-a-4-size",
+      "source_type": "page_images_jp2",
+      "evidence_grade_target": "A",
+      "status": "page_inspected",
+      "verified_scope": "377 JP2 page images of archive item 'Jaimini KVA A4 size', 1241x1755 px each; sha256 of the distributed jp2 zip = 200379fe29d5593d30c9d27425bfb7c100942aee4e1e00fb5e38341822bc84af. Page-image index N corresponds to printed Introduction page N-11, established from header strips at images 60, 140 and 200. Pages read directly in this pass: Introduction pp. 100-116, which carry the fourteen karaka-kundalis of paragraphs 114-129 together with the planetary position lists that the item's OCR text layer lost entirely for Ranade, Tilak, Gandhi and Lokur and rendered as Latin gibberish for Nehru, Patel and Mavlankar. The images carry the Devanagari graha abbreviations and the chart plates that the text layer did not recover. This acquisition supplied the eight degree-bearing worked charts used as the Jaimini validation suite.",
+      "rights_note": "1951 Indian publication, rights status unresolved; the uploader's CC BY-NC-ND cannot be granted over another party's work. Used for internal alignment, for reading the critical editor's own worked charts, and for paraphrase. No Sanskrit is quoted from this edition - quotation is taken from the public-domain Sutrarthaprakasika printing instead.",
+      "next_action": "Read the Sanskrit-text pages (image index about 135 onward) for the variant apparatus at 1.1.15, the only document that can settle the seven-versus-eight karaka question, which the worked charts provably cannot; then Appendix 1 (Jaimini-Sutra-Karika) and Appendix 4 (comparative table against Brhad-Yavana-Jataka, Brhajjataka, Saravali and Brhat Parasari)."
+    },
+    {
+      "id": "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition",
+      "tradition": "vietnamese_tu_vi",
+      "branch": "twentieth_century_vietnamese_tu_vi_dau_so_construction_and_delineation",
+      "title": "Tử Vi đẩu số tân biên",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "repository": "openly served searchable digital edition, retrieved 2026-08-04 into tmp/acquire/pdfs/tu_vi_dau_so_tan_bien/",
+      "url": "local: E:/code.projects/astrology/tmp/acquire/pdfs/tu_vi_dau_so_tan_bien/ (tuvi_mucluc.pdf, tuvi_dv01.pdf .. tuvi_dv06.pdf)",
+      "source_type": "searchable_digital_edition_of_a_1957_printing_not_a_scan",
+      "evidence_grade_target": "A",
+      "status": "full_text_inspected",
+      "verified_scope": "Complete book in seven PDF parts, 277 pages, with a clean publisher text layer of roughly 500,000 characters of Vietnamese. Hash-pinned: tuvi_dv01.pdf 597465 bytes sha256 4293562c32502e5b0295897e19b3a212a787e019456a104bd8dd50eed7228c82; tuvi_dv02.pdf 255380 bytes b928b2adb34426da0a49facf12cb182b7e1f3c91e30994fcbce4d0aa595da6b4; tuvi_dv03.pdf 266389 bytes ddb25fb82335a922993a3cf373d8361830655726e77f51d506851b8158055196; tuvi_dv04.pdf 251145 bytes ff6607d3741989e6721f1984672ca8451ffa2905c79deb63fa3e6b7c3b746a50; tuvi_dv05.pdf 204255 bytes b3e4ad51314bd644564d923387325f472d679328e06e2e1bf622bff5563badae; tuvi_dv06.pdf 383295 bytes d10ff9945b1975af27064d0f73c236f9ff189f189d278e82ff03136b0954902a; tuvi_mucluc.pdf 347303 bytes d108849f2f3253ab0104c66803020be4abddaa3cacfa3bebfcbe131676662434. The structure matches the 1957 Tín Đức Thư Xã printing exactly: Phần I Lập thành (pp.5-30), Phần II Luận đoán 12 cung (pp.31-247), Phần III Luận đoán vận hạn (pp.248-271). Phần 1 was read in full, printed pp.5-30, and is the section the Vietnamese defensibility spec named as the one acquisition that would turn the track's orphaned delineation cells into a system. It carries all eleven numbered subsections: ĐỊNH CUNG, TÌM BẢN MỆNH, PHÂN ÂM DƯƠNG, ĐỊNH GIỜ, AN MỆNH, AN THÂN, LẬP CỤC, AN SAO (37 numbered star groups including the placement of Tuần and Triệt), ĐỊNH HƯỚNG CHIẾU, KHỞI HẠN, LÝ GIẢI NGŨ HÀNH CAN CHI. Five printed grids in section 8 are flattened into single columns by the text layer and were read instead from the PDF pages rendered at 170 dpi: the LẬP CỤC table on p.7, the five Tử Vi ring tables on pp.7-8, the two Thiên Phủ ring diagrams on p.9, and the Tuần and Triệt tables with their board diagrams on pp.16-17. Collation result: of the 150 printed day-entries in the five Tử Vi tables, 148 reproduce a single closed-form placement exactly; the two failures are confined to the Kim tứ cục table, where the day 21 is printed twice and the day 24 not at all. Phần II and Phần III were located and their section boundaries confirmed against the muc luc, but are not yet mined.",
+      "rights_note": "RIGHTS-CHECK. Vân Đằng Thái Thứ Lang's work is twentieth-century and very likely still in copyright; the acquisition ledger flags this item accordingly. The retrieved artefact is a searchable digital edition, not a scan of the 1957 printing, and carries no rights statement of its own. Quotation here is research use with full citation; no customer-facing reproduction may be made without a rights opinion.",
+      "next_action": "Mine Phần II (per-palace, per-star delineation, printed pp.31-247) and Phần III (timing, pp.248-271). Obtain a scan of the 1957 Tín Đức Thư Xã printing to collate this digital edition against the edition it claims to reproduce. Obtain the Tính Mệnh Vạn Niên Lịch, the almanac the book itself names at p.29, since every construction rule that takes a lunar month, lunar day or branch hour is downstream of a calendar this book does not supply."
     }
   ]
 }

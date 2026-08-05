@@ -1,0 +1,4599 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "jaimini",
+ "school_id": "jaimini_upadesa_sutra_technique",
+ "source_pack_id": "jaimini_upadesa_sutra_technique_v1",
+ "source_edition_id": "abhyankar_1951_critical_edition_page_images_with_sutrarthaprakasika_dli_2015_242319",
+ "source_registry_ids": [
+  "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+  "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+  "jaimini_sutrarthaprakasika_dli_2015_242319",
+  "jaimini_sitaram_jha_tattvadarsa_benares",
+  "jaimini_nilakantha_vyakhya_ms_jammu_882gha"
+ ],
+ "implementation_status": "research_verified",
+ "publication_status": "research_only",
+ "evidence_note": "The working technique layer of the Jaimini Upadesa Sutra, covering Adhyaya 1 (four padas) and Adhyaya 2 (four padas) -- every pada that survives with a commentary and a translation. It is built on two witnesses read in the original plus one acquisition the track had been waiting for: the page images of K. V. Abhyankar's 1951 critical edition (fifteen manuscripts for Adhyayas 1-2), whose text layer had lost the plates. Sanskrit is quoted from the Jaiminiyasutram with the Sutrarthaprakasika (DLI 2015.242319), the best Devanagari witness retrieved; Abhyankar's own English translation is used for passage alignment and is cited as such, never quoted as the text. Every conclusion carries an engine_rendering graded engine_translation_unreviewed and no cell is customer-eligible. Adhyayas 3 and 4 are deliberately absent: Abhyankar's own Critical Note states that the commentaries and translations terminate at the end of the first two Adhyayas and that only the sutra-patha of the last two survives, 'very inaccurate and unreliable'. That is a ceiling stated by the critical editor, not an unfinished task. Where commentators disagree the positions are encoded as separate attributed rules linked by conflicts_with and are never averaged. Death timing, cause of death, lifespan, caste, servitude, gender and bodily-defect clauses are encoded verbatim so the corpus is not bowdlerised and carry output_policy 'refused'. This manifest is a companion to jaimini_rule_manifest.json (the provenance and conflict pack for Adhyaya 1 Pada 1); the two are not merged, and no rule id is shared.",
+ "rules": [
+  {
+   "rule_id": "jaimini.text.opening.vrddhopadesa",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "text_frame",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.1",
+    "sutra_abhyankar": "1.1.1"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "reading_section",
+      "operator": "equals",
+      "value": "jaimini"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "frame",
+    "result": "the pack presents itself as vrddha-upadesa, received instruction",
+    "sanskrit": "शासत्रसुघां वितरिष्यन्‌ काश्यां घोमत्सुधाकरो जयति",
+    "iast": "athato vrddhopadesah",
+    "engine_rendering": "Now, therefore, the instruction of the ancients (in astrology) is set out. The text announces itself as transmitted teaching, not as the author's own invention.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.1 (Sutrarthaprakasika numbering); = Abhyankar 1.1.1",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.1, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "D",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; the Devanagari of this opening sutra was not recovered cleanly by either OCR - the IAST here is reconstructed from Abhyankar's English and must be checked against the page image before promotion"
+  },
+  {
+   "rule_id": "jaimini.text.katapayadi.bhavas-and-rasis",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "katapayadi",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.31",
+    "sutra_abhyankar": "1.1.32"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sutra_word_denotes",
+      "operator": "in",
+      "value": [
+       "bhava",
+       "rasi"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "decoding_rule",
+    "result": "decode the word's consonants as katapayadi numerals to obtain the bhava or rasi number",
+    "sanskrit": "सर्वत्र सवर्णा भावा रायश्च",
+    "engine_rendering": "Everywhere in this work the bhavas and the rasis are to be read out of the letters (of the words used for them) by the katapayadi consonant-numeral scheme. Nothing downstream can be decoded without this.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 1,
+   "exceptions": [
+    "Confirmed twice by worked examples inside the text itself: dara = 4 (1.1.29) and viveka = 144 (1.1.33)."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.31 (Sutrarthaprakasika numbering); = Abhyankar 1.1.32",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.32, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.text.katapayadi.not-grahas",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "katapayadi",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.32",
+    "sutra_abhyankar": "1.1.33"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sutra_word_denotes",
+      "operator": "equals",
+      "value": "graha"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "decoding_rule",
+    "result": "read the word as the planet it names; do not decode it as a numeral",
+    "sanskrit": "न ग्रहाः",
+    "engine_rendering": "The grahas are not to be read in that way. Planet names in the sutras are planet names, not numerals.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 1,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.32 (Sutrarthaprakasika numbering); = Abhyankar 1.1.33",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.33, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.drsti.rasi.movable",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "rasi_drsti",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.2",
+    "sutra_abhyankar": "1.1.2"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "rasi_modality",
+      "operator": "equals",
+      "value": "movable"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "aspect_geometry",
+    "result": "aspects the three fixed signs other than the 2nd from itself",
+    "aspected_by_sign": {
+     "Aries": [
+      "Leo",
+      "Scorpio",
+      "Aquarius"
+     ],
+     "Cancer": [
+      "Scorpio",
+      "Aquarius",
+      "Taurus"
+     ],
+     "Libra": [
+      "Aquarius",
+      "Taurus",
+      "Leo"
+     ],
+     "Capricorn": [
+      "Taurus",
+      "Leo",
+      "Scorpio"
+     ]
+    },
+    "excluded_sign": {
+     "Aries": "Taurus",
+     "Cancer": "Leo",
+     "Libra": "Scorpio",
+     "Capricorn": "Aquarius"
+    },
+    "sanskrit": "तत्युचोस्ि प्रसरितयशश््रौरयोष्याधिनाथः",
+    "iast": "abhipasyanty rksani parsve ca",
+    "engine_rendering": "A movable sign aspects the signs in front of it and at its two sides - which the commentary's vrddha karika fixes as the three fixed signs, excluding the fixed sign immediately next to it.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 2,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2 (Sutrarthaprakasika numbering); = Abhyankar 1.1.2",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.drsti.rasi.fixed",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "rasi_drsti",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.2",
+    "sutra_abhyankar": "1.1.2"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "rasi_modality",
+      "operator": "equals",
+      "value": "fixed"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "aspect_geometry",
+    "result": "aspects the three movable signs other than the 12th from itself",
+    "aspected_by_sign": {
+     "Taurus": [
+      "Cancer",
+      "Libra",
+      "Capricorn"
+     ],
+     "Leo": [
+      "Libra",
+      "Capricorn",
+      "Aries"
+     ],
+     "Scorpio": [
+      "Capricorn",
+      "Aries",
+      "Cancer"
+     ],
+     "Aquarius": [
+      "Aries",
+      "Cancer",
+      "Libra"
+     ]
+    },
+    "excluded_sign": {
+     "Taurus": "Aries",
+     "Leo": "Cancer",
+     "Scorpio": "Libra",
+     "Aquarius": "Capricorn"
+    },
+    "sanskrit": "तत्युचोस्ि प्रसरितयशश््रौरयोष्याधिनाथः",
+    "iast": "abhipasyanty rksani parsve ca",
+    "engine_rendering": "A fixed sign aspects the three movable signs, excluding the movable sign immediately behind it.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 2,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2 (Sutrarthaprakasika numbering); = Abhyankar 1.1.2",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.drsti.rasi.dual",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "rasi_drsti",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.2",
+    "sutra_abhyankar": "1.1.2"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "rasi_modality",
+      "operator": "equals",
+      "value": "dual"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "aspect_geometry",
+    "result": "aspects the other three dual signs",
+    "aspected_by_sign": {
+     "Gemini": [
+      "Virgo",
+      "Sagittarius",
+      "Pisces"
+     ],
+     "Virgo": [
+      "Gemini",
+      "Sagittarius",
+      "Pisces"
+     ],
+     "Sagittarius": [
+      "Gemini",
+      "Virgo",
+      "Pisces"
+     ],
+     "Pisces": [
+      "Gemini",
+      "Virgo",
+      "Sagittarius"
+     ]
+    },
+    "sanskrit": "तत्युचोस्ि प्रसरितयशश््रौरयोष्याधिनाथः",
+    "iast": "abhipasyanty rksani parsve ca",
+    "engine_rendering": "A dual (common) sign aspects the other three dual signs, with no exclusion.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 2,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2 (Sutrarthaprakasika numbering); = Abhyankar 1.1.2",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.drsti.graha.inherits-rasi-drsti",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "graha_drsti",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.3",
+    "sutra_abhyankar": "1.1.3"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_rasi",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "aspect_geometry",
+    "result": "the graha aspects every sign its own sign aspects, and every graha standing there",
+    "note": "no 7th-house aspect and no special Mars/Jupiter/Saturn aspects are recognised here",
+    "sanskrit": "तन्निषटाश्च तदत्‌",
+    "iast": "tannisthas ca tadvat",
+    "engine_rendering": "Grahas standing in those signs aspect in the same way. A graha has no aspect of its own in this system; it borrows the aspect of the sign it occupies. This is the single largest divergence from Parasari geometry.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 2,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.3 (Sutrarthaprakasika numbering); = Abhyankar 1.1.3",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.3, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.drsti.rasi.excluded-sign-is-the-adjacent-one",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "rasi_drsti",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.2",
+    "sutra_abhyankar": "1.1.2"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "rasi_modality",
+      "operator": "in",
+      "value": [
+       "movable",
+       "fixed"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "aspect_geometry",
+    "result": "exactly one candidate sign is excluded, and it is the adjacent one",
+    "excluded_sign": {
+     "Aries": "Taurus",
+     "Cancer": "Leo",
+     "Libra": "Scorpio",
+     "Capricorn": "Aquarius",
+     "Taurus": "Aries",
+     "Leo": "Cancer",
+     "Scorpio": "Libra",
+     "Aquarius": "Capricorn"
+    },
+    "sanskrit": "तत्युचोस्ि प्रसरितयशश््रौरयोष्याधिनाथः",
+    "engine_rendering": "The sign excluded from a movable or fixed sign's aspect is the adjacent sign of the opposite modality - the 2nd from a movable sign, the 12th from a fixed sign. Dual signs exclude nothing.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2 (Sutrarthaprakasika numbering); = Abhyankar 1.1.2",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.drsti.rasi.sammukha-parsva-reading.disputed",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "rasi_drsti",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.2",
+    "sutra_abhyankar": "1.1.2"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "aspect_strength_model",
+      "operator": "equals",
+      "value": "requested"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "disputed_convention",
+    "result": "front and side aspects are not graded; all three aspects are treated alike",
+    "alternative": "grade the sammukha aspect above the two parsva aspects",
+    "sanskrit": "तत्युचोस्ि प्रसरितयशश््रौरयोष्याधिनाथः",
+    "engine_rendering": "The Sutrarthaprakasika reads 'in front' (sammukha) and 'at the sides' (parsva) as together yielding the three signs of the opposite modality; a competing reading treats them as two separate aspect classes of different strength. The pack encodes the first and records the second rather than choosing silently.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.drsti.rasi.movable",
+    "jaimini.drsti.rasi.fixed"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2 (Sutrarthaprakasika numbering); = Abhyankar 1.1.2",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.2, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    },
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Sutrarthaprakasika",
+     "section": "commentary at 1.1.2",
+     "location": "gloss on abhipasyanty rksani parsve ca",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.from-2nd-4th-11th",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.4",
+    "sutra_abhyankar": "1.1.4"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house_from_reference_graha",
+      "operator": "in",
+      "value": [
+       2,
+       4,
+       11
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "argala",
+    "result": "argala is formed on the reference point",
+    "houses": [
+     4,
+     2,
+     11
+    ],
+    "sanskrit": "शाके योरामयलेन विश्वनाये समर्पिता",
+    "iast": "darabhagyasulastha argala nidhyatuh",
+    "engine_rendering": "Grahas standing in the 4th, the 2nd and the 11th from the graha under consideration form an argala - an intervention, a bolt thrown across - upon it.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 3,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.4 (Sutrarthaprakasika numbering); = Abhyankar 1.1.4",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.4, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.from-3rd-malefic-majority",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.5",
+    "sutra_abhyankar": "1.1.5"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house_from_reference_graha",
+      "operator": "equals",
+      "value": 3
+     },
+     {
+      "fact": "malefics_in_house",
+      "operator": "greater_than",
+      "value": "benefics_in_house"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "argala",
+    "result": "argala is formed from the 3rd",
+    "houses": [
+     3
+    ],
+    "sanskrit": "६५ ॥",
+    "iast": "kamastha tu bhuyasa papanam",
+    "engine_rendering": "Grahas in the 3rd form an argala too, but only when they are malefic and outnumber the benefics standing there.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.5 (Sutrarthaprakasika numbering); = Abhyankar 1.1.5",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.5, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.virodha-houses",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.6",
+    "sutra_abhyankar": "1.1.6"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house_from_reference_graha",
+      "operator": "in",
+      "value": [
+       3,
+       10,
+       12
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "argala_obstruction",
+    "result": "the paired argala is obstructed",
+    "pairing": {
+     "12": "obstructs the 2nd",
+     "10": "obstructs the 4th",
+     "3": "obstructs the 11th"
+    },
+    "sanskrit": "रिष्फनीचकासस्था विरोधिनः",
+    "iast": "risphanicakamastha virodhinah",
+    "engine_rendering": "Grahas in the 12th, the 10th and the 3rd obstruct (virodha) the argalas of the 2nd, the 4th and the 11th respectively.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [
+    "The pairing itself is contested; see jaimini.argala.virodhi-pairing.disputed."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.6 (Sutrarthaprakasika numbering); = Abhyankar 1.1.6",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.6, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.virodhi-pairing.disputed",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.6",
+    "sutra_abhyankar": "1.1.6"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "argala_pairing_model",
+      "operator": "equals",
+      "value": "requested"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "disputed_convention",
+    "result": "pairing undecided",
+    "alternative_a": "ordered pairing 12-2, 10-4, 3-11",
+    "alternative_b": "each obstructor answers the argala it counts to",
+    "sanskrit": "रिष्फनीचकासस्था विरोधिनः",
+    "engine_rendering": "The sutra lists the obstructing houses but does not say which obstructs which. The Sutrarthaprakasika pairs them in order (12 against 2, 10 against 4, 3 against 11); another reading pairs each obstructor with whichever argala it counts to. Both are recorded; neither is adopted.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.argala.virodha-houses"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.6 (Sutrarthaprakasika numbering); = Abhyankar 1.1.6",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.6, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.virodha-fails-when-weaker",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.7",
+    "sutra_abhyankar": "1.1.7"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "obstructing_grahas_count",
+      "operator": "less_than",
+      "value": "argala_grahas_count"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "argala_obstruction",
+    "result": "the obstruction fails and the argala stands",
+    "sanskrit": "न न्यूना विवलाश्च",
+    "iast": "na nyuna vibalas ca",
+    "engine_rendering": "Obstructors that are fewer in number, or weaker, do not obstruct. The argala stands.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.7 (Sutrarthaprakasika numbering); = Abhyankar 1.1.7",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.7, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.from-trikona",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.8",
+    "sutra_abhyankar": "1.1.8"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house_from_reference_graha",
+      "operator": "in",
+      "value": [
+       5,
+       9
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "argala",
+    "result": "trikona argala is formed",
+    "houses": [
+     5,
+     9
+    ],
+    "sanskrit": "साधरणीत्यटम्‌",
+    "iast": "pragvat trikone",
+    "engine_rendering": "The same argala is formed from the trines - the 5th and the 9th - as before.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.8 (Sutrarthaprakasika numbering); = Abhyankar 1.1.8",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.8, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.ketu-counts-backward",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.9",
+    "sutra_abhyankar": "1.1.9"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "equals",
+      "value": "Ketu"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "argala",
+    "result": "count Ketu's argala houses in the reverse direction",
+    "sanskrit": "विपरोतं केतोः",
+    "iast": "viparitam ketoh",
+    "engine_rendering": "For Ketu the reverse holds: the counting of houses runs backwards.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [
+    "The scope of this reversal is disputed; see jaimini.argala.ketu-reversal-scope.disputed."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.9 (Sutrarthaprakasika numbering); = Abhyankar 1.1.9",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.9, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.ketu-reversal-scope.disputed",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.9",
+    "sutra_abhyankar": "1.1.9"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "ketu_reversal_scope",
+      "operator": "equals",
+      "value": "requested"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "disputed_convention",
+    "result": "scope undecided",
+    "alternative_a": "universal over 1.1.4-1.1.8",
+    "alternative_b": "confined to the trikona sutra 1.1.8",
+    "sanskrit": "विपरोतं केतोः",
+    "engine_rendering": "Whether 'reverse for Ketu' governs the whole argala complex (1.1.4-1.1.8) or only the trikona sutra it stands next to is disputed in the commentary. Both readings are recorded.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.argala.ketu-counts-backward"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.9 (Sutrarthaprakasika numbering); = Abhyankar 1.1.9",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.9, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.argala.target-of-intervention.disputed",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "argala",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.4",
+    "sutra_abhyankar": "1.1.4"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "argala_target_model",
+      "operator": "equals",
+      "value": "requested"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "disputed_convention",
+    "result": "target undecided",
+    "alternative_a": "the bhava under consideration (Sutrarthaprakasika)",
+    "alternative_b": "the aspecting graha (Subodhini)",
+    "sanskrit": "शाके योरामयलेन विश्वनाये समर्पिता",
+    "engine_rendering": "What the argala is thrown across is disputed: the Sutrarthaprakasika takes the target to be the bhava under consideration; the Subodhini takes it to be the aspecting graha. The two produce different intervention lines in the same chart.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.argala.from-2nd-4th-11th"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.4 (Sutrarthaprakasika numbering); = Abhyankar 1.1.4",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.4, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    },
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Sutrarthaprakasika",
+     "section": "commentary at 1.1.4",
+     "location": "where the commentator names and rejects the Subodhini's reading",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.atmakaraka.by-degree",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "degree_within_rasi",
+      "operator": "is_maximum_among",
+      "value": "karaka_candidate_set"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the Atmakaraka",
+    "rank": 1,
+    "sort": "degree within sign, descending",
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "Of the seven, or of the eight, the one that has advanced furthest - measured in degrees, minutes and the finer units, inside the sign it stands in - is the Atmakaraka, the significator of the self. The sutra itself says 'of seven or of eight' (saptanam astanam va) and so leaves the candidate set open.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 4,
+   "exceptions": [
+    "The candidate set is left open by the sutra itself and is disclosed, not chosen: see jaimini.karaka.scheme.seven and jaimini.karaka.scheme.eight."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.atmakaraka.bandha-moksa",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.11",
+    "sutra_abhyankar": "1.1.11"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 1
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "signification",
+    "result": "the Atmakaraka governs bandha and moksa - bondage and release, misery and happiness",
+    "sanskrit": "स ईष्टे बन्धमोक्षयोः",
+    "iast": "sa iste bandhamoksayoh",
+    "engine_rendering": "He rules over bondage and release. The commentary's 'bondage' runs from the metaphysical to the literal, including imprisonment, which is why this signification is retained as testimony and never issued as a forecast.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "output_policy": "refused",
+    "output_policy_reason": "the commentary's bandha includes literal imprisonment; this is historical testimony, not a forecast"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.11 (Sutrarthaprakasika numbering); = Abhyankar 1.1.11",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.11, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "refused for customer output; this cell states a death, lifespan, caste, gender or bodily-defect result and is retained as historical testimony only",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.amatyakaraka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.12",
+    "sutra_abhyankar": "1.1.12"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 2
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the the Minister significator",
+    "rank": 2,
+    "signifies": "counsel, office, the person's work in the world",
+    "sanskrit": "तस्यानुसरणादमालयः",
+    "engine_rendering": "The graha next in order after the preceding karaka is the the Minister significator, signifying counsel, office, the person's work in the world. Rank 2 by degree within sign, descending.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.12 (Sutrarthaprakasika numbering); = Abhyankar 1.1.12",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.12, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.bhratrkaraka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.13",
+    "sutra_abhyankar": "1.1.13"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 3
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the the significator of the Brother",
+    "rank": 3,
+    "signifies": "brother, courage, the sibling axis",
+    "sanskrit": "तस्य श्रता",
+    "engine_rendering": "The graha next in order after the preceding karaka is the the significator of the Brother, signifying brother, courage, the sibling axis. Rank 3 by degree within sign, descending.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.13 (Sutrarthaprakasika numbering); = Abhyankar 1.1.13",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.13, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.matrkaraka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.14",
+    "sutra_abhyankar": "1.1.14"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 4
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the the significator of the Mother",
+    "rank": 4,
+    "signifies": "mother, nurture, dwelling",
+    "sanskrit": "तस्य माता",
+    "engine_rendering": "The graha next in order after the preceding karaka is the the significator of the Mother, signifying mother, nurture, dwelling. Rank 4 by degree within sign, descending.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.14 (Sutrarthaprakasika numbering); = Abhyankar 1.1.14",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.14, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.pitrkaraka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 5
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the Pitrkaraka",
+    "rank": 5,
+    "signifies": "father",
+    "iast": "tasya pita",
+    "engine_rendering": "The graha next in order after the Matrkaraka is the Pitrkaraka, the significator of the Father. This sutra stands in Abhyankar's critical text, built on fifteen manuscripts, and is absent from the Sutrarthaprakasika's running text, which explicitly reports and rejects the manuscripts that carry it. It is the whole of the seven-versus-eight question.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.scheme.seven"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "Abhyankar's critical text of the Upadesa Sutra",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.15, present in the critical text only",
+     "verification": "english_translation_of_the_critical_editor_read_directly"
+    },
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "the running text has no such sutra and the commentary rejects the manuscripts that do",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.putrakaraka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.16",
+    "sutra_abhyankar": "1.1.17"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 6
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the the significator of the Son",
+    "rank": 6,
+    "signifies": "children",
+    "sanskrit": "तस्य ज्ञातिः",
+    "engine_rendering": "The graha next in order after the preceding karaka is the the significator of the Son, signifying children. Rank 6 by degree within sign, descending.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.16 (Sutrarthaprakasika numbering); = Abhyankar 1.1.17",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.17, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.jnatikaraka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.17",
+    "sutra_abhyankar": "1.1.18"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 7
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the the significator of kinsfolk",
+    "rank": 7,
+    "signifies": "kin, cousins, the wider family",
+    "sanskrit": "कार्य इति सूचकदन्ेति",
+    "engine_rendering": "The graha next in order after the preceding karaka is the the significator of kinsfolk, signifying kin, cousins, the wider family. Rank 7 by degree within sign, descending.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.17 (Sutrarthaprakasika numbering); = Abhyankar 1.1.18",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.18, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.darakaraka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.18",
+    "sutra_abhyankar": "1.1.19"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_rank",
+      "operator": "equals",
+      "value": 8
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "that graha is the the significator of the Wife",
+    "rank": 8,
+    "signifies": "spouse, partnership",
+    "sanskrit": "मात्रा सह पुत्रमेकं समामनन्ति",
+    "engine_rendering": "The graha next in order after the preceding karaka is the the significator of the Wife, signifying spouse, partnership. Rank 8 by degree within sign, descending.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.18 (Sutrarthaprakasika numbering); = Abhyankar 1.1.19",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.19, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.scheme.seven",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.18",
+    "sutra_abhyankar": "1.1.19"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme",
+      "operator": "equals",
+      "value": "seven"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "seven chara karakas; the Matrkaraka doubles as Putrakaraka; no distinct Pitrkaraka",
+    "candidate_set": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn"
+    ],
+    "sanskrit": "मात्रा सह पुत्रमेकं समामनन्ति",
+    "engine_rendering": "Some hold the tradition of taking the significator of the mother as the significator of the son as well - that is, seven karakas, not eight, Rahu being left out. This is the Sutrarthaprakasika's own running text.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.scheme.eight",
+    "jaimini.karaka.pitrkaraka"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.18 (Sutrarthaprakasika numbering); = Abhyankar 1.1.19",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.19, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.scheme.eight",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme",
+      "operator": "equals",
+      "value": "eight"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "eight chara karakas with a distinct Pitrkaraka",
+    "candidate_set": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Rahu"
+    ],
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "The competing scheme takes eight karakas, adding Rahu to the seven and giving the father a karaka of his own. Abhyankar reasons that Rahu and Ketu hold identical degrees-within-sign and therefore count as one, giving eight and not nine.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.scheme.seven"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.scheme.undecided",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme",
+      "operator": "equals",
+      "value": "unset"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "refusal",
+    "result": "abstain; require the scheme to be declared before any karaka below rank 1 is named",
+    "abstain": true,
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "The pack does not choose between the seven-karaka and the eight-karaka schemes. The sutra's own 'saptanam astanam va' leaves it open, the two best witnesses differ, and the choice changes which graha carries the father, the son and the kin. Any reading built on this pack must disclose which scheme it ran.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.scheme.seven",
+    "jaimini.karaka.scheme.eight"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.rahu.forward-counted",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme",
+      "operator": "equals",
+      "value": "eight"
+     },
+     {
+      "fact": "rahu_counting",
+      "operator": "equals",
+      "value": "forward"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "Rahu's rank is taken from his degree within his sign, counted forward",
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "Where Rahu is admitted, one convention counts his degree-within-sign forward like any other graha. Abhyankar's own fourteen worked charts are consistent with this and with Rahu's exclusion, and are not consistent with reverse counting.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.rahu.reverse-counted"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.rahu.reverse-counted",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme",
+      "operator": "equals",
+      "value": "eight"
+     },
+     {
+      "fact": "rahu_counting",
+      "operator": "equals",
+      "value": "reverse"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "Rahu's effective degree is 30 minus his degree within sign",
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "The competing convention, carried by a vrddha verse quoted in the Sutrarthaprakasika (meshady-asavya-margena), counts Rahu backwards from the end of his sign, so that his effective degree is 30 minus his longitude in sign. Abhyankar's Patel chart refutes this for his own practice: reverse counting would make Rahu at 25 the Atmakaraka, and Abhyankar names Saturn.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.rahu.forward-counted",
+    "jaimini.karaka.rahu.excluded"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.rahu.excluded",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.18",
+    "sutra_abhyankar": "1.1.19"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme",
+      "operator": "equals",
+      "value": "seven"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "Rahu and Ketu are not candidates for any karaka",
+    "sanskrit": "मात्रा सह पुत्रमेकं समामनन्ति",
+    "engine_rendering": "The third convention leaves Rahu out of the karaka set altogether. Under the seven-karaka scheme this is the only available reading, and none of Abhyankar's charts distinguishes it from forward counting, because in none of them would Rahu have been the Atmakaraka on a forward count.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.rahu.forward-counted"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.18 (Sutrarthaprakasika numbering); = Abhyankar 1.1.19",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.19, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.rahu-ketu.count-as-one",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme",
+      "operator": "equals",
+      "value": "eight"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "Ketu is not a separate karaka candidate; Rahu stands for the pair",
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "Abhyankar's reason for eight rather than nine: Rahu and Ketu always hold the same degree within their respective signs, so admitting both would produce a tie by construction. Only Rahu is entered.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "Abhyankar's introduction to the Upadesa Sutra",
+     "section": "Introduction, karaka section",
+     "location": "editor's reasoning on seven versus eight",
+     "verification": "english_translation_of_the_critical_editor_read_directly"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.tie-break.finer-units",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "degree_within_rasi_tie",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "resolve by minutes, then seconds, then finer",
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "The sutra's kaladibhih - 'by minutes and the rest' - is read by one party as the tie-break itself: go to finer units until the ranking separates.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.tie-break.stronger-graha",
+    "jaimini.karaka.tie-break.sthira-karaka"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.tie-break.stronger-graha",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "degree_within_rasi_tie",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "resolve by graha strength",
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "The Sutrarthaprakasika's own view, shared with an unnamed kecit, is that a tie goes to the stronger graha rather than to finer units.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.tie-break.finer-units"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    },
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Sutrarthaprakasika",
+     "section": "commentary at 1.1.10",
+     "location": "the commentator's own view, with kecit cited in support",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.tie-break.sthira-karaka",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.10",
+    "sutra_abhyankar": "1.1.10"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "degree_within_rasi_tie",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "resolve by the fixed significator of the topic in question",
+    "reported_and_rejected_by": "Sutrarthaprakasika",
+    "sanskrit": "आत्माधिकः कटादिभि्नभोगः सप्तानामष्टानां वा",
+    "engine_rendering": "The Subodhini resolves ties by the sthira (fixed) karaka of the topic. The Sutrarthaprakasika reports and rejects this. Recorded because the rejection is itself evidence that the position was held.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.karaka.tie-break.finer-units",
+    "jaimini.karaka.tie-break.stronger-graha"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10 (Sutrarthaprakasika numbering); = Abhyankar 1.1.10",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.10, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    },
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Sutrarthaprakasika",
+     "section": "commentary at 1.1.10",
+     "location": "where the Subodhini is named and rejected",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.karaka.outranks-lagna-lord",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.11",
+    "sutra_abhyankar": "1.1.11"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "judgment_step",
+      "operator": "equals",
+      "value": "personal_signification"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "judgment_order",
+    "result": "read the Atmakaraka before and above the lagna lord",
+    "sanskrit": "स ईष्टे बन्धमोक्षयोः",
+    "engine_rendering": "Because the Atmakaraka rules bondage and release and the whole of Adhyaya 1 Pada 2 is read from his sign, he outranks the lagna lord for personal signification. Doing this step late, or subordinating it to the lagna, is the reliable tell of a Parasari reading wearing Jaimini vocabulary.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 4,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.11 (Sutrarthaprakasika numbering); = Abhyankar 1.1.11",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.11, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.sthira-karaka.mars.siblings-and-mother",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "sthira_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.19",
+    "sutra_abhyankar": "1.1.20"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "topic",
+      "operator": "in",
+      "value": [
+       "sister",
+       "brother_in_law",
+       "younger_brother",
+       "mother"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "read the topic from Mars",
+    "layer": "sthira",
+    "sanskrit": "भगिन्यारतः इयाः कनीयान्‌ जननी च",
+    "engine_rendering": "Sister, brother-in-law, younger brother and mother are considered from Mars. The fixed significator layer runs alongside the variable one; Jaimini uses both at once.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.19 (Sutrarthaprakasika numbering); = Abhyankar 1.1.20",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.20, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.sthira-karaka.mercury.maternal-kin",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "sthira_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.20",
+    "sutra_abhyankar": "1.1.21"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "topic",
+      "operator": "in",
+      "value": [
+       "maternal_uncle",
+       "mothers_relatives"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "read the topic from Mercury",
+    "layer": "sthira",
+    "sanskrit": "इव्यत्तरतः",
+    "engine_rendering": "Other relatives - the maternal uncle and the mother's people generally - are considered from the next, Mercury.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.20 (Sutrarthaprakasika numbering); = Abhyankar 1.1.21",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.21, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.sthira-karaka.jupiter.abhyankar",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "sthira_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.21",
+    "sutra_abhyankar": "1.1.22"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "topic",
+      "operator": "in",
+      "value": [
+       "grandfather",
+       "husband",
+       "son"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "result": "read all three from Jupiter",
+    "layer": "sthira",
+    "sanskrit": "जानीयात्‌",
+    "engine_rendering": "Grandfather, husband and son are all considered from Jupiter - Abhyankar's reading of the sutra.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.sthira-karaka.jupiter-venus-saturn.sutrarthaprakasika"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.21 (Sutrarthaprakasika numbering); = Abhyankar 1.1.22",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.22, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.sthira-karaka.jupiter-venus-saturn.sutrarthaprakasika",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "sthira_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.21",
+    "sutra_abhyankar": "1.1.22"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "topic",
+      "operator": "in",
+      "value": [
+       "grandfather",
+       "husband",
+       "son"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "layer": "sthira",
+    "result": "grandfather from Jupiter, husband from Venus, son from Saturn",
+    "sanskrit": "जानीयात्‌",
+    "engine_rendering": "The Sutrarthaprakasika splits the same sutra three ways: grandfather from Jupiter, husband from Venus, son from Saturn. Both readings are encoded; neither is averaged into the other.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.sthira-karaka.jupiter.abhyankar"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.21 (Sutrarthaprakasika numbering); = Abhyankar 1.1.22",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.22, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    },
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Sutrarthaprakasika",
+     "section": "commentary at 1.1.21",
+     "location": "the three-way split of the sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.sthira-karaka.venus-and-the-next-four",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "sthira_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.22",
+    "sutra_abhyankar": "1.1.23"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "topic",
+      "operator": "in",
+      "value": [
+       "wife",
+       "parents",
+       "parents_in_law",
+       "mothers_parents"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "significator_assignment",
+    "layer": "sthira",
+    "result": "from Venus; or distributed over Venus, Saturn, the Sun and the Moon in that order",
+    "sanskrit": "न्तवासिनः",
+    "engine_rendering": "Wife, parents, parents-in-law and the mother's parents are considered from the next, Venus - or rather, says the text, from the next four respectively: Venus, Saturn, the Sun and the Moon.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [
+    "The sutra offers both a single significator and a distribution over four, and does not decide between them."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.22 (Sutrarthaprakasika numbering); = Abhyankar 1.1.23",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.23, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.graha-bala.saturn-most-feeble",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "sthira_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.23",
+    "sutra_abhyankar": "1.1.24"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "strength_comparison",
+      "operator": "includes",
+      "value": "Saturn"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "strength",
+    "result": "Saturn ranks last in natural strength",
+    "full_order_source": "imported by the commentary from Brhajjataka; not Jaimini's own",
+    "sanskrit": "प्रयोजनं तु लघुजातके “वलस म्येऽस्ादधिकचिन्ता\" इति",
+    "engine_rendering": "Saturn is the most feeble among the grahas. The sutra names only Saturn; the full natural strength order that the commentaries supply is imported from the Brhajjataka and must be labelled as such.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 9,
+   "exceptions": [
+    "Only the Saturn clause is Jaimini's. Any use of the full order must attribute it to the Brhajjataka."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.23 (Sutrarthaprakasika numbering); = Abhyankar 1.1.24",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.24, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.graha-bala.natural-order.imported",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "sthira_karaka",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.23",
+    "sutra_abhyankar": "1.1.24"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "strength_comparison",
+      "operator": "equals",
+      "value": "natural_order"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "imported_convention",
+    "result": "use the Brhajjataka order and disclose the import",
+    "attribution": "Brhajjataka, via the Jaimini commentaries",
+    "sanskrit": "प्रयोजनं तु लघुजातके “वलस म्येऽस्ादधिकचिन्ता\" इति",
+    "engine_rendering": "The natural strength order used to break ties - conventionally the Sun downward to Saturn - reaches this tradition from outside it. The pack carries it as an imported convention with its source named, never as a Jaimini doctrine.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.graha-bala.saturn-most-feeble"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.23 (Sutrarthaprakasika numbering); = Abhyankar 1.1.24",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.24, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.arudha.lagna.general",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "arudha_pada",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.28",
+    "sutra_abhyankar": "1.1.29"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "bhava_lord_position",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "derived_point",
+    "result": "arudha = lord's sign advanced by (bhava to lord) signs",
+    "counting": "inclusive, per standard Sanskrit usage - assumed, not stated by the sutra",
+    "sanskrit": "यावदीशाश्रयं पदस्क्षाणाम्‌",
+    "engine_rendering": "The Pada or Arudha of a bhava is found by counting from the bhava to its lord, then the same number again onward from the lord. For the lagna this gives the Pada Lagna or Arudha Lagna.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 6,
+   "exceptions": [
+    "The sutra does not state whether counting is inclusive. Inclusive counting is assumed and flagged."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.28 (Sutrarthaprakasika numbering); = Abhyankar 1.1.29",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.29, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.arudha.lord-in-4th-yields-4th",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "arudha_pada",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.29",
+    "sutra_abhyankar": "1.1.30"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lord_house_from_bhava",
+      "operator": "equals",
+      "value": 4
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "derived_point",
+    "result": "the arudha is the 4th from the bhava, not the 7th",
+    "sanskrit": "स्वस्थे दाराः",
+    "iast": "svasthe darah",
+    "engine_rendering": "If the lord stands in the 4th from its bhava, the arudha would fall on the bhava itself; the text therefore assigns the 4th (i.e. the lord's own sign) rather than the 7th. Decoded by katapayadi: svastha, 'standing in its own', with dara = 4.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.29 (Sutrarthaprakasika numbering); = Abhyankar 1.1.30",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.30, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.arudha.lord-in-7th-yields-10th",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "arudha_pada",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.30",
+    "sutra_abhyankar": "1.1.31"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lord_house_from_bhava",
+      "operator": "equals",
+      "value": 7
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "derived_point",
+    "result": "the arudha is the 10th from the bhava, not the bhava itself",
+    "sanskrit": "सुतस्थे जन्म",
+    "iast": "sutasthe janma",
+    "engine_rendering": "If the lord stands in the 7th from its bhava, the arudha would fall back on the bhava itself; the text assigns the 10th instead.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.30 (Sutrarthaprakasika numbering); = Abhyankar 1.1.31",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.31, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.arudha.pada-kundali.parallel-frame",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "arudha_pada",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.28",
+    "sutra_abhyankar": "1.1.29"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "frame",
+      "operator": "equals",
+      "value": "pada_kundali"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "chart_frame",
+    "result": "build a parallel twelve-house frame from the twelve arudhas; do not merge it with the rasi chart",
+    "sanskrit": "यावदीशाश्रयं पदस्क्षाणाम्‌",
+    "engine_rendering": "The twelve arudhas form a second twelve-house chart, the pada-kundali, read in parallel with the rasi chart. Abhyankar reads it as a separate figure in his worked charts and never merges its houses into the rasi chart's.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 6,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.28 (Sutrarthaprakasika numbering); = Abhyankar 1.1.29",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.29, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, Introduction",
+     "section": "paragraphs 110-113",
+     "location": "the pada-kundali and upapada-kundali illustrations, page images 111-124",
+     "verification": "page_images_read_directly"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.dasa.chara.direction.odd-forward",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_dasa",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.24",
+    "sutra_abhyankar": "1.1.25"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sign_parity",
+      "operator": "equals",
+      "value": "odd"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "dasa_direction",
+    "result": "count the dasa sequence forward (direct) from the sign",
+    "sanskrit": "परानीक्ततिर्वि षमभेष",
+    "engine_rendering": "Counting runs forward for odd signs.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 8,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.24 (Sutrarthaprakasika numbering); = Abhyankar 1.1.25",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.25, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.dasa.chara.direction.even-reverse",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_dasa",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.25",
+    "sutra_abhyankar": "1.1.26"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sign_parity",
+      "operator": "equals",
+      "value": "even"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "dasa_direction",
+    "result": "count the dasa sequence in reverse from the sign",
+    "sanskrit": "पराड्लयोत्तरषु",
+    "engine_rendering": "Counting runs backwards for even signs.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 8,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.25 (Sutrarthaprakasika numbering); = Abhyankar 1.1.26",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.26, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.dasa.chara.direction.fixed-sign-exception",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_dasa",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.26",
+    "sutra_abhyankar": "1.1.27"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sign",
+      "operator": "in",
+      "value": [
+       "Taurus",
+       "Leo",
+       "Scorpio",
+       "Aquarius"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "dasa_direction",
+    "result": "the odd/even parity rule is suspended for these four signs",
+    "signs": [
+     "Taurus",
+     "Leo",
+     "Scorpio",
+     "Aquarius"
+    ],
+    "sanskrit": "नक्र चित्‌",
+    "engine_rendering": "Not so in some cases - which both witnesses agree means the four fixed signs Taurus, Leo, Scorpio and Aquarius, where the parity rule does not hold.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.26 (Sutrarthaprakasika numbering); = Abhyankar 1.1.27",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.27, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.dasa.chara.length.sign-to-its-lord",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_dasa",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.28",
+    "sutra_abhyankar": "1.1.29"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "dasa_sign",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "dasa_length",
+    "result": "years = signs counted from the dasa sign to its lord's sign, in the sign's own direction",
+    "sanskrit": "यावदीशाश्रयं पदस्क्षाणाम्‌",
+    "engine_rendering": "The number of years of a sign's dasa is the count from that sign to the sign its lord occupies, taken in the direct or reverse order according as the sign is odd or even.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 8,
+   "exceptions": [
+    "The sutra fixes the counting but not the subtract-one convention, nor the case of a lord in its own sign, nor the dual lordship of Scorpio and Aquarius. Those are recorded as undecided."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.28 (Sutrarthaprakasika numbering); = Abhyankar 1.1.29",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.29, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.dasa.chara.length.conventions-undecided",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_dasa",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.28",
+    "sutra_abhyankar": "1.1.29"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "dasa_length_convention",
+      "operator": "equals",
+      "value": "unset"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "refusal",
+    "abstain": true,
+    "result": "abstain from issuing chara dasa period lengths until the three conventions are declared",
+    "undecided": [
+     "subtract one or not",
+     "lord in its own sign",
+     "dual lordship of Scorpio and Aquarius"
+    ],
+    "sanskrit": "यावदीशाश्रयं पदस्क्षाणाम्‌",
+    "engine_rendering": "Three conventions the sutra does not settle: whether one is subtracted from the count, what a lord in its own sign yields, and which of the two lords of Scorpio and Aquarius is used. The pack abstains and requires them to be declared.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.dasa.chara.length.sign-to-its-lord"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.28 (Sutrarthaprakasika numbering); = Abhyankar 1.1.29",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.29, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.dasa.cycle.144-year-bound",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "chara_dasa",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.33",
+    "sutra_abhyankar": "1.1.34"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "dasa_system",
+      "operator": "equals",
+      "value": "chara"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "dasa_bound",
+    "result": "the twelve sign-periods total at most 144 years",
+    "maximum_years": 144,
+    "sanskrit": "यावद्दिवेकमाटृत्तिर्भानाम्‌",
+    "iast": "yavad vivekam avrttir bhanam",
+    "engine_rendering": "The twelve signs are taken one after another for the periods so that the maximum for the twelve reaches viveka - 144 by katapayadi. Twelve signs at a maximum of twelve years each.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 8,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.33 (Sutrarthaprakasika numbering); = Abhyankar 1.1.34",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.34, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.varga.hora-dreskana.delegated",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "varga",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ],
+    "sutra_sutrarthaprakasika": "1.1.34",
+    "sutra_abhyankar": "1.1.35"
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_requested",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "delegation",
+    "result": "import the varga definition from a named external text and attribute it there",
+    "never_attribute_to": "Jaimini",
+    "sanskrit": "होरादयः सिद्धाः",
+    "iast": "horadayah siddhah",
+    "engine_rendering": "Hora, Dreskana and the rest are to be taken as they are current among practitioners. The text pointedly declines to define them, so no divisional definition may ever be attributed to Jaimini.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika commentary",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.34 (Sutrarthaprakasika numbering); = Abhyankar 1.1.35",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "The Upadesa Sutra of Jaimini, critically edited by K. V. Abhyankar (Ahmedabad 1951)",
+     "section": "Adhyaya I Pada i (1.1)",
+     "location": "sutra 1.1.35, editor's own English translation",
+     "verification": "english_translation_of_the_critical_editor_read_directly; used for passage alignment, not as the quoted text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.hora.rate",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "elapsed_time_from_origin",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "derived_point",
+    "result": "one rasi per hora (hour) elapsed from the origin",
+    "rate_signs_per_hour": 1,
+    "engine_rendering": "The Hora Lagna advances one sign for every half of the ascensional time of a sign - in practice one sign per hour of elapsed time from the reckoning point. Twice the rate of the ascendant.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 7,
+   "exceptions": [
+    "The starting point is a live three-way dispute; see jaimini.special-lagna.origin.*"
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.bhava.rate",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "elapsed_time_from_origin",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "derived_point",
+    "result": "one rasi per five ghatikas elapsed from the origin",
+    "rate_signs_per_hour": 0.5,
+    "engine_rendering": "The Bhava Lagna advances one sign per five ghatikas (two hours) from the reckoning point - the rate of the mean ascendant.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 7,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.ghatika.rate",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "elapsed_time_from_sunrise",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "derived_point",
+    "result": "one rasi per ghatika elapsed from sunrise",
+    "rate_signs_per_hour": 2.5,
+    "engine_rendering": "The Ghatika Lagna advances one sign per ghatika (24 minutes) from sunrise - five times the rate of the mean ascendant, completing the zodiac in a little under five hours.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 7,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.origin.from-sun-always",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "special_lagna_origin_convention",
+      "operator": "equals",
+      "value": "sun_always"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "origin = the Sun's sign, unconditionally",
+    "engine_rendering": "The Sutrarthaprakasika's own position: the Hora and Bhava Lagnas are counted from the Sun's sign in every chart.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.special-lagna.origin.parity-conditioned",
+    "jaimini.special-lagna.origin.nilakantha-unread"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.origin.parity-conditioned",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "special_lagna_origin_convention",
+      "operator": "equals",
+      "value": "parity"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "convention",
+    "result": "origin = the Sun's sign for an odd lagna, the lagna for an even lagna",
+    "engine_rendering": "The position of the pracinah and of the vrddha verse: count from the Sun if the lagna falls in an odd sign, and from the lagna itself if it falls in an even sign.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.special-lagna.origin.from-sun-always"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.origin.nilakantha-unread",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "special_lagna_origin_convention",
+      "operator": "equals",
+      "value": "nilakantha"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "refusal",
+    "abstain": true,
+    "result": "abstain; Nilakantha's own wording is not recoverable from the material held",
+    "engine_rendering": "Nilakantha holds a third position on the starting point. It reaches us only through the words of the commentator arguing against him; the Jammu manuscript of his own Vyakhya has been retrieved but its Devanagari is not legible enough to state what he actually said. This is a named, located gap, not a vague one.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.special-lagna.origin.from-sun-always",
+    "jaimini.special-lagna.origin.parity-conditioned"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    },
+    {
+     "edition_id": "jaimini_nilakantha_vyakhya_ms_jammu_882gha",
+     "work": "Nilakantha, Jaimini Sutra Vyakhya (Jammu MS 882 Gha)",
+     "section": "folios covering Adhyaya 1 Pada 1",
+     "location": "manuscript OCR; 28,648 Devanagari characters, largely garbled",
+     "verification": "full_text_inspected; content identifiable, wording not recoverable"
+    }
+   ],
+   "evidence_grade": "D",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.origin.undecided",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "special_lagna_origin_convention",
+      "operator": "equals",
+      "value": "unset"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "refusal",
+    "abstain": true,
+    "result": "abstain until the origin convention is declared",
+    "engine_rendering": "With three positions on the table and one of them unreadable, the pack does not choose a Hora/Bhava Lagna origin. Any reading that uses these points must state which convention it ran.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.special-lagna.origin.from-sun-always",
+    "jaimini.special-lagna.origin.parity-conditioned"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.varnada.construction",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lagna_sign",
+      "operator": "is_set",
+      "value": true
+     },
+     {
+      "fact": "hora_lagna_sign",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "derived_point",
+    "result": "sum the two counts when the parities agree, difference them when they differ, then count from the lagna",
+    "engine_rendering": "The Varnada is built by counting from Aries to the lagna and from Pisces to the Hora Lagna (reversing whichever count belongs to an even sign), then adding the two counts if the lagna and Hora Lagna agree in parity and taking their difference if they do not, and counting the result from the lagna.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 7,
+   "exceptions": [
+    "The commentator transmitting this rule twice states that he does not understand why it is framed as it is."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.varnada.transmitter-uncertainty",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varnada_confidence",
+      "operator": "equals",
+      "value": "requested"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "provenance_flag",
+    "result": "the transmitting commentator does not claim to understand the rule; treat any Varnada output as low confidence",
+    "engine_rendering": "At 1.1.31 the Sutrarthaprakasika twice admits it cannot explain the Varnada rule it is transmitting. That admission is part of the evidence and is recorded on the rule rather than smoothed away.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jaimini.special-lagna.varnada.construction"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.special-lagna.varnada.worked-examples-do-not-close",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "special_lagna",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varnada_validation",
+      "operator": "equals",
+      "value": "requested"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "open_validation",
+    "result": "two worked examples exist and do not yet reconcile with the stated verse",
+    "engine_rendering": "The Sutrarthaprakasika supplies two numeric Varnada examples with full sign-degree-minute-second longitudes. They are legible, but the arithmetic uses finer values than the verse as stated, so they cannot yet be turned into a passing test. Recorded as an open item rather than as a pass.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+     "work": "Jaiminiyasutram with the Sutrarthaprakasika",
+     "section": "Adhyaya I Pada i, commentary at sutra 1.1.31",
+     "location": "the vrddha karikas quoted in the commentary on the katapayadi sutra",
+     "verification": "devanagari_read_directly_from_ocr_text"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.judgment.hierarchy",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "judgment_order",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "reading_section",
+      "operator": "equals",
+      "value": "jaimini"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "judgment_order",
+    "result": [
+     "katapayadi decoding",
+     "rasi drsti",
+     "argala and its obstruction",
+     "chara karakas",
+     "sthira karakas alongside",
+     "arudha padas as a parallel frame",
+     "special lagnas",
+     "dasas"
+    ],
+    "engine_rendering": "Jaimini's own order of judgment, taken from the sequence of the sutras: decode the text (katapayadi), then rasi drsti, then argala, then the chara karakas, then the sthira karakas alongside them, then the arudha padas as a parallel frame, then the special lagnas, then the dasas. Strength is a tie-breaker applied inside steps, not a step of its own.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 0,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "Abhyankar's critical text and translation",
+     "section": "Adhyaya I Pada i, the order of the sutras themselves",
+     "location": "sutras 1.1.2 through 1.1.34",
+     "verification": "english_translation_of_the_critical_editor_read_directly"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.refusal.no-parasari-merge",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "refusal",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "output_mode",
+      "operator": "equals",
+      "value": "combined_verdict"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "refusal",
+    "abstain": true,
+    "result": "refuse to merge; render as two attributed readings",
+    "engine_rendering": "Jaimini and Parasari nominate different significators, draw different aspect lines and open different periods. Where both are shown they are shown as two readings with their disagreements visible; they are never merged into one verdict.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+     "work": "Abhyankar's introduction",
+     "section": "Introduction",
+     "location": "the editor's own comparison of Jaimini's method with the other systems",
+     "verification": "english_translation_of_the_critical_editor_read_directly"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.worked-example.frame.karaka-kundali",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "worked_example",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "atmakaraka_sign",
+      "operator": "is_set",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "chart_frame",
+    "result": "first house of the karaka-kundali = the Atmakaraka's sign",
+    "engine_rendering": "Abhyankar's own reading frame in all fourteen worked charts: a karaka-kundali is cast with the Atmakaraka's sign as its first house, and every delineation in Adhyaya 1 Pada 2 is read from that frame, not from the birth ascendant. The rasi positions he prints are given as sign numbers counted from Aries, with the degree inside the sign - which is exactly what the karaka ranking needs.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": 5,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, The Upadesa Sutra of Jaimini - page images",
+     "section": "Introduction paragraph 114-129",
+     "location": "printed page 114-129; jp2 page image index 114-129",
+     "verification": "page_images_read_directly; the text layer of this scan lost the chart plates and several of the position lists, which is why the images were read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.worked-example.suite.result",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "worked_example",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "validation_suite",
+      "operator": "equals",
+      "value": "abhyankar_karaka_kundalis"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "validation_result",
+    "charts_total": 14,
+    "charts_with_printed_degrees": 8,
+    "reproduced": 7,
+    "failed": 1,
+    "failing_chart": "Pandit Jawaharlal Nehru, Introduction para 124",
+    "result": "the degree-descending karaka rule reproduces the critical editor's own judgement in 7 of 8 testable charts",
+    "engine_rendering": "The suite result, published pass and fail. Of Abhyankar's fourteen karaka-kundalis, eight print degrees-within-sign for every graha. Seven of those eight reproduce his own stated significatory planet under the plain rule of sutra 1.1.10 - sort by degree within sign, descending, take the first. The eighth, Nehru (para 124), does not, and does not under any Rahu convention: the Sun is printed at 2 degrees while the Moon stands at 9, and reverse-counting Rahu would give Rahu at 26. The printed 2 degrees was verified against the page image at 2x and is astronomically correct for the stated moment, so this is not an OCR artefact. It is either a compositor's error in the significatory planet or an undeclared step in the editor's own practice.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, The Upadesa Sutra of Jaimini - page images",
+     "section": "Introduction paragraph 114-129",
+     "location": "printed page 114-129; jp2 page image index 114-129",
+     "verification": "page_images_read_directly; the text layer of this scan lost the chart plates and several of the position lists, which is why the images were read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.worked-example.suite.rahu-convention-discriminated",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "worked_example",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "rahu_counting_evidence",
+      "operator": "equals",
+      "value": "abhyankar_worked_charts"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "validation_result",
+    "discriminating_charts": 1,
+    "discriminating_chart": "Sardar Vallabhbhai Patel, Introduction para 125",
+    "result": "forward counting (or exclusion) reproduces Abhyankar; reverse counting contradicts him",
+    "not_settled": "forward counting versus excluding Rahu entirely - no chart in the suite distinguishes them, because in none of the fourteen would Rahu have been the Atmakaraka on a forward count",
+    "engine_rendering": "The suite settles one convention that the track had recorded as undecided. Only one of the fourteen charts has numbers that discriminate between the Rahu conventions: Patel (para 125), where Rahu stands at 5 degrees. Forward-counted, Rahu ranks low and Saturn at 20 is the Atmakaraka, which is what Abhyankar states. Reverse-counted at 30 minus 5 = 25, Rahu would outrank Saturn and Abhyankar would be contradicting himself. The reverse-count convention is therefore refuted for Abhyankar's own practice. It is not refuted for the tradition at large - the vrddha verse that carries it is still quoted approvingly in the Sutrarthaprakasika - so both rules stay in the pack with this result attached.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, The Upadesa Sutra of Jaimini - page images",
+     "section": "Introduction paragraph 125",
+     "location": "printed page 125; jp2 page image index 125",
+     "verification": "page_images_read_directly; the text layer of this scan lost the chart plates and several of the position lists, which is why the images were read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.worked-example.suite.karaka-scheme-not-settled",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "worked_example",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "karaka_scheme_evidence",
+      "operator": "equals",
+      "value": "abhyankar_worked_charts"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "validation_result",
+    "result": "not settled by the worked examples; only rank one is ever named",
+    "remains_source_gated_on": "Abhyankar's variant apparatus for 1.1.15, in Devanagari, on the Sanskrit-text pages",
+    "engine_rendering": "The suite does not settle the seven-versus-eight karaka question, and cannot. Abhyankar names only the significatory planet - rank one - in every one of the fourteen charts. The seven/eight fork changes which title attaches to ranks four through eight, never who holds rank one. The acquisition that was expected to close this question closes a different one instead.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, The Upadesa Sutra of Jaimini - page images",
+     "section": "Introduction paragraph 114-129",
+     "location": "printed page 114-129; jp2 page image index 114-129",
+     "verification": "page_images_read_directly; the text layer of this scan lost the chart plates and several of the position lists, which is why the images were read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.worked-example.ranade.rasi-drsti-confirmed",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "worked_example",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "validation_case",
+      "operator": "equals",
+      "value": "ranade_rasi_drsti"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "validation_result",
+    "result": "rasi drsti reproduced three times in one worked chart",
+    "checks": [
+     "Capricorn aspects Taurus",
+     "Capricorn aspects Leo",
+     "Aquarius aspects Libra",
+     "Aries aspects Leo"
+    ],
+    "engine_rendering": "The Ranade chart (para 117) is an independent confirmation of the rasi-drsti table from inside the tradition's own worked material. Abhyankar says Saturn, Rahu and Jupiter in rasi 10 aspect the fourth and seventh from a karaka lagna at rasi 11 - that is rasi 2 and rasi 5, and Capricorn's movable aspect is exactly Taurus, Leo and Scorpio. He says Venus in rasi 11 aspects the ninth, rasi 7 - and Aquarius' fixed aspect is Aries, Cancer and Libra. He says Mars in rasi 1 aspects the seventh, rasi 5 - and Aries aspects Leo, Scorpio and Aquarius. Three independent hits, none of which is a Parasari aspect.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, The Upadesa Sutra of Jaimini - page images",
+     "section": "Introduction paragraph 117",
+     "location": "printed page 117; jp2 page image index 117",
+     "verification": "page_images_read_directly; the text layer of this scan lost the chart plates and several of the position lists, which is why the images were read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.worked-example.lokur.rasi-drsti-confirmed",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "worked_example",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "validation_case",
+      "operator": "equals",
+      "value": "lokur_rasi_drsti"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "validation_result",
+    "result": "rasi drsti reproduced twice in a second worked chart",
+    "checks": [
+     "Aries aspects Leo",
+     "Cancer aspects Scorpio"
+    ],
+    "engine_rendering": "The Lokur chart (para 128) confirms the same table from a second, independent figure. With the karaka lagna at rasi 2, Abhyankar has the Moon in rasi 1 aspecting the fourth (rasi 5) - Aries' movable aspect - and Saturn in rasi 4 aspecting the seventh (rasi 8) - Cancer's movable aspect. Neither is a Parasari aspect of those grahas.",
+    "rendering_grade": "engine_translation_unreviewed"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, The Upadesa Sutra of Jaimini - page images",
+     "section": "Introduction paragraph 128",
+     "location": "printed page 128; jp2 page image index 128",
+     "verification": "page_images_read_directly; the text layer of this scan lost the chart plates and several of the position lists, which is why the images were read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no Jaimini engine exists, no independent Sanskrit review has been obtained, and the karaka-scheme and Rahu conventions are disclosed rather than chosen",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  },
+  {
+   "rule_id": "jaimini.worked-example.ranade.longevity-refused",
+   "tradition_id": "jaimini",
+   "school_id": "jaimini_upadesa_sutra_technique",
+   "period": "jaimini_upadesa_sutra_adhyayas_1_2_abhyankar_1951_critical_text_with_sutrarthaprakasika",
+   "domain": "natal",
+   "scope": {
+    "work": "Upadesa Sutra of Jaimini",
+    "technique": "worked_example",
+    "engine_facts_consumed": [
+     "sidereal graha longitude",
+     "rasi",
+     "degree within rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "topic",
+      "operator": "equals",
+      "value": "lifespan"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "customer_prediction": false,
+    "ctype": "delineation",
+    "result": "the editor derives a lifespan ceiling from the ayurdaya methods",
+    "value_as_printed": "not beyond 64 years",
+    "engine_rendering": "The Ranade paragraph closes with a lifespan claim - 'he would not be endowed with a long life beyond 64 years'. It is recorded here because suppressing it would misrepresent what the text does, and it is refused for output because the corpus does not publish lifespan numbers.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "output_policy": "refused",
+    "output_policy_reason": "lifespan claim; never published in any hedged form"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_page_images_jp2",
+     "work": "Abhyankar 1951, The Upadesa Sutra of Jaimini - page images",
+     "section": "Introduction paragraph 117",
+     "location": "printed page 117; jp2 page image index 117",
+     "verification": "page_images_read_directly; the text layer of this scan lost the chart plates and several of the position lists, which is why the images were read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "refused for customer output; this cell states a death, lifespan, caste, gender or bodily-defect result and is retained as historical testimony only",
+   "review_status": "engine_translation_unreviewed; Sanskrit read directly from the Sutrarthaprakasika printing and aligned against Abhyankar's critical text and his own English"
+  }
+ ]
+}
