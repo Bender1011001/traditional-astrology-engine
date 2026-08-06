@@ -14,10 +14,19 @@ report.
 That has now happened twice - once to the Valens pack and once to four packs at
 the same time - so it gets a measurement rather than vigilance.
 
-A rule is counted REACHED if it produces a rendered delineation on at least one
+A rule is counted REACHED if it produces a QUOTED DELINEATION on at least one
 of several varied nativities. Varied matters: a rule gated on a nocturnal chart
 or a retrograde Saturn will never fire on one birth, and calling it dead would
 be the same error in the opposite direction.
+
+Read the number precisely. Some packs hold structured lookups with no prose to
+quote - a table of directional strengths, a benefic/malefic classification -
+and an engine that renders those as explanatory notes has wired them without
+producing a single delineation. They will appear here as unreached. That is a
+limitation of the measurement, not necessarily of the engine, and the fix is
+to check the report before concluding a pack is idle. What the number is
+reliable for is the opposite direction: a pack listed here that ALSO appears
+nowhere in any report is certainly unwired.
 
 Calculation manifests correctly reach nothing - they feed the panel's arithmetic
 rather than producing prose - so they are listed separately from the delineation
@@ -171,11 +180,15 @@ def main(argv: list[str] | None = None) -> int:
             tag = "  (calc)" if row["is_calculation"] else ""
             print(f"{row['manifest']:<56}{row['rules']:>7}{row['reached']:>9}{tag}")
 
-    print("\nDELINEATION MANIFESTS NO ENGINE READS")
-    print("  (a zero here is unrealised work, not a missing source)")
+    print("\nMANIFESTS PRODUCING NO QUOTED DELINEATION")
+    print("  (usually unrealised work; occasionally a pack of structured")
+    print("   lookups an engine renders as notes — check before assuming)")
     for row in result["unwired_manifests"]:
         print(f"  {row['rules']:>4}  {row['manifest']}")
-    print(f"\n  {result['unwired_rules']} rules mined, validated, and never rendered.")
+    print(
+        f"\n  {result['unwired_rules']} rules mined, validated, and quoted in "
+        "no report."
+    )
 
     if result["engine_errors"]:
         print(f"\n{len(result['engine_errors'])} engine error(s):")
