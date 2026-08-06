@@ -35,6 +35,7 @@ REPORT_ENGINES = {
     "ziwei_doushu": "ziwei_report",
     "sukuyodo": "sukuyodo_report",
     "vietnamese": "tuvi_report",
+    "latin_european": "lilly_report",
 }
 
 

@@ -61,10 +61,10 @@ MATURITY: dict[str, dict[str, Any]] = {
     },
     "latin_european": {
         "category": PARTIAL_JUDGMENT,
-        "source_readiness": "moderate - Lilly's tables encoded; no Lilly rule manifest in the corpus yet",
-        "computational_readiness": "high - scoring, cusps, accidental dignities",
-        "validation_coverage": "GERMES cross-check on the scoring layer",
-        "interpretation_readiness": "partial",
+        "source_readiness": "high - 34 rules from Christian Astrology Book 1 in Lilly's own English, so no translation gate applies to this track at all",
+        "computational_readiness": "high - Regiomontanus cusps and Lilly's essential-dignity scoring, cross-checked against a third-party scoreset with the divergences explained",
+        "validation_coverage": "essential-dignity scores agree with GERMES on 3 of 7 exactly and the reason for each divergence is recorded rather than averaged",
+        "interpretation_readiness": "partial - the apparatus is quoted and the horary half is deliberately not applied to a nativity; Lilly's natal judgment is in Book 3, which this corpus does not hold",
         "publication_readiness": "research only",
     },
     "islamicate_persian": {
