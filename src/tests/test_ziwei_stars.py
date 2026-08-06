@@ -260,3 +260,32 @@ def test_a_translated_entry_says_which_cell_it_came_from():
         got = star_delineation(star)
         if got["translated"]:
             assert got["cell"], star
+
+
+def test_the_reconstruction_is_presented_as_a_conjecture_not_a_correction():
+    """An external review flagged "it corrects it" as too assertive.
+
+    The Tử Vi pack states the discipline the project actually holds: do not
+    emend a printed table. Keep the printed reading, record the defect, and
+    state the reconstruction's answer as a prediction. Zi Wei's report now
+    says the same rather than announcing a correction.
+    """
+    from datetime import date
+
+    from src.engine.multitradition.types import BirthInput
+    from src.engine.traditions.ziwei_report import build_report
+
+    report = build_report(
+        BirthInput(
+            name="Fixture", civil_date=date(1996, 8, 13), civil_time="07:18",
+            utc_offset_hours=-7.0, latitude=38.2494, longitude=-122.04,
+            place_label="Fairfield, California",
+        )
+    )
+    stars = next(
+        s for s in report.sections if s.title == "The Fourteen Main Stars"
+    )
+    blob = " ".join(stars.notes)
+    assert "it corrects it" not in blob
+    assert "conjectural emendation" in blob.lower()
+    assert "does not overrule the text" in blob

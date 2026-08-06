@@ -214,7 +214,13 @@ def _stars_section(
             "ten day-one and day-two anchors the verses state in words. The "
             "two cells it misses are single-character transcription defects, "
             "detectable because a grid must partition the thirty days exactly "
-            "once. Where it disagrees with a printed cell it corrects it."
+            "once. Where it disagrees with a printed cell, the disagreement "
+            "is a CONJECTURAL EMENDATION and is treated as one: the printed "
+            "reading stands as the source's, the reconstruction's answer is "
+            "recorded as a prediction about what the cell should say, and a "
+            "second witness would be needed to settle it. The reconstruction "
+            "is a collation instrument — the text prints tables and states no "
+            "formula — and it does not overrule the text."
         )
 
     s.notes.append(str(board.get("note", "")))
