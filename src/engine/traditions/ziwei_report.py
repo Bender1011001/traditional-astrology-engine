@@ -27,6 +27,7 @@ from ..multitradition import build_panel
 from ..multitradition.types import BirthInput
 from ..multitradition.ziwei_stars import (
     BRANCH_HANZI,
+    _rules,
     FOURTEEN,
     STAR_NAMES,
     place_across_candidates,
@@ -83,6 +84,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _palaces_section(report, facts)
     _stars_section(report, facts, board)
     _life_palace_section(report, facts, board)
+    _auxiliary_section(report, facts)
     _transformations_section(report, facts)
     _limits_section(report, facts, board)
     return report
@@ -320,6 +322,145 @@ def _life_palace_section(
                 + ". The Chinese is on disk; the rendering pass did not reach "
                 "it. That is a different state from missing, and the fixable "
                 "one."
+            )
+
+
+#: The auxiliary tables the panel computes, in the order the chapter places
+#: them, paired with the rule that states each derivation.
+AUXILIARY_ORDER = (
+    ("lucun", "祿存 Lu Cun", "ziwei.quanshu.j2.place_lucun_by_year_stem"),
+    ("qingyang_tuoluo", "擎羊／陀羅 Qing Yang and Tuo Luo",
+     "ziwei.quanshu.j2.place_qingyang_tuoluo_from_lucun"),
+    ("tiankui_tianyue", "天魁／天鉞 Tian Kui and Tian Yue",
+     "ziwei.quanshu.j2.place_tiankui_tianyue_by_year_stem"),
+    ("tianma", "天馬 Tian Ma", "ziwei.quanshu.j2.place_tianma_by_year_branch"),
+    ("huoxing_lingxing", "火星／鈴星 Huo Xing and Ling Xing",
+     "ziwei.quanshu.j2.place_huoxing_lingxing_by_year_branch"),
+    ("tiankong_dijie", "天空／地劫 Tian Kong and Di Jie",
+     "ziwei.quanshu.j2.place_tiankong_dijie_by_hour"),
+    ("tianxing_tianyao", "天刑／天姚 Tian Xing and Tian Yao",
+     "ziwei.quanshu.j2.place_tianxing_tianyao_by_month"),
+    ("santai_bazuo", "三台／八座 San Tai and Ba Zuo",
+     "ziwei.quanshu.j2.place_santai_bazuo_by_day"),
+    ("tianku_tianxu", "天哭／天虛 Tian Ku and Tian Xu",
+     "ziwei.quanshu.j2.place_tianku_tianxu_by_year_branch"),
+    ("longchi_fengge", "龍池／鳳閣 Long Chi and Feng Ge",
+     "ziwei.quanshu.j2.place_longchi_fengge_by_year_branch"),
+    ("taifu_fenggao", "台輔／封誥 Tai Fu and Feng Gao",
+     "ziwei.quanshu.j2.place_taifu_fenggao_by_hour"),
+    ("honglun_tianxi", "紅鸞／天喜 Hong Luan and Tian Xi",
+     "ziwei.quanshu.j2.place_honglun_tianxi_by_year_branch"),
+    ("jielu_kongwang", "截路空亡 Jie Lu Kong Wang",
+     "ziwei.quanshu.j2.place_jielu_kongwang_by_year_stem"),
+)
+
+
+def _branch_text(value: object) -> str:
+    """A placement, which may be one branch or several."""
+    if isinstance(value, str):
+        return f"{BRANCH_HANZI.get(value, value)} ({value})"
+    if isinstance(value, list):
+        return "、".join(f"{BRANCH_HANZI.get(v, v)} ({v})" for v in value)
+    if isinstance(value, dict):
+        # Keys are the pack's own star slugs; say them as names.
+        return "; ".join(
+            f"{k.replace('_', ' ').title()} at "
+            f"{BRANCH_HANZI.get(v, v)} ({v})"
+            for k, v in value.items()
+        )
+    return str(value)
+
+
+def _auxiliary_section(report: TraditionReport, facts: dict) -> None:
+    """Where the auxiliary stars fall, and the rule that puts each there.
+
+    The panel computed all fourteen tables and the report showed none of them,
+    while its own limits section said so. Positions are not judgments — the
+    chapter's meanings for these stars are a separate layer and are not
+    claimed here — but a Zi Wei chart without its auxiliaries is not the
+    chart the tradition reads.
+    """
+    aux = facts.get("auxiliary_placements") or {}
+    tables = aux.get("tables") or {}
+    if not tables:
+        return
+
+    s = report.add(ReportSection("The Auxiliary Stars", level=2))
+    s.notes.append(
+        "Positions only. These are placed by year stem, year branch, month, "
+        "day or hour rather than by the lunar day, so — unlike the fourteen "
+        "main stars — they survive the calendar disagreement above intact."
+    )
+
+    shown = 0
+    for key, label, rule_id in AUXILIARY_ORDER:
+        row = tables.get(key)
+        if not row:
+            continue
+        placement = _branch_text(row.get("engine_rendering"))
+        keyed = str(row.get("keyed_to", "")).replace("_", " ")
+        s.notes.append(
+            f"- **{label}** — {placement}"
+            + (f", keyed to the {keyed}" if keyed else "")
+            + "."
+        )
+        shown += 1
+        rule = _rules().get(rule_id)
+        if rule is None:
+            continue
+        text = (rule.get("conclusion") or {}).get("engine_rendering")
+        if isinstance(text, str) and text.strip():
+            s.delineations.append(
+                Delineation(
+                    text=text.strip(),
+                    rule_id=rule_id,
+                    source="Ziwei Doushu Quanshu, juan 2",
+                    evidence_grade=rule.get("evidence_grade", "?"),
+                    trigger=f"how {label} is placed",
+                )
+            )
+
+    fixed = aux.get("tianshang_tianshi")
+    if fixed:
+        s.notes.append(
+            "- **天傷／天使 Tian Shang and Tian Shi** — fixed by house rather "
+            "than by any calendar quantity: Tian Shang in the servants palace, "
+            "Tian Shi in the illness palace."
+        )
+    s.notes.insert(1, f"{shown} of the chapter's auxiliary tables are placed here.")
+
+    absent = aux.get("not_placed_here")
+    if isinstance(absent, dict):
+        # Each entry is a reason, and the reasons differ in kind: one layer
+        # needs a target year this panel does not read, another needs a sex
+        # input it does not collect and refuses to guess.
+        s.notes.append("Named by the chapter and NOT placed here:")
+        for reason in absent.values():
+            s.notes.append(f"  - {reason}")
+    elif absent:
+        s.notes.append(
+            "Named by the chapter and NOT placed here: "
+            + (", ".join(absent) if isinstance(absent, list) else str(absent))
+            + "."
+        )
+
+    for rule_id, title in (
+        ("ziwei.quanshu.j2.assign_ming_zhu", "the ruler of the life palace"),
+        ("ziwei.quanshu.j2.assign_shen_zhu", "the ruler of the body"),
+    ):
+        rule = _rules().get(rule_id)
+        if rule is None:
+            continue
+        text = (rule.get("conclusion") or {}).get("engine_rendering")
+        if isinstance(text, str) and text.strip():
+            s.delineations.append(
+                Delineation(
+                    text=text.strip(),
+                    rule_id=rule_id,
+                    source="Ziwei Doushu Quanshu, juan 2",
+                    evidence_grade=rule.get("evidence_grade", "?"),
+                    trigger=f"how {title} is named",
+                )
             )
 
 
