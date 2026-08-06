@@ -132,6 +132,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _lot_inventory_section(report)
     _hyleg_section(report, qabisi)
     _time_section(report, qabisi)
+    _biruni_boundaries_section(report)
     _selfcheck_section(report, qabisi)
     _limits(report, qabisi, biruni)
     return report
@@ -555,6 +556,67 @@ def _time_section(report: TraditionReport, qabisi: dict) -> None:
         if finding and finding[-1] not in ".!?":
             finding += "."
         s.notes.append(f"On the rate of direction — {finding}")
+
+
+def _biruni_boundaries_section(report: TraditionReport) -> None:
+    """What al-Biruni's pack permits, and what it declines to authorize.
+
+    His fifteen rules are authorization gates rather than prose - booleans
+    saying what a reading built on him may and may not assert. Nothing in the
+    generic firing path can use them, so all fifteen were unreachable, and one
+    of them bears directly on a table this report already prints.
+    """
+    gate = _rules_by_id().get("islamicate.al_biruni.firdaria.duration.unresolved")
+    joy = _rules_by_id().get("islamicate.al_biruni.condition.joy_nonexclusive")
+    identity = _rules_by_id().get("islamicate.al_biruni.tafhim.identity")
+    if not any((gate, joy, identity)):
+        return
+
+    s = report.add(
+        ReportSection("What al-Bīrūnī's Pack Will Not Authorize", level=2)
+    )
+    s.notes.append(
+        "Two authors stand behind this report and they do not license the "
+        "same claims. Where they differ, the difference is stated rather than "
+        "resolved by taking whichever one says more."
+    )
+
+    if gate is not None:
+        c = gate.get("conclusion") or {}
+        if not c.get("major_duration_table_available"):
+            s.notes.append(
+                "**The firdāriyya durations above are al-Qabīsī's, not "
+                "al-Bīrūnī's.** al-Bīrūnī's pack gives the ORDER of the "
+                "periods — which planet rules and in what sequence, diurnal "
+                "and nocturnal — and does not carry a duration table or "
+                "authorize elapsed-age boundaries. So the ages shown rest on "
+                "a single witness, and a reader who wants two should know "
+                "that only one of them supplies the numbers."
+            )
+
+    if joy is not None:
+        c = joy.get("conclusion") or {}
+        if not c.get("debility_cancelled"):
+            s.notes.append(
+                "**A planet in its joy is still debilitated if it is "
+                "debilitated.** al-Bīrūnī's pack is explicit that the joy "
+                "condition does not cancel debility, does not change a "
+                "malefic's nature, and does not on its own authorize a "
+                "complete judgment. Joy is a condition among others, not a "
+                "rescue."
+            )
+
+    if identity is not None:
+        c = identity.get("conclusion") or {}
+        if not c.get("generic_islamicate_merge"):
+            s.notes.append(
+                "**This is al-Bīrūnī, not 'medieval Arabic astrology'.** His "
+                "pack forbids being merged into a generic Islamicate "
+                "composite and forbids importing later authors' accretions "
+                "into him. Where this report shows him beside al-Qabīsī it "
+                "shows two authors, and where they disagree — as they do "
+                "about Mercury's sect — the disagreement is carried."
+            )
 
 
 def _selfcheck_section(report: TraditionReport, qabisi: dict) -> None:
