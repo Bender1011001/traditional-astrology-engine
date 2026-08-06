@@ -172,11 +172,22 @@ def test_a_foreign_tradition_is_not_cited_as_this_one_s_method(reports):
 # --- a document says what kind of document it is -----------------------------
 
 
-def test_a_report_with_no_delineation_is_not_called_a_reading(reports):
-    """Sukuyōdō quotes nothing about the native. Calling it a reading misleads."""
-    from src.engine.traditions.readiness import AUDIT, classify
+def test_a_report_with_no_delineation_is_not_called_a_reading():
+    """A document that quotes nothing about the native is not a reading.
 
-    got = classify(reports["sukuyodo"])
+    Tested against a constructed empty report rather than against whichever
+    tradition currently happens to be emptiest — the rule is what matters,
+    and a track improving must not break the test that watches the rule.
+    Sukuyōdō was the original case and has since been given delineations.
+    """
+    from src.engine.traditions.readiness import AUDIT, classify
+    from src.engine.traditions.report import ReportSection, TraditionReport
+
+    empty = TraditionReport(
+        tradition_id="anything", display_name="x", birth={},
+    )
+    empty.add(ReportSection("Computed things", level=2)).notes.append("a fact")
+    got = classify(empty)
     assert got.delineations == 0
     assert got.kind == AUDIT
     assert "not a reading" in got.explanation

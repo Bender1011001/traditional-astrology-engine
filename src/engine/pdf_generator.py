@@ -22,20 +22,57 @@ class HorizontalLine(Flowable):
 
 
 class TraditionalChartWheel(Flowable):
-    """Compact seven-planet whole-sign wheel for the report cover."""
+    """Whole-sign chart wheel: element-coloured sign band, glyphs, houses,
+    degree ticks, angle markers, and the aspect geometry.
 
-    SIGNS = ("Ar", "Ta", "Ge", "Cn", "Le", "Vi", "Li", "Sc", "Sg", "Cp", "Aq", "Pi")
-    PLANET_LABELS = {
-        "Sun": "Su",
-        "Moon": "Mo",
-        "Mercury": "Me",
-        "Venus": "Ve",
-        "Mars": "Ma",
-        "Jupiter": "Ju",
-        "Saturn": "Sa",
+    Drawn from the outside in:
+      * an element-tinted band carrying the twelve sign glyphs
+      * a degree scale, ticked every 5 degrees and emphasised every 10
+      * a house band carrying Roman numerals (whole-sign, so house N is the
+        Nth sign from the rising sign)
+      * the planets, with glyph and degree-in-sign
+      * the aspect lines, red for hard contacts and blue for soft
+      * the four angles, with the horizon drawn across the figure
+    """
+
+    SIGN_GLYPHS = (
+        "♈♉♊♋♌♍"
+        "♎♏♐♑♒♓"
+    )
+    SIGN_ABBR = ("Ar", "Ta", "Ge", "Cn", "Le", "Vi", "Li", "Sc", "Sg", "Cp", "Aq", "Pi")
+
+    PLANET_GLYPHS = {
+        "Sun": "☉",
+        "Moon": "☽",
+        "Mercury": "☿",
+        "Venus": "♀",
+        "Mars": "♂",
+        "Jupiter": "♃",
+        "Saturn": "♄",
+    }
+    PLANET_ABBR = {
+        "Sun": "Su", "Moon": "Mo", "Mercury": "Me", "Venus": "Ve",
+        "Mars": "Ma", "Jupiter": "Ju", "Saturn": "Sa",
     }
 
-    def __init__(self, chart_data, size=250):
+    # Element tints, warm through cool. Kept pale so ink drawn over them stays
+    # legible, including in greyscale print.
+    ELEMENT_FILL = {
+        "fire": colors.HexColor("#F6DFD6"),
+        "earth": colors.HexColor("#DFE7DA"),
+        "air": colors.HexColor("#F3EFD9"),
+        "water": colors.HexColor("#D9E4EC"),
+    }
+    ELEMENTS = ("fire", "earth", "air", "water")
+
+    ROMAN = ("I", "II", "III", "IV", "V", "VI",
+             "VII", "VIII", "IX", "X", "XI", "XII")
+
+    INK = colors.HexColor("#172554")
+    ACCENT = colors.HexColor("#8B1E1E")
+    SOFT = colors.HexColor("#1E3A8A")
+
+    def __init__(self, chart_data, size=340):
         super().__init__()
         self.chart_data = chart_data
         self.width = size
@@ -44,72 +81,213 @@ class TraditionalChartWheel(Flowable):
 
     @staticmethod
     def _point(cx, cy, radius, longitude, ascendant):
-        angle = math.radians(180.0 - ((float(longitude) - ascendant) % 360.0))
+        """Map an ecliptic longitude to a point on the wheel.
+
+        Convention: the Ascendant sits on the left (due west on the page) and
+        longitude increases ANTICLOCKWISE, descending below the horizon first.
+        That places the four angles where every chart-reader expects them —
+        Ascendant left, IC bottom, Descendant right, Midheaven top — and makes
+        house I follow the Ascendant downward.
+
+        This previously used `180 - (lon - asc)`, which runs longitude the other
+        way and renders the whole figure MIRRORED: the Midheaven appeared at the
+        bottom of the page and the houses ran backwards. The sign is now `+`.
+        """
+        angle = math.radians(180.0 + ((float(longitude) - ascendant) % 360.0))
         return cx + radius * math.cos(angle), cy + radius * math.sin(angle)
 
+    def _sector(self, canvas, cx, cy, r_out, r_in, start_lon, span, asc, fill):
+        """Fill the annular sector between two radii."""
+        path = canvas.beginPath()
+        steps = 14
+        for i in range(steps + 1):
+            lon = start_lon + span * (i / steps)
+            x, y = self._point(cx, cy, r_out, lon, asc)
+            if i == 0:
+                path.moveTo(x, y)
+            else:
+                path.lineTo(x, y)
+        for i in range(steps, -1, -1):
+            lon = start_lon + span * (i / steps)
+            x, y = self._point(cx, cy, r_in, lon, asc)
+            path.lineTo(x, y)
+        path.close()
+        canvas.setFillColor(fill)
+        canvas.setStrokeColor(fill)
+        canvas.setLineWidth(0.2)
+        canvas.drawPath(path, stroke=1, fill=1)
+
     def draw(self):
+        from src.engine.fonts import ASTRO_GLYPH_FONT, ensure_astro_glyphs
+
+        glyphs = ensure_astro_glyphs()
         canvas = self.canv
-        cx = self.width / 2
-        cy = self.height / 2
-        outer = self.width * 0.46
-        inner = self.width * 0.34
+        cx = cy = self.width / 2
+
+        r_outer = self.width * 0.48
+        r_sign_in = self.width * 0.395
+        r_tick = self.width * 0.365
+        r_house_in = self.width * 0.315
+        r_planet = self.width * 0.255
+        r_aspect = self.width * 0.205
+
         analysis = self.chart_data.get("analysis", {}) or {}
         angles = analysis.get("angles", {}) or {}
-        asc = (angles.get("Ascendant", {}) or {}).get("longitude", 0.0)
-        if isinstance(asc, dict):
-            asc = asc.get("lon_abs", 0.0)
-        asc = float(asc or 0.0)
+
+        def _angle_lon(name):
+            value = angles.get(name)
+            if isinstance(value, dict):
+                value = value.get("longitude", value.get("lon_abs", 0.0))
+            return float(value or 0.0)
+
+        asc = _angle_lon("Ascendant")
+        mc = _angle_lon("Midheaven")
+        asc_sign = int(asc // 30) % 12
 
         canvas.saveState()
-        canvas.setStrokeColor(colors.HexColor("#172554"))
-        canvas.setFillColor(colors.HexColor("#172554"))
-        canvas.setLineWidth(1.1)
-        canvas.circle(cx, cy, outer, stroke=1, fill=0)
-        canvas.setLineWidth(0.6)
-        canvas.circle(cx, cy, inner, stroke=1, fill=0)
 
-        asc_sign = int(asc // 30) % 12
-        for offset in range(12):
-            longitude = (asc_sign + offset) * 30.0
-            x1, y1 = self._point(cx, cy, inner, longitude, asc)
-            x2, y2 = self._point(cx, cy, outer, longitude, asc)
+        # --- element-tinted sign band ---------------------------------------
+        for i in range(12):
+            sign_index = (asc_sign + i) % 12
+            start = (asc_sign + i) * 30.0
+            self._sector(canvas, cx, cy, r_outer, r_sign_in, start, 30.0, asc,
+                         self.ELEMENT_FILL[self.ELEMENTS[sign_index % 4]])
+
+        canvas.setStrokeColor(self.INK)
+        canvas.setLineWidth(1.2)
+        canvas.circle(cx, cy, r_outer, stroke=1, fill=0)
+        canvas.setLineWidth(0.7)
+        canvas.circle(cx, cy, r_sign_in, stroke=1, fill=0)
+        canvas.circle(cx, cy, r_house_in, stroke=1, fill=0)
+        canvas.setLineWidth(0.5)
+        canvas.circle(cx, cy, r_aspect, stroke=1, fill=0)
+
+        # --- sign dividers, glyphs, degree scale ----------------------------
+        for i in range(12):
+            sign_index = (asc_sign + i) % 12
+            start = (asc_sign + i) * 30.0
+            x1, y1 = self._point(cx, cy, r_sign_in, start, asc)
+            x2, y2 = self._point(cx, cy, r_outer, start, asc)
+            canvas.setStrokeColor(self.INK)
+            canvas.setLineWidth(0.7)
             canvas.line(x1, y1, x2, y2)
-            middle = longitude + 15.0
-            tx, ty = self._point(cx, cy, outer - 13, middle, asc)
-            canvas.setFont("Times-Bold", 7.5)
-            canvas.drawCentredString(tx, ty - 2.5, self.SIGNS[(asc_sign + offset) % 12])
 
+            gx, gy = self._point(cx, cy, (r_outer + r_sign_in) / 2, start + 15.0, asc)
+            canvas.setFillColor(self.INK)
+            if glyphs:
+                canvas.setFont(ASTRO_GLYPH_FONT, 13)
+                canvas.drawCentredString(gx, gy - 4.5, self.SIGN_GLYPHS[sign_index])
+            else:
+                canvas.setFont("Times-Bold", 8.5)
+                canvas.drawCentredString(gx, gy - 3, self.SIGN_ABBR[sign_index])
+
+            for d in range(0, 30, 5):
+                lon = start + d
+                major = (d % 10 == 0)
+                r_from = r_tick if major else r_tick + 3.5
+                tx1, ty1 = self._point(cx, cy, r_from, lon, asc)
+                tx2, ty2 = self._point(cx, cy, r_sign_in, lon, asc)
+                canvas.setLineWidth(0.5 if major else 0.3)
+                canvas.setStrokeColor(colors.HexColor("#7C8AA5"))
+                canvas.line(tx1, ty1, tx2, ty2)
+
+        # --- house band ------------------------------------------------------
+        for i in range(12):
+            start = (asc_sign + i) * 30.0
+            x1, y1 = self._point(cx, cy, r_house_in, start, asc)
+            x2, y2 = self._point(cx, cy, r_tick, start, asc)
+            canvas.setStrokeColor(colors.HexColor("#93A1B5"))
+            canvas.setLineWidth(0.5)
+            canvas.line(x1, y1, x2, y2)
+            hx, hy = self._point(cx, cy, (r_tick + r_house_in) / 2, start + 15.0, asc)
+            canvas.setFillColor(colors.HexColor("#5A6B85"))
+            canvas.setFont("Times-Roman", 7)
+            canvas.drawCentredString(hx, hy - 2.5, self.ROMAN[i])
+
+        # --- planet positions, resolved before anything is drawn -------------
         planets = [
-            item
-            for item in analysis.get("planets_forensic", []) or []
-            if item.get("name") in self.PLANET_LABELS
+            item for item in analysis.get("planets_forensic", []) or []
+            if item.get("name") in self.PLANET_GLYPHS
         ]
         planets.sort(key=lambda item: float(item.get("longitude", 0.0)))
+
+        positions = {}
         last_lon = None
-        cluster_level = 0
+        tier = 0
         for planet in planets:
             lon = float(planet.get("longitude", 0.0))
-            if last_lon is not None and min((lon - last_lon) % 360, (last_lon - lon) % 360) < 8:
-                cluster_level = (cluster_level + 1) % 3
+            if last_lon is not None and min((lon - last_lon) % 360,
+                                            (last_lon - lon) % 360) < 9:
+                tier = (tier + 1) % 3
             else:
-                cluster_level = 0
-            radius = inner - 20 - cluster_level * 13
-            px, py = self._point(cx, cy, radius, lon, asc)
-            canvas.setFillColor(colors.HexColor("#8B1E1E"))
-            canvas.circle(px, py, 7.5, stroke=0, fill=1)
-            canvas.setFillColor(colors.white)
-            canvas.setFont("Helvetica-Bold", 5.8)
-            canvas.drawCentredString(px, py - 2, self.PLANET_LABELS[planet["name"]])
+                tier = 0
+            positions[str(planet.get("name"))] = (
+                self._point(cx, cy, r_planet - tier * 16, lon, asc), lon
+            )
             last_lon = lon
 
-        canvas.setStrokeColor(colors.HexColor("#8B1E1E"))
-        canvas.setLineWidth(1.2)
-        left_x, left_y = self._point(cx, cy, outer + 5, asc, asc)
-        right_x, right_y = self._point(cx, cy, outer + 5, asc + 180, asc)
-        canvas.line(left_x, left_y, right_x, right_y)
-        canvas.setFillColor(colors.HexColor("#8B1E1E"))
-        canvas.setFont("Times-Bold", 7)
-        canvas.drawString(4, cy + 4, "ASC")
+        # --- aspect geometry --------------------------------------------------
+        aspect_style = {
+            "Opposition": (self.ACCENT, 0.9, None),
+            "Square": (self.ACCENT, 0.7, None),
+            "Trine": (self.SOFT, 0.7, None),
+            "Sextile": (self.SOFT, 0.5, (2, 2)),
+        }
+        for aspect in analysis.get("aspects", []) or []:
+            style = aspect_style.get(str(aspect.get("type")))
+            if not style:
+                continue
+            a = positions.get(str(aspect.get("planet_a")))
+            b = positions.get(str(aspect.get("planet_b")))
+            if not a or not b:
+                continue
+            colour, width, dash = style
+            canvas.setStrokeColor(colour)
+            canvas.setLineWidth(width)
+            canvas.setDash(dash if dash else [])
+            canvas.line(a[0][0], a[0][1], b[0][0], b[0][1])
+        canvas.setDash([])
+
+        # --- the four angles --------------------------------------------------
+        canvas.setStrokeColor(self.ACCENT)
+        canvas.setLineWidth(1.3)
+        ax1, ay1 = self._point(cx, cy, r_outer + 6, asc, asc)
+        ax2, ay2 = self._point(cx, cy, r_outer + 6, asc + 180.0, asc)
+        canvas.line(ax1, ay1, ax2, ay2)
+        canvas.setLineWidth(0.9)
+        mx1, my1 = self._point(cx, cy, r_house_in, mc, asc)
+        mx2, my2 = self._point(cx, cy, r_outer + 6, mc, asc)
+        canvas.line(mx1, my1, mx2, my2)
+        ix1, iy1 = self._point(cx, cy, r_house_in, mc + 180.0, asc)
+        ix2, iy2 = self._point(cx, cy, r_outer + 6, mc + 180.0, asc)
+        canvas.line(ix1, iy1, ix2, iy2)
+
+        canvas.setFillColor(self.ACCENT)
+        canvas.setFont("Times-Bold", 7.5)
+        for label, lon, dx in (("ASC", asc, -14), ("DSC", asc + 180.0, 14),
+                               ("MC", mc, 0), ("IC", mc + 180.0, 0)):
+            lx, ly = self._point(cx, cy, r_outer + 12, lon, asc)
+            canvas.drawCentredString(lx + dx, ly - 2, label)
+
+        # --- planet discs, drawn last so they sit above the lines -------------
+        for planet in planets:
+            name = str(planet.get("name"))
+            (px, py), lon = positions[name]
+            canvas.setFillColor(colors.white)
+            canvas.setStrokeColor(self.ACCENT)
+            canvas.setLineWidth(0.9)
+            canvas.circle(px, py, 10.5, stroke=1, fill=1)
+            canvas.setFillColor(self.ACCENT)
+            if glyphs:
+                canvas.setFont(ASTRO_GLYPH_FONT, 12)
+                canvas.drawCentredString(px, py - 4, self.PLANET_GLYPHS[name])
+            else:
+                canvas.setFont("Helvetica-Bold", 6.5)
+                canvas.drawCentredString(px, py - 2.5, self.PLANET_ABBR[name])
+            canvas.setFillColor(self.INK)
+            canvas.setFont("Times-Roman", 6)
+            canvas.drawCentredString(px, py - 18, str(int(lon % 30)) + "°")
+
         canvas.restoreState()
 
 

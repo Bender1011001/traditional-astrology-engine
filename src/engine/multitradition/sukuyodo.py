@@ -332,3 +332,122 @@ def build(
         ),
     })
     return result
+
+# -- the weekday's ruling planet, and what the text says of it ------------
+
+#: The continuous seven-day cycle, Sunday first, matching the chapter's own
+#: names table. The source is explicit that the week never breaks: "one
+#: changes each day, one revolution in seven days, then begins again" - and
+#: adds that if you forget which day it is, ask a Sogdian, a Persian, or a
+#: person of the Five Indias, because they all know.
+WEEKDAY_PLANETS = (
+    "太陽 Sun", "太陰 Moon", "熒惑 Mars", "辰星 Mercury",
+    "歲星 Jupiter", "太白 Venus", "鎮星 Saturn",
+)
+
+#: Clauses the pack refuses for customer output, quoted so the refusal can be
+#: applied to the verbatim rather than to a paraphrase of it.
+REFUSED_CLAUSES = {
+    "短命": "a short-life claim",
+    "醜陋": "a claim about physical ugliness",
+    "妨親害族": "a claim that the native harms kin and injures the clan",
+    "惡性": "a claim of evil disposition",
+}
+
+
+#: Engine renderings of the seven natal clauses, unreviewed. The refused
+#: portions are rendered too - the refusal happens at fire time, so the
+#: reader is told a clause was withheld rather than shown a doctored one.
+CLAUSE_RENDERING = {
+    "法合足智策、端政美貌、孝順短命":
+        "accords with resourceful intelligence, upright bearing and a "
+        "handsome appearance, and with filial obedience",
+    "合多智策、美貌、樂福田、好布施、孝順":
+        "accords with abundant resourcefulness, a handsome appearance, "
+        "delight in the field of merit, a liking for almsgiving, and filial "
+        "obedience",
+    "法合醜陋惡性、妨親害族，便弓馬多嗔":
+        "accords with skill at the bow and horse, and with a quick temper",
+    "法合貴重榮祿":
+        "accords with high standing, honour and emolument",
+    "法合短命好善，人皆欽慕":
+        "accords with a love of the good, and with being admired by all",
+    "法合少病、足聲名、少孝順、信朋友":
+        "accords with little sickness, ample repute, scant filial obedience, "
+        "and good faith towards friends",
+}
+
+
+def weekday_planet(weekday_sunday_first: int) -> str:
+    """The planet ruling a weekday, 0 = Sunday."""
+    return WEEKDAY_PLANETS[weekday_sunday_first % 7]
+
+
+def weekday_natal_clause(planet: str) -> dict[str, Any] | None:
+    """What the chapter says of a native born under this planet's day.
+
+    Returns the verbatim, the refused portions named rather than silently
+    dropped, and whether anything survives to be shown. Mercury's entry
+    carries no natal clause at all - the chapter simply omits it - and that
+    asymmetry is reported rather than filled by inference from the other six.
+    """
+    rule = _rules().get("sukuyo.weekday.natal_delineation")
+    if rule is None:
+        return None
+    for row in (rule.get("conclusion") or {}).get("delineations", []):
+        if row.get("planet") != planet:
+            continue
+        verbatim = str(row.get("verbatim", ""))
+        if verbatim.startswith("("):
+            return {
+                "planet": planet,
+                "absent": True,
+                "why": (
+                    "The chapter gives this planet an entry but no natal "
+                    "clause. Six of the seven carry one; this one does not, "
+                    "and the gap is recorded rather than filled by inference."
+                ),
+            }
+        refused = [
+            reason for token, reason in REFUSED_CLAUSES.items()
+            if token in verbatim
+        ]
+        return {
+            "planet": planet,
+            "verbatim": verbatim,
+            "rendering": CLAUSE_RENDERING.get(verbatim),
+            "refused": refused,
+            "absent": False,
+            "rule_id": "sukuyo.weekday.natal_delineation",
+            "not_natal": (
+                "Each entry also carries an annual omen and an "
+                "eclipse-and-earthquake omen. Those concern the year and the "
+                "state, not a person, and are not folded in here."
+            ),
+        }
+    return None
+
+
+def association_categories() -> dict[str, Any] | None:
+    """Which three-nine categories the text calls good for association.
+
+    The source hedges itself with 大抵 ("broadly speaking") and that hedge is
+    carried. It also contradicts itself, and the contradiction is preserved:
+    危 is excluded from the favourable set here, while both election passages
+    make a 危 day the recommended day for forming ties and for marriage. The
+    same text treats the category as bad for a relationship and the day as
+    good for starting one. That is not averaged away.
+    """
+    rule = _rules().get("sukuyo.sanku.favourable_set_for_association")
+    if rule is None:
+        return None
+    c = rule.get("conclusion") or {}
+    return {
+        "favourable": list(c.get("favourable") or []),
+        "unfavourable_note": c.get("unfavourable"),
+        "verbatim": c.get("verbatim"),
+        "hedge": c.get("hedge_in_source"),
+        "tension": c.get("tension_to_preserve"),
+        "secrecy_claim": c.get("secrecy_claim"),
+        "rule_id": "sukuyo.sanku.favourable_set_for_association",
+    }

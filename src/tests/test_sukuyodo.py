@@ -279,3 +279,88 @@ def test_candidates_are_ordered_and_attributed():
     assert len(backing["星"]) == 1
     for c in candidates:
         assert len(c["sanku"]) == 27
+
+
+# --- what the text says of the native ------------------------------------
+
+
+def test_the_weekday_cycle_needs_no_lunar_calendar():
+    """It survives the regime refusal, which is why it is worth firing.
+
+    The seven-day week is continuous in this text, so the birth weekday is
+    known even when the birth mansion is not.
+    """
+    from src.engine.multitradition.sukuyodo import (
+        WEEKDAY_PLANETS,
+        weekday_planet,
+    )
+
+    assert len(WEEKDAY_PLANETS) == 7
+    assert weekday_planet(0).endswith("Sun")
+    assert weekday_planet(7) == weekday_planet(0)
+
+
+def test_every_planet_but_mercury_carries_a_natal_clause():
+    """The chapter simply omits Mercury's, and the gap is reported."""
+    from src.engine.multitradition.sukuyodo import (
+        WEEKDAY_PLANETS,
+        weekday_natal_clause,
+    )
+
+    absent = []
+    for planet in WEEKDAY_PLANETS:
+        got = weekday_natal_clause(planet)
+        assert got is not None, planet
+        if got.get("absent"):
+            absent.append(planet)
+        else:
+            assert got["verbatim"]
+    assert [p for p in absent if "Mercury" in p] == [p for p in absent]
+    assert len(absent) == 1
+
+
+def test_refused_clauses_are_named_not_silently_cut():
+    """Short life, ugliness and harm-to-kin are in the source and withheld."""
+    from src.engine.multitradition.sukuyodo import weekday_natal_clause
+
+    mars = weekday_natal_clause("熒惑 Mars")
+    assert "醜陋" in mars["verbatim"]
+    assert any("ugliness" in r for r in mars["refused"])
+    # The rendering shown to a reader carries none of the refused content.
+    assert "ugl" not in (mars["rendering"] or "").lower()
+
+    sun = weekday_natal_clause("太陽 Sun")
+    assert any("short-life" in r for r in sun["refused"])
+    assert "short" not in (sun["rendering"] or "").lower()
+
+
+def test_the_association_rule_keeps_the_sources_own_contradiction():
+    """危 is a bad category and a good day, in the same text."""
+    from src.engine.multitradition.sukuyodo import association_categories
+
+    got = association_categories()
+    assert got["favourable"] == ["榮", "安", "成", "友", "親"]
+    assert "危" not in got["favourable"]
+    assert "危" in got["tension"]
+    assert "大抵" in got["hedge"]
+
+
+def test_sukuyodo_now_delineates_something():
+    """It fired nothing at all, and was classified a source audit for it."""
+    from datetime import date
+
+    from src.engine.multitradition.types import BirthInput
+    from src.engine.traditions.readiness import AUDIT, classify
+    from src.engine.traditions.sukuyodo_report import (
+        build_report as build_sukuyo_report,
+    )
+
+    report = build_sukuyo_report(
+        BirthInput(
+            name="Fixture", civil_date=date(1996, 8, 13), civil_time="07:18",
+            utc_offset_hours=-7.0, latitude=38.2494, longitude=-122.04,
+            place_label="Fairfield, California",
+        )
+    )
+    assert report.delineation_count >= 1
+    assert classify(report).kind != AUDIT

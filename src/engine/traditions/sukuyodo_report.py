@@ -28,12 +28,15 @@ from ..multitradition import build_panel
 from ..multitradition.sukuyodo import (
     CATEGORY_GLOSS,
     NIU,
+    association_categories,
     build as build_sukuyo,
     mansions,
     pada_closure,
+    weekday_natal_clause,
+    weekday_planet,
 )
 from ..multitradition.types import BirthInput
-from .report import ReportSection, TraditionReport
+from .report import Delineation, ReportSection, TraditionReport
 
 
 def _lunar_dates(birth: BirthInput) -> dict[str, tuple[int, int]]:
@@ -77,6 +80,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _mansion_section(report, reading)
     _sanku_section(report, reading)
     _sign_section(report, reading)
+    _natal_section(report, birth, reading)
     _structure_section(report)
     _limits_section(report, reading)
     return report
@@ -239,6 +243,78 @@ def _sign_section(report: TraditionReport, reading: dict[str, Any]) -> None:
         "T1299 names the signs by their figures — 獅子, 秤, 蝎, 磨竭, 瓶, 魚 — "
         "and no rule in the pack depends on the Western label."
     )
+
+
+def _natal_section(
+    report: TraditionReport, birth: BirthInput, reading: dict[str, Any]
+) -> None:
+    """What the chapter says of the native, as opposed to of the method.
+
+    Two things here bear on a person rather than on a technique, and neither
+    depends on the birth mansion - so they survive the calendar refusal that
+    withholds everything else.
+    """
+    s = report.add(ReportSection("What the Text Says of the Native", level=2))
+    weekday = (birth.civil_date.weekday() + 1) % 7  # Monday=0 -> Sunday-first
+    planet = weekday_planet(weekday)
+    s.notes.append(
+        f"The birth falls on the day of **{planet}**. The seven-day cycle is "
+        "continuous and unbroken in this text — *one changes each day, one "
+        "revolution in seven days, then begins again* — so it needs no lunar "
+        "calendar and is unaffected by the regime disagreement above."
+    )
+    clause = weekday_natal_clause(planet)
+    if clause is None:
+        return
+    if clause.get("absent"):
+        s.refusals.append(str(clause["why"]))
+    else:
+        rendering = clause.get("rendering")
+        if rendering:
+            s.delineations.append(
+                Delineation(
+                    text=f"A native of this day {rendering}.",
+                    rule_id=str(clause["rule_id"]),
+                    source="Sukuyōkyō (T1299), the weekday chapter",
+                    evidence_grade="C",
+                    trigger=f"born on the day of {planet}",
+                )
+            )
+        for reason in clause.get("refused", []):
+            s.refusals.append(
+                f"The same clause also carries {reason}, which the pack "
+                "refuses for output about a living person. It is withheld "
+                "here rather than quietly cut from the quotation."
+            )
+        s.notes.append(str(clause["not_natal"]))
+
+    assoc = association_categories()
+    if assoc and reading.get("status") == "emitted":
+        s.delineations.append(
+            Delineation(
+                text=(
+                    "Broadly speaking, take "
+                    + "、".join(assoc["favourable"])
+                    + " as good and fit for forming ties; all the rest are "
+                    "bad, and one should not become close through them."
+                ),
+                rule_id=str(assoc["rule_id"]),
+                source="Sukuyōkyō (T1299), on the three nines",
+                evidence_grade="C",
+                trigger="the three-nine categories, applied to association",
+            )
+        )
+        s.notes.append(f"The source hedges this itself: {assoc['hedge']}")
+        s.notes.append(f"And contradicts itself, preserved: {assoc['tension']}")
+        s.notes.append(
+            f"The passage calls itself a secret method — {assoc['secrecy_claim']}."
+        )
+    elif assoc:
+        s.notes.append(
+            "The association rule is not applied, because it runs over the "
+            "three-nine categories and those are reckoned from a birth "
+            "mansion this reading could not settle."
+        )
 
 
 def _structure_section(report: TraditionReport) -> None:

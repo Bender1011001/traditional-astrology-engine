@@ -43,7 +43,22 @@ class HylegAlcocodenEngine:
         if house == 1:
             return True
 
-        if planet.altitude is not None:
+        # The remaining hylegical houses (7, 9, 10, 11) are above the horizon by
+        # construction — that is precisely why Lilly admits them:
+        #   "when they be either in the firft, tenth, eleventh, feventh or ninth
+        #    houfes ... what fpace of the AEquator is under the earth is
+        #    rejected, unlefle within five and twenty degrees of the afcendant"
+        #                     — Christian Astrology (1647) Bk III ch. CIV, p. 527
+        #
+        # An altitude refinement is therefore redundant here, and the previous
+        # form was actively harmful: `Planet.altitude` defaults to 0.0 and is not
+        # populated on these charts, so `altitude is not None` was always True and
+        # `0.0 > 0` was always False. Every luminary in houses 7/9/10/11 was
+        # silently rejected, forcing the Hyleg down to the Lot of Fortune or the
+        # Ascendant in the large majority of nativities.
+        #
+        # Only consult altitude when it carries a real measurement.
+        if planet.altitude:  # non-zero => actually computed
             return planet.altitude > 0
 
         return True
@@ -275,12 +290,33 @@ class HylegAlcocodenEngine:
                 c2["aspect_mode"] = "whole_sign"
                 sign_hits.append(c2)
 
-        if not sign_hits:
-            return None  # type: ignore
+        if sign_hits:
+            best = max(sign_hits, key=lambda x: (x["score"],))
+            best["note"] = (
+                "No degree-orb aspect qualified; selected by whole-sign aspect fallback."
+            )
+            return best
 
-        best = max(sign_hits, key=lambda x: (x["score"],))
+        # 3) No candidate aspects the Hyleg at all.
+        #
+        # Lilly, Christian Astrology (1647) Bk III ch. CIV, printed p. 531:
+        #   "he that hath afpect to the Hyleg is preferred before he that hath
+        #    none; IF NONE ASPECT THE HYLEG, then he that excels the reft in
+        #    effentiall dignities"
+        #
+        # So the aspect is a PREFERENCE and tie-break, not an absolute filter.
+        # Previously this returned None, which produced "no giver of years" and
+        # a zero-year result for real charts (e.g. a nativity whose dignity
+        # rulers are all in aversion to the Hyleg). Lilly's own instruction is
+        # to fall back to the greatest essential dignity.
+        best = max(candidates, key=lambda x: (x["score"],))
+        best = dict(best)
+        best["aspect"] = None
+        best["aspect_mode"] = "none_lilly_dignity_fallback"
         best["note"] = (
-            "No degree-orb aspect qualified; selected by whole-sign aspect fallback."
+            "No planet aspects the Hyleg by degree or whole sign. Following Lilly "
+            "(Bk III ch. CIV), the planet excelling in essential dignity is taken "
+            "as Alcocoden despite the absence of an aspect."
         )
         return best
 
@@ -301,28 +337,68 @@ class HylegAlcocodenEngine:
         )
         dignity_score = dignity.get("total_score", 0)
 
-        years_type = "Minor"
-        base_years = HylegAlcocodenEngine.PLANETARY_YEARS[p_name]["minor"]  # type: ignore
-
-        if house in [1, 4, 7, 10] and dignity_score >= 4:
+        # YEARS-CLASS RULE — al-Biruni, Book of Instruction (Wright 1934) §522:
+        #   "then the most powerful planet as regards dignities (mubtazzah) or
+        #    those in aspect to it is the kadkhuda. IF IT IS AT AN ANGLE A LARGE
+        #    NUMBER IS ASSIGNED, IF SUCCEDENT AN INTERMEDIATE ONE, AND IF IN A
+        #    CADENT POSITION A SMALL ONE."
+        #
+        # The criterion is PLACEMENT ALONE. Essential dignity does not select
+        # the class in al-Biruni; it governs the UNIT instead (see the note on
+        # unit scaling below).
+        #
+        # Why this source: al-Biruni is the only authority whose full procedure
+        # survives complete and legible in the editions held here. Lilly states
+        # the condition as "angular, ftrong and fortunate" but the sentence that
+        # gives the resulting class is destroyed in our 1647 scan (p. 531), so
+        # his rule cannot be implemented faithfully. Valens uses a different
+        # criterion again (configuration with the controller and sign-ruler).
+        # The disagreement is real and is disclosed to the reader rather than
+        # silently resolved.
+        #
+        # An earlier implementation here let dignity demote the class, which
+        # made an angular peregrine Alcocoden score WORSE than a succedent one —
+        # an inversion no authority supports.
+        if house in [1, 4, 7, 10]:
             years_type = "Major"
-            base_years = HylegAlcocodenEngine.PLANETARY_YEARS[p_name]["major"]  # type: ignore
-        elif house in [2, 5, 8, 11] and dignity_score >= 0:
+        elif house in [2, 5, 8, 11]:
             years_type = "Mean"
-            base_years = HylegAlcocodenEngine.PLANETARY_YEARS[p_name]["mean"]  # type: ignore
+        else:
+            years_type = "Minor"
+
+        base_years = HylegAlcocodenEngine.PLANETARY_YEARS[p_name][  # type: ignore
+            {"Major": "major", "Mean": "mean", "Minor": "minor"}[years_type]
+        ]
+
+        # DISCLOSED DEPARTURE: al-Biruni §522 continues "according to the
+        # condition of the kadkhuda as regards power or weakness, these numbers
+        # indicate years of life or months or days or hours." That unit scaling
+        # is NOT applied here — every result is expressed in years. Applying it
+        # would require a source-verified threshold for what counts as weak
+        # enough to demote years to months, which no inspected edition supplies.
 
         logs = [
-            f"Base: {years_type} Years of {p_name.value} ({base_years}) due to House {house} and dignity {dignity_score}"
+            f"Base: {years_type} Years of {p_name.value} ({base_years}) by placement in House {house}"
+            f" (al-Biruni §522); recorded essential dignity {dignity_score}"
         ]
         total = base_years
 
-        # 2. Additions/Subtractions from Aspects (Bonatti/Lilly-inspired heuristic)
+        # 2. ADDITIONS AND SUBTRACTIONS — al-Biruni, §522:
+        #   "every fortune which is in a friendly aspect to it, or is in
+        #    reception with it, ADDS ITS SMALLEST NUMBER to the allowance, in
+        #    the form of years or months according to the strength or weakness
+        #    aforesaid, while every infortune in inimical aspect DEDUCTS SUCH A
+        #    NUMBER. These are styled the additions and deductions."
         #
-        # Many medieval presentations add/subtract in a mixed "years + months" manner:
-        # - Benefics can add their Minor Years + (Mean Years / 12) as years (months converted to years)
-        # - Malefics can subtract similarly, but typically only on hard aspects.
+        # So the quantity is flat: the aspecting planet's LESSER ("smallest")
+        # years. Benefics add on friendly aspect (conjunction/sextile/trine);
+        # malefics deduct on inimical aspect (conjunction/square/opposition).
         #
-        # This is still an approximation; we keep it auditable and conservative.
+        # The previous implementation added "lesser years + mean years / 12",
+        # a "lesser years and the months of their mean years" formula that
+        # appears in NEITHER al-Biruni NOR Lilly's chapter CIV. Lilly carries no
+        # numeric modifier apparatus at all. That formula was inherited from
+        # secondary commentary and is removed as unsourced.
 
         for p in chart.planets:
             if p.name == p_name:
@@ -351,28 +427,24 @@ class HylegAlcocodenEngine:
                 if p.name not in HylegAlcocodenEngine.PLANETARY_YEARS:
                     continue
 
-                minor_y = float(HylegAlcocodenEngine.PLANETARY_YEARS[p.name]["minor"])  # type: ignore
-                mean_y = float(HylegAlcocodenEngine.PLANETARY_YEARS[p.name]["mean"])  # type: ignore
-                delta_full = minor_y + (mean_y / 12.0)
+                # al-Biruni's quantity: the aspecting planet's "smallest
+                # number" — its lesser years. Flat, with no month term.
+                delta_full = float(
+                    HylegAlcocodenEngine.PLANETARY_YEARS[p.name]["minor"]  # type: ignore
+                )
 
                 if p.name in [PlanetName.JUPITER, PlanetName.VENUS]:
-                    # Benefics add: full help on soft aspects, partial on hard aspects.
+                    # "every fortune which is in a FRIENDLY ASPECT to it ...
+                    # adds its smallest number". Hard aspects from a benefic are
+                    # not friendly aspects and are given no additive effect;
+                    # no inspected edition grants them one.
                     if aspect_type in ["Conjunction", "Trine", "Sextile"]:
                         mod = delta_full  # type: ignore
-                    elif aspect_type in ["Square", "Opposition"]:
-                        mod = delta_full / 2.0  # type: ignore
 
                 elif p.name in [PlanetName.SATURN, PlanetName.MARS]:
-                    # Malefics subtract: only on hard aspects.
+                    # "every infortune in INIMICAL ASPECT deducts such a number."
                     if aspect_type in ["Conjunction", "Square", "Opposition"]:
-                        # Treat squares as weaker than conjunction/opposition in this numeric heuristic.
-                        mod = (
-                            -(delta_full / 2.0)  # type: ignore
-                            if aspect_type == "Square"
-                            else -delta_full
-                        )
-                    elif aspect_type in ["Trine", "Sextile"]:
-                        mod = 0
+                        mod = -delta_full  # type: ignore
 
                 if mod != 0:
                     total += mod
