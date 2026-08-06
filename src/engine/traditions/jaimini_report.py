@@ -206,7 +206,9 @@ def build_report(
     _opening(report, birth, chart, j)
     _drsti_section(report, j)
     _argala_section(report, j)
+    _katapayadi_section(report)
     _karaka_section(report, j)
+    _sthira_karaka_section(report)
     _pada_section(report, j)
     _lagna_section(report, j)
     _dasa_section(report, j)
@@ -338,6 +340,124 @@ def _argala_section(report: TraditionReport, j: dict) -> None:
     if lagna_block:
         s.notes.append(lagna_block["target_fork"])
         s.notes.append(lagna_block["pairing_fork"])
+
+
+def _sutra_delineation(rule_id: str, text: str, trigger: str) -> Delineation | None:
+    """Fire from the analytical pack, which states the sutra and not a rendering.
+
+    The base manifest holds the sutra text under its own key and the substance
+    under a per-rule field name. Nothing in it carries engine_rendering, which
+    is exactly why every one of its 41 rules was unreachable.
+    """
+    rule = _rules_by_id().get(rule_id)
+    if rule is None or not text.strip():
+        return None
+    c = rule.get("conclusion") or {}
+    sutra = c.get("sutra") or c.get("stated_as")
+    body = text.strip()
+    if isinstance(sutra, str) and sutra.strip():
+        body = f"{body} (*{sutra.strip()}*)"
+    return Delineation(
+        text=body,
+        rule_id=rule_id,
+        source=_source_label(rule),
+        evidence_grade=rule.get("evidence_grade", "?"),
+        trigger=trigger,
+    )
+
+
+def _katapayadi_section(report: TraditionReport) -> None:
+    """Step one of the tradition's own judgment order: decode the text.
+
+    The report followed the hierarchy from step two onward, which is a strange
+    place to begin when the sutras are written in numeric code.
+    """
+    rule = _rules_by_id().get("jaimini.katapayadi.bhava-and-rasi")
+    if rule is None:
+        return
+    c = rule.get("conclusion") or {}
+    s = report.add(ReportSection("Reading the Sūtras (Kaṭapayādi)", level=2))
+    d = _sutra_delineation(
+        "jaimini.katapayadi.bhava-and-rasi",
+        str(c.get("decoding", "")),
+        "the sūtras are written in numeric code",
+    )
+    if d:
+        s.delineations.append(d)
+    worked = c.get("worked_example_in_commentary")
+    if worked:
+        s.notes.append(f"The commentary's own worked example: {worked}.")
+    if c.get("second_example"):
+        s.notes.append(f"And a second: {c['second_example']}.")
+    if c.get("why_this_matters"):
+        s.notes.append(str(c["why_this_matters"]))
+    limit = _rules_by_id().get("jaimini.katapayadi.not-grahas")
+    if limit:
+        lc = limit.get("conclusion") or {}
+        s.notes.append(
+            "The code does not extend everywhere: "
+            + str(lc.get("decoding", "")).rstrip(".")
+            + "."
+        )
+
+
+def _sthira_karaka_section(report: TraditionReport) -> None:
+    """The FIXED significators, which the chara karakas do not replace.
+
+    Jaimini uses both. A report that computes the variable set and never says
+    the fixed one exists has quietly halved the tradition's significator
+    apparatus.
+    """
+    s = report.add(ReportSection("The Sthira Kārakas", level=2))
+    s.notes.append(
+        "These are fixed by nature and do not change from chart to chart. "
+        "They coexist with the chara kārakas above rather than being replaced "
+        "by them — Jaimini uses both, and the report would be reading with "
+        "one of the two if this section were absent."
+    )
+    for rule_id, graha in (
+        ("jaimini.sthira-karaka.mars", "Mars"),
+        ("jaimini.sthira-karaka.mercury", "Mercury"),
+    ):
+        rule = _rules_by_id().get(rule_id)
+        if rule is None:
+            continue
+        c = rule.get("conclusion") or {}
+        signifies = c.get("signifies") or []
+        d = _sutra_delineation(
+            rule_id,
+            f"{graha} fixedly signifies " + ", ".join(signifies),
+            f"the sthira kāraka of {graha}",
+        )
+        if d:
+            s.delineations.append(d)
+        if c.get("note"):
+            s.notes.append(str(c["note"]))
+
+    disputed = _rules_by_id().get(
+        "jaimini.sthira-karaka.jupiter-venus-saturn.disputed"
+    )
+    if disputed is None:
+        return
+    c = disputed.get("conclusion") or {}
+    sub = report.add(
+        ReportSection("Grandfather, Husband and Son — Disputed", level=3)
+    )
+    sub.notes.append(
+        "The two readings assign the SAME three topics to DIFFERENT grahas, "
+        "so this is a fork that changes who signifies what, not a wording "
+        "quibble. Both are given; neither is adopted."
+    )
+    sub.notes.append(f"Abhyankar reads: {c.get('reading_abhyankar')}.")
+    sub.notes.append(
+        f"The Sūtrārthaprakāśikā reads: {c.get('reading_sutrarthaprakasika')}."
+    )
+    if c.get("textual_basis_of_the_split"):
+        sub.notes.append(
+            f"The basis of the split: {c['textual_basis_of_the_split']}."
+        )
+    if c.get("sutra"):
+        sub.notes.append(f"The sūtra itself: *{c['sutra']}*.")
 
 
 def _karaka_section(report: TraditionReport, j: dict) -> None:
