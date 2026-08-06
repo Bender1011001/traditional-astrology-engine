@@ -1,0 +1,38 @@
+{
+  "fragment_id": "zpzq_geju",
+  "source_file": "tmp/acquire/pdfs/ziping_zhenquan_shen_xiaozhan_nlc_scan.pdf",
+  "pages_covered": "PDF pages 1-12 so far (title, preface, TOC, body start)",
+  "edition_identity": {
+    "work": "子平真詮 (title page: 秘本子平真詮)",
+    "author": "山陰沈燡燔孝瞻撰 (Shen Yifan, zi Xiaozhan, of Shanyin; TOC and body head both carry 山陰沈燡燔孝瞻撰)",
+    "print": "Republican-era Shanghai typeset edition: title page reads 秘本子平真詮 / 沈孝瞻先生撰 / 附偉人星命錄・民國萬年曆 / 上海世界書局發行 (bottom row of title page reads 世界圖書館發行-style seal script; TOC lists the appendices as 新增 偉人星命錄 and 民國萬年書)",
+    "preface": "Standard recension preface present at PDF pages 2-4, narrating discovery of Shen's 子平手錄三十九篇 via 章君安 in the 宛平沈明府 office, and calling the work 此談子平家眞詮也; signed 乾隆四十一年歲在丙申初夏同里後學胡焜倬雲甫謹識 (1776, Hu Kunzhuo, zi Yunfu — the 胡空甫 of received tradition)",
+    "date_of_this_print": "民國 (Republican) era, undated on title page; 民國萬年曆 appendix implies post-1912. This is a 世界書局 typeset reprint of the standard 1776 recension, NOT a Qing block print.",
+    "nlc_marks": "NLC barcode '3 2167 7651 2' stamped above the preface frame on PDF page 2; handwritten shelf numbers top-left of same page",
+    "page_layout": "one printed folio page per PDF page, text in frame, columns top-to-bottom right-to-left, running title 子平眞詮 plus folio number in the left margin",
+    "note": "Preface says 手錄三十九篇 (39 chapters); TOC enumerates 47 論-titles because each 取運 chapter is listed separately, plus the two 新增 Republican appendices."
+  },
+  "chapter_map": [
+    {"chapter": "序 (胡焜倬 preface, dated 乾隆四十一年丙申)", "pdf_page": 2},
+    {"chapter": "目錄 (TOC)", "pdf_page": 5},
+    {"chapter": "論十干十二支", "pdf_page": 10}
+  ],
+  "toc_chapter_list_in_order": [
+    "論十干十二支", "論陰陽生尅", "論陰陽生死", "論十干配合性情", "論十干合而不合",
+    "論十干得時不旺失時不弱", "論刑冲會合解法", "論用神", "論用神成敗救應", "論用神變化",
+    "論用神純雜", "論用神格局高低", "論用神因成得敗因敗得成", "論用神配氣候得失", "論相神緊要",
+    "論雜氣如何取用", "論墓庫刑衝之說", "論四吉神能破格", "論四凶神能成格", "論生尅先後分吉凶",
+    "論星辰無關格局", "論外格用舍", "論宮分用神配六親", "論妻子", "論行運",
+    "論行運成格變格", "論喜忌干支有別", "論支中喜忌逢運透清", "論時說拘泥格局", "論時說以訛傳訛",
+    "論正官", "論正官取運", "論財", "論財取運", "論印", "論印取運",
+    "論食神", "論食神取運", "論偏官", "論偏官取運", "論傷官", "論傷官取運",
+    "論陽刃", "論陽刃取運", "論建祿月刦", "論建祿月刦取運", "論雜格",
+    "(新增) 偉人星命錄", "(新增) 民國萬年書"
+  ],
+  "fragment_rules": [],
+  "fragment_vectors": [],
+  "collation_notes": [
+    "TOC (PDF p5) lists chapter 5 as 論日干合而不合 at first glance, but the second character is 十 in the same title style as its neighbours; received editions have 論十干合而不合 — body heading to be checked when reached.",
+    "Author name printed 沈燡燔 in TOC byline and preface (先生諱燡燔), matching the received name 沈燡燔 sometimes romanized via variant 沈铁燔/沈燡燔 confusion; courtesy name 孝瞻 confirmed."
+  ]
+}

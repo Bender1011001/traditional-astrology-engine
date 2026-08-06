@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-05",
+  "tradition_id": "vietnamese_tu_vi",
+  "source_registry_ids": [
+    "vietnam_tu_vi_dau_so_tan_bien_van_dang_thai_thu_lang_digital_edition"
+  ],
+  "status": "partially_encoded",
+  "notes": "The four practice charts of the PHU LUC (appendix) of Van Dang Thai Thu Lang, Tu Vi dau so tan bien, Phan 3 section 6, printed pp. 271-275 (PDF part dv06, pdfpages 47-51). The book introduces them in one sentence: 'Phan sau day la bon la so de quan sat va tap luan doan' - what follows are four charts for observation and practice judgment. They are the first published Vietnamese worked charts this corpus holds, and they close the loop on the construction pack: for all four, the life palace, body palace, Thai Tue ring seat and Loc Ton seat RECOMPUTE EXACTLY from the birth data under the rules already extracted into tuvi_construction_rule_manifest.json (an Menh, an Than, an Thai Tue, an Loc Ton), which is the strongest internal validation the Lap thanh extraction has. One systematic defect of the digital edition is recorded rather than repaired: in the typeset appendix grids the ring of branch labels is misdrawn relative to the palace cells - uniformly shifted by six branches in chart 1, by two in chart 2, and drawn in the reverse direction in chart 3 - while the palace names, their star contents, the decade ages and the centre-panel birth data are mutually coherent and agree with the book's own placement rules. The recovered branch seats stated below therefore come from the internal consistency of the star contents with the construction rules, not from the printed ring, and every example says so. Charts 3 and 4 carry the author's outcome commentary including violent death; those sentences are quoted in the trace as what the source does and fall under the track's standing refusals - nothing from them is ever rendered to a reader. No Vietnamese specialist has reviewed these transcriptions; the witness is a searchable digital re-edition flagged RIGHTS-CHECK, research_only.",
+  "examples": [
+    {
+      "example_id": "vietnam.tuvi.tanbien.appendix_chart_1_puppet_king",
+      "work": "Tử Vi đẩu số tân biên, Phần 3, 6. PHỤ LỤC, 6.1. Lá số thứ nhất",
+      "location": "printed p.272; PDF part dv06, pdfpage 48",
+      "description": "Captioned 'Số vua bù nhìn năm Bính Thân (1956) 44 tuổi (để tập luận đoán và chiêm nghiệm)' - the chart of a puppet king, aged 44 in Bính Thân 1956, given for practice judgment. Yin male (Âm Nam), year Quý Sửu, month 9, day 23, hour Dần; Mệnh nạp âm Tang Đố Mộc; Mộc Tam Cục (Wood-3 bureau). The book does not name the native. Recovered seats: Mệnh at Thân with Tử Vi and Thiên Phủ co-seated, Thân cư Quan Lộc at Tý, decade ages from 3 running backward (Âm Nam, cục number 3), Tuần covering Dần-Mão (decade Giáp Thìn), Triệt covering Tý-Sửu (stem Quý). The printed grid's branch ring is shifted six branches against the palace cells; with that shift undone, the drawn Tuần and Triệt boxes land exactly on Dần-Mão and Tý-Sửu as the placement rules require.",
+      "chart_data": {
+        "civil_date": "lunar year Quý Sửu, month 9, day 23 - no civil-calendar equivalent supplied by the book",
+        "civil_time": "giờ Dần (Dần double-hour)",
+        "calendar": "Vietnamese lunisolar as stated; the book outsources conversion to an almanac it names and does not supply",
+        "date_certainty": "as_printed"
+      },
+      "author_positions": {
+        "birth_frame": "Âm Nam; Năm Qúy Sửu, tháng 9, ngày 23, giờ Dần; Mệnh Tang Đố Mộc; Mộc Tam Cục",
+        "menh_vien": "recovered seat Thân - Tử Vi (M), Thiên Phủ (M); Tướng Quân, Long Đức, Văn Xương, Quốc Ấn, Thiên Hỷ, Thai Phụ; Lâm Quan; decade age 3",
+        "phu_mau": "recovered seat Dậu - Thái Âm (M); Tiểu Hao, Bạch Hổ, Thiên Riêu, Địa Không, Phượng Các, Thiên Qúy, Thiên Y, Giải Thần, Thiên Tài, Hóa Khoa; Quan Đới",
+        "phuc_duc": "recovered seat Tuất - Tham Lang (V); Địa Võng, Quả Tú, Hóa Kỵ, Thanh Long, Phúc Đức, Tam Thai, Thiên Đức, Thiên Trù; Mộc Dục",
+        "dien_trach": "recovered seat Hợi - Cự Môn (Đ); Điếu Khách, Đà La, Lực Sỹ, Hóa Quyền, Thiên Mã; Tràng Sinh; decade age 93",
+        "quan_loc_than": "recovered seat Tý, carries THÂN - Liêm Trinh (V), Thiên Tướng (V); Trực Phù, Linh Tinh, Lộc Tồn, Bác Sỹ, Tả Phù; Dưỡng; decade age 83",
+        "no_boc": "recovered seat Sửu - Thiên Lương (Đ); Quan Phù, Thái Tuế, Thiên Thương, Phá Toái, Kình Dương, Địa Kiếp, Hỏa Tinh, Thiên Thọ, Hoa Cái; Thai; decade age 73",
+        "thien_di": "recovered seat Dần - Thất Sát (M); Phục Binh, Cô Thần, Lưu Hà, Kiếp Sát, Thiên Không, Thiếu Dương, Hữu Bật, Hồng Loan; Tuyệt; decade age 63",
+        "tat_ach": "recovered seat Mão - Thiên Đồng (D); Đại Hao, Tang Môn, Thiên Sứ, Thiên Khôi, Địa Giải, Lưu Niên; Mộ; decade age 53",
+        "tai_bach": "recovered seat Thìn - Vũ Khúc (M); Bệnh Phù, Thiên La, Thiếu Âm, Bát Tọa, Thiên Giải, Phong Cáo; Tử; decade age 43",
+        "tu_tuc": "recovered seat Tỵ - Thái Dương (M); Quan Phù, Thiên Khốc, Thiên Hình, Hỷ Thần, Long Trì, Ân Quang, Thiên Việt, Đường Phù, Thiên Phúc; Bệnh; decade age 33",
+        "phu_the": "recovered seat Ngọ - Phá Quân (M); Phi Liêm, Tử Phù, Văn Khúc, Nguyệt Đức, Đào Hoa, Thiên Quan, Hóa Lộc; Suy; decade age 23",
+        "huynh_de": "recovered seat Mùi - Thiên Cơ (Đ); Tuế Phá, Thiên Hư, Tấu Thư, Đẩu Quân; Đế Vượng; decade age 13",
+        "tuan_triet": "Tuần drawn between the cells recovered as Dần-Mão; Triệt drawn between the cells recovered as Tý-Sửu",
+        "grid_defect": "printed branch ring uniformly shifted +6 against the palace cells (e.g. the Mệnh cell is labelled Dần where the contents require Thân)"
+      },
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c1.menh_seat",
+            "kind": "calculation_value",
+            "author_states": "The Mệnh palace, holding Tử Vi and Thiên Phủ, sits where month 9 counted forward from Dần and hour Dần counted back require - recovered as Thân; the printed ring's 'Dần' label is part of the shifted-ring defect.",
+            "engine_field": "vietnamese_tu_vi.chart.menh_branch",
+            "expected_value": "Thân",
+            "comparison": "manual",
+            "note": "Recomputed from rule vietnam.tuvi.lt.menh.life_palace_from_lunar_month_and_hour; consistent with Tử Vi-Thiên Phủ co-seating, which the book's own tables allow only at Dần or Thân."
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c1.cuc",
+            "kind": "calculation_value",
+            "author_states": "Mộc Tam Cục",
+            "engine_field": "vietnamese_tu_vi.chart.cuc",
+            "expected_value": "Mộc tam cục",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c1.thai_tue_ring",
+            "kind": "calculation_value",
+            "author_states": "Thái Tuế stands in the Nô Bộc palace, recovered seat Sửu, agreeing with the year branch Sửu; Tuế Phá stands opposite in Huynh Đệ.",
+            "engine_field": "vietnamese_tu_vi.chart.thai_tue_branch",
+            "expected_value": "Sửu",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c1.loc_ton",
+            "kind": "calculation_value",
+            "author_states": "Lộc Tồn stands in the Quan Lộc palace, recovered seat Tý, agreeing with the year stem Quý.",
+            "engine_field": "vietnamese_tu_vi.chart.loc_ton_branch",
+            "expected_value": "Tý",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c1.decade_start",
+            "kind": "timing_period",
+            "author_states": "The first decade age printed at Mệnh is 3, the cục number of Mộc Tam Cục, and the ages 13, 23, ... run backward through Huynh Đệ, Phu Thê - the Âm Nam direction.",
+            "engine_field": "vietnamese_tu_vi.chart.dai_han_start_age",
+            "expected_value": 3,
+            "comparison": "manual"
+          }
+        ],
+        "quotation": "Số vua bù nhìn năm Bính Thân (1956) 44 tuổi (để tập luận đoán và chiêm nghiệm)"
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "no Vietnamese Tử Vi engine exists; every comparison above is manual recomputation, not an engine run",
+        "the lunar birth data has no almanac conversion; the book outsources the calendar",
+        "digital re-edition, RIGHTS-CHECK, research_only; no native-speaker review yet"
+      ]
+    },
+    {
+      "example_id": "vietnam.tuvi.tanbien.appendix_chart_2_treacherous_hero",
+      "work": "Tử Vi đẩu số tân biên, Phần 3, 6. PHỤ LỤC, 6.2. Lá số thứ hai",
+      "location": "printed p.273; PDF part dv06, pdfpage 49",
+      "description": "Captioned 'Số gian hùng năm Bính Thân (1956) 66 tuổi, đã có sự nghiệp lớn lao nhưng hại dân hại nước (để tập luận đoán và chiêm nghiệm)' - the chart of a treacherous hero, 66 in 1956, of great career but harmful to people and country. Yin male, year Tân Mão, month 6, day 6, hour Mão; Mệnh nạp âm Tùng Bách Mộc; Thủy Nhị Cục. Recovered seats: Mệnh at Thìn with Tử Vi and Thiên Tướng, Thân cư Thiên Di at Tuất, decades from age 2 running backward. The printed branch ring is shifted two branches against the palace cells.",
+      "chart_data": {
+        "civil_date": "lunar year Tân Mão, month 6, day 6",
+        "civil_time": "giờ Mão",
+        "calendar": "Vietnamese lunisolar as stated",
+        "date_certainty": "as_printed"
+      },
+      "author_positions": {
+        "birth_frame": "Âm Nam; Năm Tân Mão, tháng 6, ngày 6, giờ Mão; Mệnh Tùng Bách Mộc; Thủy Nhị Cục",
+        "menh": "recovered seat Thìn - Tử Vi (V), Thiên Tướng (V); Thiên La, Lưu Hà, Thiên Không, Tấu Thư, Thiếu Dương; Đế Vượng; decade age 2",
+        "huynh_de": "recovered seat Mão - Cự Môn (M), Thiên Cơ (M); Phi Liêm, Thái Tuế, Thiên Khốc, Thiên Qúy, Hóa Lộc; Suy; decade age 12",
+        "phu_the": "recovered seat Dần - Tham Lang (Đ); Trực Phù, Thiên Hình, Địa Kiếp, Hỷ Thần, Tam Thai, Thiên Việt, Đường Phù; Bệnh; decade age 22",
+        "tu_tuc": "recovered seat Sửu - Thái Dương (Đ), Thái Âm (Đ); Bệnh Phù, Quả Tú, Điếu Khách, Linh Tinh, Thiên Giải, Thiên Thọ, Đẩu Quân, Hóa Quyền; Tử; decade age 32",
+        "tai_bach": "recovered seat Tý - Vũ Khúc (M), Thiên Phủ (M); Đại Hao, Phúc Đức, Bát Tọa, Thiên Đức, Đào Hoa, Hồng Loan, Địa Giải, Lưu Niên; Mộ; decade age 42",
+        "tat_ach": "recovered seat Hợi - Thiên Đồng (Đ); Phục Binh, Bạch Hổ, Thiên Sứ, Ân Quang; Tuyệt; decade age 52",
+        "thien_di_than": "recovered seat Tuất, carries THÂN - Phá Quân (Đ); Quan Phủ, Địa Võng, Kình Dương, Long Đức; Thai; decade age 62",
+        "no_boc": "recovered seat Dậu - Tuế Phá, Thiên Hư, Thiên Thương, Lộc Tồn, Bác Sỹ, Tả Phù, Thai Phụ, Thiên Quan; Dưỡng",
+        "quan_loc": "recovered seat Thân - Liêm Trinh (V); Tử Phù, Kiếp Sát, Đà La, Địa Không, Lực Sỹ, Nguyệt Đức; Tràng Sinh",
+        "dien_trach": "recovered seat Mùi - Quan Phù, Hóa Kỵ, Thanh Long, Long Trì, Phượng Các, Văn Xương, Văn Khúc, Giải Thần, Thiên Tài, Hoa Cái, Hóa Khoa; Mộc Dục",
+        "phuc_duc": "recovered seat Ngọ - Thất Sát (M); Tiểu Hao, Thiên Riêu, Hỏa Tinh, Thiếu Âm, Thiên Khôi, Thiên Y, Thiên Hỷ, Thiên Trù; Quan Đới",
+        "phu_mau": "recovered seat Tỵ - Thiên Lương (H); Tang Môn, Cô Thần, Phá Toái, Tướng Quân, Hữu Bật, Quốc Ấn, Phong Cáo, Thiên Mã, Thiên Phúc; Lâm Quan",
+        "tuan_triet": "Tuần drawn at the Phúc Đức/Điền Trạch boundary, recovered Ngọ-Mùi (decade Tân Mão belongs to Giáp Thân: missing Ngọ-Mùi); Triệt drawn at the Phụ Mẫu/Mệnh boundary, recovered Thìn-Tỵ (stem Tân)",
+        "grid_defect": "printed branch ring uniformly shifted -2 against the palace cells"
+      },
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c2.menh_seat",
+            "kind": "calculation_value",
+            "author_states": "Mệnh with Tử Vi and Thiên Tướng, recovered seat Thìn: month 6 from Dần gives Mùi, hour Mão counted back from Mùi gives Thìn; Tử Vi-Thiên Tướng co-seat only at Thìn or Tuất in the book's tables.",
+            "engine_field": "vietnamese_tu_vi.chart.menh_branch",
+            "expected_value": "Thìn",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c2.than_seat",
+            "kind": "calculation_value",
+            "author_states": "Thân rides the Thiên Di palace, recovered seat Tuất: hour Mão counted forward from Mùi.",
+            "engine_field": "vietnamese_tu_vi.chart.than_branch",
+            "expected_value": "Tuất",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c2.thai_tue_ring",
+            "kind": "calculation_value",
+            "author_states": "Thái Tuế stands in Huynh Đệ, recovered seat Mão, agreeing with the year branch Mão.",
+            "engine_field": "vietnamese_tu_vi.chart.thai_tue_branch",
+            "expected_value": "Mão",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c2.loc_ton",
+            "kind": "calculation_value",
+            "author_states": "Lộc Tồn stands in Nô Bộc, recovered seat Dậu, agreeing with the year stem Tân.",
+            "engine_field": "vietnamese_tu_vi.chart.loc_ton_branch",
+            "expected_value": "Dậu",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c2.decade_start",
+            "kind": "timing_period",
+            "author_states": "First decade age 2 at Mệnh - the cục number of Thủy Nhị Cục - with 12, 22 running backward, the Âm Nam direction.",
+            "engine_field": "vietnamese_tu_vi.chart.dai_han_start_age",
+            "expected_value": 2,
+            "comparison": "manual"
+          }
+        ],
+        "quotation": "Số gian hùng năm Bính Thân (1956) 66 tuổi, đã có sự nghiệp lớn lao nhưng hại dân hại nước (để tập luận đoán và chiêm nghiệm)"
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "no Vietnamese Tử Vi engine exists; comparisons are manual recomputation",
+        "lunar birth data unconverted; calendar outsourced by the book",
+        "digital re-edition, RIGHTS-CHECK, research_only"
+      ]
+    },
+    {
+      "example_id": "vietnam.tuvi.tanbien.appendix_chart_3_woman_1950",
+      "work": "Tử Vi đẩu số tân biên, Phần 3, 6. PHỤ LỤC, 6.3. Lá số thứ ba",
+      "location": "printed p.274; PDF part dv06, pdfpage 50",
+      "description": "A woman's chart given with an outcome the author asserts: Dương Nữ, year Giáp Thìn, month 9, day 10, hour Ngọ; Mệnh Phú Đăng Hỏa; Mộc Tam Cục. Mệnh and Thân coincide (hour Ngọ) at the recovered seat Thìn, holding Thái Dương with Thái Tuế. The chapter closes with the author's own hạn walk-through for the year Canh Dần (1950), age 47 - quoted below as the trace requires - naming bankruptcy, rape and the husband's death by French soldiers. Under this track's standing refusals none of that is ever rendered; it is recorded because a trace that dropped it would misrepresent what the practice section of this book does. The printed branch ring of this grid runs in the WRONG DIRECTION around the board (labels decrease left-to-right across the top row where the palace sequence increases), the third distinct ring defect in three charts.",
+      "chart_data": {
+        "civil_date": "lunar year Giáp Thìn, month 9, day 10",
+        "civil_time": "giờ Ngọ",
+        "calendar": "Vietnamese lunisolar as stated",
+        "date_certainty": "as_printed"
+      },
+      "author_positions": {
+        "birth_frame": "Dương Nữ; Năm Giáp Thìn, tháng 9, ngày 10, giờ Ngọ; Mệnh Phú Đăng Hỏa; Mộc Tam Cục",
+        "menh_vien_than": "recovered seat Thìn, Mệnh and Thân coincide - Thái Dương (V); Phục Binh, Thái Tuế, Thiên La, Linh Tinh, Hóa Kỵ, Văn Xương, Thiên Giải, Hoa Cái; Tử; decade age 3",
+        "huynh_de": "recovered seat Mão - Vũ Khúc (Đ), Thất Sát (H); Quan Phủ, Trực Phù, Kình Dương, Địa Giải, Hóa Khoa; Mộ; decade age 13",
+        "phu_the": "recovered seat Dần - Thiên Đồng (M), Thiên Lương (V); Điếu Khách, Thiên Khốc, Lộc Tồn, Bác Sỹ, Hữu Bật, Thiên Qúy, Thiên Mã, Đẩu Quân; Tuyệt; decade age 23",
+        "tu_tuc": "recovered seat Sửu - Thiên Tướng (Đ); Quả Tú, Phá Toái, Đà La, Lực Sỹ, Phúc Đức, Thiên Khôi, Thiên Đức; Thai; decade age 33",
+        "tai_bach": "recovered seat Tý - Cự Môn (V); Bạch Hổ, Thanh Long, Tả Phù, Ân Quang, Thai Phụ; Dưỡng; decade age 43",
+        "tat_ach": "recovered seat Hợi - Liêm Trinh (H), Tham Lang (H); Tiểu Hao, Thiên Sứ, Long Đức, Hồng Loan, Hóa Lộc; Tràng Sinh; decade age 53",
+        "thien_di": "recovered seat Tuất - Thái Âm (M); Tuế Phá, Thiên Hư, Địa Võng, Tướng Quân, Văn Khúc, Quốc Ân; Mộc Dục; decade age 63",
+        "no_boc": "recovered seat Dậu - Thiên Phủ (B); Tử Phù, Thiên Riêu, Thiên Thương, Lưu Hà, Tấu Thư, Tam Thai, Nguyệt Đức, Thiên Y, Đào Hoa, Thiên Phúc; Quan Đới",
+        "quan_loc": "recovered seat Thân - Phi Liêm, Quan Phù, Hỏa Tinh, Long Trì, Phong Cao, Thiên Tài, Thiên Thọ; Lâm Quan",
+        "dien_trach": "recovered seat Mùi - Tử Vi (Đ), Phá Quân (Đ); Hỷ Thần, Thiếu Âm, Thiên Việt, Đường Phù, Thiên Quan, Hóa Quyền; Đế Vượng",
+        "phuc_duc": "recovered seat Ngọ - Thiên Cơ (Đ); Bệnh Phù, Tang Môn, Phượng Các, Giải Thần; Suy",
+        "phu_mau": "recovered seat Tỵ - Đại Hao, Thiên Hình, Cô Thần, Kiếp Sát, Thiên Không, Địa Kiếp, Địa Không, Thiếu Dương, Bát Tọa, Thiên Hỷ, Lưu Niên, Thiên Trù; Bệnh",
+        "grid_defect": "printed branch ring runs in the reverse direction around the board; recovered seats come from the star contents against the construction rules"
+      },
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c3.menh_than_coincide",
+            "kind": "calculation_value",
+            "author_states": "The cell is headed MỆNH VIÊN - THÂN: for an hour-Ngọ birth Mệnh and Thân fall in the same palace, recovered seat Thìn.",
+            "engine_field": "vietnamese_tu_vi.chart.menh_branch",
+            "expected_value": "Thìn",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c3.thai_tue_in_menh",
+            "kind": "calculation_value",
+            "author_states": "Thái Tuế stands in the Mệnh palace itself - year branch Thìn, Mệnh at Thìn.",
+            "engine_field": "vietnamese_tu_vi.chart.thai_tue_branch",
+            "expected_value": "Thìn",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c3.loc_ton",
+            "kind": "calculation_value",
+            "author_states": "Lộc Tồn stands in Phu Thê, recovered seat Dần, agreeing with the year stem Giáp.",
+            "engine_field": "vietnamese_tu_vi.chart.loc_ton_branch",
+            "expected_value": "Dần",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c3.luu_thai_tue_1950",
+            "kind": "timing_period",
+            "author_states": "Lưu Thái Tuế năm Dần tại cung Phu Quân - in a Dần year the moving Thái Tuế stands in the spouse palace, recovered seat Dần, exactly as section 4.1's rule places it.",
+            "engine_field": "vietnamese_tu_vi.timing.luu_thai_tue_branch",
+            "expected_value": "Dần",
+            "comparison": "manual",
+            "note": "This sentence sits inside an outcome passage that the track's refusals bar from any rendering; only the mechanical placement is encoded here."
+          }
+        ],
+        "quotation": "Gốc đại hạn (43-52). Lưu niên tiểu hạn năm Dần có Cơ, Tang, Hổ, Xương, Khúc, Kỵ, Hỏa Linh. ... Lưu Thái Tuế năm Dần tại cung Phu Quân, năm Canh Dần (1950) 47 tuổi phá sản, bị hãm hiếp, chồng bị quân Pháp bắn chết."
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "the chapter's outcome sentences are refused output under the track's standing refusals; they exist here only as trace",
+        "no Vietnamese Tử Vi engine exists; comparisons are manual recomputation",
+        "digital re-edition, RIGHTS-CHECK, research_only"
+      ]
+    },
+    {
+      "example_id": "vietnam.tuvi.tanbien.appendix_chart_4_soldier_1953",
+      "work": "Tử Vi đẩu số tân biên, Phần 3, 6. PHỤ LỤC, 6.4. Lá số thứ tư",
+      "location": "printed p.275; PDF part dv06, pdfpage 51",
+      "description": "A young man's chart with the author's asserted outcome: Âm Nam, year Tân Mùi, month 11, day 30, hour Dần; Mệnh Lộ Bàng Thổ; Mộc Tam Cục. Recovered seats: Mệnh at Tuất with Thiên Cơ and Thiên Lương under Tuần, Thân riding Quan Lộc at Dần. The closing hạn walk-through names death in battle in Quý Tỵ (1953) at 23, at Quần Phương Hạ, Nam Định - quoted as trace, refused as output. The chapter also demonstrates the Mệnh-vô-chính-diệu-adjacent doctrine 'Tuần án ngữ, Triệt xung chiếu' being read as part of the judgment. Note: this is a day-30 birth, which exercises the last row of the Tử Vi placement tables - the region where the collation found the Kim tứ cục table defective (day 24 missing, day 21 doubled); the Mộc tam cục table used here collated clean.",
+      "chart_data": {
+        "civil_date": "lunar year Tân Mùi, month 11, day 30 - a 30th day, so only valid in a full month; no conversion supplied",
+        "civil_time": "giờ Dần",
+        "calendar": "Vietnamese lunisolar as stated",
+        "date_certainty": "as_printed"
+      },
+      "author_positions": {
+        "birth_frame": "Âm Nam; Năm Tân Mùi, tháng 11, ngày 30, giờ Dần; Mệnh Lộ Bàng Thổ; Mộc Tam Cục",
+        "menh_vien": "recovered seat Tuất - Thiên Cơ (M), Thiên Lương (M); Quan Phủ, Địa Võng, Kình Dương, Thiếu Âm; Mộc Dục; decade age 3; the author reads Mệnh under Tuần with Triệt in the opposite palace: 'Mệnh: Cơ, Lương, Tuần án ngữ, Triệt xung chiếu'",
+        "phu_mau": "recovered seat Hợi - Tử Vi (B), Thất Sát (V); Phục Binh, Quan Phù, Thiên Khốc, Thiên Riêu, Long Trì, Thiên Y, Đẩu Quân, Thiên Mã; Tràng Sinh",
+        "phuc_duc": "recovered seat Tý - Đại Hao, Tử Phù, Linh Tinh, Hữu Bật, Ân Quang, Nguyệt Đức, Đào Hoa, Lưu Niên; Dưỡng",
+        "dien_trach": "recovered seat Sửu - Bệnh Phù, Tuế Phá, Thiên Hư, Phá Toái, Địa Kiếp; Thai",
+        "quan_loc_than": "recovered seat Dần, carries THÂN - Hỷ Thần, Long Đức, Tả Phù, Thiên Qúy, Thiên Việt, Đường Phù, Thiên Hỷ; Tuyệt",
+        "no_boc": "recovered seat Mão - Liêm Trinh (H), Phá Quân (H); Phi Liêm, Bạch Hổ, Thiên Thương, Phượng Các, Giải Thần; Mộ",
+        "thien_di": "recovered seat Thìn - Thiên La, Quả Tú, Lưu Hà, Tấu Thư, Phúc Đức, Thiên Đức, Phong Cáo; Tử; decade age 63",
+        "tat_ach": "recovered seat Tỵ - Thiên Phủ (Đ); Điếu Khách, Thiên Sứ, Thiếu Dương, Tướng Quân, Quốc Ấn, Địa Giải, Thiên Tài, Thiên Mã, Thiên Phúc; Bệnh; decade age 53",
+        "tai_bach": "recovered seat Ngọ - Thiên Đồng (H), Thái Âm (H); Tiểu Hao, Trực Phù, Văn Khúc, Thiên Khôi, Thiên Giải, Thiên Trù, Hóa Khoa; Suy; decade age 43",
+        "tu_tuc": "recovered seat Mùi - Vũ Khúc (M), Tham Lang (M); Thái Tuế, Thiên Hình, Hỏa Tinh, Thanh Long, Tam Thai, Bát Tọa, Hoa Cái; Đế Vượng; decade age 33",
+        "phu_the": "recovered seat Thân - Thái Dương (H), Cự Môn (Đ); Cô Thần, Kiếp Sát, Hóa Kỵ, Thiên Không, Đà La, Lực Sỹ, Văn Xương, Hồng Loan, Thai Phụ, Hóa Quyền, Hóa Lộc; Lâm Quan; decade age 23",
+        "huynh_de": "recovered seat Dậu - Thiên Tướng (H); Tang Môn, Địa Không, Lộc Tồn, Bác Sỹ, Thiên Thọ, Thiên Quan; Quan Đới; decade age 13",
+        "tuan_triet": "Tuần over Mệnh at Tuất (decade Giáp Tuất for Tân Mùi... stated by the author as 'Tuần án ngữ' on Mệnh); Triệt xung chiếu - in the palace opposite Mệnh, i.e. covering the Thìn side (stem Tân places Triệt at Thìn-Tỵ)",
+        "grid_defect": "the text layer's branch labels for this grid are scattered and could not be aligned; recovered seats come from the star contents against the construction rules"
+      },
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c4.menh_seat",
+            "kind": "calculation_value",
+            "author_states": "Mệnh with Thiên Cơ and Thiên Lương, recovered seat Tuất: month 11 from Dần gives Tý, hour Dần counted back gives Tuất; Cơ-Lương co-seat only at Thìn or Tuất.",
+            "engine_field": "vietnamese_tu_vi.chart.menh_branch",
+            "expected_value": "Tuất",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c4.than_seat",
+            "kind": "calculation_value",
+            "author_states": "Thân rides Quan Lộc, recovered seat Dần: hour Dần counted forward from the month palace Tý.",
+            "engine_field": "vietnamese_tu_vi.chart.than_branch",
+            "expected_value": "Dần",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c4.thai_tue_ring",
+            "kind": "calculation_value",
+            "author_states": "Thái Tuế stands in Tử Tức, recovered seat Mùi, agreeing with the year branch Mùi.",
+            "engine_field": "vietnamese_tu_vi.chart.thai_tue_branch",
+            "expected_value": "Mùi",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c4.loc_ton",
+            "kind": "calculation_value",
+            "author_states": "Lộc Tồn stands in Huynh Đệ, recovered seat Dậu, agreeing with the year stem Tân.",
+            "engine_field": "vietnamese_tu_vi.chart.loc_ton_branch",
+            "expected_value": "Dậu",
+            "comparison": "manual"
+          },
+          {
+            "claim_id": "vietnam.tuvi.tanbien.c4.tuan_an_ngu",
+            "kind": "dignity_assessment",
+            "author_states": "Mệnh: Cơ, Lương, Tuần án ngữ, Triệt xung chiếu - the Mệnh palace sits under Tuần with Triệt shining from opposition, which the author treats as the chart's governing condition.",
+            "comparison": "manual",
+            "note": "Mechanically consistent: Tân Mùi lies in the decade Giáp Tuất (Tuần at Thân-Dậu)? No - the author's own placement rule for Tân Mùi gives decade Giáp Tý... The author states Tuần on Mệnh at the recovered seat Tuất; under the manifest's Tuần rule the Tân Mùi decade is Giáp Tý, leaving Tuất-Hợi uncovered - which places Tuần exactly over Tuất-Hợi. Consistent after all; kept as a manual check with the working shown."
+          }
+        ],
+        "quotation": "Mệnh: Cơ, Lương, Tuần án ngữ, Triệt xung chiếu. Thiếu thời rất lao khổ, không thể sống lâu được, chỉ có tu hành mới được hưởng phúc thọ. ... Lưu Thái Tuế năm Tỵ tại cung Tật Ách, năm Qúy Tỵ (1953) 23 tuổi tử trận tại làng Quần - Phương Hạ - Nam Định."
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "the death-in-battle outcome is refused output under the track's standing refusals; recorded as trace only",
+        "day-30 birth: depends on a full lunar month, and the book supplies no almanac",
+        "no Vietnamese Tử Vi engine exists; comparisons are manual recomputation",
+        "digital re-edition, RIGHTS-CHECK, research_only"
+      ]
+    }
+  ]
+}

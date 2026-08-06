@@ -1,74 +1,1950 @@
 {
   "schema_version": 1,
-  "updated": "2026-08-02",
+  "updated": "2026-08-05",
   "tradition_id": "indian_jyotisha",
   "source_pack_id": "mantreswara_phaladeepika_subrahmanya_1950_v1",
-  "status": "research_vectors_pending_translation_rights_review_and_independent_sanskrit_review",
-  "source_ids": ["jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive"],
+  "status": "research_vectors; every planet-in-bhava cell (Sun-Ketu x 12 houses, 110 bhava vectors) was verified 2026-08-05 against rendered page images of the 1950 Subrahmanya Sastri printing - primary witness in.gov.ignca.6945 leaves 0118-0131 (printed pp. 84-97), second witness dli.ernet.507316 leaves 0114-0115 (printed pp. 82-83, the pages the primary scan physically lacks). Each vector cites its sloka, printed page and leaf. Ten cells were corrected against the print during verification (see the rule manifest exceptions). Independent Sanskrit review of the translation itself remains pending; the yoga and dasha vectors retain their earlier translation_inspected_ocr status.",
+  "source_ids": [
+    "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive"
+  ],
   "vectors": [
-    {"vector_id": "jyotisha.phaladeepika.bhava.sun.house10", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.sun"], "inputs": {"graha": "Sun", "house_from_lagna": 10}, "expected": {"result_summary": "sons, vehicles, praise, intelligence, wealth, strength and fame; becomes a king"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 4"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.sun.house2_not_recovered", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.sun"], "inputs": {"graha": "Sun", "house_from_lagna": 2}, "expected": {"result_summary": null, "reason": "not_recovered_from_this_ocr_pass"}, "provenance": "Negative control: houses 1-5, 7 and 8 are explicitly absent from this rule's table, and must fan out/abstain rather than be invented"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.moon.house1_waxing", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.moon"], "inputs": {"graha": "Moon", "house_from_lagna": 1, "moon_phase": "waxing"}, "expected": {"result_summary": "strong constitution, long life, fearless, powerful, wealthy"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 5"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.moon.house1_waning", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.moon"], "inputs": {"graha": "Moon", "house_from_lagna": 1, "moon_phase": "waning"}, "expected": {"result_summary": "the reverse of the waxing-Moon result"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 5, explicit phase contrast"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.moon.house9", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.moon"], "inputs": {"graha": "Moon", "house_from_lagna": 9}, "expected": {"result_summary": "prosperous and virtuous; blessed with children; victorious; undertakings succeed from the outset"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 6"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.mars.house10", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.mars"], "inputs": {"graha": "Mars", "house_from_lagna": 10}, "expected": {"result_summary": "a king, cruel, liberal, praised by important people"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 10"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.mars.house1", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.mars"], "inputs": {"graha": "Mars", "house_from_lagna": 1}, "expected": {"result_summary": "an injured limb; short-lived; very cruel and adventurous"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 8"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.mercury.house1", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.mercury"], "inputs": {"graha": "Mercury", "house_from_lagna": 1}, "expected": {"result_summary": "long-lived; speaks sweetly and clearly; sharp-witted; learned in all shastras"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 11"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.mercury.house12", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.mercury"], "inputs": {"graha": "Mercury", "house_from_lagna": 12}, "expected": {"result_summary": "miserable; devoid of learning; suffers humiliation; inactive"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 13"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.jupiter.house1", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.jupiter"], "inputs": {"graha": "Jupiter", "house_from_lagna": 1}, "expected": {"result_summary": "handsome; fortunate; long-lived; fearless; blessed with children"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 14"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.jupiter.house10", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.jupiter"], "inputs": {"graha": "Jupiter", "house_from_lagna": 10}, "expected": {"result_summary": "follows the right course of conduct; renowned for his virtues; very rich; a friend of the king"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 16"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.venus.house1", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.venus"], "inputs": {"graha": "Venus", "house_from_lagna": 1}, "expected": {"result_summary": "a healthy and beautiful body; happy; endowed with long life"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 17"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.venus.house8", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.venus"], "inputs": {"graha": "Venus", "house_from_lagna": 8}, "expected": {"result_summary": "long-lived, rich, a ruler of the earth"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 18"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.saturn.house1_exalted", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.saturn"], "inputs": {"graha": "Saturn", "house_from_lagna": 1, "dignity": "exalted"}, "expected": {"result_summary": "on a par with the king; a chief or mayor of a city"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 20 (dignity-conditioned)"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.saturn.house1_neutral", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.saturn"], "inputs": {"graha": "Saturn", "house_from_lagna": 1, "dignity": "neutral placement"}, "expected": {"result_summary": "afflicted with sorrow and misery from childhood; suffers indigence; slovenly and indolent"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 20; negative control proving house-1 result depends on dignity unlike every other house in this table"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.saturn.house10", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.saturn"], "inputs": {"graha": "Saturn", "house_from_lagna": 10}, "expected": {"result_summary": "a king or his minister; devotes himself to agriculture; brave, rich and renowned"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 23"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.rahu.house1", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.rahu"], "inputs": {"graha": "Rahu", "house_from_lagna": 1}, "expected": {"result_summary": "short life; possesses wealth and strength; suffers diseases in the upper limbs"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 25"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.rahu.well_associated_exception", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.rahu"], "inputs": {"graha": "Rahu", "associated_with": "benefic", "house_from_lagna": 5}, "expected": {"result_summary": "fully auspicious dasha; affluence on a par with a king", "note": "house 5 is not among the excluded 6th/8th/12th"}, "provenance": "Phaladeepika Adhyaya VIII exception clause"},
-
-    {"vector_id": "jyotisha.phaladeepika.bhava.ketu.house6", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.ketu"], "inputs": {"graha": "Ketu", "house_from_lagna": 6}, "expected": {"result_summary": "very magnanimous; possesses the best qualities; attains everlasting fame, firmness and high authority; destroys his enemies"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 30"},
-    {"vector_id": "jyotisha.phaladeepika.bhava.ketu.house1", "rule_ids": ["jyotisha.phaladeepika.08.planet_in_bhava.ketu"], "inputs": {"graha": "Ketu", "house_from_lagna": 1}, "expected": {"result_summary": "ungrateful; unhappy; bears tales against others; an outcast, fallen from his position"}, "provenance": "Phaladeepika Adhyaya VIII, Sloka 28"},
-
-    {"vector_id": "jyotisha.phaladeepika.mahapurusha.ruchaka_mars", "rule_ids": ["jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"], "inputs": {"graha": "Mars", "dignity": "own sign", "house_from_lagna": 4}, "expected": {"yoga_present": true, "yoga_name": "Ruchaka", "result_summary": "a long face; wealth by daring deeds; brave; army leader; victorious"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 1 (definition) and Sloka 3 (result)"},
-    {"vector_id": "jyotisha.phaladeepika.mahapurusha.sasa_saturn", "rule_ids": ["jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"], "inputs": {"graha": "Saturn", "dignity": "exalted", "house_from_lagna": 10}, "expected": {"yoga_present": true, "yoga_name": "Sasa", "result_summary": "extolled by all; strong; headman of a village or a king; wicked in disposition"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 1 (definition) and Sloka 3-4 (result)"},
-    {"vector_id": "jyotisha.phaladeepika.mahapurusha.mars_kendra_neutral_no_yoga", "rule_ids": ["jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"], "inputs": {"graha": "Mars", "dignity": "neutral placement", "house_from_lagna": 4}, "expected": {"yoga_present": false}, "provenance": "Negative control: kendra placement alone, without own-sign or exaltation dignity, does not produce a Mahapurusha yoga per Sloka 1's definition"},
-    {"vector_id": "jyotisha.phaladeepika.mahapurusha.mars_own_sign_non_kendra_no_yoga", "rule_ids": ["jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"], "inputs": {"graha": "Mars", "dignity": "own sign", "house_from_lagna": 2}, "expected": {"yoga_present": false}, "provenance": "Negative control: own-sign dignity alone, outside a kendra (1,4,7,10), does not produce a Mahapurusha yoga per Sloka 1's definition"},
-
-    {"vector_id": "jyotisha.phaladeepika.kesari.moon_kendra_from_jupiter", "rule_ids": ["jyotisha.phaladeepika.06.kesari_and_sakata_yoga"], "inputs": {"moon_house_minus_jupiter_house_mod_12": 0}, "expected": {"kesari_present": true, "result_summary": "destroys all his enemies like a lion; speaks loftily and nobly"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 14 (definition: kendra = relative distance 0, 3, 6, or 9) and Sloka 16 (result)"},
-    {"vector_id": "jyotisha.phaladeepika.kesari.moon_sixth_from_jupiter_uncancelled", "rule_ids": ["jyotisha.phaladeepika.06.kesari_and_sakata_yoga"], "inputs": {"moon_house_minus_jupiter_house_mod_12": 5, "moon_house_from_lagna": 2}, "expected": {"sakata_present": true, "result_summary": "often becomes unfortunate and may regain what he once lost"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 14 (Sakata) and Sloka 17 (result); Moon not in a kendra from Lagna here so the cancellation does not apply"},
-    {"vector_id": "jyotisha.phaladeepika.kesari.moon_sixth_from_jupiter_cancelled", "rule_ids": ["jyotisha.phaladeepika.06.kesari_and_sakata_yoga"], "inputs": {"moon_house_minus_jupiter_house_mod_12": 5, "moon_house_from_lagna": 4}, "expected": {"sakata_present": false, "reason": "moon_in_kendra_from_lagna_cancels_sakata"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 14, explicit cancellation clause"},
-
-    {"vector_id": "jyotisha.phaladeepika.mahabhagya.male_day_odd", "rule_ids": ["jyotisha.phaladeepika.06.mahabhagya_yoga"], "inputs": {"sex": "male", "birth_time": "day", "sun_sign_parity": "odd", "moon_sign_parity": "odd", "lagna_sign_parity": "odd"}, "expected": {"yoga_present": true, "result_summary": "immense pleasure to all by his mere appearance; liberal in gifts; famous; lives for eighty years"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 13 and Sloka 15"},
-    {"vector_id": "jyotisha.phaladeepika.mahabhagya.female_night_even", "rule_ids": ["jyotisha.phaladeepika.06.mahabhagya_yoga"], "inputs": {"sex": "female", "birth_time": "night", "sun_sign_parity": "even", "moon_sign_parity": "even", "lagna_sign_parity": "even"}, "expected": {"yoga_present": true, "result_summary": "wealth, a long-lived husband, sons and grandsons; exceedingly lucky"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 13 and Sloka 15, female variant"},
-
-    {"vector_id": "jyotisha.phaladeepika.adhama_sama_varishtha.kendra_from_sun_is_worst", "rule_ids": ["jyotisha.phaladeepika.06.adhama_sama_varishtha_yoga"], "inputs": {"moon_house_minus_sun_house_mod_12": 0}, "expected": {"grade": "Adhama", "rank": "lowest"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 14 and Sloka 18; the notable inversion (kendra graded worst) is the point of this vector"},
-    {"vector_id": "jyotisha.phaladeepika.adhama_sama_varishtha.apoklima_from_sun_is_best", "rule_ids": ["jyotisha.phaladeepika.06.adhama_sama_varishtha_yoga"], "inputs": {"moon_house_minus_sun_house_mod_12": 2}, "expected": {"grade": "Varishtha", "rank": "highest"}, "provenance": "Phaladeepika Adhyaya VI, Sloka 14 and Sloka 18"},
-
-    {"vector_id": "jyotisha.phaladeepika.sunapha.mars_second_from_moon", "rule_ids": ["jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma_yoga"], "inputs": {"graha_house_minus_moon_house_mod_12": 1, "graha": "Mars"}, "expected": {"yoga_present": "Sunapha", "result_summary": "a king or his equal, with self-acquired property, renowned for wisdom and wealth"}, "provenance": "Phaladeepika Adhyaya V, Sloka 5 (definition) and Sloka 6 (result)"},
-    {"vector_id": "jyotisha.phaladeepika.sunapha.kemadruma_no_planets", "rule_ids": ["jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma_yoga"], "inputs": {"planets_in_2nd_or_12th_from_moon_excluding_sun": []}, "expected": {"yoga_present": "Kemadruma", "result_summary": "obscure, miserable, given to base ways, penurious, drudging as a menial, wickedly disposed"}, "provenance": "Phaladeepika Adhyaya V, Sloka 5 (absence definition) and Sloka 7 (result)"},
-    {"vector_id": "jyotisha.phaladeepika.sunapha.kemadruma_dissenting_view_moon_associated", "rule_ids": ["jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma_yoga"], "inputs": {"planets_in_2nd_or_12th_from_moon_excluding_sun": [], "moon_associated_with_any_graha": true}, "expected": {"yoga_present": "disputed", "reason": "named_dissenting_view_holds_kemadruma_cancelled_when_moon_is_associated"}, "provenance": "Phaladeepika Adhyaya V, Sloka 5, explicit named minority view; must not be silently resolved either way"},
-
-    {"vector_id": "jyotisha.phaladeepika.vesikartari.subhakartari_lagna", "rule_ids": ["jyotisha.phaladeepika.06.vesi_vaasi_kartari_yoga"], "inputs": {"benefics_in_2nd_and_12th_from_lagna": true}, "expected": {"yoga_present": "Subhakartari", "result_summary": "long-lived; fearless; free from disease; without enemies; happy and rich"}, "provenance": "Phaladeepika Adhyaya VI, Slokas 9-11"},
-    {"vector_id": "jyotisha.phaladeepika.vesikartari.papakartari_lagna", "rule_ids": ["jyotisha.phaladeepika.06.vesi_vaasi_kartari_yoga"], "inputs": {"malefics_in_2nd_and_12th_from_lagna": true}, "expected": {"yoga_present": "Papakartari", "result_summary": "poor; impure; unhappy; bereft of wife and children; deprived of some limb; short-lived"}, "provenance": "Phaladeepika Adhyaya VI, Slokas 9-11"},
-
-    {"vector_id": "jyotisha.phaladeepika.rajayoga4.mars_mercury_second", "rule_ids": ["jyotisha.phaladeepika.four_rajayogas"], "inputs": {"configuration": 2, "mars_house_from_lagna": 2, "mercury_house_from_lagna": 2}, "expected": {"rajayoga_present": true, "configuration_name": "rajayoga_2"}, "provenance": "Phaladeepika, Sloka 24, second of the four named configurations"},
-    {"vector_id": "jyotisha.phaladeepika.rajayoga4.sun_venus_fourth", "rule_ids": ["jyotisha.phaladeepika.four_rajayogas"], "inputs": {"configuration": 3, "sun_house_from_lagna": 4, "venus_house_from_lagna": 4}, "expected": {"rajayoga_present": true, "configuration_name": "rajayoga_3"}, "provenance": "Phaladeepika, Sloka 24, third of the four named configurations"},
-
-    {"vector_id": "jyotisha.phaladeepika.neechabhanga.one_directional_lagna_kendra", "rule_ids": ["jyotisha.phaladeepika.neechabhanga_rajayoga"], "inputs": {"graha_dignity": "debilitated", "debilitation_lord_house_from_lagna": 4}, "expected": {"cancellation_present": true, "grade": "one_directional", "result_summary": "the person born will become a king and a just ruler"}, "provenance": "Phaladeepika, Sloka 26"},
-    {"vector_id": "jyotisha.phaladeepika.neechabhanga.mutual_kendra", "rule_ids": ["jyotisha.phaladeepika.neechabhanga_rajayoga"], "inputs": {"graha_dignity": "debilitated", "debilitation_lord_house_from_lagna": 7, "mutual_kendra_relation": true}, "expected": {"cancellation_present": true, "grade": "mutual", "result_summary": "an emperor respected by all other kings"}, "provenance": "Phaladeepika, Sloka 27"},
-    {"vector_id": "jyotisha.phaladeepika.neechabhanga.no_cancellation_negative_control", "rule_ids": ["jyotisha.phaladeepika.neechabhanga_rajayoga"], "inputs": {"graha_dignity": "debilitated", "debilitation_lord_house_from_lagna": 2}, "expected": {"cancellation_present": false}, "provenance": "Negative control: house 2 is not a kendra (1,4,7,10), so none of Sloka 26-29's cancellation tests are met"},
-    {"vector_id": "jyotisha.phaladeepika.neechabhanga.non_debilitated_negative_control", "rule_ids": ["jyotisha.phaladeepika.neechabhanga_rajayoga"], "inputs": {"graha_dignity": "own sign"}, "expected": {"cancellation_present": false, "reason": "rule_only_applies_when_dignity_is_debilitated"}, "provenance": "Negative control proving this rule is not evaluated at all outside the debilitation trigger"},
-
-    {"vector_id": "jyotisha.phaladeepika.mahadasha.sun_well_placed", "rule_ids": ["jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"], "inputs": {"mahadasha_lord": "Sun", "natal_sun_condition": "well_placed"}, "expected": {"result_summary": "fame, success in undertakings, gravity, devotion to one's duty, and happiness"}, "provenance": "Phaladeepika Adhyaya XIX, Sloka 6"},
-    {"vector_id": "jyotisha.phaladeepika.mahadasha.sun_badly_placed", "rule_ids": ["jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"], "inputs": {"mahadasha_lord": "Sun", "natal_sun_condition": "badly_placed"}, "expected": {"result_summary": "promotes quarrel; sudden displeasure of the sovereign; sickness among relatives"}, "provenance": "Phaladeepika Adhyaya XIX, Sloka 5; negative control proving the Sun's result (unlike the other eight grahas) is placement-conditioned"},
-    {"vector_id": "jyotisha.phaladeepika.mahadasha.jupiter", "rule_ids": ["jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"], "inputs": {"mahadasha_lord": "Jupiter"}, "expected": {"result_summary": "performs a virtuous deed; honoured by the sovereign; acquisition of elephants, horses and vehicles; fulfilment of desires"}, "provenance": "Phaladeepika Adhyaya XIX, Sloka 11"},
-    {"vector_id": "jyotisha.phaladeepika.mahadasha.rahu_well_associated", "rule_ids": ["jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"], "inputs": {"mahadasha_lord": "Rahu", "rahu_associated_with": "benefic", "rahu_house_from_lagna": 9}, "expected": {"result_summary": "fully auspicious; affluence on a par with a king; steady accumulation of wealth"}, "provenance": "Phaladeepika Adhyaya XIX, Sloka 14-16 exception clause"}
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house1",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "he will have very little hair; most inactive to do any work; angry and impetuous; tall in stature; proud; soiled eyes and a lean body; valiant, impatient and cruel-hearted"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 1, p. 82-83, dli.ernet.507316 leaves 0114-0115 (second witness; primary scan lacks these pages); page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "devoid of learning, modesty and riches, and will be stammering"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 2, p. 83, dli.ernet.507316 leaf 0115; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "strong, brave, wealthy and liberal, but inimical towards his relations"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 2, p. 83, dli.ernet.507316 leaf 0115; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "no happiness, no relations, no lands, no friends and no house; he will serve the State and spend away his paternal property"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 2, p. 83, dli.ernet.507316 leaf 0115; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "bereft of happiness, riches and children, and his life will be short; intelligent, and will travel over forest regions"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 3, p. 83, dli.ernet.507316 leaf 0115; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "will become a King, famous, of good qualities, wealthy and victorious"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 3, p. 83, dli.ernet.507316 leaf 0115; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "will incur the displeasure of the sovereign, and will be deformed; he will be wandering, without a wife, and suffer humiliation"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 3, p. 83-84, dli.ernet.507316 leaf 0115 + in.gov.ignca.6945 leaf 0118; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "the person born will lose his wealth and friends; he will not be long-lived and will have defective eye-sight or be blind"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 3, p. 84, in.gov.ignca.6945 leaf 0118 (print reads 8th where OCR gave 6th); page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "loses his father; has children and relations; reveres gods and brahmins"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 4, p. 84, in.gov.ignca.6945 leaf 0118; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "sons, vehicles, laudation, intelligence, wealth, strength and fame; becomes a king"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 4, p. 84, in.gov.ignca.6945 leaf 0118; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "very wealthy and long-lived; a king; without sorrow"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 4, p. 84, in.gov.ignca.6945 leaf 0118; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.sun.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.sun"
+      ],
+      "inputs": {
+        "graha": "Sun",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "hates his father; defective eyesight; without wealth and children"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 4, p. 84, in.gov.ignca.6945 leaf 0118; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house1_waxing_or_waning",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "waxing Moon: strong constitution, long life, fearless, powerful, wealthy; waning Moon: the reverse of these"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 5, p. 84, in.gov.ignca.6945 leaf 0118; page_image_verified_2026-08-05 (result is phase-conditioned)"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "rich, very learned or soft-tongued; a sensualist, but defective of some limb"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 5, p. 85, in.gov.ignca.6945 leaf 0119; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "has brothers; lascivious; strong and powerful; but very miserly"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 5, p. 85, in.gov.ignca.6945 leaf 0119; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "happy, indulges in sensual pleasure, liberal in gifts, has friends and vehicles, becomes renowned"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 6, p. 85, in.gov.ignca.6945 leaf 0119; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "good sons; very intelligent; gentle bearing; becomes a minister"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 6, p. 85, in.gov.ignca.6945 leaf 0119; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "short-lived; ignorant; suffers from stomach ailment; suffers humiliation"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 6, p. 85, in.gov.ignca.6945 leaf 0119; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "agreeable to look at; loved by a beautiful woman; exceedingly lovely"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 6, p. 85, in.gov.ignca.6945 leaf 0119; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "suffers from diseases; short-lived"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 7, p. 85, in.gov.ignca.6945 leaf 0119; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "prosperous and virtuous; blessed with children; victorious; undertakings succeed from the outset"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 7, p. 85-86, in.gov.ignca.6945 leaves 0119-0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "does good acts; helpful to the virtuous"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 7, p. 86, in.gov.ignca.6945 leaf 0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "high-minded, long-lived, endowed with riches, children and servants"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 7, p. 86, in.gov.ignca.6945 leaf 0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.moon.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.moon"
+      ],
+      "inputs": {
+        "graha": "Moon",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "odious to others; suffers misery; insulted; most indolent"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 7, p. 86, in.gov.ignca.6945 leaf 0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house1",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "an injured limb; short-lived; very cruel and adventurous"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 8, p. 86, in.gov.ignca.6945 leaf 0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "adverse or ugly-faced; devoid of learning and wealth; dependent on bad people"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 8, p. 86, in.gov.ignca.6945 leaf 0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "good qualities; possesses wealth; brave; unassailable; happy; no brothers"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 8, p. 86, in.gov.ignca.6945 leaf 0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "without friends, mother, lands, happiness, house and vehicles"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 8, p. 86, in.gov.ignca.6945 leaf 0120; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "unhappy; full of reverses; back-biting; weak-minded"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 9, p. 86-87, in.gov.ignca.6945 leaves 0120-0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "exceedingly smitten with love; wealthy and famous; a king; victorious in battle"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 9, p. 87, in.gov.ignca.6945 leaf 0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "does improper acts; suffers affliction through disease; wanders the roads; loses his wife"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 9, p. 87, in.gov.ignca.6945 leaf 0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "deformed body; poor; short-lived; cursed by the people"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 9, p. 87, in.gov.ignca.6945 leaf 0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "friend of the sovereign yet hated by others; fatherless; commits homicide"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 10, p. 87, in.gov.ignca.6945 leaf 0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "a king, cruel, liberal, praised by important people"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 10, p. 87, in.gov.ignca.6945 leaf 0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "endowed with riches and happiness; brave; no sorrow; good character"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 10, p. 87, in.gov.ignca.6945 leaf 0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mars.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "deformed eyes; cruel; without a wife; a slanderer; a mean wretch"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 10, p. 87, in.gov.ignca.6945 leaf 0121; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house1",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "long-lived; speaks sweetly and clearly; sharp-witted; learned in all shastras"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 11, p. 87-88, in.gov.ignca.6945 leaves 0121-0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "acquires wealth by his own talents; a poet; sincere and attractive in speech; eats sumptuous food"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 11, p. 88, in.gov.ignca.6945 leaf 0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "brave; of medium life; has good brothers; suffers fatigue and is dejected"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 11, p. 88, in.gov.ignca.6945 leaf 0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "learned; witty in speech; happy; possessed of friends, lands, corn, wealth and enjoyment"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 11, p. 88, in.gov.ignca.6945 leaf 0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "learned; happy; courageous; a good number of children; conversant with charms or spells"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 12, p. 88, in.gov.ignca.6945 leaf 0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "angry through disputes; harsh in speech; idle; destroys the power of his enemies"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 12, p. 88, in.gov.ignca.6945 leaf 0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "learned; dresses beautifully; has all the greatness; a rich lady as his wife"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 12, p. 88, in.gov.ignca.6945 leaf 0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "widely renowned; long-lived; supporter of his family; a lord and a commander of the army"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 12, p. 88, in.gov.ignca.6945 leaf 0122; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "learning and wealth; good conduct; religious-minded; conversant with everything; very eloquent in speech"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 13, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "successful in whatever he undertakes; good learning, strength, intelligence and happiness; does good acts; truthful"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 13, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "long-lived; truthful; very rich; happy; possessed of servants"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 13, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.mercury.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "miserable; devoid of learning; suffers humiliation; cruel and inactive"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 13, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house1",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "handsome; fortunate; long-lived; fearless; blessed with children"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 14, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "eloquent; a good connoisseur of food; a lovely face; wealthy and learned"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 14, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "treated with disrespect; miserly; a renowned brother; commits sins; wickedly disposed"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 14, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "lives with mother, friends, attendants, sons, wife, corn and so on; happy"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 14, p. 89, in.gov.ignca.6945 leaf 0123; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "suffers distress (source names loss connected with progeny, suppressed here); intelligent; becomes a king's adviser"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 15, p. 90, in.gov.ignca.6945 leaf 0124; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "very inactive; suffers disrespect; destroys his enemies; clever in charms and exorcising"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 15, p. 90, in.gov.ignca.6945 leaf 0124 (print reads very inactive); page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "possesses a good wife and sons; very amiable; more munificent than his father"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 15, p. 90, in.gov.ignca.6945 leaf 0124; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "poor; earns his livelihood as a menial; sinful but long-lived"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 15, p. 90, in.gov.ignca.6945 leaf 0124; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "becomes a famous minister; endowed with wealth and children; anxious to do virtuous acts"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 16, p. 90, in.gov.ignca.6945 leaf 0124; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "follows the right course of conduct; renowned for his virtues; very rich; a friend of the king"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 16, p. 90, in.gov.ignca.6945 leaf 0124; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "wealthy; fearless; few children; long-lived; travels in vehicles"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 16, p. 90, in.gov.ignca.6945 leaf 0124; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.jupiter.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.jupiter"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "hated by others; foul-mouthed; no children; sinful, idle and a menial"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 16, p. 90, in.gov.ignca.6945 leaf 0124; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house1",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "a healthy and beautiful body; happy; endowed with long life"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 17, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "becomes a poet; endowed with wealth of various kinds"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 17, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "wifeless; unhappy; poor; miserly; unpopular"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 17, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "good vehicles, good house, jewels, clothes and scents"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 17, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "owner of immense wealth; protects others; very wise; blessed with children"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 18, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "no enemies; no riches; corrupted by young women; affected by grief"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 18, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "a good wife but has intrigues with bad women; loses a wife; wealthy"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 18, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "long-lived, rich, a ruler of the earth"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 18, p. 91, in.gov.ignca.6945 leaf 0125; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "blessed with wife, friends and children; prosperous through royal favor"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 19, p. 92, in.gov.ignca.6945 leaf 0126; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "widely renowned; has friends; a lord happily employed"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 19, p. 92, in.gov.ignca.6945 leaf 0126; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "rich; fond of the company of other women; endowed with many comforts"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 19, p. 92, in.gov.ignca.6945 leaf 0126; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.venus.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.venus"
+      ],
+      "inputs": {
+        "graha": "Venus",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "sexual enjoyment, wealth and splendour"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 19, p. 92, in.gov.ignca.6945 leaf 0126; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house1_exalted_or_own_sign",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 1,
+        "dignity_condition": "exalted_or_own_sign"
+      },
+      "expected": {
+        "result_summary": "on a par with the king; a chief or mayor of a city"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 20, p. 92, in.gov.ignca.6945 leaf 0126; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house1_other_sign",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 1,
+        "dignity_condition": "other_sign"
+      },
+      "expected": {
+        "result_summary": "afflicted with sorrow and misery from childhood; suffers indigence; slovenly and indolent"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 20, p. 92, in.gov.ignca.6945 leaf 0126; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "an ugly face; without wealth; follows evil courses; later in life lives in a foreign country with vehicles, wealth and other enjoyments"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 21, p. 92, in.gov.ignca.6945 leaf 0126; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "very intelligent; liberal in gifts; happy with his wife; he will however be inactive and overcome with sorrow"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 21, p. 92, in.gov.ignca.6945 leaf 0126 (print reads however be inactive); page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "unhappy; houseless; without vehicles; deprived of his mother; sickly in his early years"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 22, p. 93, in.gov.ignca.6945 leaf 0127; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "roaming about; loses his reason; bereft of children (suppressed), wealth and happiness; perfidious and evil-minded"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 22, p. 93, in.gov.ignca.6945 leaf 0127; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "a voracious eater; wealthy; subdued by his enemies; stubborn; possessed of self-respect"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 22, p. 93, in.gov.ignca.6945 leaf 0127; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "wedded to a bad wife; poor; roaming; distressed"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 22, p. 93, in.gov.ignca.6945 leaf 0127 (print includes roaming); page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "unclean and without wealth; suffers from piles; cruel-minded; pinched with hunger; despised by his friends"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 23, p. 93, in.gov.ignca.6945 leaf 0127; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "bereft of fortune, wealth, children (suppressed), father and religious merit; wicked"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 24, p. 93-94, in.gov.ignca.6945 leaves 0127-0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "a king or his minister; devotes himself to agriculture; brave, rich and renowned"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 24, p. 94, in.gov.ignca.6945 leaf 0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "a long span of life; lasting wealth and good income; brave; free from disease; moneyed"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 24, p. 94, in.gov.ignca.6945 leaf 0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.saturn.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.saturn"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "impudent; indigent; without children (suppressed); defective of some limb; stupid; driven out by his enemies"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 24, p. 94, in.gov.ignca.6945 leaf 0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house1",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "short life; possesses wealth and strength; suffers diseases in the upper limbs (head, face)"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 25, p. 94, in.gov.ignca.6945 leaf 0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "dubious or insincere in speech; disease in the mouth or face; tender-hearted; wealth through the sovereign; wrathful yet happy"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 25, p. 94, in.gov.ignca.6945 leaf 0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "proud; hostile to his brothers; strong-willed; long-lived; wealthy"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 25, p. 94, in.gov.ignca.6945 leaf 0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "a fool; causes sorrow; has friends; short-lived; happy at some time or other"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 25, p. 94, in.gov.ignca.6945 leaf 0128; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "talks through the nose; childless (suppressed); hard-hearted; suffers from belly-ache"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 26, p. 94-95, in.gov.ignca.6945 leaves 0128-0129; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "troubled by his enemies, or oppressed by malefic planets (demons); suffers from a disease in the anus; wealthy; long-lived"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 26, p. 95, in.gov.ignca.6945 leaf 0129 (print reads disease in the anus); page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "loses wealth through intrigues with women; suffers separation from his beloved; loses his manhood; self-willed and silly"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 26, p. 95, in.gov.ignca.6945 leaf 0129; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "short-lived; does impure acts; defective of a limb; suffers wind-disease; has limited issue (suppressed)"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 26, p. 95, in.gov.ignca.6945 leaf 0129; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "speaks opposingly; becomes head of his clan, headman of a village or mayor of a city; commits unrighteous deeds"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 27, p. 95, in.gov.ignca.6945 leaf 0129; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "becomes famous; has a limited number of issue (suppressed); engages in others' business; does no good act; fearless"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 27, p. 95, in.gov.ignca.6945 leaf 0129; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "prosperous; does not have many children (suppressed); long-lived; suffers from ear disease"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 27, p. 95, in.gov.ignca.6945 leaf 0129; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "intent on secretly committing sinful acts; spends much; suffers from a water-disease"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 27, p. 95, in.gov.ignca.6945 leaf 0129; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house1",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 1
+      },
+      "expected": {
+        "result_summary": "ungrateful; unhappy; bears tales against others; an outcast, fallen from his position; deformed body; associates with the wicked"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 28, p. 96, in.gov.ignca.6945 leaf 0130; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house2",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "result_summary": "devoid of learning and riches; speech of very vile quality; a sinister look; ever eating at others' tables"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 28, p. 96, in.gov.ignca.6945 leaf 0130; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house3",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 3
+      },
+      "expected": {
+        "result_summary": "confers long life, strength, wealth and fame; lives happily with his wife and eats good food; loses a brother"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 29, p. 96, in.gov.ignca.6945 leaf 0130; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house4",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "result_summary": "loses his lands, vehicles, mother and happiness; leaves his native country and dwells in a foreign place at another's bounty"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 29, p. 96, in.gov.ignca.6945 leaf 0130; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house5",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "causes loss of children (suppressed), stomach disease and trouble from goblins; becomes evil-minded and wicked"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 30, p. 96, in.gov.ignca.6945 leaf 0130; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house6",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 6
+      },
+      "expected": {
+        "result_summary": "very magnanimous; possesses the best qualities; attains everlasting fame, firmness and high authority; destroys his enemies"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 30, p. 96, in.gov.ignca.6945 leaf 0130; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house7",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 7
+      },
+      "expected": {
+        "result_summary": "suffers disrespect; seeks the company of bad women; afflicted by a bowel-related disease; suffers loss of wife and vital power"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 31, p. 96-97, in.gov.ignca.6945 leaves 0130-0131; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house8",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 8
+      },
+      "expected": {
+        "result_summary": "short-lived; suffers separation from dear friends and engages in quarrels; meets injury from a weapon; disappointment in all undertakings"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 31, p. 97, in.gov.ignca.6945 leaf 0131; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house9",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "follows a sinful course; does unrighteous things; deprived of his father; unlucky and indigent; slanders the good"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 32, p. 97, in.gov.ignca.6945 leaf 0131; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house10",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "result_summary": "experiences obstacles to good acts; impure; engaged in vile acts, yet energetic, bold and widely renowned"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 32, p. 97, in.gov.ignca.6945 leaf 0131; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house11",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 11
+      },
+      "expected": {
+        "result_summary": "hoards money; has many good qualities; enjoys himself well; commands all the facilities for getting good materials; successful in obtaining all his requirements"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 33, p. 97, in.gov.ignca.6945 leaf 0131; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.ketu.house12",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.ketu"
+      ],
+      "inputs": {
+        "graha": "Ketu",
+        "house_from_lagna": 12
+      },
+      "expected": {
+        "result_summary": "secretly commits sinful acts; spends money on vile things; destroys wealth; of forbidden conduct; suffers eye-disease"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII, Sloka 33, p. 97, in.gov.ignca.6945 leaf 0131; page_image_verified_2026-08-05"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.bhava.rahu.well_associated_exception",
+      "rule_ids": [
+        "jyotisha.phaladeepika.08.planet_in_bhava.rahu"
+      ],
+      "inputs": {
+        "graha": "Rahu",
+        "associated_with": "benefic",
+        "house_from_lagna": 5
+      },
+      "expected": {
+        "result_summary": "fully auspicious dasha; affluence on a par with a king",
+        "note": "house 5 is not among the excluded 6th/8th/12th"
+      },
+      "provenance": "Phaladeepika Adhyaya VIII exception clause"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahapurusha.ruchaka_mars",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "dignity": "own sign",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "yoga_present": true,
+        "yoga_name": "Ruchaka",
+        "result_summary": "a long face; wealth by daring deeds; brave; army leader; victorious"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 1 (definition) and Sloka 3 (result)"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahapurusha.sasa_saturn",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"
+      ],
+      "inputs": {
+        "graha": "Saturn",
+        "dignity": "exalted",
+        "house_from_lagna": 10
+      },
+      "expected": {
+        "yoga_present": true,
+        "yoga_name": "Sasa",
+        "result_summary": "extolled by all; strong; headman of a village or a king; wicked in disposition"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 1 (definition) and Sloka 3-4 (result)"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahapurusha.mars_kendra_neutral_no_yoga",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "dignity": "neutral placement",
+        "house_from_lagna": 4
+      },
+      "expected": {
+        "yoga_present": false
+      },
+      "provenance": "Negative control: kendra placement alone, without own-sign or exaltation dignity, does not produce a Mahapurusha yoga per Sloka 1's definition"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahapurusha.mars_own_sign_non_kendra_no_yoga",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.pancha_mahapurusha_yoga"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "dignity": "own sign",
+        "house_from_lagna": 2
+      },
+      "expected": {
+        "yoga_present": false
+      },
+      "provenance": "Negative control: own-sign dignity alone, outside a kendra (1,4,7,10), does not produce a Mahapurusha yoga per Sloka 1's definition"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.kesari.moon_kendra_from_jupiter",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.kesari_and_sakata_yoga"
+      ],
+      "inputs": {
+        "moon_house_minus_jupiter_house_mod_12": 0
+      },
+      "expected": {
+        "kesari_present": true,
+        "result_summary": "destroys all his enemies like a lion; speaks loftily and nobly"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 14 (definition: kendra = relative distance 0, 3, 6, or 9) and Sloka 16 (result)"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.kesari.moon_sixth_from_jupiter_uncancelled",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.kesari_and_sakata_yoga"
+      ],
+      "inputs": {
+        "moon_house_minus_jupiter_house_mod_12": 5,
+        "moon_house_from_lagna": 2
+      },
+      "expected": {
+        "sakata_present": true,
+        "result_summary": "often becomes unfortunate and may regain what he once lost"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 14 (Sakata) and Sloka 17 (result); Moon not in a kendra from Lagna here so the cancellation does not apply"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.kesari.moon_sixth_from_jupiter_cancelled",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.kesari_and_sakata_yoga"
+      ],
+      "inputs": {
+        "moon_house_minus_jupiter_house_mod_12": 5,
+        "moon_house_from_lagna": 4
+      },
+      "expected": {
+        "sakata_present": false,
+        "reason": "moon_in_kendra_from_lagna_cancels_sakata"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 14, explicit cancellation clause"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahabhagya.male_day_odd",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.mahabhagya_yoga"
+      ],
+      "inputs": {
+        "sex": "male",
+        "birth_time": "day",
+        "sun_sign_parity": "odd",
+        "moon_sign_parity": "odd",
+        "lagna_sign_parity": "odd"
+      },
+      "expected": {
+        "yoga_present": true,
+        "result_summary": "immense pleasure to all by his mere appearance; liberal in gifts; famous; lives for eighty years"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 13 and Sloka 15"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahabhagya.female_night_even",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.mahabhagya_yoga"
+      ],
+      "inputs": {
+        "sex": "female",
+        "birth_time": "night",
+        "sun_sign_parity": "even",
+        "moon_sign_parity": "even",
+        "lagna_sign_parity": "even"
+      },
+      "expected": {
+        "yoga_present": true,
+        "result_summary": "wealth, a long-lived husband, sons and grandsons; exceedingly lucky"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 13 and Sloka 15, female variant"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.adhama_sama_varishtha.kendra_from_sun_is_worst",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.adhama_sama_varishtha_yoga"
+      ],
+      "inputs": {
+        "moon_house_minus_sun_house_mod_12": 0
+      },
+      "expected": {
+        "grade": "Adhama",
+        "rank": "lowest"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 14 and Sloka 18; the notable inversion (kendra graded worst) is the point of this vector"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.adhama_sama_varishtha.apoklima_from_sun_is_best",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.adhama_sama_varishtha_yoga"
+      ],
+      "inputs": {
+        "moon_house_minus_sun_house_mod_12": 2
+      },
+      "expected": {
+        "grade": "Varishtha",
+        "rank": "highest"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Sloka 14 and Sloka 18"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.sunapha.mars_second_from_moon",
+      "rule_ids": [
+        "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma_yoga"
+      ],
+      "inputs": {
+        "graha_house_minus_moon_house_mod_12": 1,
+        "graha": "Mars"
+      },
+      "expected": {
+        "yoga_present": "Sunapha",
+        "result_summary": "a king or his equal, with self-acquired property, renowned for wisdom and wealth"
+      },
+      "provenance": "Phaladeepika Adhyaya V, Sloka 5 (definition) and Sloka 6 (result)"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.sunapha.kemadruma_no_planets",
+      "rule_ids": [
+        "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma_yoga"
+      ],
+      "inputs": {
+        "planets_in_2nd_or_12th_from_moon_excluding_sun": []
+      },
+      "expected": {
+        "yoga_present": "Kemadruma",
+        "result_summary": "obscure, miserable, given to base ways, penurious, drudging as a menial, wickedly disposed"
+      },
+      "provenance": "Phaladeepika Adhyaya V, Sloka 5 (absence definition) and Sloka 7 (result)"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.sunapha.kemadruma_dissenting_view_moon_associated",
+      "rule_ids": [
+        "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma_yoga"
+      ],
+      "inputs": {
+        "planets_in_2nd_or_12th_from_moon_excluding_sun": [],
+        "moon_associated_with_any_graha": true
+      },
+      "expected": {
+        "yoga_present": "disputed",
+        "reason": "named_dissenting_view_holds_kemadruma_cancelled_when_moon_is_associated"
+      },
+      "provenance": "Phaladeepika Adhyaya V, Sloka 5, explicit named minority view; must not be silently resolved either way"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.vesikartari.subhakartari_lagna",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.vesi_vaasi_kartari_yoga"
+      ],
+      "inputs": {
+        "benefics_in_2nd_and_12th_from_lagna": true
+      },
+      "expected": {
+        "yoga_present": "Subhakartari",
+        "result_summary": "long-lived; fearless; free from disease; without enemies; happy and rich"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Slokas 9-11"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.vesikartari.papakartari_lagna",
+      "rule_ids": [
+        "jyotisha.phaladeepika.06.vesi_vaasi_kartari_yoga"
+      ],
+      "inputs": {
+        "malefics_in_2nd_and_12th_from_lagna": true
+      },
+      "expected": {
+        "yoga_present": "Papakartari",
+        "result_summary": "poor; impure; unhappy; bereft of wife and children; deprived of some limb; short-lived"
+      },
+      "provenance": "Phaladeepika Adhyaya VI, Slokas 9-11"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.rajayoga4.mars_mercury_second",
+      "rule_ids": [
+        "jyotisha.phaladeepika.four_rajayogas"
+      ],
+      "inputs": {
+        "configuration": 2,
+        "mars_house_from_lagna": 2,
+        "mercury_house_from_lagna": 2
+      },
+      "expected": {
+        "rajayoga_present": true,
+        "configuration_name": "rajayoga_2"
+      },
+      "provenance": "Phaladeepika, Sloka 24, second of the four named configurations"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.rajayoga4.sun_venus_fourth",
+      "rule_ids": [
+        "jyotisha.phaladeepika.four_rajayogas"
+      ],
+      "inputs": {
+        "configuration": 3,
+        "sun_house_from_lagna": 4,
+        "venus_house_from_lagna": 4
+      },
+      "expected": {
+        "rajayoga_present": true,
+        "configuration_name": "rajayoga_3"
+      },
+      "provenance": "Phaladeepika, Sloka 24, third of the four named configurations"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.neechabhanga.one_directional_lagna_kendra",
+      "rule_ids": [
+        "jyotisha.phaladeepika.neechabhanga_rajayoga"
+      ],
+      "inputs": {
+        "graha_dignity": "debilitated",
+        "debilitation_lord_house_from_lagna": 4
+      },
+      "expected": {
+        "cancellation_present": true,
+        "grade": "one_directional",
+        "result_summary": "the person born will become a king and a just ruler"
+      },
+      "provenance": "Phaladeepika, Sloka 26"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.neechabhanga.mutual_kendra",
+      "rule_ids": [
+        "jyotisha.phaladeepika.neechabhanga_rajayoga"
+      ],
+      "inputs": {
+        "graha_dignity": "debilitated",
+        "debilitation_lord_house_from_lagna": 7,
+        "mutual_kendra_relation": true
+      },
+      "expected": {
+        "cancellation_present": true,
+        "grade": "mutual",
+        "result_summary": "an emperor respected by all other kings"
+      },
+      "provenance": "Phaladeepika, Sloka 27"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.neechabhanga.no_cancellation_negative_control",
+      "rule_ids": [
+        "jyotisha.phaladeepika.neechabhanga_rajayoga"
+      ],
+      "inputs": {
+        "graha_dignity": "debilitated",
+        "debilitation_lord_house_from_lagna": 2
+      },
+      "expected": {
+        "cancellation_present": false
+      },
+      "provenance": "Negative control: house 2 is not a kendra (1,4,7,10), so none of Sloka 26-29's cancellation tests are met"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.neechabhanga.non_debilitated_negative_control",
+      "rule_ids": [
+        "jyotisha.phaladeepika.neechabhanga_rajayoga"
+      ],
+      "inputs": {
+        "graha_dignity": "own sign"
+      },
+      "expected": {
+        "cancellation_present": false,
+        "reason": "rule_only_applies_when_dignity_is_debilitated"
+      },
+      "provenance": "Negative control proving this rule is not evaluated at all outside the debilitation trigger"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahadasha.sun_well_placed",
+      "rule_ids": [
+        "jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"
+      ],
+      "inputs": {
+        "mahadasha_lord": "Sun",
+        "natal_sun_condition": "well_placed"
+      },
+      "expected": {
+        "result_summary": "fame, success in undertakings, gravity, devotion to one's duty, and happiness"
+      },
+      "provenance": "Phaladeepika Adhyaya XIX, Sloka 6"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahadasha.sun_badly_placed",
+      "rule_ids": [
+        "jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"
+      ],
+      "inputs": {
+        "mahadasha_lord": "Sun",
+        "natal_sun_condition": "badly_placed"
+      },
+      "expected": {
+        "result_summary": "promotes quarrel; sudden displeasure of the sovereign; sickness among relatives"
+      },
+      "provenance": "Phaladeepika Adhyaya XIX, Sloka 5; negative control proving the Sun's result (unlike the other eight grahas) is placement-conditioned"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahadasha.jupiter",
+      "rule_ids": [
+        "jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"
+      ],
+      "inputs": {
+        "mahadasha_lord": "Jupiter"
+      },
+      "expected": {
+        "result_summary": "performs a virtuous deed; honoured by the sovereign; acquisition of elephants, horses and vehicles; fulfilment of desires"
+      },
+      "provenance": "Phaladeepika Adhyaya XIX, Sloka 11"
+    },
+    {
+      "vector_id": "jyotisha.phaladeepika.mahadasha.rahu_well_associated",
+      "rule_ids": [
+        "jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"
+      ],
+      "inputs": {
+        "mahadasha_lord": "Rahu",
+        "rahu_associated_with": "benefic",
+        "rahu_house_from_lagna": 9
+      },
+      "expected": {
+        "result_summary": "fully auspicious; affluence on a par with a king; steady accumulation of wealth"
+      },
+      "provenance": "Phaladeepika Adhyaya XIX, Sloka 14-16 exception clause"
+    }
   ],
   "required_expansion_before_implementation": [
     "recover Sun's Adhyaya VIII houses 1-5, 7 and 8 from a page-image check, then extend the Sun vector set to full 12-house coverage",

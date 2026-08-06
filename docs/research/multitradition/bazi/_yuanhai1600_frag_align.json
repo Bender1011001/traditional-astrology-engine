@@ -1,0 +1,28 @@
+{
+  "fragment_id": "yh1600_align",
+  "source_file": "tmp/acquire/pdfs/yuanhai_ziping_ming_wanli_1600.pdf",
+  "pages_covered": "1-3 (in progress)",
+  "edition_identity": {
+    "title_as_printed": "刻京臺增補淵海子平大全",
+    "toc_title": "刻淵海子平大全目錄 (PDF page 1, right half)",
+    "juan1_opening_imprint": {
+      "pdf_page": 3,
+      "columns": [
+        "刻京臺增補淵海子平大全卷之一",
+        "欽天監承德郎李欽增補",
+        "閩書林喬山堂劉大易繡梓"
+      ],
+      "note": "劉大易 is the given name of the Jianyang printer Liu Longtian 劉龍田; 喬山堂 is his shop. 閩書林 = the Fujian (Jianyang) book quarter. Red seals at lower right of the juan-1 opening leaf; National Palace Museum digital watermark 國立故宮博物院 overlays the scans."
+    },
+    "colophon_date": "not yet located",
+    "seals": "Juan 1 opening leaf lower right: two red collection seals (small, partially legible in scan); TOC first leaf carries red seals in the title column area including a gourd-shaped seal. To be detailed if legible on closer reading.",
+    "toc_contents_confirmed": "卷一 諸家起例/吉凶起例/闗煞起例; 卷二 子平舉要歌/詳解定真論/喜忌篇/繼善篇; 卷三 論正官…看命入式/造化氣/十段錦/格局生死決; 卷四 雜論口訣/群興論/論興亡/實法第一/實法第二(神趣八法: 類象屬象從象化象照象鬼象伏象)/傷官說/心鏡歌/寸金搜髓論/論細命法/相心賦/玄機賦/妖祥賦/絡繹賦/捷馳千里馬/五行消息賦/又賦/幽微賦/金玉賦/萬金賦/淵源集說/造微賦/人鑑論/愛憎賦; 卷五 內十八格/外十八格/百章歌; 卷六 批命活用總套/批富貴貧賤總套 目錄終 (PDF pages 1-2)"
+  },
+  "passages": [],
+  "fragment_rules": [],
+  "fragment_vectors": [],
+  "collation_notes": [
+    "PDF page 2 left half carries the woodcut frontispiece 造化玄機 (master reading a fate-board for clients).",
+    "TOC lists 傷官說 between 神趣八法 items and 心鏡歌 in 卷四 — not in the task's known map."
+  ]
+}

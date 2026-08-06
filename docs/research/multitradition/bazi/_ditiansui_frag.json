@@ -1,0 +1,32 @@
+{
+  "fragment_id": "ditiansui",
+  "source_files": [
+    "tmp/acquire/texts/ditiansui_chanwei_ren_tieqiao_wikisource.txt (SHA-256 1d1a3d61c1b9a26618b41b8ead857a6b966992fdf2adabdc607a0c6cb4c8f04d)",
+    "tmp/acquire/pdfs/ditiansui_jiyao_nlc_scan.pdf (65 PDF pages)"
+  ],
+  "pages_covered": "1658 scan: pages 1-6 read so far (title, self-preface, publisher catalog, TOC x2, main text p.1); transcription: chapters 天干/衰旺/從象/化象/假從/假化/順局 read in full",
+  "edition_identity_1658": {
+    "title": "滴天髓輯要 (Ditian Sui Jiyao, 'Essentials of the Ditian Sui')",
+    "compiler": "海昌陳之遴素庵氏輯 (Chen Zhilin, hao Su'an, of Haichang) — so printed on the first text leaf (PDF page 6)",
+    "preface": "自序 on PDF page 2, signed 順治戊戌春二月望日素庵老人書 — Shunzhi wuxu = 1658 CE, 15th day of the 2nd spring month",
+    "attribution_statement_in_preface": "The 1658 preface opens: 滴天髓之書。乃一知命者所作。託於誠意伯劉基。— i.e. Chen Su'an himself states the base text was written by an anonymous 'knower of fate' and ATTACHED to Liu Ji's name. The Liu Ji attribution was already marked as unresolved by the earliest dated witness we hold.",
+    "physical_print": "This scan is NOT a 1658 woodblock: it is a Republican-era typeset reprint by 乾乾書社 (Qianqian Book Society, Shanghai, 靜安寺路戈登路口慶福里九號), whose catalog page (PDF page 3) advertises 子平真詮評註 and 滴天髓徵義 — both 1930s Xu Lewu-circle publications. The DATED layer is Chen Su'an's 1658 compilation and preface that the reprint transmits; the physical witness is ~1930s.",
+    "library_marks": "National Library / 國立北平圖書館 collection seal on PDF page 6; shelf marks 293.1 / 377, accession 43636 on PDF page 2; 贈品 (gift) stamp on title leaf",
+    "structure": "27+ chapters per TOC (PDF pages 4-5): 通天論 天干論 地支論 干支論 形象論 方局論 格局論 從化論 歲運論 體用論 精神論 衰旺論 中和論 剛柔論 順逆論 寒暖論 月令論 生時論 源流論 通隔論 清濁論 眞假論 隱顯論 衆寡論 奮鬱論 恩怨論 順反論 戰合論 君臣論 性情論 絆神論 地位論 震兌論 母子論 疾病論 六親論 貴賤貧富吉凶壽夭論 坎離論 才德論 閒神論 出身論 貞元論. NOTE: follow and transform are ONE chapter here (從化論); there are no separate 假從/假化/順局/反局 chapters — 順反論 presumably absorbs 順局/反局."
+  },
+  "leaf_map_1658": [
+    {"pdf_page": 1, "content": "title leaf: 滴天髓輯要 / 海昌陳素庵輯 / 乾乾書社出版"},
+    {"pdf_page": 2, "content": "滴天髓輯要自序, dated 順治戊戌春二月望日素庵老人書 (1658)"},
+    {"pdf_page": 3, "content": "publisher catalog 本社出版書目 (乾乾書社, Shanghai)"},
+    {"pdf_page": 4, "content": "目錄 leaf 1: 通天論…順反論"},
+    {"pdf_page": 5, "content": "目錄 leaf 2: 戰合論…貞元論"},
+    {"pdf_page": 6, "content": "main text p.1: 通天論 (欲識三元萬物宗。先觀帝載與神功。… 戴天履地人為貴。順則吉兮悖則凶。)"}
+  ],
+  "base_text_alignment": [],
+  "fragment_rules": [],
+  "fragment_vectors": [],
+  "collation_notes": [
+    "The wikisource transcription of 滴天髓闡微 is in SIMPLIFIED characters and carries OCR-grade corruption (e.g. line 2451 reads 奶之轻者也 for 根之轻者也, 根挭 for 根重, 衰右有旺 at line 2449 for 衰中有旺); verbatim quotes below reproduce the file as-is and flag corruption where load-bearing.",
+    "In the 闡微 transcription the 從象 chapter's base-text couplet is MISSING and was supplied by a later hand: line 7458 reads 孤立无气唯有从，依得财官享富贵。（原文缺，此后人按原注意补）. The canonical line 從得真者只論從，從神又有吉和凶 is therefore NOT attested in our transcription's base text; its second half is quoted inside Ren Tieqiao's commentary (line 7462: 所谓从神又有吉和凶也). The 1658 witness must arbitrate."
+  ]
+}

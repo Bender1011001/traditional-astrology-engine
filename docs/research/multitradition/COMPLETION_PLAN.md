@@ -43,7 +43,7 @@ because the four kinds have different owners and different costs.
 | **B. Engine** | Computation the tradition needs that nothing computes yet | Days | Me |
 | **C. Mining** | Source held, pages legible, nobody has read them | Days, agent-parallel | Me |
 | **D. Acquisition** | Source not in the repository at all | Unknown; owner-dependent | Owner (fetch) then me |
-| **E. Review** | Mined and rendered, but the translation is unreviewed | External | A specialist, not me |
+| **E. Verification** | Rendered, and not yet checked against the source's own worked examples | Hours to days | Me — see below |
 
 **The headline measurement: 452 rules sit in delineation manifests that no
 engine reads.** Calculation manifests are excluded from that figure — they feed
@@ -225,10 +225,28 @@ would be wrong:
    (*saptānāṃ aṣṭānāṃ vā*), the chara daśā length conventions, the Varṇada
    derivation its own transmitter cannot explain. A practitioner declares a
    school; the engine asks the caller to.
-3. **Independent specialist review** (category E). No amount of engine work
-   converts `engine_translation_unreviewed` into a reviewed rendering. This
-   gates promotion out of research-only for every non-English track and is the
-   single largest external dependency in the project.
+3. **Verification against worked examples.** Renderings are graded
+   `engine_translation_unreviewed` and that grade is honest, but it is not a
+   queue for a reviewer who does not exist. There is no specialist. The
+   project's own standard (`DEFENSIBILITY.md`) settled this: translation is not
+   a gate for quotation, because showing the original, the rendering and the
+   citation together lets any future reader check the rendering — which is
+   strictly more auditable than paraphrasing someone's copyrighted English.
+
+   What upgrades confidence is criterion 4 of that standard: **reproduce the
+   tradition's own worked examples.** That is a thing I can do and have been
+   doing, and it is the strongest proof available:
+
+   - Murakami Tennō's recorded birth mansion — reproduced exactly
+   - al-Qabīsī's own worked figures — 6 of 6
+   - BPHS's printed Ṣaḍbala arithmetic — uccha 38|04 through piṇḍa 9|41|14
+   - Abhyankar's Patel chart, which discriminates the Rahu convention
+   - the Tử Vi placement tables — 148 of 150, with the two exceptions being
+     the defect the pack already documents
+   - Zi Wei's five printed grids — every cell, plus all ten stated anchors
+
+   Where a track has no worked example, say so — that is the real gap, and it
+   is a mining target, not a hiring one.
 
 A tradition can pass all five gates and still carry all three of these. That is
 what a careful practitioner's reading looks like too.

@@ -1138,7 +1138,11 @@ def _limits(report: TraditionReport, facts: dict) -> None:
         "Sagar (Devanāgarī read directly, with the edition's own printed "
         "pāṭhabheda apparatus carried where it exists), and Bṛhajjātaka (grade "
         "B via Aiyar 1905). Every Devanāgarī rendering is graded "
-        "engine_translation_unreviewed; independent Sanskrit review is "
+        "engine_translation_unreviewed. The Devanāgarī, the rendering and "
+        "the śloka citation are all shown together, so the rendering can be "
+        "checked against the source rather than taken. What raises confidence "
+        "beyond that is the recension's own worked arithmetic, which this "
+        "engine reproduces exactly; review is "
         "outstanding on all of it.",
         "The second Saravali witness is corrupt at the akṣara level, so no "
         "cross-witness collation could be established in either direction - "
