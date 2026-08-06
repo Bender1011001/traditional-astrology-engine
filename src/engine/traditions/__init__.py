@@ -36,6 +36,7 @@ REPORT_ENGINES = {
     "sukuyodo": "sukuyodo_report",
     "vietnamese": "tuvi_report",
     "latin_european": "lilly_report",
+    "byzantine": "byzantine_report",
 }
 
 

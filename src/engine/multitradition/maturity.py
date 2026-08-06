@@ -107,6 +107,14 @@ MATURITY: dict[str, dict[str, Any]] = {
         "interpretation_readiness": "developed - report engine reading from the karaka-kundali, with the karaka scheme and the chara dasa lengths both refused because the pack refuses them",
         "publication_readiness": "research only",
     },
+    "byzantine": {
+        "category": PARTIAL_JUDGMENT,
+        "source_readiness": "moderate - 31 rules from the Rhetorius compendium, with the Greek carried beside every rendering so the grade means check-this rather than trust-this",
+        "computational_readiness": "shares the Hellenistic figure; sect, places and angles are computed, the lots are quoted and deliberately not cast",
+        "validation_coverage": "NONE - no worked nativity of Rhetorius' is in this corpus. That is this track's real gap and it is a mining target, the codices existing",
+        "interpretation_readiness": "partial - runs in Rhetorius' own seven-inspection order, which he states outright and closes by saying it is how one avoids error about the foundations",
+        "publication_readiness": "research only",
+    },
     "chinese_bazi": {
         "category": NATAL_REPORT,
         "source_readiness": "moderate - Yuanhai Ziping/Sanming Tonghui transcriptions traceable to the Siku recension, uncollated",
