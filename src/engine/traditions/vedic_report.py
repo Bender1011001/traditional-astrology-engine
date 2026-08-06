@@ -251,6 +251,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _bhavas_section(report, facts, houses, lordships, grahas)
     strength = _strength_of(birth, facts)
     _strength_section(report, facts, strength)
+    _brhajjataka_planetary_section(report, facts)
     _yogas_section(report, facts, strength)
     _vargas_section(report, facts, grahas, strength)
     _dasha_section(report, facts)
@@ -532,6 +533,163 @@ def _strength_of(birth: BirthInput, facts: dict) -> dict[str, Any]:
             "ashtakavarga": None,
             "error": f"{type(exc).__name__}: {exc}",
         }
+
+
+BRHAJJATAKA_PLANETARY_MANIFEST = (
+    RESEARCH_ROOT / "jyotisha" / "brhajjataka_planetary_rule_manifest.json"
+)
+
+
+@lru_cache(maxsize=1)
+def _brhajjataka_planetary() -> dict[str, Any]:
+    """Varahamihira's planetary doctrine, loaded separately.
+
+    It lives outside _rules_by_id() because its rules carry structured lookups
+    rather than an engine_rendering, so the generic firing path cannot use
+    them - which is exactly why all eleven were unreachable.
+    """
+    if not BRHAJJATAKA_PLANETARY_MANIFEST.exists():
+        return {}
+    try:
+        data = json.loads(
+            BRHAJJATAKA_PLANETARY_MANIFEST.read_text(encoding="utf-8")
+        )
+    except (OSError, ValueError):
+        return {}
+    return {r["rule_id"]: r for r in data.get("rules", [])}
+
+
+def _bj(suffix: str) -> dict[str, Any] | None:
+    for rule_id, rule in _brhajjataka_planetary().items():
+        if rule_id.endswith(suffix):
+            return rule
+    return None
+
+
+def _brhajjataka_planetary_section(
+    report: TraditionReport, facts: dict
+) -> None:
+    """Varahamihira on benefic and malefic, aspect, relation and strength.
+
+    Rendered as doctrine rather than as a verdict about this chart, and shown
+    here because two of its rules corroborate what the engine already computes
+    from other authors.
+    """
+    if not _brhajjataka_planetary():
+        return
+    s = report.add(
+        ReportSection("Varāhamihira on the Planets (Bṛhajjātaka II)", level=2)
+    )
+
+    bm = _bj("02.05.benefic_malefic_classification")
+    if bm:
+        c = bm.get("conclusion") or {}
+        s.notes.append(
+            "**Benefic and malefic are conditional, not fixed.** Malefic: "
+            + ", ".join(str(x).replace("_", " ") for x in c.get("malefic", []))
+            + ". Benefic: "
+            + ", ".join(str(x).replace("_", " ") for x in c.get("benefic", []))
+            + "."
+        )
+        unresolved = c.get("unresolved")
+        if unresolved:
+            items = (
+                unresolved if isinstance(unresolved, list) else [unresolved]
+            )
+            s.notes.append(
+                "Left unresolved by the text: "
+                + ", ".join(str(x).replace("_", " ") for x in items)
+                + "."
+            )
+
+    asp = _bj("02.13.aspect_strengths")
+    if asp:
+        c = asp.get("conclusion") or {}
+        table = c.get("baseline_fraction_by_relative_house") or {}
+        if table:
+            s.notes.append(
+                "**Aspect is fractional, by relative house**: "
+                + ", ".join(
+                    f"the {ORDINAL.get(int(h), h)} at {frac}"
+                    for h, frac in sorted(
+                        table.items(), key=lambda kv: int(kv[0])
+                    )
+                )
+                + "."
+            )
+            s.notes.append(
+                "This is a THIRD aspect scheme in this corpus, beside the "
+                "flat special-aspect rule this engine uses and the "
+                "quarter-grading of BPHS adhyāya 4. The three are not "
+                "reconciled here; the disagreement is the finding."
+            )
+
+    dig = _bj("02.19.directional_strength")
+    if dig:
+        c = dig.get("conclusion") or {}
+        houses = c.get("directional_strength_houses") or {}
+        if houses:
+            s.notes.append(
+                "**Directional strength**: "
+                + ", ".join(
+                    f"{g.title()} in the {ORDINAL.get(int(h), h)}"
+                    for g, h in houses.items()
+                )
+                + "."
+            )
+            s.notes.append(
+                "This CORROBORATES the dig-bala the strength section computes "
+                "from BPHS uttara 2, which reaches the same assignment from "
+                "the opposite direction — BPHS names each graha's weak point "
+                "and Varāhamihira names its strong one. Two authors, one "
+                "doctrine, and the agreement is what makes it evidence "
+                "rather than a single source repeated."
+            )
+
+    order = _bj("02.21.natural_strength_order")
+    if order:
+        c = order.get("conclusion") or {}
+        series = c.get("weakest_to_strongest") or []
+        if series:
+            s.notes.append(
+                "**Natural strength, weakest to strongest**: "
+                + " < ".join(g.title() for g in series)
+                + "."
+            )
+            s.notes.append(
+                "The same ordinal series appears on the Jaimini side of this "
+                "corpus, where the pack cites it as a genuine point of "
+                "agreement between the two branches. Both witnesses are held "
+                "here and both are now rendered."
+            )
+
+    day_night = _bj("02.21.temporal_strength_day_night")
+    if day_night:
+        c = day_night.get("conclusion") or {}
+        s.notes.append(
+            "**Temporal strength**: strong by day — "
+            + ", ".join(g.title() for g in c.get("day_strength", []))
+            + "; strong by night — "
+            + ", ".join(g.title() for g in c.get("night_strength", []))
+            + ". Mercury is strong in both."
+        )
+
+    phase = _bj("02.21.temporal_strength_lunar_phase")
+    if phase:
+        c = phase.get("conclusion") or {}
+        s.notes.append(
+            "By lunar phase, the waxing half strengthens the "
+            f"{c.get('waxing_moon_half_strength_category')}s and the waning "
+            f"half the {c.get('waning_moon_half_strength_category')}s."
+        )
+
+    s.notes.append(
+        "These are Varāhamihira's doctrines, rendered as doctrine. No verdict "
+        "about this chart is drawn from them here — the engine computes "
+        "strength from BPHS's apparatus, and mixing two authors' scales "
+        "without a stated rule for doing so is the error this corpus keeps "
+        "recording."
+    )
 
 
 def _strength_section(
