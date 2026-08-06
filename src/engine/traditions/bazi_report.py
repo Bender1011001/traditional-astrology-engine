@@ -37,6 +37,21 @@ RESEARCH_ROOT = (
 DELINEATION_MANIFEST = (
     RESEARCH_ROOT / "bazi" / "yuanhai_ziping_delineation_manifest.json"
 )
+ZIPING_TECHNIQUE_MANIFEST = (
+    RESEARCH_ROOT / "bazi" / "ziping_technique_rule_manifest.json"
+)
+
+#: The order a Ziping reading works in, which is the order these rules are
+#: shown in. The text is explicit about the first step: judge the five agents
+#: first, and only afterwards look at lu and the rest.
+ZIPING_TOPIC_ORDER = (
+    ("yongshen", "The Useful God (用神)"),
+    ("geju", "The Structure (格局)"),
+    ("rootedness", "Rootedness and the Storehouse"),
+    ("shensha", "Lu, the Post-Horse and the Marvels"),
+    ("tengod", "The Ten Gods in Combination"),
+    ("dayun", "The Luck Periods"),
+)
 
 # The Ten Gods as the pack names them, mapped to the labels the engine emits.
 TEN_GOD_KEYS = {
@@ -540,6 +555,63 @@ def _condition_verdict(
     return True, ", ".join(n for n, _v in checks)
 
 
+def _ziping_method(report: TraditionReport) -> None:
+    """Ziping's own technique, from Sanming Tonghui juan 3.
+
+    Twenty-three rules assembled from fragments and never wired to anything.
+    They are method rather than per-chart cells, so they are stated once here
+    in the order a Ziping reading works in - and that includes the doctrine
+    of the useful god, which this report cannot yet COMPUTE but which the
+    tradition states plainly enough to quote.
+    """
+    import json as _json
+
+    if not ZIPING_TECHNIQUE_MANIFEST.exists():
+        return
+    try:
+        rules = _json.loads(
+            ZIPING_TECHNIQUE_MANIFEST.read_text(encoding="utf-8")
+        ).get("rules", [])
+    except (OSError, ValueError):
+        return
+
+    s = report.add(ReportSection("Ziping's Method", level=2))
+    s.notes.append(
+        "The technique itself, from Sanming Tonghui juan 3. These are "
+        "statements of method rather than judgments about this chart, so they "
+        "are given once here instead of being scattered through the pillars."
+    )
+    shown = 0
+    for key, title in ZIPING_TOPIC_ORDER:
+        matching = [r for r in rules if f".{key}." in r.get("rule_id", "")]
+        if not matching:
+            continue
+        sub = report.add(ReportSection(title, level=3))
+        for rule in matching:
+            c = rule.get("conclusion") or {}
+            text = c.get("engine_rendering")
+            if not isinstance(text, str) or not text.strip():
+                continue
+            if "refus" in str(c.get("output_policy") or "").lower():
+                continue
+            sub.delineations.append(
+                Delineation(
+                    text=text.strip(),
+                    rule_id=rule["rule_id"],
+                    source="Sanming Tonghui, juan 3",
+                    evidence_grade=rule.get("evidence_grade", "?"),
+                    trigger=f"Ziping method — {title.lower()}",
+                )
+            )
+            shown += 1
+    s.notes.append(
+        f"{shown} method statement(s). The engine does not yet DECIDE the "
+        "useful god or the structure for a given chart — those judgments stay "
+        "refused elsewhere in this report — but the tradition's own account of "
+        "what they are is quoted here rather than left on disk."
+    )
+
+
 def build_report(birth: BirthInput) -> TraditionReport:
     facts = _facts(birth)
     report = TraditionReport(
@@ -554,6 +626,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _relations(report, facts)
     _hour_fork_report(report, facts)
     _luck(report, facts, birth.sex)
+    _ziping_method(report)
     _delineations(report, facts)
     _limits(report, facts)
     return report
