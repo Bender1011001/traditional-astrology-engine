@@ -129,6 +129,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _natures_section(report, qabisi)
     _conditions_section(report, qabisi, biruni)
     _lots_section(report, qabisi)
+    _lot_inventory_section(report)
     _hyleg_section(report, qabisi)
     _time_section(report, qabisi)
     _selfcheck_section(report, qabisi)
@@ -357,6 +358,69 @@ def _lots_section(report: TraditionReport, qabisi: dict) -> None:
             "printed them beside the rest would be flattening a distinction "
             "the author drew."
         )
+
+
+def _lot_inventory_section(report: TraditionReport) -> None:
+    """Every lot chapter V names, by house, with its authority.
+
+    The lots CAST for this nativity are above. This is the chapter's own
+    inventory, which is longer: it records who each lot is attributed to, and
+    it distinguishes the lots this engine could cast from the ones that key to
+    a house cusp - because this section computes whole-sign places and casting
+    a cusp-keyed lot against them would be a different lot wearing the right
+    name.
+    """
+    houses = []
+    for n in range(1, 13):
+        rule = _rules_by_id().get(f"islam.qabisi.ch5.lots.house_{n:02d}")
+        if rule:
+            houses.append((n, rule))
+    if not houses:
+        return
+
+    s = report.add(ReportSection("The Full Inventory of Lots", level=2))
+    d = _fire(
+        "islam.qabisi.ch5.lot_projection_method",
+        "how any lot in the chapter is to be projected",
+    )
+    if d:
+        s.delineations.append(d)
+
+    total = 0
+    cusp_gated = 0
+    for n, rule in houses:
+        lots = (rule.get("conclusion") or {}).get("lots") or []
+        if not lots:
+            continue
+        lines = [f"**House {n}** — {len(lots)} lot(s):"]
+        for lot in lots:
+            total += 1
+            name = lot.get("english_name") or lot.get("transliteration")
+            formula = (
+                f"{lot.get('from_point')} → {lot.get('to_point')}, cast from "
+                f"{lot.get('cast_from')}"
+            )
+            marks = []
+            if lot.get("reverses_by_night"):
+                marks.append("reverses by night")
+            if lot.get("needs_house_cusp"):
+                marks.append("keys to a house cusp, so not cast here")
+                cusp_gated += 1
+            suffix = f" ({'; '.join(marks)})" if marks else ""
+            lines.append(f"  - *{name}* — {formula}{suffix}.")
+            note = lot.get("note")
+            if note:
+                lines.append(f"      {note}")
+        s.notes.append("\n".join(lines))
+
+    s.notes.insert(
+        1,
+        f"Chapter V names {total} lots across the twelve houses. "
+        f"{cusp_gated} of them key to a house cusp or to the Midheaven; this "
+        "section computes whole-sign places, so those are named and not "
+        "approximated — a cusp-keyed lot cast against a whole-sign place is a "
+        "different lot with the right name on it.",
+    )
 
 
 def _hyleg_section(report: TraditionReport, qabisi: dict) -> None:
