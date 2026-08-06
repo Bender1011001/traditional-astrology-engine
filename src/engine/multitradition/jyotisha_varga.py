@@ -207,9 +207,14 @@ def all_vargas(longitude: float) -> dict[str, str]:
 
 # -- the five-fold relation ----------------------------------------------
 
-#: The temporal friendship: a graha is a friend of one standing in the 2nd,
-#: 3rd, 4th, 10th, 11th or 12th from it, and an enemy otherwise.
+#: The temporal friendship, and it is SOURCED, not supplied: Varahamihira
+#: states the houses outright at Brhajjataka 2.18 - friend in the 2nd, 12th,
+#: 11th, 3rd, 10th and 4th, enemy in the 1st, 5th, 6th, 7th, 8th and 9th.
+#: An earlier version of this module called the whole five-fold relation a
+#: configured method. That was an overstatement, made by checking the strength
+#: and varga packs and not the Brhajjataka planetary one.
 TATKALIKA_FRIENDLY_HOUSES = (2, 3, 4, 10, 11, 12)
+TATKALIKA_SOURCE = "Varahamihira, Brhajjataka 2.18"
 
 #: The compound rule is a DISCLOSED CONVENTION, not a mined rule. The corpus
 #: names adhimitra and adhisatru in its strength tables but no manifest in it
@@ -225,13 +230,15 @@ COMPOUND_RELATION = {
 }
 
 COMPOUND_RELATION_DISCLOSURE = (
-    "configured_method - the five-fold relation (adhimitra ... adhisatru) is "
-    "computed by compounding the natural relation with the temporal one, a "
-    "graha counting as a temporal friend of one in the 2nd, 3rd, 4th, 10th, "
-    "11th or 12th from it. NO manifest in this corpus encodes that "
-    "compounding: the strength and varga packs name the five tiers and take "
-    "them as given. The convention is supplied here and flagged so that a "
-    "source pass on BPHS adhyaya 3's maitri slokas can confirm or replace it."
+    "The five-fold relation (adhimitra ... adhisatru) is built from two "
+    "SOURCED inputs and one supplied step. The natural relations are "
+    "Varahamihira's at Brhajjataka 2.16-17, and the temporal ones are his at "
+    "2.18 - friend in the 2nd, 12th, 11th, 3rd, 10th and 4th from a graha, "
+    "enemy in the rest. What no manifest in this corpus states is how the two "
+    "COMPOUND into the five tiers: natural friend plus temporal friend giving "
+    "adhimitra, natural enemy plus temporal friend giving sama, and so on. "
+    "That table alone is configured_method, and a source pass on BPHS "
+    "adhyaya 3's maitri slokas can confirm or replace it."
 )
 
 
