@@ -22,6 +22,7 @@ nicety. Using a stand-in kernel and saying so is the honest version of that.
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from ..multitradition import build_panel
@@ -81,6 +82,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _sanku_section(report, reading)
     _sign_section(report, reading)
     _natal_section(report, birth, reading)
+    _reception_section(report)
     _structure_section(report)
     _limits_section(report, reading)
     return report
@@ -315,6 +317,70 @@ def _natal_section(
             "three-nine categories and those are reckoned from a birth "
             "mansion this reading could not settle."
         )
+
+
+def _reception_section(report: TraditionReport) -> None:
+    """How the tradition reached Japan, and which calendar it worked in.
+
+    Thirteen mined rules that make the calendar refusal above far more precise
+    than "the tables are not here". The sharpest of them: there are TWO named
+    regimes in play and they are not interchangeable.
+    """
+    from ..multitradition.sukuyodo import _rules as _sukuyo_rules
+
+    rules = _sukuyo_rules()
+    futian = rules.get("sukuyo.jp.futian_li_is_the_named_regime")
+    senmyo = rules.get("sukuyo.jp.senmyo_reki_is_the_state_calendar")
+    if not (futian or senmyo):
+        return
+
+    s = report.add(ReportSection("How This Reached Japan", level=2))
+    if futian:
+        c = futian.get("conclusion") or {}
+        s.notes.append(
+            f"The astrologers' calendar is the **{c.get('regime_name_cjk')} "
+            f"({c.get('regime_name_ja')})**, by {c.get('author')}, "
+            f"{c.get('produced')}, with an epoch of {c.get('epoch_year')} CE. "
+            f"{c.get('relation_to_this_tradition', '')}."
+        )
+    if senmyo:
+        c = senmyo.get("conclusion") or {}
+        s.notes.append(
+            "The **Senmyō reki** is something else: "
+            f"{c.get('role')}. It is {c.get('distinct_from')}."
+        )
+        s.notes.append(
+            "**That distinction sharpens the refusal above.** A Japanese birth "
+            "record states a civil date in the state calendar; the astrologer "
+            "then works in his own. Two regimes, not one, and not "
+            "interchangeable — so the stand-in kernel this report uses is "
+            "standing in for a pair of calendars, not for a single missing "
+            "table."
+        )
+    nichien = rules.get("sukuyo.jp.nichien_transmission_953_957")
+    if nichien:
+        c = nichien.get("conclusion") or {}
+        s.notes.append(
+            f"Nichien departed in {c.get('departed')} for "
+            f"{c.get('destination')}, studied {c.get('studied')}, and "
+            f"returned in {c.get('returned')}. {c.get('classification_note', '')}."
+        )
+    honmyo = rules.get("sukuyo.jp.honmyo_nichi_is_sexagenary")
+    if honmyo:
+        c = honmyo.get("conclusion") or {}
+        s.notes.append(
+            f"On the ritual day the 961 arbitration went the other way: "
+            f"{c.get('result')}."
+        )
+        # The pack cross-references a sibling rule by id inside its prose.
+        # That is a note to a maintainer, not a sentence for a reader.
+        warning = re.sub(
+            r"\s*The boundary rule [a-z0-9_.]+ is unaffected\s*-?\s*",
+            " ",
+            str(c.get("boundary_warning", "")),
+        ).strip()
+        if warning:
+            s.notes.append(warning)
 
 
 def _structure_section(report: TraditionReport) -> None:
