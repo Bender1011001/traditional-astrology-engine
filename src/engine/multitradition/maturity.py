@@ -172,11 +172,11 @@ MATURITY: dict[str, dict[str, Any]] = {
         "publication_readiness": "research only",
     },
     "vietnamese": {
-        "category": CALENDAR,
-        "source_readiness": "moderate - modern profile, validated worked tables",
-        "computational_readiness": "full for the calendar",
-        "validation_coverage": "all published vectors reproduce",
-        "interpretation_readiness": "none - natal interpretation explicitly refused",
+        "category": PARTIAL_JUDGMENT,
+        "source_readiness": "moderate - modern profile with validated worked tables, plus 54 Tu Vi rules from a construction manual and a Le Qui Don verse pack",
+        "computational_readiness": "full for the calendar; the Tu Vi board is constructed - Menh, Than, the cuc and Tu Vi's own seat - and the remaining star series are not placed",
+        "validation_coverage": "all published calendar vectors reproduce; the cuc grid's Latin-square property is asserted on load, which is the check that catches a mis-transcribed cell",
+        "interpretation_readiness": "partial - construction only; the palace delineations the pack holds are not wired",
         "publication_readiness": "research only",
     },
 }

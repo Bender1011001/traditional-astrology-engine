@@ -34,6 +34,7 @@ REPORT_ENGINES = {
     "jaimini": "jaimini_report",
     "ziwei_doushu": "ziwei_report",
     "sukuyodo": "sukuyodo_report",
+    "vietnamese": "tuvi_report",
 }
 
 
