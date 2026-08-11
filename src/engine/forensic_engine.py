@@ -1344,7 +1344,20 @@ class Auditor:
         #    technique. Reference: Valens, Anthology IV; Brennan, Hellenistic
         #    Astrology ch. 19 (peak periods are angular from the Lot of Fortune).
         zodiacal_releasing: Dict[str, Any] = {
-            "_doc": "Valens zodiacal releasing. L1 chapters released from the Lot of Spirit (action, career, eminence) and the Lot of Fortune (body, circumstance). 'current' gives the active L1>L2>L3. 'peak_from_fortune' marks chapters whose sign is angular (1/4/7/10) from the Lot of Fortune (peak periods of activity). Loosing of the Bond is flagged in each period's status.",
+            "_doc": (
+                "Valens zodiacal releasing. Released from the Lot of Spirit (mind, action, "
+                "career, eminence - the Sun's lot) and the Lot of Fortune (body, circumstance, "
+                "and the crafts done by hand - the Moon's lot); Valens IV.4, 160 and II.19, 81. "
+                "ALSO released topically per Valens IV.16, 185 - 'from EACH PLACE the releases "
+                "of the years should be made: from the Midheaven when we inquire about action, "
+                "and from the place concerning marriage when about a wife' - hence Marriage_7th, "
+                "Children_5th and Action_10th, counted whole-sign from the Ascendant. "
+                "'current' gives the active L1>L2>L3. 'peak_from_fortune' marks chapters whose "
+                "sign is angular (1/4/7/10) from the Lot of Fortune. Loosing of the Bond is "
+                "flagged in each period's status; per Valens IV.5, 163 it is NOT uniformly a "
+                "crisis marker - Saturn loosing into Leo/Cancer 'brings things out of darkness "
+                "into light', and with an afflicted natal Mercury the loosing runs 'to the better'."
+            ),
         }
         try:
             lot_lons = predictor.get_lots()  # name -> absolute longitude (sect-aware)
@@ -1352,11 +1365,32 @@ class Auditor:
             fortune_sidx = (
                 int(fortune_lon / 30) % 12 if fortune_lon is not None else None
             )
+            # Valens IV.16, 185: releasing is NOT restricted to the two lots.
+            # "from EACH PLACE the significations or the releases of the years
+            # should be made: from the MIDHEAVEN when we inquire about ACTION,
+            # and from the place concerning MARRIAGE when about a WIFE, ...
+            # and likewise from the place concerning CHILDREN."
+            # The machinery already accepts any start sign; only this call site
+            # was hard-wired to Fortune and Spirit, which is why no report could
+            # answer a topical timing question.
+            release_points: Dict[str, int] = {}
             for lot_name in ("Spirit", "Fortune"):
                 lon = lot_lons.get(lot_name)
-                if lon is None:
-                    continue
-                start_sign = list(Sign)[int(lon / 30) % 12]
+                if lon is not None:
+                    release_points[lot_name] = int(lon / 30) % 12
+            try:
+                asc_idx = int(float(chart.ascendant) / 30.0) % 12  # type: ignore
+                for label, offset in (
+                    ("Marriage_7th", 6),
+                    ("Children_5th", 4),
+                    ("Action_10th", 9),
+                ):
+                    release_points[label] = (asc_idx + offset) % 12
+            except Exception:
+                pass
+
+            for lot_name, sidx in release_points.items():
+                start_sign = list(Sign)[sidx]
                 current = calculate_zr_periods(start_sign, bdt, ans_date, level=4)
                 lifetime = calculate_zr_lifetime_map(
                     start_sign, bdt, years=100, max_level=1

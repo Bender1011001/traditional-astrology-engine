@@ -404,25 +404,95 @@ class PDFReportGenerator:
             except Exception:
                 return Paragraph(escape(stripped), style)
 
+    @staticmethod
+    def _is_table_separator(cells):
+        """A markdown separator row: every cell is dashes, colons or blank."""
+        return bool(cells) and all(
+            set(c.strip()) <= set("-: ") and "-" in c for c in cells
+        )
+
+    def _make_table(self, rows):
+        """Build a ReportLab Table from buffered markdown rows.
+
+        Without this, a pipe-delimited row falls through to the paragraph
+        branch and typesets as literal pipes, which is what every previous
+        report did. Cells are Paragraphs so long text wraps instead of
+        overflowing the column.
+        """
+        parsed = []
+        for raw in rows:
+            cells = [c.strip() for c in raw.strip().strip("|").split("|")]
+            if self._is_table_separator(cells):
+                continue
+            parsed.append(cells)
+        if not parsed:
+            return []
+
+        width = max(len(r) for r in parsed)
+        parsed = [r + [""] * (width - len(r)) for r in parsed]
+
+        cell_style = ParagraphStyle(
+            "TableCell", parent=self.styles["Normal"], fontSize=8.5, leading=11
+        )
+        head_style = ParagraphStyle(
+            "TableHead", parent=cell_style, fontName=self.styles["Header3"].fontName
+        )
+
+        data = []
+        for i, row in enumerate(parsed):
+            style = head_style if i == 0 else cell_style
+            data.append([self._safe_para(self._fmt_inline(c), style) for c in row])
+
+        avail = 6.5 * inch
+        table = Table(data, colWidths=[avail / width] * width, hAlign="LEFT")
+        table.setStyle(
+            TableStyle(
+                [
+                    ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                    ("LINEBELOW", (0, 0), (-1, 0), 0.75, colors.HexColor("#444444")),
+                    ("LINEBELOW", (0, 1), (-1, -2), 0.25, colors.HexColor("#DDDDDD")),
+                    ("TOPPADDING", (0, 0), (-1, -1), 3),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+                    ("LEFTPADDING", (0, 0), (-1, -1), 4),
+                    ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+                ]
+            )
+        )
+        return [Spacer(1, 4), table, Spacer(1, 8)]
+
     def _parse_markdown(self, text):
         """
         Simple, robust Markdown parser for ReportLab.
-        Converts # Headers, **bold**, *italics*, and lists; tolerates malformed
-        inline markup without failing the document.
+        Converts # Headers, **bold**, *italics*, lists and pipe tables;
+        tolerates malformed inline markup without failing the document.
         """
         flowables = []
         lines = text.split("\n")
         in_code_block = False
         in_evidence_notes = False
+        table_buf = []
+
+        def flush_table():
+            if table_buf:
+                flowables.extend(self._make_table(list(table_buf)))
+                table_buf.clear()
 
         for line in lines:
             line = line.strip()
 
             if line.startswith("```"):
+                flush_table()
                 in_code_block = not in_code_block
                 continue
             if in_code_block:
                 continue
+
+            # Buffer consecutive pipe rows and emit them as one table.
+            if line.startswith("|") and line.endswith("|") and len(line) > 1:
+                table_buf.append(line)
+                continue
+            flush_table()
+
             if not line:
                 flowables.append(Spacer(1, 6))
                 continue
@@ -468,6 +538,7 @@ class PDFReportGenerator:
                     )
                 )
 
+        flush_table()  # a document ending in a table would otherwise drop it
         return flowables
 
     def generate(self, custom_content: str = None):  # type: ignore

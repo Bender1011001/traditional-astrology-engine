@@ -274,8 +274,80 @@ def _condition_class(details: Mapping[str, Any]) -> str:
     return "mixed"
 
 
-def _direct_planet_delineation(name: str, details: Mapping[str, Any]) -> str:
+_VALENS_MALEFICS = {"Saturn", "Mars"}
+_VALENS_BENEFICS = {"Jupiter", "Venus"}
+_VALENS_DIURNAL = {"Sun", "Jupiter", "Saturn"}
+_VALENS_NOCTURNAL = {"Moon", "Venus", "Mars"}
+# Valens IV.11, 176: the injurious places. Benefics falling here "help nothing",
+# are "ineffective and weak", and "do not distribute their own goods".
+_VALENS_INJURIOUS_PLACES = {2, 6, 8, 12}
+
+
+def _valens_placement_verdict(
+    name: str, details: Mapping[str, Any], sect_type: Optional[str]
+) -> Optional[str]:
+    """Valens I.1, printed p. 5 - the placement-and-sect test, run BEFORE the label.
+
+        "The benefics, well placed and in their proper places, accomplish their
+         own effects ... BUT WHEN FALLEN, THEY ARE INDICATIVE OF OPPOSITIONS.
+         Likewise the malefics: when transacting in their proper places AND OF
+         THE SECT, they are GIVERS OF GOOD THINGS, and indicative of greater
+         rank and of advancement."
+
+    And I.22, p. 49, as method: the delineation lists are "single-form and
+    universal distinctions", but "THE POWER OF THE MATTERS WILL BE ALTERED" by
+    placement.
+
+    The composer previously read essential dignity alone and asserted the
+    verdict from the label - "because X is debilitated, these matters do not
+    operate cleanly" - which is the judgment order Valens forbids. Returns a
+    verdict only where his test actually fires, so ordinary cases fall through
+    to the existing prose unchanged.
+    """
+    dignity = str(details.get("dignities") or "").lower()
+    try:
+        house = int(details.get("house") or 0)
+    except (TypeError, ValueError):
+        house = 0
+    if not house:
+        return None
+
+    in_own_place = "domicile" in dignity or "exaltation" in dignity
+    is_day = str(sect_type or "").upper().startswith("DAY")
+    of_sect = name in (_VALENS_DIURNAL if is_day else _VALENS_NOCTURNAL)
+    injurious = house in _VALENS_INJURIOUS_PLACES
+
+    if name in _VALENS_MALEFICS and in_own_place and of_sect and not injurious:
+        return (
+            f"{name} is a malefic by nature, but the test Valens applies before the label is "
+            f"placement and sect, and {name} passes both: it stands in its own place and is of "
+            f"the sect in favour. On that reckoning it is a giver of good things here, and "
+            f"indicative of greater rank and advancement - not of damage. The nature is the raw "
+            f"material; the placement decides."
+        )
+    if name in _VALENS_BENEFICS and injurious:
+        return (
+            f"{name} is a benefic by nature, but it has fallen into one of the places Valens "
+            f"counts injurious, and there he is explicit that the benefics do not distribute "
+            f"their own goods. On that reckoning its testimony here is of opposition and "
+            f"ineffectiveness rather than support. The nature does not survive the placement."
+        )
+    if name in _VALENS_MALEFICS and of_sect and not injurious:
+        return (
+            f"{name} is a malefic by nature but is of the sect in favour and does not stand in "
+            f"an injurious place. Valens moderates it accordingly: its testimony is the manner "
+            f"and severity of a difficulty, not a guarantee of one."
+        )
+    return None
+
+
+def _direct_planet_delineation(
+    name: str, details: Mapping[str, Any], sect_type: Optional[str] = None
+) -> str:
     """State what a calculated planetary condition says about the native."""
+    placement_first = _valens_placement_verdict(name, details, sect_type)
+    if placement_first:
+        return placement_first
     condition = _condition_class(details)
     house = int(details.get("house") or 0)
     place = HOUSE_CONTEXT.get(house, f"house {house}")
@@ -615,6 +687,7 @@ def _planetary_testimony_paragraphs(
     planets: list[Mapping[str, Any]],
     aspects: list[Mapping[str, Any]],
     chart_rulers: list[Mapping[str, Any]],
+    sect_type: Optional[str] = None,
 ) -> list[str]:
     """Interpret every planet's full publishable condition and its configurations."""
     by_name = {
@@ -701,7 +774,7 @@ def _planetary_testimony_paragraphs(
             [
                 f"### {name} — {PLANET_EPITHETS[name]}",
                 (
-                    f"{_evidence_sentence(item)} {_direct_planet_delineation(name, details)} {weight}. {motion} "
+                    f"{_evidence_sentence(item)} {_direct_planet_delineation(name, details, sect_type)} {weight}. {motion} "
                     f"Its phase is {phase}. {orientation_text} {disposer_text} [{item.get('id')}]"
                 ),
             ]
@@ -2388,10 +2461,17 @@ def _longevity_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
         return str(value)
 
     paragraphs = [
-        "## Length of Life: Hyleg, Alcocoden, and Anareta",
+        "## Vitality: Hyleg, Alcocoden, and the Allotment of Years",
         (
-            "The old authors did not regard longevity as a mood or a metaphor. They selected a giver of life, a giver of years, "
-            "and destructive directions. This chart produces two incompatible numerical branches, so both must be stated. "
+            "The old authors selected a giver of life (Hyleg) and a giver of years (Alcocoden) to judge the "
+            "constitution: how robust the vital force is, where it is supported, and where it is undermined. "
+            "They also produced a number of years. This report publishes that arithmetic in full, but it does "
+            "**not** present it as a date of death, and you should not read it as one. The reason is empirical "
+            "rather than squeamish: applied mechanically to real nativities, the numeric step is frequently "
+            "falsified by the native's own survival, and Lilly himself writes that the Hyleg, Alcocoden, and "
+            "Anareta cannot always be determined with certainty. What survives that scrutiny is the "
+            "*constitutional* testimony — which planet carries the vital force, in what condition, and what "
+            "presses on it. That is what is judged below. "
             f"[{source_item.get('id')}] [{branch_item.get('id')}]"
         ),
     ]
@@ -2881,6 +2961,31 @@ def _long_range_timing_paragraphs(
         technique = details.get("technique")
         if technique == "annual_profection_map":
             continue
+        elif technique == "firdaria_map":
+            paragraphs.extend(["### The Remaining Firdaria Chapters", _evidence_sentence(item)])
+            for period in details.get("periods", []):
+                if not isinstance(period, Mapping):
+                    continue
+                lord = str(period.get("lord"))
+                planet = planet_map.get(lord)
+                ruler_text = ""
+                if planet:
+                    pd = planet["details"]
+                    ruler_text = (
+                        f" {lord} is natally in house {pd.get('house')} with {pd.get('dignities')}, so this chapter is "
+                        f"routed through {HOUSE_CONTEXT.get(pd.get('house'), 'that place')} and from "
+                        f"{_condition_phrase(pd)} condition repeatedly produces "
+                        f"{PLANET_PERIOD_EVENTS.get(lord, lord + ' matters')} [{planet.get('id')}]"
+                    )
+                elif lord in ("North Node", "South Node"):
+                    ruler_text = (
+                        " The nodal periods are the configured extension to the seven-planet core; they describe "
+                        "increase and release respectively rather than a planet's own agenda."
+                    )
+                paragraphs.append(
+                    f"{lord}, {period.get('start')} to {period.get('end')} ({period.get('years')} years).{ruler_text} "
+                    f"[{item.get('id')}]"
+                )
         elif technique == "zodiacal_releasing_map":
             lot = str(details.get("lot"))
             field = "action, direction, and reputation" if lot == "Spirit" else "circumstance and material allotment"
@@ -2910,6 +3015,10 @@ def _long_range_timing_paragraphs(
                     f"[{item.get('id')}]"
                 )
     return paragraphs
+
+
+# One full profection cycle returns the Ascendant to its starting place.
+DETAILED_FORECAST_YEARS = 12
 
 
 def _ranked_forecast_paragraphs(
@@ -3050,10 +3159,17 @@ def _ranked_forecast_paragraphs(
         )
     if not windows:
         return []
+    # Detailed year-by-year judgment covers one complete profection cycle (12
+    # years returns the Ascendant to its starting place). The remaining years
+    # are published as a compact calendar below rather than as prose.
+    all_windows = windows
+    windows = windows[:DETAILED_FORECAST_YEARS]
     ranked = sorted(windows, key=lambda row: (-float(row["score"]), str(row["chapter"].get("start"))))
     rank_by_start = {str(row["chapter"].get("start")): index + 1 for index, row in enumerate(ranked)}
+    first_year = str(windows[0]["chapter"].get("start"))[:4]
+    last_year = str(windows[-1]["chapter"].get("end"))[:4]
     paragraphs = [
-        "## Ranked Forecast: 2026-2031",
+        f"## Ranked Forecast: {first_year}-{last_year}",
         "These are event judgments, not a list of themes. Rank measures agreement among independent clocks; it does not mean that a lower-ranked year is unimportant. Dates are activation windows, not promises that an event occurs on one exact day.",
     ]
     event_verdicts = {
@@ -3098,6 +3214,31 @@ def _ranked_forecast_paragraphs(
             f"Convergence score {row['score']:.1f}; direct support: {support_text}.{background_text} "
             f"{row['citations']}" + (f" [{planet.get('id')}]" if planet else ""),
         ])
+
+    remaining = all_windows[DETAILED_FORECAST_YEARS:]
+    if remaining:
+        first = str(remaining[0]["chapter"].get("start"))[:4]
+        last = str(remaining[-1]["chapter"].get("end"))[:4]
+        paragraphs.extend([
+            f"### The Full Profection Calendar: {first}-{last}",
+            (
+                "Beyond the detailed cycle above, the annual profection calendar continues as exact "
+                "arithmetic. Each line gives the year, the activated place, and the Lord of that Year, "
+                "whose natal condition (judged earlier in this report) decides how the year performs. "
+                "These are ruler activations, not predicted events."
+            ),
+        ])
+        rows: list[str] = []
+        for row in remaining:
+            chapter = row["chapter"]
+            ruler = str(row["ruler"])
+            house = int(chapter.get("age") or 0) % 12 + 1
+            rows.append(
+                f"- **{str(chapter.get('start'))[:4]}-{str(chapter.get('end'))[:4]}** (age "
+                f"{chapter.get('age')}): {chapter.get('sign')}, house {house} — "
+                f"{HOUSE_CONTEXT.get(house, f'house {house}')} — Lord of the Year: {ruler}"
+            )
+        paragraphs.append("\n".join(rows))
     return paragraphs
 
 
@@ -3142,9 +3283,17 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
         "your capacities, difficulties, relationships, work, losses, conflicts, and likely periods of change. Each "
         "conclusion is weighted through sect, planetary condition, rulership, configuration, reception, and time lords."
     )
+    sect_label: Optional[str] = None
     if foundation:
         lines.append(_evidence_sentence(foundation[0]))
         sect_fact = str(foundation[0].get("fact", "")).upper()
+        # Captured for _valens_placement_verdict: Valens I.1 p.5 runs the
+        # placement-and-sect test BEFORE the benefic/malefic label, so the
+        # planet paragraphs need to know the sect, not just this preamble.
+        if "CHART IS DAY" in sect_fact:
+            sect_label = "DAY"
+        elif "CHART IS NIGHT" in sect_fact:
+            sect_label = "NIGHT"
         if "CHART IS DAY" in sect_fact:
             lines.append(
                 "Sect is applied before judging the malefics: Saturn is the more moderated malefic in this day figure, while Mars is less accommodated to the prevailing sect. This changes the manner and severity of their testimony; it does not make Saturn benefic or make every Mars testimony destructive. "
@@ -3177,7 +3326,11 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
         "Each planet acts in your life. Strength shows capacity; debility or maltreatment shows recurring failures, conflicts, "
         "losses, delays, and difficult people. Contrary testimony modifies rather than erases judgment."
     )
-    lines.extend(_planetary_testimony_paragraphs(planets, aspects, chart_rulers))
+    lines.extend(
+        _planetary_testimony_paragraphs(
+            planets, aspects, chart_rulers, sect_type=sect_label
+        )
+    )
     lines.extend(_antiscia_paragraphs(antiscia, planets))
     lines.extend(_doryphory_paragraphs(doryphory, planets))
     lines.extend(_dispositor_paragraphs(dispositors))

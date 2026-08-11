@@ -38,9 +38,20 @@ _INTERNAL_OUTPUT = re.compile(
     r"\b(?:DARK_MOON|MOON_UNDER_BEAMS|CONSTRUCTIVE_MALEFIC|DESTRUCTIVE_MALEFIC)\b)"
 )
 
+# "guaranteed" and "certain outcome" were matched as bare words, which meant the
+# contract flagged its OWN disclaimers - "it describes the manner and severity of
+# a difficulty, not a guaranteed event" tripped the fatalism check. That pushes
+# authors toward vaguer hedging, which is the opposite of what this rule is for.
+# The check now requires an ASSERTIVE construction, so a promise still fails and
+# a denial of a promise does not. Variable-width lookbehind is unavailable in
+# `re`, so enumerating negations is not an option; requiring the assertive form
+# is both simpler and harder to defeat by accident.
 _FATALISTIC = re.compile(
     r"\b(?:the universe (?:will )?(?:demand|require)s?|mandatory (?:reset|reckoning)|"
-    r"guaranteed|certain outcome|ultimate worldly success|architect of your own survival|"
+    r"(?:is|are|was|were)\s+guaranteed|guarantees?\s+(?:that|you|a\b|an\b|the\b)|"
+    r"guaranteed\s+(?:outcome|success|result|to\b)|"
+    r"(?:is|are|it is)\s+(?:a\s+)?certain outcome|"
+    r"ultimate worldly success|architect of your own survival|"
     r"this will happen|fate has determined|the chart decrees)\b",
     re.IGNORECASE,
 )
@@ -88,13 +99,31 @@ def _excerpt(text: str, match: re.Match[str], radius: int = 85) -> str:
     return re.sub(r"\s+", " ", text[start:end]).strip()[:260]
 
 
+# A phrase inside a denial is not the claim the contract is guarding against.
+# "success is guaranteed" must fail; "nothing here is guaranteed" and "not a
+# guaranteed event" are the disclaimers we WANT authors to write, and flagging
+# them pushes the prose toward vaguer hedging - the opposite of the intent.
+# Python's `re` has no variable-width lookbehind, so this is checked as a window
+# of preceding text rather than inside each pattern.
+_NEGATION_NEARBY = re.compile(
+    r"\b(?:not|never|no|none|nothing|nor|without|cannot|can't|doesn't|does not|"
+    r"isn't|is not|won't|will not|rather than|instead of)\b[^.;:]{0,40}$",
+    re.IGNORECASE,
+)
+
+
 def _pattern_violation(
     text: str, pattern: re.Pattern[str], code: str, message: str
 ) -> ReadingViolation | None:
-    match = pattern.search(text)
-    if not match:
-        return None
-    return ReadingViolation(code, message, _excerpt(text, match))
+    for match in pattern.finditer(text):
+        # Look back to the start of the sentence, capped, for a negator.
+        window_start = max(0, match.start() - 80)
+        preceding = text[window_start : match.start()]
+        preceding = re.split(r"[.;:]\s", preceding)[-1]
+        if _NEGATION_NEARBY.search(preceding):
+            continue
+        return ReadingViolation(code, message, _excerpt(text, match))
+    return None
 
 
 def _repeated_paragraph(text: str) -> ReadingViolation | None:

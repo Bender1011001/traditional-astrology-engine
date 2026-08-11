@@ -94,6 +94,29 @@ PTOLEMAIC_TRIPLICITY = {
     "Water": (PlanetName.VENUS, PlanetName.MOON),
 }
 
+# Ptolemy gives WATER three rulers, not two. Tetrabiblos I.19 (Boll-Boer Greek,
+# source file lines 3859-3895):
+#
+#   "κατελείφθη μόνῳ λοιπῷ ὄντι τῷ τοῦ Ἄρεως ... συνοικοδεσποτοῦσι δὲ ΑΥΤΩΙ
+#    ... νυκτὸς μὲν ἡ σελήνη, ἡμέρας δὲ ὁ τῆς Ἀφροδίτης"
+#
+#   "It was left to Mars, he being the sole one remaining and having a relation
+#    to it through the house of Scorpio. And co-ruling it WITH HIM - on account
+#    of both the sect and the femininity of the signs - by night the Moon, and
+#    by day Venus."
+#
+# Both received traditions keep half of that sentence: Lilly reads only "left to
+# Mars" and gives him water by day and night; the common table reads only the
+# co-rulers and drops Mars. Water is Ptolemy's ONLY three-ruler triangle - the
+# other three name two rulers each and no third.
+#
+# PTOLEMAIC_TRIPLICITY above holds the sect-split pair, and several callers
+# unpack it as exactly two (reception.py), so Mars is carried separately here
+# rather than widening that tuple. He rules in BOTH sects.
+PTOLEMAIC_TRIPLICITY_PARTICIPATING = {
+    "Water": PlanetName.MARS,
+}
+
 # Lilly's printed triplicity table (Christian Astrology I) - a LATIN-EUROPEAN
 # tradition, not Ptolemy's, and kept separate from him for that reason. Its
 # water row gives Mars by day and by night, which is where the old hybrid's

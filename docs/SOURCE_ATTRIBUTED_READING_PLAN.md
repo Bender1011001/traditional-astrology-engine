@@ -28,6 +28,52 @@ We want:
 
 ---
 
+## 1b. SOURCE POLICY (owner decision, 2026-08-02)
+
+**"I only want to use the old texts. I don't want other people's opinions or interpretation."**
+
+### The rule
+Doctrine comes from the historical authority itself. Modern commentary, popularisations, and secondary interpretation are excluded as sources — they may be used privately as finding aids, never cited as doctrine.
+
+A translation of Ptolemy is still Ptolemy. A modern astrologer explaining what Ptolemy meant is not.
+
+### Tier 0 — the original languages (best available; started 2026-08-02)
+**This is now the preferred tier. Work from it wherever the text exists.**
+
+| Text | Location | Status |
+|---|---|---|
+| **Ptolemy, Greek** (Boll–Boer Teubner critical edition) | `docs/research/multitradition/hellenistic/sources/ptolemy_apotelesmatika_boll_boer_teubner_djvu.txt` | Book I ch. 7, 14, 19, 20 translated; ch. 21 opened. See `docs/sources/ptolemy_greek_book1.md` |
+| **CCAG** vols 1, 5.1, 8.1, 8.3, 8.4 | `docs/research/multitradition/byzantine/sources/` | not started |
+| **Lydus, *De Ostentis*** | same directory | not started |
+| **Ibn Ezra, Hebrew** (facing pages in Sela) | `tmp/ibn_ezra_nativities_revolutions_sela.txt` | not started |
+
+Three reasons this outranks Tier 1:
+1. **No copyright at all.** The Greek is ancient; our English is our own work and is quotable without restriction.
+2. **No translator between us and the author.** Our Ashmand edition is Ashmand's English of *Proclus' paraphrase* — Ptolemy at two removes. The registry has always said so in `edition_limit`; the Greek removes both layers.
+3. **Ptolemy almost always says *why*.** English versions keep the rule and drop the argument. The argument is the more valuable half for a source-attributed reading.
+
+### Tier 1 — quotable verbatim (old, public domain)
+| Text | Status | Covers |
+|---|---|---|
+| **Lilly, *Christian Astrology* (1647)** | English **original**, PD | planets, twelve houses, dignities, reception, degree qualities, hyleg |
+| **Ptolemy, *Tetrabiblos* (Ashmand 1822)** | PD translation | sect, aspects, triplicities, terms, prorogation |
+| **al-Bīrūnī, *Book of Instruction* (Wright 1934)** | PD translation | Firdaria, hayz/halb, years tables |
+
+### Tier 2 — technique usable, wording NOT quotable (in copyright)
+Dorotheus (Pingree/Houlding — marked "personal study use only"), Ibn Ezra (Sela), Firmicus (Bram 1975), Paulus (Schmidt), Valens (Schmidt/Riley).
+
+A **method** is arithmetic and free to implement. Only a translator's English is protected. So: compute the technique, describe it in our own words, cite chapter and page — never reproduce the translation.
+
+### Tier 3 — excluded entirely
+Modern commentary and popularisations. Specifically `docs/research/Binder1.txt`, which is AI-generated reports citing web pages, contains two corrupted planetary-years tables, and attributes web paraphrases to Ptolemy and Valens. **Leads only. Never a source.**
+
+### Known consequences
+- Paulus's twelve places (the classic Hellenistic house source) is unquotable AND its OCR is destroyed. **Lilly p.95 covers the same ground and is quotable** — use it.
+- Zodiacal Releasing interpretation is thinner without quotable Valens. Mechanics are unaffected.
+- [ ] Confirm al-Bīrūnī/Wright 1934 PD status per jurisdiction before commercial verbatim use.
+
+---
+
 ## 2. Design principles
 
 1. **No claim without a citation.** If we can't name the text, chapter and page, it doesn't go in the customer-facing layer.
@@ -58,6 +104,8 @@ We want:
 - [ ] **"Foreshadowing" ZR status** — a configured label currently published under a Valens citation. Either source it or relabel it.
 - [ ] **ZR uses 360-day years** for L1/L2 boundaries; dates run ~5 days early per released year. Needs a source check.
 - [ ] **Valens-variant Eros/Necessity** appear swapped in `lots.py` (dead code, no callers).
+- [x] **Water triplicity fork — RESOLVED 2026-08-02 from Ptolemy's Greek (I.19).** Ptolemy says both received answers in one sentence: the triangle "was left to Mars," *and* the Moon co-rules by night and Venus by day *with him*. Water is his only three-ruler triangle. Our `(Venus, Moon)` sect-split is correct and Lilly's Mars is correctly held in its own table. **Remaining gap:** the two-slot structure cannot hold Mars as a water ruler in both sects, so that dignity goes unscored — needs a third optional slot, not a change to the existing two.
+- [ ] **Mercury's sect was never resolved in readings** — fixed 2026-08-02 in `multitradition/hellenistic.py`. Ptolemy I.7 makes it determinate from the solar phase (morning → diurnal, evening → nocturnal); the engine computed the phase but printed "common" and stopped. Audited the other sect call sites: `horary.py:1260`, `trace_generator.py:330`, `hellenistic_report.py:224` and `free_reading_generator.py:188` all enumerate only the six fixed-sect planets and simply omit Mercury — a coverage gap, not a false claim. **One open case:** `byzantine_report.py:150` prints "Mercury is common to both" from a *Rhetorius* rule pack. Do NOT paste Ptolemy's resolution in there — that is tradition-blending, the same error as the old hybrid water triplicity. It needs Rhetorius' own text, or it stays as it is.
 
 ---
 

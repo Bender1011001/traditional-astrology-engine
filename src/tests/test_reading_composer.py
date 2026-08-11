@@ -160,7 +160,11 @@ def test_evidence_packet_excludes_protected_layers_and_outer_planets(chart_data)
     career = next(item for item in evidence if item.category == "topical")
     timing = [item for item in evidence if item.category == "timing"]
     assert sect.source_rule_id == "sect_malefic_moderation"
-    assert sect.verification_status == "text_verified"
+    # Was "text_verified", which is the DEFAULT applied when a registry rule
+    # carries no verification field at all - it reads like a verification but
+    # means "unrecorded". Tetrabiblos I.7 has since been read in the Boll-Boer
+    # Greek, so this rule now carries a real, stronger status.
+    assert sect.verification_status == "greek_text_read_directly"
     assert almutens == []
     assert "action, rank, reputation, and career" in career.fact
     assert "essential dignity strong (+9)" in career.fact
@@ -177,7 +181,11 @@ def test_evidence_packet_excludes_protected_layers_and_outer_planets(chart_data)
     assert releasing.verification_status == "translation_inspected"
     assert firdaria.verification_status == "translation_and_facing_text_inspected"
     aspect = next(item for item in evidence if item.category == "aspect")
-    assert aspect.verification_status == "translation_inspected_partial"
+    # Was "translation_inspected_partial" while ptolemaic_aspects cited Ashmand
+    # 1822 - which is Ashmand's English of PROCLUS' PARAPHRASE, i.e. Ptolemy at
+    # two removes. Tetrabiblos I.14 has since been read in the Boll-Boer Greek
+    # directly, so the provenance genuinely improved and the assertion tracks it.
+    assert aspect.verification_status == "greek_text_read_directly"
     joy = next(item for item in evidence if item.category == "planetary_joy")
     assert joy.details == {"name": "Mercury", "house": 1}
     assert joy.source_rule_id == "paulus_planetary_joys"

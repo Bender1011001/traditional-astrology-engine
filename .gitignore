@@ -121,3 +121,16 @@ etsy_test_batch.csv
 # local agent/editor scaffold (leaks internal deploy URLs + local perms)
 .claude/
 .roomodes
+
+# Blind-test answer key. Committing this defeats the test it exists to run.
+BARNUM_BLIND_TEST_KEY_DO_NOT_OPEN.json
+
+# Third-party reference texts dropped in the repo root. Not ours to redistribute,
+# and the source policy is to work from the original editions under docs/sources/.
+/Implementation Specifications for Historical Astrological Calculation Engines_ A Technical and Astronomical Blueprint.txt
+/Traditional Astrology Engine Specifications.txt
+/Traditional Astrology Reading Guide.txt
+
+# Local tooling scratch + skill pins; not part of the deployed service.
+tools/
+skills-lock.json

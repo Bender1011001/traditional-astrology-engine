@@ -15,6 +15,12 @@ from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 from typing import Any, Mapping
+from src.engine.valens_delineations import (BOUND_QUALIFIER,
+                                          BOUND_SIGN_NOTES,
+                                          PLANET_COLOUR_TASTE,
+                                          bound_delineation,
+                                          lord_of_hour_delineation,
+                                          lunar_phase_for)
 
 
 SEPTENER = ("Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn")
@@ -65,6 +71,45 @@ PAULUS_LOT_MEANINGS = {
     "Nemesis": "subterranean and cold fates, impotence, exile, destruction, grief, and the quality of death",
 }
 SOURCE_REGISTRY_PATH = Path(__file__).resolve().parents[1] / "database" / "data" / "doctrine_sources.json"
+
+# Long-range timing coverage. The classical techniques are exact arithmetic and
+# cost nothing to project forward, so the report covers the native's realistic
+# remaining life rather than an arbitrary short slice. These are activation
+# calendars, not event guarantees; the composer states that limit in prose.
+#
+# The horizon prefers the chart's own Alcocoden allotment of years, which is the
+# tradition's own answer to "how far ahead does this nativity run". It is used
+# only to bound a calendar; the report never presents it as a date of death, and
+# a figure the engine marked invalid (below the native's attained age) is not
+# used at all.
+DEFAULT_HORIZON_AGE = 90
+MIN_HORIZON_YEARS_AHEAD = 12
+
+
+def _alcocoden_horizon_age(chart_data: Mapping[str, Any]) -> int:
+    """Age at which the long-range activation calendars stop.
+
+    DELIBERATELY INDEPENDENT OF THE LONGEVITY JUDGMENT.
+
+    An earlier version bounded these calendars at the chart's own Alcocoden
+    allotment. That was wrong on two counts:
+
+      1. It published a death date by implication. A reader whose profection
+         table simply stops at 2056 has been told something about 2056, and
+         every inspected authority forbids exactly that. Lilly: the native may
+         live the allotted years "if he met with no very obfiruftive
+         direftions in the interim, or efcaped ludden caltuJties" — and he adds
+         that "its not in Mans power politicly to fet downe the certaine number
+         of yeeres". al-Biruni and Valens both frame the figure as a ceiling
+         that stands only until an anaereta interferes.
+      2. It made the calendar hostage to a technique this project has since
+         shown to be unreliable in implementation (see scripts/validate_longevity.py).
+
+    Profections, Firdaria, decennials and Zodiacal Releasing are deterministic
+    calendars of activation. They cost nothing to project and carry no claim
+    about survival, so they run to a fixed generous age for every native.
+    """
+    return DEFAULT_HORIZON_AGE
 
 
 def _load_source_registry() -> Mapping[str, Any]:
@@ -152,6 +197,76 @@ def _planet_condition_details(planet: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+# Egyptian bounds as plain data, so the Ascendant's bound can be found without
+# importing the dignity calculator into the evidence layer. Cumulative END
+# degrees, mirroring EGYPTIAN_TERMS.
+_SIGN_SEQUENCE = ("Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+                  "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces")
+
+# Valens III.15, p. 156: "In the OPPOSITION, through sevens of years; in the
+# RIGHT TRINE, through the 9th; in the LEFT TRINE, through the 5th; in the
+# RIGHT SQUARE, through the 10th; in the LEFT, through the 4th."
+# Keyed by whole-sign separation from the Lot of Fortune to the malefic.
+# Right-hand figures are the earlier (dexter) side, counted backwards in
+# zodiacal order; left-hand the later (sinister) side.
+_CLIMACTERIC_BY_FIGURE = {
+    6: ("opposition", "sevens of years"),
+    8: ("right trine", "the 9th year"),
+    4: ("left trine", "the 5th year"),
+    9: ("right square", "the 10th year"),
+    3: ("left square", "the 4th year"),
+}
+
+
+_DOMICILE_BY_SIGN = {
+    "Aries": "Mars", "Taurus": "Venus", "Gemini": "Mercury", "Cancer": "Moon",
+    "Leo": "Sun", "Virgo": "Mercury", "Libra": "Venus", "Scorpio": "Mars",
+    "Sagittarius": "Jupiter", "Capricorn": "Saturn", "Aquarius": "Saturn",
+    "Pisces": "Jupiter",
+}
+
+
+_EGYPTIAN_BOUNDS = {}
+
+
+def _load_egyptian_bounds() -> None:
+    from src.engine.reference_data import EGYPTIAN_TERMS
+    for sign_key, rows in EGYPTIAN_TERMS.items():
+        name = str(getattr(sign_key, "value", sign_key))
+        _EGYPTIAN_BOUNDS[name] = [
+            (str(getattr(p, "value", p)), float(limit)) for p, limit in rows
+        ]
+
+
+_load_egyptian_bounds()
+
+
+def _place_tier(house: Any) -> str:
+    """Valens's potency ranking of the places, IV.11, printed p. 176.
+
+    "The BUSY and ACTIVE places are: the Ascendant, the Midheaven, the Good
+     Daimon [11th], Good Fortune [5th], the Lot of Fortune, the Daimon, Eros,
+     Necessity. MIDDLING: the God [9th], the Goddess [3rd], and the remaining
+     two angles [7th, 4th]. MODERATE and INJURIOUS: the rest."
+
+    This is the definition of chrematistikos, the term II.2 and II.22 both hang
+    on; without it neither rule can be evaluated. Note Valens rates the 6th
+    above the 12th "inasmuch as it holds a trine figure to the Midheaven",
+    which this coarse three-way split does not express.
+    """
+    try:
+        h = int(house)
+    except (TypeError, ValueError):
+        return "unranked"
+    if h in (1, 10, 11, 5):
+        return "busy"
+    if h in (9, 3, 7, 4):
+        return "middling"
+    if h in (2, 6, 8, 12):
+        return "injurious"
+    return "unranked"
+
+
 def _dispositor_chain(
     start: str, planets: Mapping[str, Mapping[str, Any]]
 ) -> tuple[list[str], str]:
@@ -175,6 +290,58 @@ def _dispositor_chain(
         seen.add(disposer)
         current = disposer
     return chain, "incomplete"
+
+
+_FIRDARIA_DAY_ORDER = [
+    ("Sun", 10), ("Venus", 8), ("Mercury", 13), ("Moon", 9),
+    ("Saturn", 11), ("Jupiter", 12), ("Mars", 7),
+    ("North Node", 3), ("South Node", 2),
+]
+_FIRDARIA_NIGHT_ORDER = [
+    ("Moon", 9), ("Saturn", 11), ("Jupiter", 12), ("Mars", 7),
+    ("Sun", 10), ("Venus", 8), ("Mercury", 13),
+    ("North Node", 3), ("South Node", 2),
+]
+
+
+def _firdaria_remaining_majors(
+    chart_data: Mapping[str, Any], report_date: str
+) -> list[dict[str, Any]]:
+    """Project the Firdaria major-period sequence forward from the report date.
+
+    The engine returns only the currently active period. The full sequence is
+    fixed arithmetic from the birth date and sect, so the remaining chapters
+    are derived here rather than left unanswerable for the customer.
+    """
+    analysis = _mapping(chart_data.get("analysis"))
+    sect_type = str(_mapping(analysis.get("sect")).get("type") or "").upper()
+    order = _FIRDARIA_DAY_ORDER if sect_type.startswith("DAY") else _FIRDARIA_NIGHT_ORDER
+    birth_iso = str(_mapping(_mapping(chart_data.get("meta")).get("chart")).get("date") or "")
+    if not birth_iso:
+        return []
+    try:
+        birth = datetime.fromisoformat(birth_iso[:10])
+        now = datetime.fromisoformat(report_date[:10])
+    except ValueError:
+        return []
+
+    rows: list[dict[str, Any]] = []
+    cursor_age = 0.0
+    for lord, duration in order:
+        start = birth + timedelta(days=cursor_age * 365.25)
+        end = birth + timedelta(days=(cursor_age + duration) * 365.25)
+        cursor_age += duration
+        if end <= now:
+            continue
+        rows.append(
+            {
+                "lord": lord,
+                "start": start.date().isoformat(),
+                "end": end.date().isoformat(),
+                "years": duration,
+            }
+        )
+    return rows
 
 
 def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidence]:
@@ -257,6 +424,630 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
         for item in _sequence(analysis.get("planets_forensic"))
         if isinstance(item, Mapping) and item.get("name") in SEPTENER
     }
+
+    # Ptolemy, Tetrabiblos I.7, read from the Boll-Boer Greek: Mercury is common
+    # to both sects, "diurnal when he makes a MORNING appearance, nocturnal when
+    # an EVENING one." The phase is already computed; only the conclusion was
+    # missing, so every chart reported Mercury as permanently undecided and
+    # silently dropped a real dignity or debility.
+    mercury = planets.get("Mercury")
+    if mercury is not None and sect.get("type"):
+        oriental = _planet_condition_details(mercury).get("is_oriental")
+        if oriental is not None:
+            is_day = str(sect["type"]).upper().startswith("DAY")
+            mercury_diurnal = bool(oriental)
+            in_sect = mercury_diurnal == is_day
+            phase_word = "morning" if mercury_diurnal else "evening"
+            verdict = "of the sect in favour" if in_sect else "contrary to the sect"
+            add(
+                "foundation",
+                (
+                    f"Mercury is {'a morning' if mercury_diurnal else 'an evening'} star, "
+                    f"and is therefore reckoned "
+                    f"{'diurnal' if mercury_diurnal else 'nocturnal'}; in this "
+                    f"{str(sect['type']).lower()} chart Mercury is {verdict}."
+                ),
+                "Claudius Ptolemy, Apotelesmatika I.7, Boll-Boer Greek, source file lines 2498-2522",
+                "ptolemy_sect_membership",
+                "analysis.planets_forensic[Mercury].is_oriental",
+                (
+                    "Ptolemy makes Mercury's sect determinate from its solar phase. "
+                    "'Common' names the rule, not the answer: given a phase there is always "
+                    "an answer. This modifies Mercury's condition; it does not by itself "
+                    "make Mercury strong or weak."
+                ),
+                {
+                    "phase": phase_word,
+                    "reckoned": "diurnal" if mercury_diurnal else "nocturnal",
+                    "chart_sect": str(sect["type"]),
+                    "in_sect": in_sect,
+                },
+            )
+
+    # ------------------------------------------------------------------
+    # The Lot of Fortune as a second Ascendant. Valens II.17, 79,7:
+    #   "Before all one must precisely establish the Lot of Fortune ... For the
+    #    Lot itself takes up the power of the ASCENDANT and of LIFE; the tenth
+    #    from it, of MIDHEAVEN and REPUTATION."
+    # topical.py has emitted places_from_fortune all along and nothing ever
+    # surfaced it, so the layer Valens says to consult "before all" never
+    # reached a reader.
+    fortune_places = _mapping(_mapping(analysis.get("topical")).get("places_from_fortune"))
+    fortune_entries = [
+        _mapping(p) for p in _sequence(fortune_places.get("places")) if isinstance(p, Mapping)
+    ]
+    if fortune_entries:
+        by_place = {int(p.get("place_from_fortune", 0)): p for p in fortune_entries}
+        lot_itself = by_place.get(1)
+        acquisition = by_place.get(11)
+
+        if lot_itself and acquisition:
+            lot_house = _place_tier(lot_itself.get("radical_house"))
+            acq_house = _place_tier(acquisition.get("radical_house"))
+            add(
+                "fortune_derived",
+                (
+                    f"The Lot of Fortune falls in {lot_itself.get('sign')}, whole-sign house "
+                    f"{lot_itself.get('radical_house')} ({lot_house}), ruled by "
+                    f"{lot_itself.get('ruler')}. The Place of Acquisition — the eleventh from "
+                    f"Fortune — is {acquisition.get('sign')}, whole-sign house "
+                    f"{acquisition.get('radical_house')} ({acq_house}), ruled by "
+                    f"{acquisition.get('ruler')}."
+                ),
+                "Vettius Valens, Anthologiae II.17 (79,7), II.20 (82,6) and II.22 (89), Kroll 1908 Greek",
+                "valens_fortune_derived_places",
+                "analysis.topical.places_from_fortune",
+                (
+                    "Valens judges the Lot of Fortune as a second Ascendant and reads wealth "
+                    "over time by comparing it against the eleventh place from it. Place tiers "
+                    "are his: busy (Asc, MC, 11th, 5th), middling (9th, 3rd, 7th, 4th), "
+                    "injurious (2nd, 6th, 8th, 12th) - IV.11, 176. This is a placement "
+                    "testimony, not a prediction of wealth."
+                ),
+                {
+                    "fortune_sign": fortune_places.get("fortune_sign"),
+                    "fortune_house": lot_itself.get("radical_house"),
+                    "fortune_tier": lot_house,
+                    "fortune_ruler": lot_itself.get("ruler"),
+                    "acquisition_sign": acquisition.get("sign"),
+                    "acquisition_house": acquisition.get("radical_house"),
+                    "acquisition_tier": acq_house,
+                    "acquisition_ruler": acquisition.get("ruler"),
+                },
+            )
+
+            # Valens II.22, 89 reads the pair as a life-arc, and it is the only
+            # rule in the corpus that uses the Acquisition place. It was
+            # uninterpretable until II.20 defined the term.
+            lot_ok = lot_house != "injurious"
+            acq_ok = acq_house != "injurious"
+            if lot_ok != acq_ok:
+                if acq_ok:
+                    verdict = (
+                        "Fortune falls in an injurious place while the Acquisition does not. "
+                        "Valens reads that as becoming better from a young age: what arrives "
+                        "unbidden is obstructed, what is built through the Acquisition place is not."
+                    )
+                else:
+                    verdict = (
+                        "Fortune falls well while the Acquisition is afflicted. Valens reads "
+                        "that as possessions diminishing as age advances."
+                    )
+                add(
+                    "fortune_derived",
+                    verdict,
+                    "Vettius Valens, Anthologiae II.22, printed p. 89, Kroll 1908 Greek",
+                    "valens_fortune_acquisition_arc",
+                    "analysis.topical.places_from_fortune",
+                    (
+                        "A comparative placement rule about the direction of material fortune "
+                        "over a life, not a promise of wealth or poverty. It says nothing about "
+                        "amounts and nothing about a date. NOTE: the Acquisition place is a "
+                        "fixed ten-sign offset from Fortune, so the two tiers are NOT "
+                        "independent testimonies - they are one placement stated twice, and "
+                        "must not be counted as separate agreeing evidence. The split occurs "
+                        "for only four of the twelve possible Fortune placements (houses 4, 6, "
+                        "10 and 12); on the other eight the rule is silent."
+                    ),
+                    {
+                        "fortune_tier": lot_house,
+                        "acquisition_tier": acq_house,
+                        "direction": "improving" if acq_ok else "diminishing",
+                    },
+                )
+
+    # Valens I.3, pp. 14-19 delineates all sixty bounds. We have always reported
+    # the bound lord and said nothing about what it means. Only translated
+    # bounds are emitted; an untranslated one produces silence rather than a
+    # generic phrase, because at the point of use an invented delineation is
+    # indistinguishable from a translated one.
+    for name in SEPTENER:
+        planet = planets.get(name)
+        if not planet:
+            continue
+        variants = _mapping(_mapping(planet.get("dignities")).get("variants"))
+        egyptian = _mapping(_mapping(variants.get("terms")).get("egyptian"))
+        bound_lord = egyptian.get("ruler")
+        sign_name = planet.get("sign")
+        delineation = bound_delineation(sign_name, bound_lord)
+        if not delineation:
+            continue
+        note = BOUND_SIGN_NOTES.get(str(sign_name))
+        add(
+            "bound_delineation",
+            (
+                f"{name} stands in {sign_name}, in the bound of {bound_lord}. "
+                f"Valens delineates that bound: {delineation}."
+                + (" " + note if note else "")
+            ),
+            "Vettius Valens, Anthologiae I.3, printed pp. 14-19, Kroll 1908 Greek",
+            "valens_bound_delineations",
+            f"analysis.planets_forensic[{name}].dignities.variants.terms.egyptian.ruler",
+            (
+                "A delineation of the DEGREES, not a verdict on the person. Valens attaches "
+                "conditions constantly and they decide the outcome - Sagittarius in Mercury's "
+                "bound gives philosophers 'when Mercury inclines' and soldiers 'when Mars'; "
+                "Capricorn in Jupiter's bound produces BOTH reputation and disrepute. Quoting "
+                "the substrate without the condition is quoting half a sentence. The bound is "
+                "one testimony among many and is outweighed by placement and sect. "
+                + BOUND_QUALIFIER
+            ),
+            {
+                "planet": name,
+                "sign": sign_name,
+                "bound_lord": bound_lord,
+                "bound_system": "Egyptian (the set Valens uses)",
+            },
+        )
+
+    # Valens II.4, pp. 60-62: the planet "allotted the hour" (ruling the
+    # Ascendant) or ruling the Lot of Fortune, with witness clauses that
+    # double, redirect or reverse the base verdict.
+    _asc_lon_early = _mapping(_mapping(analysis.get("angles")).get("Ascendant")).get("longitude")
+    try:
+        asc_sign_for_lord = (
+            _SIGN_SEQUENCE[int(float(_asc_lon_early) // 30) % 12]
+            if _asc_lon_early is not None
+            else None
+        )
+    except (TypeError, ValueError):
+        asc_sign_for_lord = None
+    fortune_sign_name = str(fortune_places.get("fortune_sign") or "") or None
+    for role, sign_name in (("Ascendant", asc_sign_for_lord), ("Lot of Fortune", fortune_sign_name)):
+        if not sign_name:
+            continue
+        ruler = _DOMICILE_BY_SIGN.get(sign_name)
+        ruler_planet = planets.get(str(ruler)) if ruler else None
+        if ruler_planet is None or not ruler_planet.get("sign"):
+            continue
+        r_sign = str(ruler_planet.get("sign"))
+        if r_sign not in _SIGN_SEQUENCE:
+            continue
+        witnesses = []
+        for other in SEPTENER:
+            if other == ruler:
+                continue
+            op = planets.get(other)
+            if not op or not op.get("sign") or str(op.get("sign")) not in _SIGN_SEQUENCE:
+                continue
+            d = (_SIGN_SEQUENCE.index(str(op.get("sign"))) - _SIGN_SEQUENCE.index(r_sign)) % 12
+            if d in (0, 2, 3, 4, 6, 8, 9, 10):
+                witnesses.append(other)
+        found = lord_of_hour_delineation(ruler, witnesses)
+        if not found:
+            continue
+        base, clauses = found
+        add(
+            "lord_of_hour",
+            (
+                f"{ruler} rules the {role}. Valens: {base}."
+                + ("".join(" " + c.capitalize() + "." for c in clauses) if clauses else "")
+            ),
+            "Vettius Valens, Anthologiae II.4, printed pp. 60-62, Kroll 1908 Greek",
+            "valens_lord_of_hour_or_lot",
+            f"analysis.planets_forensic[{ruler}]",
+            (
+                "The base verdict and the witness clauses are reported separately because "
+                "Valens's clauses reverse the outcome as often as they strengthen it - Saturn "
+                "prospers 'provided Mars does not oppose', and with Mars gives disturbances "
+                "instead. A modified verdict must never be presented as the base one."
+            ),
+            {
+                "role": role,
+                "ruler": ruler,
+                "witnesses": witnesses,
+                "clauses_applied": len(clauses),
+            },
+        )
+
+    # Valens II.37 (pp. 114-117) and II.38 (pp. 119-121). Marriage is judged
+    # from the 7th sign AND from Venus's condition, dispositor and witnesses.
+    # Each test below is one of his named conditions; all inputs were already
+    # computed and none were being applied to this topic.
+    venus = planets.get("Venus")
+    if venus is not None:
+        tests: list[str] = []
+        details_out: Dict[str, Any] = {}
+
+        # "if her lord is setting, or in the BAD-DAIMON place ... it makes
+        #  people unfortunate about marriages and transactions"
+        v_disp = _planet_condition_details(venus).get("dispositor")
+        disp_planet = planets.get(str(v_disp)) if v_disp else None
+        if disp_planet is not None and disp_planet.get("house") == 12:
+            tests.append(
+                f"Venus's dispositor {v_disp} stands in the twelfth place, which Valens names "
+                f"the Bad Daimon. He reads that as unfortunate about marriages and transactions"
+            )
+            details_out["dispositor_in_12th"] = v_disp
+
+        # "The Moon set under the beams is not good for marriage."
+        moon_p = planets.get("Moon")
+        if moon_p is not None:
+            solar = str(moon_p.get("solar_status") or "").upper()
+            if "COMBUST" in solar or "UNDER" in solar:
+                tests.append(
+                    "the Moon is under the Sun's beams, which Valens states is not good for marriage"
+                )
+                details_out["moon_under_beams"] = True
+
+        # "Saturn OVERLOOKING Venus makes people for the most part unmarried
+        #  and hard to deal with." Overcoming = Saturn in the 10th sign from her.
+        saturn_p = planets.get("Saturn")
+        v_sign, s_sign = str(venus.get("sign") or ""), str((saturn_p or {}).get("sign") or "")
+        if v_sign in _SIGN_SEQUENCE and s_sign in _SIGN_SEQUENCE:
+            sep = (_SIGN_SEQUENCE.index(s_sign) - _SIGN_SEQUENCE.index(v_sign)) % 12
+            if sep == 9:
+                tests.append(
+                    "Saturn stands in the tenth sign from Venus, overcoming her - the figure "
+                    "Valens says makes people for the most part unmarried and hard to deal with"
+                )
+                details_out["saturn_overcomes_venus"] = True
+            elif sep in (3, 6):
+                tests.append(
+                    "Saturn regards Venus by "
+                    + ("opposition" if sep == 6 else "square")
+                    + ", which Valens counts as Saturn overlooking her"
+                )
+                details_out["saturn_regards_venus"] = "opposition" if sep == 6 else "square"
+            elif sep == 0:
+                # Co-presence, not an aspect. Valens keeps the two distinct
+                # (synparousia vs epiblepein), so it is named as what it is.
+                tests.append(
+                    "Saturn is co-present with Venus in the same sign - closer contact than the "
+                    "aspects Valens names, though he treats co-presence as a separate category"
+                )
+                details_out["saturn_copresent_with_venus"] = True
+
+        # "Venus in SATURN'S SIGN OR BOUNDS" is one of the named conditions of
+        # II.37's severe branch, alongside the aspect. Omitting it missed the
+        # single most specific Saturn-Venus contact a chart can have.
+        v_terms = _mapping(_mapping(_mapping(venus.get("dignities")).get("variants")).get("terms"))
+        v_bound_lord = _mapping(v_terms.get("egyptian")).get("ruler")
+        if str(v_bound_lord) == "Saturn":
+            tests.append(
+                "Venus stands in Saturn's own bound, a condition Valens names explicitly "
+                "alongside the aspect"
+            )
+            details_out["venus_in_saturn_bound"] = True
+        if v_sign in ("Capricorn", "Aquarius"):
+            tests.append(f"Venus stands in Saturn's own sign, {v_sign}")
+            details_out["venus_in_saturn_sign"] = True
+
+        if tests:
+            # The escape clause. Valens attaches it ONLY to the extreme outcome
+            # ("altogether widows and virgins"), which requires the absence of
+            # ALL THREE of Mars, Jupiter and Mercury. It does not soften the
+            # milder statements, and reading it onto them is a documented error.
+            witnesses = []
+            for w in ("Mars", "Jupiter", "Mercury"):
+                wp = planets.get(w)
+                if wp is None or not wp.get("sign"):
+                    continue
+                w_sign = str(wp.get("sign"))
+                if w_sign not in _SIGN_SEQUENCE or v_sign not in _SIGN_SEQUENCE:
+                    continue
+                d = (_SIGN_SEQUENCE.index(w_sign) - _SIGN_SEQUENCE.index(v_sign)) % 12
+                if d in (0, 2, 3, 4, 6, 8, 9, 10):
+                    witnesses.append(w)
+            details_out["mitigating_witnesses"] = witnesses
+            clause = (
+                (
+                    " Valens's severest outcome requires that NONE of Mars, Jupiter or Mercury "
+                    "witness Venus; here " + ", ".join(witnesses) + " "
+                    + ("does" if len(witnesses) == 1 else "do")
+                    + ", so that branch is closed by his own wording."
+                )
+                if witnesses
+                else (
+                    " None of Mars, Jupiter or Mercury witnesses Venus, so Valens's severest "
+                    "branch is not excluded by the condition he attaches to it."
+                )
+            )
+            add(
+                "marriage_testimony",
+                "On the place of marriage: " + "; ".join(tests) + "." + clause,
+                "Vettius Valens, Anthologiae II.37 (pp. 114-117) and II.38 (pp. 119-121), Kroll 1908 Greek",
+                "valens_marriage_tests",
+                "analysis.planets_forensic[Venus]",
+                (
+                    "Named placement tests, not a forecast about any relationship. The escape "
+                    "clause governs ONLY the sentence it appears in - Valens attaches it to the "
+                    "extreme outcome alone, and carrying it up to the milder statements is "
+                    "unsupported. Marriage is also read from the 7th sign, which these tests do "
+                    "not replace."
+                ),
+                details_out,
+            )
+
+    # Valens II.2, printed pp. 56-57. The sect light's triplicity rulers divide
+    # the life: the FIRST governs the earlier portion, the SECOND the later.
+    # analysis.triplicity_periods already returns exactly these three rulers and
+    # even labels their temporal roles; nothing read them.
+    trip = _mapping(analysis.get("triplicity_periods"))
+    rulers = _mapping(trip.get("rulers"))
+    first_r, second_r = rulers.get("first"), rulers.get("second")
+    if first_r and second_r:
+        def _standing(pname: str) -> tuple[str, Optional[int]]:
+            pl = planets.get(str(pname))
+            if not pl:
+                return "unranked", None
+            house = pl.get("house")
+            return _place_tier(house), house
+
+        first_tier, first_house = _standing(first_r)
+        second_tier, second_house = _standing(second_r)
+        order = {"busy": 2, "middling": 1, "injurious": 0, "unranked": 1}
+        arc = None
+        if order[first_tier] < order[second_tier]:
+            arc = (
+                "The first ruler stands in a weaker place than the second. Valens reads that as "
+                "irregularities in the earlier portion of life, becoming effective afterwards - "
+                "though passed, in his words, unstably and fearfully."
+            )
+        elif order[first_tier] > order[second_tier]:
+            arc = (
+                "The first ruler stands in a stronger place than the second. Valens reads that as "
+                "being brought out well in the earlier years and afterwards pulled down."
+            )
+        add(
+            "life_arc",
+            (
+                f"The sect light is {trip.get('sect_light')} in {trip.get('sect_light_sign')}, "
+                f"the {str(trip.get('element') or '').lower()} triangle. Its rulers are "
+                f"{first_r} (first, governing the earlier portion of life, in house "
+                f"{first_house} - {first_tier}) and {second_r} (second, governing the later, "
+                f"in house {second_house} - {second_tier}), with {rulers.get('participant')} "
+                f"participating." + (" " + arc if arc else "")
+            ),
+            "Vettius Valens, Anthologiae II.1 (54,4) and II.2 (56,16-57), Kroll 1908 Greek",
+            "valens_triplicity_life_arc",
+            "analysis.triplicity_periods",
+            (
+                "Valens judges each ruler by place - angular or busy gives fortunate and brilliant, "
+                "succedent middling, cadent low and unfortunate - and divides the life between the "
+                "first and second. It describes a SHAPE, not dated events, and it names no hinge "
+                "year: Valens puts the turn at 'the ascension of the sign', which depends on the "
+                "birth latitude and is not computed here."
+            ),
+            {
+                "sect_light": trip.get("sect_light"),
+                "element": trip.get("element"),
+                "first_ruler": first_r,
+                "first_tier": first_tier,
+                "second_ruler": second_r,
+                "second_tier": second_tier,
+                "participant": rulers.get("participant"),
+                "direction": (
+                    "improving" if arc and "afterwards" in arc and "pulled down" not in arc
+                    else "declining" if arc else "level"
+                ),
+            },
+        )
+
+    # Valens II.27, printed pp. 94-95: a distinct timing system, and it splits
+    # the significators by QUESTION - life from the Ascendant and Moon, action
+    # and reputation from Fortune, Spirit, the Sun and the syzygy. We run one
+    # undifferentiated timeline.
+    add(
+        "timing_method",
+        (
+            "Valens assigns different significators to different questions of timing: for the "
+            "times OF LIFE, the Ascendant and the Moon, or the signs their lords occupy; for "
+            "ACTION and REPUTATION, the Lot of Fortune, the Lot of Spirit, the Sun, the prenatal "
+            "syzygy, and the exaltation and its lord. Period lengths come from the ascensional "
+            "time of the sign or the planet's own cyclic period, and the places hand over in "
+            "rank order - the angles first, then the succedents, then the cadents, empty places "
+            "being skipped."
+        ),
+        "Vettius Valens, Anthologiae II.27, printed pp. 94-95, Kroll 1908 Greek",
+        "valens_time_distribution",
+        "analysis.enhanced_profections",
+        (
+            "A statement of METHOD - which significators answer which question - not a forecast. "
+            "Valens carries at least eight distinct timing systems and ranks none of them, "
+            "because he held that the method must be fitted to the chart and said he ran out of "
+            "life to determine which was right."
+        ),
+        {
+            "life_significators": ["Ascendant", "Moon"],
+            "action_significators": ["Fortune", "Spirit", "Sun", "syzygy", "exaltation lord"],
+            "handover_order": ["angles", "succedents", "cadents"],
+        },
+    )
+
+    # Valens I.1 (pp. 1-5) and II.30 (p. 101): several topics carry MORE THAN
+    # ONE significator, and the engine has been treating each too narrowly.
+    # The Moon signifies the mother AND Venus "signifies mother and nourishment";
+    # II.30 confirms it - "likewise VENUS the maternal place, AND THE MOON".
+    # Siblings run three deep: the Moon (elder brother), Jupiter (brotherhood)
+    # and Mercury, "lord of brothers and of younger children".
+    add(
+        "second_significators",
+        (
+            "The mother has two significators in this tradition, not one: the Moon, and Venus, "
+            "who 'signifies mother and nourishment'. Siblings have three: the Moon for the elder "
+            "brother, Jupiter for brotherhood, and Mercury, 'lord of brothers and of younger "
+            "children'. The father is the Sun, and in second place Saturn."
+        ),
+        "Vettius Valens, Anthologiae I.1 (pp. 1-5) and II.30 (p. 101), Kroll 1908 Greek",
+        "valens_second_significators",
+        "reference: Valens I.1, II.30",
+        (
+            "A rule about WHICH planets to weigh for a topic, not a statement about the reader's "
+            "family. Valens judges the parents by asking which of Sun, Saturn, Moon and Venus is "
+            "more afflicted or has fallen away - a comparison that is impossible if only one "
+            "significator per parent is admitted."
+        ),
+        {
+            "mother": ["Moon", "Venus"],
+            "father": ["Sun", "Saturn"],
+            "siblings": ["Moon", "Jupiter", "Mercury"],
+        },
+    )
+
+    # Valens III.15, printed p. 156: the climacteric PERIODICITY is set by which
+    # aspect a malefic throws at the Lot of Fortune. Not implemented anywhere.
+    if fortune_entries:
+        lot_sign = str(fortune_places.get("fortune_sign") or "")
+        lot_idx = _SIGN_SEQUENCE.index(lot_sign) if lot_sign in _SIGN_SEQUENCE else None
+        if lot_idx is not None:
+            cycles = []
+            for malefic in ("Saturn", "Mars"):
+                mp = planets.get(malefic)
+                if not mp or not mp.get("sign"):
+                    continue
+                msign = str(mp.get("sign"))
+                if msign not in _SIGN_SEQUENCE:
+                    continue
+                sep = (_SIGN_SEQUENCE.index(msign) - lot_idx) % 12
+                figure = _CLIMACTERIC_BY_FIGURE.get(sep)
+                if figure:
+                    cycles.append((malefic, figure[0], figure[1]))
+            if cycles:
+                described = "; ".join(
+                    f"{m} stands in {fig} to the Lot, giving a cycle of {per}"
+                    for m, fig, per in cycles
+                )
+                add(
+                    "climacteric",
+                    (
+                        f"Valens derives the climacteric periodicity from the figure a malefic "
+                        f"throws at the Lot of Fortune. {described}."
+                    ),
+                    "Vettius Valens, Anthologiae III.15, printed p. 156, Kroll 1908 Greek",
+                    "valens_lot_climacterics",
+                    "analysis.topical.places_from_fortune",
+                    (
+                        "A periodicity, not a list of dated events. Valens gives it as 'especially "
+                        "when malefics are with, or witness, Fortune' - so it applies where such a "
+                        "figure exists and is silent otherwise. It names an interval, never an outcome."
+                    ),
+                    {"cycles": [{"malefic": m, "figure": f, "period": p} for m, f, p in cycles]},
+                )
+
+    # Valens II.35, pp. 106-108: eleven lunar configurations, each with the
+    # topic it signifies and the planet prevailing through it. The engine
+    # emitted a single undifferentiated lunar_cycle item.
+    moon = planets.get("Moon")
+    if moon is not None:
+        elongation = _planet_condition_details(moon).get("solar_elongation_deg")
+        phase = lunar_phase_for(elongation)
+        if phase:
+            lord_clause = (
+                f" {phase['lord']} prevails through it."
+                if phase.get("lord")
+                else ""
+            )
+            add(
+                "lunar_phase",
+                (
+                    f"The Moon stands at the {phase['name']}, "
+                    f"{float(elongation):.1f} degrees from the Sun. "
+                    f"Valens assigns that configuration to {phase['signifies']}.{lord_clause}"
+                ),
+                "Vettius Valens, Anthologiae II.35, printed pp. 106-108, Kroll 1908 Greek",
+                "valens_lunar_configurations",
+                "analysis.planets_forensic[Moon].solar_elongation_deg",
+                (
+                    "Valens divides the lunar month into eleven named configurations and gives "
+                    "each a topic and a ruling planet. The waxing half-moon carries injury and "
+                    "violent happenings; the waning half-moon carries old matters and "
+                    "long-lasting afflictions, under Saturn - acute against chronic. This is a "
+                    "topical assignment, not a prediction."
+                ),
+                {
+                    "phase": phase["name"],
+                    "elongation_deg": round(float(elongation), 2),
+                    "lord": phase.get("lord"),
+                },
+            )
+
+    # Valens I.1, pp. 1-5. Each planet's schema closes with sect, colour and
+    # taste. The pair is complete across all seven and had never been carried.
+    colour_lines = []
+    for name in SEPTENER:
+        entry = PLANET_COLOUR_TASTE.get(name) or {}
+        if entry.get("colour") and entry.get("taste"):
+            colour_lines.append(
+                f"{name}: in colour {entry['colour']}, in taste {entry['taste']}"
+            )
+    if colour_lines:
+        add(
+            "planetary_qualities",
+            "Valens closes each planet's account with a colour and a taste. " + "; ".join(colour_lines) + ".",
+            "Vettius Valens, Anthologiae I.1, printed pp. 1-5, Kroll 1908 Greek",
+            "valens_planet_colour_taste",
+            "reference: src/engine/valens_delineations.PLANET_COLOUR_TASTE",
+            (
+                "A complete and systematic attribute set in the source, recorded for fidelity. "
+                "It is a property of the PLANETS, not of the reader, and carries no judgment "
+                "about the chart. Mercury's pair was not preserved in the passage as read and "
+                "is therefore omitted rather than guessed."
+            ),
+            {"planets_carried": len(colour_lines), "planets_total": len(SEPTENER)},
+        )
+
+    # The Ascendant's own bound. Valens singles it out at I.3, p.15 for Virgo -
+    # "generally the whole of Virgo, but ESPECIALLY these degrees" - and it is
+    # the most personal degree in the figure, so it must not be omitted just
+    # because the loop above walks planets.
+    asc_map = _mapping(_mapping(analysis.get("angles")).get("Ascendant"))
+    asc_lon = asc_map.get("longitude")
+    if asc_lon is not None:
+        try:
+            asc_sign_name = _SIGN_SEQUENCE[int(float(asc_lon) // 30) % 12]
+            asc_deg = float(asc_lon) % 30.0
+            asc_bound = None
+            for planet_name, limit in _EGYPTIAN_BOUNDS.get(asc_sign_name, []):
+                if asc_deg < limit:
+                    asc_bound = planet_name
+                    break
+            asc_delineation = bound_delineation(asc_sign_name, asc_bound)
+            if asc_delineation:
+                add(
+                    "bound_delineation",
+                    (
+                        f"The Ascendant stands in {asc_sign_name}, in the bound of {asc_bound}. "
+                        f"Valens delineates that bound: {asc_delineation}."
+                    ),
+                    "Vettius Valens, Anthologiae I.3, printed pp. 14-19, Kroll 1908 Greek",
+                    "valens_bound_delineations",
+                    "analysis.angles.Ascendant",
+                    (
+                        "The bound of the rising degree, delineated. A statement about the "
+                        "DEGREES, not a verdict on the person, and one testimony among many. "
+                        + BOUND_QUALIFIER
+                    ),
+                    {
+                        "point": "Ascendant",
+                        "sign": asc_sign_name,
+                        "bound_lord": asc_bound,
+                        "bound_system": "Egyptian (the set Valens uses)",
+                    },
+                )
+        except (TypeError, ValueError):
+            pass
+
     for name in SEPTENER:
         planet = planets.get(name)
         if not planet:
@@ -1088,6 +1879,116 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
                 "rulers": [profection.get("lord_of_year")],
             },
         )
+        # Valens IV.14, printed p. 182: a retrograde time-lord DEFERS rather
+        # than denies - "they put the expected things, the matters, the benefits
+        # and the undertakings into POSTPONEMENT". That is a distinct verdict
+        # from affliction, and we had no way to say it.
+        loy_name = profection.get("lord_of_year")
+        loy = planets.get(str(loy_name)) if loy_name else None
+        if loy is not None and loy.get("retrograde"):
+            add(
+                "timing",
+                (
+                    f"The Lord of the Year, {loy_name}, is retrograde. Valens reads a "
+                    f"retrograde time-lord as postponement rather than denial: it puts the "
+                    f"expected matters, benefits and undertakings into deferral."
+                ),
+                "Vettius Valens, Anthologiae IV.14, printed p. 182, Kroll 1908 Greek",
+                "valens_retrograde_timelord_postponement",
+                f"analysis.planets_forensic[{loy_name}].retrograde",
+                (
+                    "Postponement is a distinct verdict from affliction: the matter is deferred, "
+                    "not refused. Valens sets it against the oriental time-lord who 'accomplishes "
+                    "actions manifestly'. It does not name a date on which the deferral ends."
+                ),
+                {
+                    "technique": "annual_profection",
+                    "lord_of_year": loy_name,
+                    "verdict": "postponement",
+                },
+            )
+
+        # Valens IV.22, p. 195: a malefic ruling its own period is judged by
+        # SECT, not by its label. "Mars distributing to himself BY DAY will be
+        # unpleasant and troublesome ... BUT BY NIGHT HE IS NOT BAD, but
+        # successful and beneficial - especially if he stands in the transacting
+        # signs." IV.19 says the same of the Ascendant handing to a malefic:
+        # worst "especially to SATURN BY NIGHT and to MARS BY DAY" - in each
+        # case the OUT-OF-SECT one. We had implemented this for the natal
+        # paragraphs and left the timing layer asserting from the label.
+        if loy_name in {"Saturn", "Mars"}:
+            is_day_chart = str(sect.get("type") or "").upper().startswith("DAY")
+            loy_of_sect = (loy_name == "Saturn") if is_day_chart else (loy_name == "Mars")
+            loy_tier = _place_tier((loy or {}).get("house"))
+            if loy_of_sect and loy_tier != "injurious":
+                verdict_text = (
+                    f"{loy_name} rules the year and is a malefic by nature, but is of the sect "
+                    f"in favour and does not stand in an injurious place. Valens reads a malefic "
+                    f"governing its own period under those conditions as not bad but effective "
+                    f"and beneficial - the more so for work of that planet's own kind."
+                )
+                verdict = "effective"
+            else:
+                verdict_text = (
+                    f"{loy_name} rules the year and is contrary to the sect"
+                    + (
+                        f", standing in the {loy_tier} place of house {(loy or {}).get('house')}"
+                        if loy_tier == "injurious"
+                        else ""
+                    )
+                    + ". Valens marks the out-of-sect malefic as the harder time-lord: it "
+                    "describes the manner and severity of a difficulty, not a guaranteed event."
+                )
+                verdict = "harder"
+            add(
+                "timing",
+                verdict_text,
+                "Vettius Valens, Anthologiae IV.22 (p. 195) and IV.19 (p. 192), Kroll 1908 Greek",
+                "valens_malefic_timelord_by_sect",
+                f"analysis.planets_forensic[{loy_name}]",
+                (
+                    "Sect decides the verdict on a malefic time-lord, not the malefic label. "
+                    "Valens gives the same planet opposite readings by day and by night, so a "
+                    "period ruled by Saturn or Mars cannot be judged from the planet's name "
+                    "alone. It still describes manner and severity, never a specific event."
+                ),
+                {
+                    "lord_of_year": loy_name,
+                    "of_sect": loy_of_sect,
+                    "place_tier": loy_tier,
+                    "verdict": verdict,
+                },
+            )
+
+        # Valens IV.16, p. 184: the natal foundation caps what any period can
+        # do. "When we find a notable and brilliant foundation ... with malefics
+        # holding the times ... we say the nativity will suffer nothing out of
+        # place; but the affairs will be managed disorderly." And the standing
+        # instruction: "not as though for the greater and the glorious alike,
+        # BUT DISTINGUISH."
+        add(
+            "timing",
+            (
+                "Any verdict on this period is bounded by the foundation of the nativity itself. "
+                "Valens states it three times across three books: whatever figure the stars make "
+                "at the birth, according to the foundation of the casting, is what they accomplish "
+                "when they become lords of the times. A strong foundation under difficult times "
+                "produces disorder, blame and fear rather than catastrophe; a weak one under "
+                "favourable times does not produce greatness. And nothing arrives unmixed - even "
+                "a strong benefic period, he says, brings its action or reputation together with "
+                "oppositions and expenditures."
+            ),
+            "Vettius Valens, Anthologiae IV.16 (p. 184), VII.1 (p. 266) and VII.2 (p. 267), Kroll 1908 Greek",
+            "valens_hypostasis_caps_timing",
+            "analysis.enhanced_profections",
+            (
+                "A constraint on interpretation, not a prediction. It is the doctrinal guard "
+                "against the commonest predictive error - treating a hard period as meaning the "
+                "same thing in every chart. Valens states it as an instruction: 'but distinguish'."
+            ),
+            {"technique": "interpretive_constraint", "source": "hypostasis"},
+        )
+
         signs = (
             "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces",
@@ -1102,7 +2003,11 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
         sequence = []
         if current_sign in signs and birth_year:
             sign_index = signs.index(current_sign)
-            for offset in range(6):
+            # Cover the native's realistic remaining life, not a six-year slice:
+            # profections are exact arithmetic and cost nothing to extend.
+            horizon_age = _alcocoden_horizon_age(chart_data)
+            span = max(MIN_HORIZON_YEARS_AHEAD, horizon_age - current_age)
+            for offset in range(span):
                 age = current_age + offset
                 start_year = birth_year + age
                 sequence.append(
@@ -1121,7 +2026,8 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
         if sequence:
             add(
                 "timing_map",
-                "The six-year profection map runs "
+                f"The profection map covers ages {sequence[0]['age']} through "
+                f"{sequence[-1]['age']} ({sequence[0]['start'][:4]}-{sequence[-1]['end'][:4]}) and runs "
                 + "; ".join(
                     f"age {item['age']} {item['sign']} / {item['ruler']} ({item['start']} to {item['end']})"
                     for item in sequence
@@ -1254,6 +2160,24 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
                 "end": firdaria.get("Sub End"),
             },
         )
+        # The remaining major periods to the end of the 75-year cycle. The
+        # current-period item above answers "now"; this answers "what comes
+        # after", which the customer cannot derive from a single period.
+        remaining = _firdaria_remaining_majors(chart_data, report_date)
+        if remaining:
+            add(
+                "timing_map",
+                f"The remaining Firdaria major periods run "
+                + "; ".join(
+                    f"{row['lord']} ({row['start']} to {row['end']})" for row in remaining
+                )
+                + ".",
+                "Configured medieval Firdaria sequence",
+                source_rule_id,
+                "analysis.fate.firdaria + meta.chart.date",
+                "Each major period hands the chapter to a new lord; its natal condition decides how that chapter performs.",
+                {"technique": "firdaria_map", "periods": remaining},
+            )
     else:
         # The classical Firdaria sequence spans 75 years. For a native beyond
         # that span (or when the engine returns no current period), the honest
@@ -1320,8 +2244,6 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
             if str(chapter.get("end_date") or "") <= report_date[:10]:
                 continue
             l1_chapters.append(dict(chapter))
-            if len(l1_chapters) == 3:
-                break
         if l1_chapters:
             add(
                 "timing_map",
@@ -1347,7 +2269,15 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
     current_date = report_date
     decennial_map: list[dict[str, Any]] = []
     try:
-        horizon_end = (datetime.fromisoformat(report_date.replace("Z", "+00:00")) + timedelta(days=365.2425 * 6)).date().isoformat()
+        _profection_now = _mapping(analysis.get("enhanced_profections")).get("age")
+        _age_now = float(_profection_now) if isinstance(_profection_now, (int, float)) else 0.0
+        _years_ahead = max(
+            MIN_HORIZON_YEARS_AHEAD, _alcocoden_horizon_age(chart_data) - _age_now
+        )
+        horizon_end = (
+            datetime.fromisoformat(report_date.replace("Z", "+00:00"))
+            + timedelta(days=365.2425 * _years_ahead)
+        ).date().isoformat()
     except ValueError:
         horizon_end = "9999-12-31"
     for period in decennials:
@@ -1378,7 +2308,8 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
     if decennial_map:
         add(
             "timing_map",
-            "The six-year decennial map contains "
+            f"The long-range decennial map ({decennial_map[0].get('start')} to "
+            f"{decennial_map[-1].get('end')}) contains "
             + "; ".join(
                 f"{period.get('major_lord')} major ({period.get('start')} to {period.get('end')})"
                 for period in decennial_map

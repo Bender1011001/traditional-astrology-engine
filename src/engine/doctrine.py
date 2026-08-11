@@ -32,13 +32,61 @@ _SEPTENER = [
 # --- Curated registry of standing disagreements ----------------------------
 DOCTRINAL_FORKS: List[Dict[str, Any]] = [
     {
+        "topic": "Masculine and feminine degrees",
+        "summary": "Whether the degrees alternate by a rule or follow an irregular table.",
+        "positions": [
+            {"authority": "Valens, Anthologiae I.12 (printed pp. 27-28), c. 165",
+             "position": "A GENERATIVE RULE: in masculine signs the first 2.5 degrees are masculine, the next 2.5 feminine, alternating; in feminine signs the first 2.5 are feminine, then alternating. Twelve equal blocks per sign, phase set by the sign's own gender."},
+            {"authority": "Lilly, Christian Astrology p. 117, 1647",
+             "position": "An IRREGULAR TABLE with no evident generating rule - Aries breaks at 8/9/15/22/30, Taurus at 5/11/17/21/24/30, and so on."},
+        ],
+        "engine_handling": "The engine ships Lilly's table (degrees.py _MF), correctly attributed to him. These are two different systems roughly 1,480 years apart, and neither is a corruption of the other. Valens's rule is not implemented; it is recorded here so the Lilly table is not mistaken for the tradition's single answer.",
+    },
+    {
+        "topic": "Bounds - a fourth system",
+        "summary": "Valens rejects the received bounds and derives his own.",
+        "positions": [
+            {"authority": "Egyptian / Ptolemaic / Chaldean (the three transmitted systems)",
+             "position": "Five bounds per sign among the five non-luminaries; the lights receive none. Ptolemy attacks the Egyptian set at I.21 for preserving 'consistency neither of order nor of quantity'."},
+            {"authority": "Valens, Anthologiae III.9 (printed pp. 144-145), his own",
+             "position": "'It did not seem right to me, as some do, to impose the bounds according to the seven-zone, but according to the HOUSES and the EXALTATIONS and the TRIANGLES.' Each planet's degree-allotment in EVERY sign equals its count of dignities: Sun 3, Moon 4, Saturn 4, Jupiter 5, Mars 5, Venus 5, Mercury 4 - summing exactly to 30. It INCLUDES THE LIGHTS, which no transmitted system does, and the order is SECT-DEPENDENT, which no transmitted system is."},
+        ],
+        "engine_handling": "Not implemented. TermSystem carries the three transmitted systems, which is the right default. Recorded because Valens flags it in the first person and derives it from a stated principle, so it is an authored alternative rather than a variant reading.",
+    },
+    {
+        "topic": "Topical assignment of the places",
+        "summary": "Which house governs which subject - and Valens alone carries three incompatible answers.",
+        "positions": [
+            {"authority": "Paulus Alexandrinus ch. 24 (the engine's default)",
+             "position": "The familiar twelve-place topical list. This is what the reading cites."},
+            {"authority": "Valens II.5-II.14 (printed pp. 62-68)",
+             "position": "The places delineated by CONDITIONAL OUTCOME rather than topic - what results when benefics or malefics land there, and above all where the lords of the Ascendant, Fortune and Spirit fall."},
+            {"authority": "Valens II.15 (p. 69) - the nine names",
+             "position": "god=father (9th), goddess=mother (3rd), Good Daimon=children (11th), Good Fortune=MARRIAGE (5th), Bad Daimon=sufferings (12th), Bad Fortune=injuries (6th), Fortune+Ascendant=life, Daimon=practical wisdom, Midheaven=action, Eros=desire, Necessity=enemies."},
+            {"authority": "Valens IV.12 (p. 179)",
+             "position": "A third full list: the 2nd holds 'involvement with a woman' and the place of the will; the 3rd holds kingship and authority; the 8th is 'an IDLE place'; the 9th includes astrology itself and appearances of the gods; the 10th holds the WIFE."},
+        ],
+        "engine_handling": "The engine cites Paulus and will continue to. Recorded because marriage sits in the 7th (Valens II.37), the 5th (II.15) and the 2nd/10th (IV.12) depending on the chapter, all within one author - so a topical assignment is a defensible choice among several, not a settled fact.",
+    },
+    {
+        "topic": "Lord of the Year - two different techniques, one name",
+        "summary": "A naming hazard rather than a doctrinal disagreement.",
+        "positions": [
+            {"authority": "Valens I.11 (printed p. 27) - CALENDRICAL",
+             "position": "Years since Augustus plus intercalary days plus days from Thoth to the birthday; subtract sevens; count the remainder from the Sun. Valens then rejects its universal form: 'that those born in the same year should have obtained one and the same rulership does not seem to have reason', preferring an epoch from the heliacal rising of Sirius."},
+            {"authority": "Valens IV.11 (printed p. 174) - ANNUAL PROFECTION",
+             "position": "Divide the age by twelve; the remainder counts the sign from the Ascendant. This is what the engine implements and cites to Paulus ch. 31."},
+        ],
+        "engine_handling": "The engine implements the profection only. Recorded so that nobody reading I.11 wires up the calendrical technique under the same label and silently changes what 'Lord of the Year' means.",
+    },
+    {
         "topic": "Triplicity rulers",
         "summary": "How many rulers a triplicity has, and who they are.",
         "positions": [
             {"authority": "Dorothean (Dorotheus, Carmen Astrologicum; Bonatti; Māshāʾallāh; most Persian/medieval)",
              "position": "Three rulers per triplicity — a day lord, a night lord, and a participating lord (+3 / +3 / +1)."},
-            {"authority": "Ptolemaic (Ptolemy, Tetrabiblos, the trigons chapter — I.21 in Ashmand's numbering)",
-             "position": "Two rulers per triplicity — day and night only, no participating lord. For the watery trigon Ptolemy gives Venus by day and the Moon by night, with Mars a co-ruler of the triangle through Scorpio: 'as the signs which compose this triplicity are feminine, the Moon by night and Venus by day … govern it, together with Mars.'"},
+            {"authority": "Ptolemaic (Ptolemy, Apotelesmatika I.19, read in the Boll-Boer Greek)",
+             "position": "Two rulers per triplicity for fire, earth and air. WATER IS HIS ONLY THREE-RULER TRIANGLE: 'it was left to Mars, he being the sole one remaining and having a relation to it through the house of Scorpio; and co-ruling it WITH HIM - on account of both the sect and the femininity of the signs - by night the Moon, and by day Venus.' Mars therefore holds water in BOTH sects while Venus and the Moon split it by sect. Valens II.1 (54,4) independently gives Venus by day for water, so two 2nd-century Greek sources agree against Lilly."},
             {"authority": "Lilly (Christian Astrology I) — a Latin-European table, NOT Ptolemy's",
              "position": "Two rulers per triplicity, but the watery trigon is Mars by day AND by night. This is where the commonly-quoted 'Mars is the water day-ruler' comes from; it is Lilly's, not Ptolemy's, and the two are kept as separate authorities here rather than merged under one 'Ptolemaic' label."},
         ],

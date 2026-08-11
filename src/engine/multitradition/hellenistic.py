@@ -24,10 +24,11 @@ procedures govern the judgment.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 import swisseph as swe
 
+from ..phasis import PhasisEngine
 from ..reference_data import (
     DOROTHEAN_TRIPLICITY,
     EGYPTIAN_TERMS,
@@ -246,7 +247,7 @@ def build_hellenistic(birth: BirthInput, chart: Any) -> TraditionSection:
             ),
             "bound_lord_egyptian": _bound_ruler(sign, degree, {sign: egyptian}),
             "face_lord": _face_ruler(planet.longitude),
-            "sect_status": _sect_status(name, is_day),
+            "sect_status": _sect_status(name, is_day, planet.longitude, sun),
             "retrograde": getattr(planet, "speed", 0.0) < 0,
         })
 
@@ -297,11 +298,33 @@ def _lot_dict(longitude: float, asc_index: int) -> dict[str, Any]:
     }
 
 
-def _sect_status(planet: str, is_day: bool) -> str:
+def _sect_status(
+    planet: str,
+    is_day: bool,
+    planet_lon: Optional[float] = None,
+    sun_lon: Optional[float] = None,
+) -> str:
+    """Sect membership per Ptolemy, Tetrabiblos I.7 (Περὶ ἡμερινῶν καὶ νυκτερινῶν).
+
+    Ptolemy's Greek makes Mercury's sect determinate, not perpetually undecided:
+    "τὸν δὲ τοῦ Ἑρμοῦ κοινὸν ὡς ἑῴαν μὲν φάσιν ποιούμενον ἡμερινόν, ἑσπερίαν
+    δὲ νυκτερινόν" - Mercury is common to both, diurnal when he makes a MORNING
+    appearance and nocturnal when an EVENING one. "Common" names the rule, not
+    the answer; given a phase there is always an answer. Returning the rule and
+    stopping (as this did) drops a real dignity or debility on every chart where
+    Mercury is visible, so resolve it whenever the phase is known.
+    """
     diurnal = {"Sun", "Jupiter", "Saturn"}
     nocturnal = {"Moon", "Venus", "Mars"}
     if planet == "Mercury":
-        return "common (takes the sect of its solar phase)"
+        if planet_lon is None or sun_lon is None:
+            return "common (takes the sect of its solar phase)"
+        oriental = PhasisEngine.is_oriental(planet_lon, sun_lon)
+        phase = "morning" if oriental else "evening"
+        in_sect = oriental if is_day else not oriental
+        verdict = "of the sect in favour" if in_sect else "contrary to the sect"
+        return f"{verdict} (common; {phase} star, so reckoned " \
+               f"{'diurnal' if oriental else 'nocturnal'})"
     in_sect = (planet in diurnal) if is_day else (planet in nocturnal)
     return "of the sect in favour" if in_sect else "contrary to the sect"
 

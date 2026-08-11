@@ -9,7 +9,8 @@ from .reference_data import DOMICILES as REF_DOMICILES
 from .reference_data import EGYPTIAN_TERMS
 from .reference_data import EXALTATIONS as REF_EXALTATIONS
 from .reference_data import (FACES_ORDER, PTOLEMAIC_TERMS,
-                             PTOLEMAIC_TRIPLICITY, SIGN_ELEMENTS)
+                             PTOLEMAIC_TRIPLICITY,
+                             PTOLEMAIC_TRIPLICITY_PARTICIPATING, SIGN_ELEMENTS)
 from .reference_data import TRIPLICITY_RULERS as REF_TRIPLICITY
 
 
@@ -749,6 +750,23 @@ class DignityCalculator:
                         details.append(
                             f"Triplicity ({TriplicityScheme.PTOLEMAIC_SECT_GATED.value}, Night) (+3)"
                         )
+                    else:
+                        # Ptolemy I.19 leaves the WATER triangle to Mars, with
+                        # Venus and the Moon co-ruling WITH HIM. He therefore
+                        # holds it in both sects, and the two-slot table cannot
+                        # express that. Without this branch Mars scores no
+                        # Ptolemaic triplicity in Cancer, Scorpio or Pisces,
+                        # though Ptolemy gives it to him.
+                        participating = PTOLEMAIC_TRIPLICITY_PARTICIPATING.get(
+                            element
+                        ) or PTOLEMAIC_TRIPLICITY_PARTICIPATING.get(str(element).title())
+                        if participating and planet_name == participating:
+                            score += cls.TRIPLICITY
+                            score_breakdown["triplicity"] = cls.TRIPLICITY
+                            details.append(
+                                f"Triplicity ({TriplicityScheme.PTOLEMAIC_SECT_GATED.value}, "
+                                "participating ruler, both sects) (+3)"
+                            )
 
         # 4. Terms (+2)
         term_table = EGYPTIAN_TERMS
