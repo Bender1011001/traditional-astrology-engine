@@ -1500,6 +1500,35 @@ def _monomoiria_paragraphs(
     return paragraphs
 
 
+def _bound_delineation_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
+    """Render Valens I.3, printed pp. 14-19.
+
+    The emitter for these was added without a renderer, so the packet carried
+    the delineations and the prose never printed them. The appendix still cited
+    the items - which meant the report shipped the CAVEAT ("the domicile lord
+    decides whether what the degree carries comes out base or good") with no
+    statement of what the degree carries. A dangling condition is worse than
+    silence: it points at a claim that was never made.
+
+    The table is complete at 60 of 60, so every planet and the Ascendant have a
+    delineation; a gap still renders nothing rather than inventing.
+    """
+    if not items:
+        return []
+    paragraphs = ["## The Bounds of the Degrees (Valens I.3)"]
+    paragraphs.append(
+        "Valens delineates each of the sixty bounds individually. What follows is the "
+        "substrate of the degrees themselves, not a verdict on you. Valens closes the "
+        "chapter by saying he set the degrees out one at a time for teaching, and that "
+        "in a real nativity the domicile lord lying over them decides whether what the "
+        "degree carries comes out base or good. Read every line below under that "
+        "condition, and against placement and sect, which outweigh it."
+    )
+    for item in items:
+        paragraphs.append(_evidence_sentence(item))
+    return paragraphs
+
+
 def _degree_quality_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
     if not items:
         return []
@@ -3264,6 +3293,7 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
     monomoiria_zoidion = _group(packet, "monomoiria_zoidion")
     monomoiria_trigonal = _group(packet, "monomoiria_trigonal")
     degree_qualities = _group(packet, "degree_quality")
+    bound_delineations = _group(packet, "bound_delineation")
     fixed_stars = _group(packet, "fixed_star")
     dispositors = _group(packet, "dispositor_network")
     lots = _group(packet, "lot")
@@ -3376,6 +3406,7 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
             planets,
         )
     )
+    lines.extend(_bound_delineation_paragraphs(bound_delineations))
     lines.extend(_degree_quality_paragraphs(degree_qualities))
     lines.extend(_lunar_cycle_paragraphs(lunar_cycle))
     lines.extend(_lunar_mansion_scope_paragraphs(lunar_mansion_scope))

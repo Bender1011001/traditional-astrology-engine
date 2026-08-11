@@ -349,6 +349,36 @@ def test_an_unknown_bound_still_stays_silent():
     assert bound_delineation("Aries", "Jupiter") is not None
 
 
+def test_bound_delineations_reach_the_customer_prose_not_only_the_packet():
+    """The emitter shipped without a renderer, so the packet carried all eight
+    delineations and the report printed none of them - while the appendix still
+    cited the items and their caveat. The reader got "the domicile lord decides
+    whether what the degree carries comes out base or good" with no statement of
+    what the degree carries: a condition dangling off a claim never made.
+
+    Evidence existing is not evidence rendered. This asserts on the PROSE.
+    """
+    from src.scripts.generate_premium_report import generate_chart_data_object
+    from src.services.reading_composer import compose_deterministic_draft
+
+    date_str, time_str, city, lat, lon = DAY_CHART
+    chart = generate_chart_data_object(
+        "T", date_str, time_str, city, latitude=lat, longitude=lon
+    )
+    draft, packet = compose_deterministic_draft(chart)
+
+    emitted = [e for e in packet["evidence"] if e["category"] == "bound_delineation"]
+    assert emitted, "no bound evidence emitted at all"
+    # Seven planets plus the Ascendant, and the table is complete, so every one
+    # of them must be delineated and every one must be printed.
+    assert len(emitted) == 8, f"expected 8 bound items, got {len(emitted)}"
+    assert draft.count("Valens delineates that bound") == len(emitted), (
+        "bound delineations were emitted but not rendered into the report"
+    )
+    # The governing condition must travel with them.
+    assert "domicile lord" in draft
+
+
 def test_bound_delineation_is_conditioned_by_the_domicile_lord():
     """Valens closes I.3 (p. 19,4-7) by saying the degrees were set out ALONE for
     teaching, and that the domicile lord lying over them decides whether what

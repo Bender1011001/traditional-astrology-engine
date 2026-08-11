@@ -423,6 +423,13 @@
       "verification": "greek_text_read_directly",
       "verified_summary": "Valens carries TWO distinct techniques under the phrase 'lord of the year'. I.11 is a CALENDRICAL reckoning: take the years since Augustus plus intercalary days plus days from Thoth to the birthday, subtract sevens, and count the remainder from the Sun. IV.11 is the ANNUAL PROFECTION: divide the age by twelve and let the remainder count the sign. The engine implements the profection.",
       "publication_limit": "Do not conflate them. Valens himself rejects the universal form of the calendrical one: 'that those born in the same year should have obtained one and the same rulership does not seem to have reason.' He prefers an epoch taken from the heliacal rising of Sirius over the civil new year."
+    },
+    "valens_bound_delineations": {
+      "edition_id": "valens_anthologiae_kroll_1908",
+      "location": "Book I, chapter 3 (Περὶ ὁρίων), printed pp. 14-19",
+      "verification": "greek_text_read_in_full",
+      "verified_summary": "Valens delineates each of the sixty Egyptian bounds individually. The degree boundaries were checked digit by digit against EGYPTIAN_TERMS in all twelve signs; Libra is a manuscript outlier Kroll flags at 16,18. All 60 delineations were read directly from the Greek and rendered into English in docs/sources/valens_translation.md. The chapter closes (p. 19,4-7) by stating that the degrees were set out ALONE for teaching, and that with the domicile lord lying upon them it accomplishes its own, either base or good.",
+      "publication_limit": "A delineation of the DEGREES, not a verdict on the person. Never publish a bound line as a free-standing judgment: the overlying domicile lord decides whether what the degree carries comes out base or good, and placement and sect outweigh the bound. Valens attaches conditions constantly and they reverse outcomes - Sagittarius in Mercury bound gives philosophers when Mercury inclines and soldiers when Mars; Capricorn in Jupiter bound produces BOTH reputation and disrepute."
     }
   },
   "candidate_editions_from_binder": [

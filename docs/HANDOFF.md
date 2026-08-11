@@ -5,7 +5,17 @@
 
 ---
 
-# 0. STATE AS OF 2026-08-10
+# 0. STATE AS OF 2026-08-11
+
+**Deployed and verified live.** `ef862ec` is on Cloud Run. Verification was done against a **baseline captured from prod before the deploy**, not against a green check: `Marriage_7th` / `Children_5th` / `Action_10th` went 0 → 2 in `/api/v1/charts/calculate-full`, healthz uptime reset, and a **real guest reading was generated through the customer flow** (18,703 words) and confirmed to contain the I.3 closing rule. Do it this way — a passing deploy job does not prove the revision took.
+
+**Held back deliberately:** the email-verification feature (stashed, `git stash list`). Registration withholds the JWT and emails a link to `/verify-email.html`, **a page that does not exist in the repo**. Shipping it breaks all new signups. It needs that page written and SMTP confirmed. The `email_verified` / `verification_token` columns are already on main, so there is no migration hazard.
+
+**A second deploy is pending** for the bound renderer and registry fix described below — the live revision emits the bound delineations but does not print them.
+
+---
+
+# 0b. STATE AS OF 2026-08-10
 
 **A large source-fidelity pass landed.** Roughly 250 pages of Valens (Kroll 1908) and four chapters of Ptolemy (Boll–Boer) were read **directly from the Greek**, and **all 27 resulting engine changes are implemented** with 40 regression tests in `src/tests/test_valens_greek_corrections.py`.
 
@@ -28,10 +38,14 @@ Valens I.1, p.5 — **placement and sect are tested BEFORE the benefic/malefic l
 - **Valens's 60-invariant for ascensions is schematic, not astronomical** — it is false under exact computation by up to 4.4°. Never mix his tabulated ascensions with computed ones.
 - **An escape clause governs only the sentence it appears in.** Carrying II.37's up to a stronger claim was a documented reader error.
 - **Record failures.** The test-case section holds a chart where three of four testimonies matched and one failed, plus a timing technique that has fired three times with no result.
+- **Emitting is not rendering.** There is already a rule that a rule pack which *loads* may *fire* nothing. There is now a second level of the same trap: evidence that fires may still never be **printed**. The bound emitter shipped without a renderer, so all eight delineations were generated, cited in the appendix, and their content never appeared in the report — the reader got the caveat *"the domicile lord decides whether what the degree carries comes out base or good"* attached to a claim that was never made. **Count the delineations in the composed prose, not in the evidence packet.** `test_bound_delineations_reach_the_customer_prose_not_only_the_packet` locks it.
+- **Local green does not predict CI, and sometimes cannot.** `financial_astrology_analysis/` is gitignored ("never ship"), so tests importing it pass locally by construction and can only fail in CI. One imported it at module scope, which made the miss a *collection* error that aborted the whole suite and gated the deploy. To verify CI behaviour, move the directory aside and run: `mv financial_astrology_analysis .ci_sim_financial && pytest src/tests -q; mv .ci_sim_financial financial_astrology_analysis`. Local run = 1370 tests, CI-equivalent = 1240 + 2 skipped.
 
 ### Still open
 
-Bound delineations are **60 of 60** — the table is closed, and an unknown key still returns `None` rather than inventing. Every bound item now carries the I.3 closing rule (`BOUND_QUALIFIER`): the degree's contribution is stated in isolation, and the overlying domicile lord decides whether it comes out base or good. Three Ptolemy rules remain on Ashmand (flagged, not silently repointed) because those chapters are unread in Greek. Four Paulus chapters are graded `unattested_chapter`. Roughly 190 of Valens's 423 pages are unread, chiefly the worked example charts and Books VII–IX.
+Bound delineations are **60 of 60** — the table is closed, and an unknown key still returns `None` rather than inventing. Every bound item now carries the I.3 closing rule (`BOUND_QUALIFIER`): the degree's contribution is stated in isolation, and the overlying domicile lord decides whether it comes out base or good. I.3 is registered in `verified_rules` as `greek_text_read_in_full`, so it no longer prints as "pending primary text verification".
+
+**Ptolemy IV.3 is read** (`γ΄. Περὶ τύχης ἀξιωματικῆς`) — a graded ladder from kings, through leaders "lords of life and death", to crown-bearing/procuratorial/camp-commanding/priestly rank, to civic promotion, to the undistinguished, to the wholly lowly; then the *kind* of rank from the character of the attending stars. **Jupiter's line in that last list is lost to OCR corruption and is recorded as a gap, not reconstructed.** III.5 (parents) and IV.10 (divisions of times) are read but not yet written into `docs/sources/`. Three Ptolemy rules remain on Ashmand (flagged, not silently repointed) because those chapters are unread in Greek. Four Paulus chapters are graded `unattested_chapter`. Roughly 190 of Valens's 423 pages are unread, chiefly the worked example charts and Books VII–IX.
 
 ---
 
