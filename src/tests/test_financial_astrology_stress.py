@@ -4,10 +4,19 @@ import json
 from datetime import datetime, timedelta
 import pytest
 import swisseph as swe
-from financial_astrology_analysis.analyze_finance_astrology import (
-    calculate_date_astrology,
-    DISCLAIMER
+
+# `financial_astrology_analysis/` is a local research directory and is
+# deliberately gitignored ("never ship"), so it is present on a developer
+# machine and absent in CI. Importing it at module scope made collection FAIL
+# rather than skip, which took the whole suite - and therefore the deploy -
+# down with one ImportError. Skip the module instead when the dependency is
+# not there.
+_finance = pytest.importorskip(
+    "financial_astrology_analysis.analyze_finance_astrology",
+    reason="financial_astrology_analysis/ is a gitignored local research directory",
 )
+calculate_date_astrology = _finance.calculate_date_astrology
+DISCLAIMER = _finance.DISCLAIMER
 from src.engine.models import Sign
 
 # 1. Generate edge-case dates to test
