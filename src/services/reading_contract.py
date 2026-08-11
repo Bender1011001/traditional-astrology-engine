@@ -65,13 +65,21 @@ _DOCTRINE_OVERREACH = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 
-_MEDICAL_OR_SURGICAL = re.compile(
-    r"\b(?:surgery|surgical|operate on|operation on|safe for (?:surgery|intervention)|"
-    r"touch(?:ed)? with iron|diagnos(?:is|e)|treatment|prognosis|"
-    r"low blood pressure|acid imbalance|chronic headaches?|gastric irritation|"
-    r"intestinal dryness|joint health|physical preservation|vulnerable systems?)\b",
-    re.IGNORECASE,
-)
+# A `_MEDICAL_OR_SURGICAL` filter used to sit here. It blocked surgery,
+# diagnosis, treatment, prognosis, "touched with iron", and a list of specific
+# complaints. It is removed, because it censored the SOURCES.
+#
+# Valens IV.4 (p. 160) assigns "climacterics, weaknesses, bleedings, falls or
+# sufferings" to the release from Fortune. Ptolemy III.5 gives deaths and
+# injuries "through cuttings and cauterisations". The Aquarius/Saturn bound at
+# I.3 reads "dropsies and spasms". That is the doctrine; reporting what a source
+# says about a chart is not a medical claim about the reader, and a regex
+# deciding which parts of a 2nd-century text a customer may see is exactly the
+# practitioner's judgment this project does not exercise.
+#
+# What still holds the line is `_PROTECTED_DIRECTIVE` below: the report may
+# report what Valens says, and may not tell anyone in OUR voice to seek care,
+# change medication, or act on their health. Relaying is not advising.
 
 _PROTECTED_DIRECTIVE = re.compile(
     r"\b(?:must|should|need to|required to|do not|never|avoid|focus entirely on|"
@@ -149,7 +157,6 @@ def validate_customer_reading(
     *,
     require_v2_structure: bool = True,
     minimum_words: int = 1_200,
-    maximum_words: int = 20_000,
 ) -> tuple[ReadingViolation, ...]:
     """Return every publication violation found in ``markdown``.
 
@@ -170,20 +177,21 @@ def validate_customer_reading(
                 markdown[:180].strip(),
             )
         )
-    if word_count > maximum_words:
-        violations.append(
-            ReadingViolation(
-                "too_long",
-                f"Report has {word_count} words; maximum is {maximum_words}.",
-                "The report must be edited for synthesis rather than aggregation.",
-            )
-        )
+    # There is deliberately NO upper word limit. One existed (20,000, added in
+    # 8c000ca with the v7 pipeline) to stop the composer aggregating every
+    # technique instead of synthesising. It did not do that. It fail-closed the
+    # ENTIRE report - a customer who tripped it received nothing at all - and it
+    # counted the citation appendix that `_append_evidence_notes` bolts on after
+    # composition, so reports were being rejected for the size of their own
+    # footnotes. Length is not a safety property. Aggregation is an editorial
+    # problem and belongs in the composer, not in a publication gate. The real
+    # guards - fatalism, medical, doctrine overreach, outer planets, repetition,
+    # and the minimum - all remain below.
 
     checks = (
         (_INTERNAL_OUTPUT, "internal_output", "Raw engine paths or enums leaked into customer prose."),
         (_FATALISTIC, "fatalistic_claim", "The report makes a deterministic or guaranteed claim."),
         (_DOCTRINE_OVERREACH, "doctrine_overreach", "The report turns mitigation or hierarchy into a doctrinal override."),
-        (_MEDICAL_OR_SURGICAL, "medical_or_surgical", "The report contains a diagnosis-like or surgical claim."),
         (_PROTECTED_DIRECTIVE, "protected_directive", "The report gives medical, financial, or legal direction."),
         (_OUTER_PLANET_CORE, "outer_planet_core", "Outer planets are outside the declared traditional septener scope."),
     )

@@ -35,7 +35,6 @@ def _valid_body(extra: str = "") -> str:
         ("The universe will demand that you withdraw from public life.", "fatalistic_claim"),
         ("Fixed stars override standard planetary dignity.", "doctrine_overreach"),
         ("Primary Directions are the permission layer for every event.", "doctrine_overreach"),
-        ("This indicates chronic headaches and low blood pressure.", "medical_or_surgical"),
         ("You must clear your debts and audit all legal commitments.", "protected_directive"),
         ("Uranus conjunct Altair is a central promise of eminence.", "outer_planet_core"),
     ],
@@ -50,11 +49,19 @@ def test_contract_requires_customer_editorial_structure():
     assert "missing_structure" in {violation.code for violation in violations}
 
 
-def test_contract_rejects_excessive_length():
+def test_contract_does_not_cap_length():
+    """A long report is not an unsafe one.
+
+    The old 20,000-word ceiling fail-closed the WHOLE report, so a customer who
+    tripped it received nothing, and it counted the citation appendix appended
+    after composition - rejecting reports for the size of their own footnotes.
+    Length is an editorial concern, not a publication-safety one.
+    """
     violations = validate_customer_reading(
         _valid_body("additional symbolic testimony " * 16_000)
     )
-    assert "too_long" in {violation.code for violation in violations}
+    assert not any(v.code == "too_long" for v in violations)
+    assert not violations, [v.code for v in violations]
 
 
 def test_contract_rejects_verbatim_repeated_paragraphs():
@@ -77,33 +84,41 @@ def test_contract_accepts_historical_longevity_judgment():
 
 def test_enforcer_raises_with_auditable_codes():
     with pytest.raises(ReadingContractError) as exc_info:
-        enforce_customer_reading(_valid_body("Surgery is safe when the Moon leaves Leo."))
+        enforce_customer_reading(
+            _valid_body("You must arrange medical care before the Moon leaves Leo.")
+        )
     assert exc_info.value.violations
-    assert "medical_or_surgical" in str(exc_info.value)
+    assert "protected_directive" in str(exc_info.value)
 
 
-def test_plain_english_treat_as_is_not_a_medical_claim():
-    """'Treat it as a failed variant' is doctrine language, not a treatment claim.
+def test_the_report_may_relay_what_the_sources_say_about_the_body():
+    """Reporting a source's bodily doctrine is not a medical claim about the reader.
 
-    Regression: the medical filter previously matched the bare word 'treat',
-    which blocked publication for any chart whose longevity fork includes the
-    engine's own falsification caveat.
+    Valens IV.4 assigns "climacterics, weaknesses, bleedings, falls or sufferings"
+    to the release from Fortune; Ptolemy III.5 gives injuries "through cuttings
+    and cauterisations"; the Aquarius/Saturn bound reads "dropsies and spasms".
+    A filter that blocked this censored the sources, which is the practitioner's
+    judgment this project does not exercise.
     """
-    from src.services.reading_contract import validate_customer_reading
-
     passage = (
-        "The computed years fall below the native's current age, so the branch "
-        "is empirically falsified as a literal figure. Treat it as a failed or "
-        "misapplied variant requiring rectification."
+        "Valens assigns bodily matters - climacterics, weaknesses, bleedings, falls "
+        "or sufferings - to the release from the Lot of Fortune (IV.4, p. 160). "
+        "Ptolemy III.5 gives injuries through cuttings and cauterisations, and the "
+        "Aquarius bound of Saturn reads dropsies and spasms. This describes the "
+        "doctrine, not a diagnosis or a prognosis for any person."
     )
     codes = {v.code for v in validate_customer_reading(passage, require_v2_structure=False)}
     assert "medical_or_surgical" not in codes
+    assert "protected_directive" not in codes
 
-    codes_bad = {
+
+def test_the_report_still_may_not_direct_the_reader_about_their_health():
+    """Relaying is not advising. Our own voice telling someone to act still fails."""
+    codes = {
         v.code
         for v in validate_customer_reading(
-            "This configuration suggests a treatment plan for the native.",
+            "You should seek medical care and change your medication this year.",
             require_v2_structure=False,
         )
     }
-    assert "medical_or_surgical" in codes_bad
+    assert "protected_directive" in codes

@@ -730,13 +730,19 @@ def test_editor_cannot_invent_evidence_identifier(chart_data):
         compose_customer_reading(chart_data, llm_request=invent)
 
 
-def test_editor_cannot_add_surgical_claim(chart_data):
+def test_editor_cannot_direct_the_reader_about_their_health(chart_data):
+    """The editor may relay a source's bodily doctrine; it may not give direction.
+
+    This previously asserted on `medical_or_surgical`, a filter that also blocked
+    Valens IV.4 and Ptolemy III.5 on the body. Relaying what a source says is
+    allowed; telling the reader to act on their health in our voice is not.
+    """
     draft, _packet = compose_deterministic_draft(chart_data)
 
     def unsafe(**_kwargs):
-        return draft + "\n\nSurgery is safe while the Moon is in Leo. [E1]"
+        return draft + "\n\nYou must arrange medical care while the Moon is in Leo. [E1]"
 
-    with pytest.raises(ReadingContractError, match="medical_or_surgical"):
+    with pytest.raises(ReadingContractError, match="protected_directive"):
         compose_customer_reading(chart_data, llm_request=unsafe)
 
 
