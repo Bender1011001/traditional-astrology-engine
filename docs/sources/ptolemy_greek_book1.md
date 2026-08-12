@@ -331,3 +331,25 @@ Printed p. 213 carries the subscription **τέλος τοῦ Πτολεμαίο�
 The final chapter's own content (printed 212–213) is the times material: *ἐπεμβάσεις τῶν ἀστέρων*, the transits of the stars, and *ἐνιαύσια καὶ μηνιαῖα τῶν ζῳδίων*, the annual and monthly divisions of the signs — so the chapter identification was right and only the page numbers were foreign.
 
 **Rule for mixed editions: cite the chapter, not the page.** A page range silently carried from one edition to another sends the next reader past the end of the book.
+
+---
+
+# III.5 — Περὶ γονέων, the parents (2026-08-11)
+
+Read in Boll–Boer. **Another foreign page citation.** The rule recorded *"Book III, Chapter V, The Parents, printed pp. 120–121."* In this edition printed p. 120 is where **ς΄. Περὶ ἀδελφῶν** (ch. 6, siblings) *begins*, and p. 122 opens **ζ΄. Περὶ ἀρρενικῶν καὶ θηλυκῶν** (ch. 7). The parents chapter **ends** at 120; its substance sits at ~117–120. Second instance today of a page range carried in from another edition — see the IV.10 note above.
+
+## The doctrine
+
+**Sect decides which pair of significators to watch:**
+
+> *παρατηρητέον **ἡμέρας** μὲν μάλιστα τόν τε **ἥλιον καὶ τὴν Ἀφροδίτην**, **νυκτὸς** δὲ τὸν τοῦ **Κρόνου καὶ τὴν σελήνην***
+
+By day, chiefly the **Sun and Venus**; by night, **Saturn and the Moon**. This is a sect-paired reading, not the flat "father = Sun/Saturn, mother = Moon/Venus" split.
+
+**And the parental place is treated as a derived ascendant:**
+
+> *τὸν τῆς αἱρέσεως πατρικὸν ἢ μητρικὸν τόπον **ὥσπερ ὡροσκόπον ὑποστησαμένους** τὰ λοιπὰ ὡς ἐπὶ γενέσεως*
+
+Set the paternal or maternal place of the sect **as if it were an ascendant**, then judge everything else as for a nativity. That is a whole derived-chart method, and the engine has no derived-ascendant treatment for parents.
+
+Recorded, not built — it would add a second chart layer to every reading and needs a deliberate decision.
