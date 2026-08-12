@@ -32,8 +32,24 @@ No degree sends its antiscion to the 30th, and the 30th sends to none. Under our
 
 > *[Ptolemy] quasi per speculum quidem antisciorum rationem attigit; **Dorotheus vero Sidonius**, vir prudentissimus et qui apotelesmata verissimis et disertissimis versibus scripsit, **antisciorum rationem manifestis sententiis explicavit, in libro scilicet quarto**.* (II.29,2)
 
-Firmicus says Ptolemy touched antiscia only *"as if through a mirror"*, and that **Dorotheus of Sidon set the doctrine out plainly in his FOURTH BOOK**.
+**CORRECTION (made after cross-checking Pingree's fuller quotation of this passage).** The page read in the Firmicus volume begins mid-sentence, and the "as if through a mirror" clause was first attributed here to Ptolemy. It belongs to **Antiochus**. Firmicus's full sentence names three men: *Ptolemy* follows no principle but antiscia; *Antiochus*, saying Libra does not see Aries because of the earth between, touched the doctrine only "as if through a mirror"; and **Dorotheus of Sidon set it out plainly in his FOURTH BOOK**.
 
 Our rule `firmicus_antiscia_major_configurations` cites Firmicus as its authority. Firmicus himself names Dorotheus IV as the clear source. **We now hold Dorotheus** (Pingree 1976, Arabic + English + Greek fragments), so that attribution is checkable — and the Dorotheus volume's own Appendix I is *Fragmentum e Firmici Materni Mathesios libro II 29,2*, i.e. Pingree prints this very passage as a witness to Dorotheus. The two volumes point at each other.
 
 **Not yet done:** reading Dorotheus IV on antiscia to see whether his version agrees with Firmicus's table.
+
+---
+
+## The loop closes: Firmicus IS the surviving witness
+
+Pingree prints this exact Firmicus passage in the *Carmen Astrologicum* as:
+
+> **Appendix I: Fragmentum e Firmici Materni *Mathēseos* libro II 29,2 (II 29,2–9 = fr. 61 Stegemann) haustum**
+
+He classifies it as a **fragment of Dorotheus**, with a canonical number — *fr. 61 Stegemann*.
+
+An editor prints a *testimonium* in an appendix when the primary text is lost. **The antiscia chapter of Dorotheus IV does not survive in the Arabic Carmen.** Firmicus preserves it.
+
+So `firmicus_antiscia_major_configurations` citing Firmicus is **correct and not second-best**. He is the surviving witness, and Pingree's own edition of Dorotheus says so. The earlier note here — that Firmicus "points away from himself" and the attribution was therefore unchecked — is resolved: it was checkable, it has been checked, and the answer is that there is nothing behind Firmicus to check against.
+
+**This also closes the "read Dorotheus IV on antiscia" item.** There is no Dorotheus IV antiscia text to read.
