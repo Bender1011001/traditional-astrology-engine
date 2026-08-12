@@ -527,7 +527,9 @@ def test_firmicus_antiscia_major_configurations_are_published(chart_data):
     ]
 
     assert len(antiscia) == 1
-    assert antiscia[0]["verification_status"] == "translation_and_table_inspected"
+    # Upgraded 2026-08-11: II.29 read in the Kroll-Skutsch Latin (printed pp. 77-84).
+    # All six sign-pairs and all 29 degree mappings verified against the formula.
+    assert antiscia[0]["verification_status"] == "latin_text_read_directly"
     assert "Firmicus judges major aspects through reflected degrees" in report
     assert "The Sun-Jupiter trine connects authority" in report
     assert "The Mercury-Mars square corrects their bodily sextile" in report
