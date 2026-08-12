@@ -291,3 +291,33 @@ This is worth keeping as a methodological point: a recorded gap can be an artefa
 The chapter opens by directing attention to the attendance (δορυφορία) of the lights and its quality. The graded outcomes follow: attendants angular or configured to the place above the earth give the greatest rank, and more so when the attendants are themselves in the places above the earth — these become **"lords of life and death"** (ζωῆς καὶ θανάτου κύριοι). Where the attendants are not angular but bear witness to the angles, rank is great but of a second order — crown-bearing, camp-commanding, priestly. Where the lights are not angular and most attendants neither angular nor configured to the angles, the natives are undistinguished; and where nothing attends the lights at all, they are wholly lowly and unfortunate.
 
 **Still unread in this scan:** III.5 on parents, which this same rule also cites.
+
+---
+
+# III.10–11 — the prorogator, the destroyer, and two orb numbers (2026-08-11)
+
+Read in the Boll–Boer scan, printed pp. 133–136 (`printed = pdf − 19`).
+
+**This is NOT the chapter `ptolemy_prorogation_distributor` cites.** That rule cites **IV.10, Divisions of Times, printed pp. 214–218**, which sits near the very end of the volume and is still unread here. III.10–11 is the *prorogator and length-of-life* material. They are adjacent in subject and must not be conflated.
+
+## What III.10–11 gives
+
+- Benefics **add** years and malefics **subtract** them (*ἀγαθοποιοί … ἀφαιροῦσι δὲ οἱ κακοποιοί*), the quantity taken from the **hour-times of each degree** (*ὡριαῖοι χρόνοι τῆς ἑκάστου μοίρας*) — day-times by day, night-times by night.
+- The destructive places are **Saturn and Mars**, by body or by ray, in square or opposition, and sometimes by trine.
+
+## ⚠ Two numbers we do not implement
+
+> *ἐὰν τις τῶν ἀγαθοποιῶν ἀκτῖνα συνεπιφέρῃ τετράγωνον ἢ τρίγωνον ἢ διάμετρον … **ἐπὶ μὲν Διὸς μὴ ὑπὲρ τὰς δώδεκα μοίρας, ἐπὶ δὲ Ἀφροδίτης μὴ ὑπὲρ τὰς ὀκτώ***
+
+A benefic ray rescuing the prorogator from a destroyer is admitted only within a **stated orb**:
+
+| benefic | orb |
+|---|---|
+| Jupiter | **12°** |
+| Venus | **8°** |
+
+`grep` finds no Jupiter-12 / Venus-8 gate anywhere in the engine, and the only benefic-mitigation code (`kakosis.py:398`) is a severity reducer with no such degree limit. So where Ptolemy admits a rescue *only inside a bounded orb*, we either admit it unbounded or not at all.
+
+**Not patched.** It belongs to the longevity path, which is protected output, and the change would alter which charts get a rescue. Recorded for a decision, with the numbers as Ptolemy states them so no one has to guess.
+
+**Next concrete step for this rule:** read **IV.10 at printed pp. 214–218** (≈ PDF 233–237) — the chapter the rule actually cites.
