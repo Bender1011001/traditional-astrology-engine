@@ -291,3 +291,25 @@ Eros and Nike begin from the **Lot of Daimon**, not from the Ascendant directly 
 Boer's apparatus at p. 85,13–15 records Schato's verdict on this passage: **mutilus et depravatus**, and *verus sensus inde elici non potuit* — the true sense could not be drawn out of it. **Boer reconstructs the seven-cycle constraint from Heliodorus as a control, not from Paulus's own words.**
 
 So this rule rests on an editor's reconstruction of a mutilated text. The registry's prior limit said only that "manuscript tables varied," which understated it. It now says so plainly, and the verification status is `greek_text_read_directly_source_editorially_corrupt` rather than a clean pass — because a clean-looking status on a corrupt source is worse than no status at all.
+
+---
+
+## ch. 24 read in the Greek — and a manuscript caution (2026-08-11)
+
+Printed p. 53 (mapping `PDF = (printed + 26) / 2`):
+
+> **⟨κδ΄⟩ Περὶ τῆς τῶν δώδεκα τόπων πινακικῆς ἐκθέσεως**
+>
+> *Τῶν δώδεκα τόπων πρὸς πᾶσαν ἀποτελεσματογραφίαν λαμβανομένων **ἀρχὴ καὶ πρωτοστάσιόν ἐστιν ὁ ὡροσκόπος**, δι᾽ οὗ πάντα τὰ πρὸς τὸν ἀνθρώπων συντείνοντα πράγματα…*
+
+"Of the twelve places, taken for every delineation, the **beginning and first-standing** is the **Horoskopos**, through which all matters pertaining to men are directed."
+
+That is `whole_sign_topical_chain` stated in Paulus's own words, and it verifies the engine's summary.
+
+### ⚠ Part of this chapter is a manuscript addition
+
+Boer's apparatus marks **lines 5–21 as `additamentum Z`** — present in manuscript Z, **absent from Υ, Β and γ**. So a substantial span of the tabular exposition is not carried by the whole tradition.
+
+The opening principle quoted above sits *outside* the disputed span and is safe. But **delineations drawn from the body of the table may be interpolated**, and the rule's status is `greek_text_read_directly_partial` for that reason, not because the chapter went unread. Checking the span line by line against which places it covers is the remaining work.
+
+This is the second Paulus chapter today whose apparatus undercuts a rule we ship — cf. ch. 32, where Boer records Schato's verdict *mutilus et depravatus*.

@@ -169,7 +169,11 @@ def test_evidence_packet_excludes_protected_layers_and_outer_planets(chart_data)
     assert "action, rank, reputation, and career" in career.fact
     assert "essential dignity strong (+9)" in career.fact
     assert career.source_rule_id == "whole_sign_topical_chain"
-    assert career.verification_status == "translation_inspected_partial"
+    # Upgraded 2026-08-11: Paulus ch. 24 read in the Boer Greek (printed p. 53).
+    # Still PARTIAL because Boer marks lines 5-21 of that chapter "additamentum Z" -
+    # present in one manuscript, absent from Y, B and gamma - so the body of the
+    # tabular exposition may be interpolated even though the opening principle is sound.
+    assert career.verification_status == "greek_text_read_directly_partial"
     annual = next(item for item in timing if item.source_rule_id == "annual_profection_sign_rotation")
     releasing = next(item for item in timing if item.source_rule_id == "valens_zodiacal_releasing")
     firdaria = next(
