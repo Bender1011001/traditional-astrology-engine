@@ -387,3 +387,25 @@ Printed **206–213** in Boll–Boer is **IV.10, the divisions of times** — th
 Running count of rules caught citing pages that belong to another edition: **IV.10, III.5, I.9, and now this one.** All four appear to carry Robbins-Loeb pagination inside Teubner citations. Treat every printed-page number in `verified_rules` as suspect until checked against the scan on disk.
 
 **Still unread:** IV.9 itself, which is what the Perseus rule actually needs.
+
+---
+
+# IV.9 — Περὶ θανάτου ποιότητος, the Gorgon (2026-08-11)
+
+Printed **201–204**; chapter **ι΄ Περὶ χρόνων διαιρέσεως** begins at printed **204** (refining the earlier estimate that IV.10 starts at 206).
+
+> *…ἢ κατὰ τὸ **Γοργόνιον τοῦ Περσέως** **κεφαλιζομένους** ἢ **μελεοκοπουμένους**, ἐν δὲ Σκορπίῳ καὶ Ταύρῳ καύσεσιν ἢ τομαῖς ἢ ἀποτομαῖς ἰατρῶν καὶ σπασμοῖς ἀποθνήσκοντας*
+
+At the **Gorgoneion of Perseus** — beheaded or dismembered; in Scorpio and Taurus, by burnings, cuttings, surgeons' amputations, and convulsions.
+
+## The condition, which is the important half
+
+Printed 204 states when any of this applies:
+
+> *γίνονται τῶν τοὺς **ἀναιρετικοὺς τόπους** κατασχόντων ἀστέρων ἐν τοῖς **ἀποκλίμασιν** ἐκπεσόντων, μάλισθ' ὅταν καὶ ἡ **σελήνη** παροῦσα ἢ τετραγωνίζουσα ἢ διαμηκίζουσα τύχῃ τοὺς εἰρημένους τόπους*
+
+These deaths occur **when the stars controlling the anaretic places have fallen into the cadent places**, and especially when the **Moon** is present at, or square or opposite, those places.
+
+**So a bare Algol contact licenses nothing.** The violent image is gated on a whole anaretic configuration. The engine's existing summary already said this; the Greek confirms it word for word, and the publication limit now carries the condition verbatim so it cannot be dropped in paraphrase.
+
+`ptolemy_perseus_algol` is now **fully** `greek_text_read_directly` — both I.9 and IV.9 read.
