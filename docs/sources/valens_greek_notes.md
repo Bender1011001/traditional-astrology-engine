@@ -1681,3 +1681,48 @@ Folio-verified against the scan's own running heads (p0291-0292.png reads "273"/
 **VII.4** (Kroll pp. 274–276), Ἀγωγὴ λεπτομερεστέρα καὶ περὶ χρόνων ἐμπράκτων καὶ ἀπράκτων πρὸς τὰς ἀναφορὰς καὶ τὰς περιόδους τῶν ἀστέρων — VII.2's method refined to monthly resolution, distinguishing active (ἔμπρακτοι) from inactive (ἄπρακτοι) periods. Notes that neighboring co-rulers ("synmerizontes") modify outcomes, and that period boundaries need precise determination.
 
 **Running tally of Fortune-based timing techniques found in Valens: four.** None of VII.2-4 is implemented. Not assessed for build priority — recorded for the next pass.
+
+---
+
+## Book VIII read — the two instruments, and twin rectification (2026-08-11)
+
+Folio-verified: filename offset confirmed at exactly 18 here (p0313-0314.png reads printed 295/296, checked again on the next two composites). Note this held for Book VIII but did NOT hold cleanly inside Book VII — verify per batch, do not carry an offset across books.
+
+**Book VIII begins at printed p. 295**, Οὐεττίου Οὐάλεντος Ἀντιοχέως ἀνθολογιῶν βιβλίον η΄.
+
+**VIII.1** (pp. 295–296), Πῆξις τοῦ α΄ ὀργάνου — construction of the "first instrument," a degree-by-degree numerical table across the zodiac. Base numbers per degree, increments (παραυξήσεις), and additions of 14 units. Assigns every degree of every sign a number, with signs sharing sets (Libra/Leo/Pisces one set, Aries/Virgo another, Scorpio another). Chronocratic scaffolding, not a house technique.
+
+**VIII.2** (pp. 296–297), Πῆξις τοῦ δευτέρου ὀργάνου φυσική — the astronomical rationale behind those numbers plus a second instrument. Valens identifies the 14 additions with the Moon's lights and the 2 increments with the Sun's digits, resolves a chain of divisions to 360 (one year), then extends year by year at 2°20′ each. Explicitly derivational: he says he thought it necessary to append "the derivation of its construction" after setting out its management.
+
+**VIII.3** (pp. 297–299) — fixing the horoscopic degree against the two instruments. **VIII.5** opens at p. 300.
+
+**VIII.4** (pp. 299–300), Πῶς χρὴ τῶν διδυμογόνων τὴν γεννητικὴν ὥραν ἱστάνειν — **rectification for twins**, and a real gap. Valens tabulates which reported hour-pairs are astronomically possible and which are not: first twin reported at hour 1 and second at hour 3 reads as hour 3½; hour 1 and hour 7 as hour 6½; hour 1 and hour 9 as hour 9. Some pairs he flags outright as **οὐ δυνατόν, not possible** — no such interval can have occurred — and supplies the corrected substitute. Closes by noting twins can be born within the same quarter-hour, and that the hour's steep slope (ὀξυρροπία) shifts the degree.
+
+**Not implemented, and neither is the other one.** The engine mentions "rectification" only as a caveat — text telling the reader a longevity figure is unusable and *needs* rectification — while implementing no rectification technique at all. Valens supplies two: the Trutine of Hermes gestation rule (I.23–24, restated VI.9) and this twin table. Both absent.
+
+---
+
+## Book IX gaps closed — and a pattern worth acting on (2026-08-11)
+
+Folio-verified (offset 18 here, confirmed on three separate composites).
+
+**IX.5** (pp. 339–340), Περὶ κατακλίσεως καὶ καταρχῶν — decumbiture and inceptions. Count days from the pre-natal syzygy to the birth day, cast out tetraeterides (four-year units), repeat from the current year's syzygy to the birth date and again to the day the person took to bed, then compare residues: coincidence is judged fatal, divergence indicates danger from disease. Valens then generalises the same reasoning to the inception of **any** undertaking — building dedications, leading armies, generalships, city-commands. Closes with a polemic against charlatans (γόητες) who claim to answer everything from one inception and deceive people about lifespan, preferring brief truthful judgment from the temperamental and angular constitution.
+
+**IX.6** (pp. 340–341), Περὶ εὑρέσεως ὡροσκοποῦντος ζῳδίου καὶ μοίρας ὡροσκοπούσης — rectification: recovering an unknown ascendant sign and degree. Several alternatives, each marked Ἄλλως, including one "toward forced rectification" (πρὸς ἀναγκαστικὴν ἀγωγήν) using the Sun's position in the syzygy sign against the Moon's prosneusis.
+
+**IX.10** (pp. 351–352), Ἀγωγὴ περὶ ὡροσκόπου μοίρας — a second, independent ascendant-degree method, which Valens says he is disclosing against his predecessors' practice: he names **Petosiris**, who "set things out mystically to the king," and credits **Thrasyllos**. Uses the Sun-to-Moon arc converted to oblique ascensions against a solar gnomon and the climate's rising-times table; agreement confirms the reported hour, excess or deficit says how far the ascendant must move.
+
+### The pattern
+
+**Valens supplies at least four rectification techniques and the engine implements none of them:**
+
+| technique | location | status |
+|---|---|---|
+| Trutine of Hermes (gestation) | I.23–24, restated VI.9 | not built |
+| Twin hour-pair table | VIII.4 | not built |
+| Ascendant recovery | IX.6 | not built |
+| Ascendant degree via gnomon | IX.10 | not built |
+
+Meanwhile the engine's own longevity output tells the reader a failed figure "requires rectification and primary-direction validation" — advice it cannot act on, because "rectification" appears in the codebase only as that caveat string. A reader who follows the instruction has nowhere to go.
+
+**IX.5's katarchai layer is a separate matter**, and larger: it is inceptional/electional judgment, which this project deliberately keeps off the nativity (cf. the Lilly horary split). Recorded, not proposed.

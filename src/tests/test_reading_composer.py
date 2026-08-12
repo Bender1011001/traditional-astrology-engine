@@ -674,7 +674,10 @@ def test_paulus_seven_lots_preserve_formulas_and_severe_meanings(chart_data):
 
     assert len(lots) == 7
     assert all(item["source_rule_id"] == "paulus_seven_hermetic_lots" for item in lots)
-    assert all(item["verification_status"] == "translation_and_facing_pages_inspected" for item in lots)
+    # Upgraded 2026-08-11: ch. 23 read in the Boer Greek, and all seven formulas in
+    # src/engine/lots.py were checked against it and match. Eros and Nike begin from
+    # the Lot of Daimon, which is the detail most often got wrong elsewhere.
+    assert all(item["verification_status"] == "greek_text_read_directly" for item in lots)
     assert "constraint, submission, struggle, war, enmity, hatred, condemnation, and restriction" in report
     assert "boldness, treachery, might, and villainy" in report
     assert "impotence, exile, destruction, grief, and the quality of death" in report
