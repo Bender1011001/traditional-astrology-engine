@@ -1619,3 +1619,21 @@ Valens states its function directly: "responsible for fears and dangers and bond
 **Not currently in the engine.** This is a distinct Lot construction, unrelated to Fortune/Spirit/Daemon and unrelated to III.15's Lot-of-Fortune climacteric check. Building it would need: sect-conditional arc (Saturn→Mars day, Mars→Saturn night), projected from the Ascendant, plus the Mercury-based variant Valens flags as an alternate school. Then a malefic-testimony check identical in shape to the one already used for III.15's climacteric figure — reusable code, new Lot.
 
 V.1's tail (p. 209, already read) covers severity grading — how compromised the place is, from mere anxiety through to actual imprisonment, depending on the strength of malefic testimony against it.
+
+---
+
+## VI.5–7 read — a third chronocrator technique, distinct from IV.16 releasing (2026-08-11)
+
+Folio-verified against the scan's own running heads: VI.5 at pp. 251–253, VI.6 at pp. 253–254, VI.7 at pp. 254–256.
+
+**VI.5** introduces the method as one Valens says he personally recovered — "cast aside... because its points of entry are riddling" — not an established technique he's merely repeating. It partitions life into consecutive blocks of **10 years, 9 months**, each block ruled by a planet in sequence from the sect light (Sun by day, Moon by night), cycling through the seven until the queried span is reached.
+
+**VI.6** subdivides each major block proportionally among all seven planets, down to months/days/hours — a nested sub-period inside each major period, structurally analogous to how zodiacal releasing has L1/L2/L3 but built on fixed calendar durations rather than sign-traversal. Worked example given: Saturn's ~2y6m block splits into seven sub-slices (Saturn 6mo29d, Jupiter 2mo27d, Mars 3mo14d, Sun 4mo12d, Venus 1mo25d, Mercury 4mo19d, Moon 5mo24d — summing back to 2y6m).
+
+**VI.7** gives an arithmetical shortcut to find which planet governs a given calendar date without walking the whole period table sequentially: convert elapsed days using a 365¼-day year, reduce by cycles of 129 days, and the remainder locates the position in the planetary sequence.
+
+**Distinct from IV.16 (zodiacal releasing, already implemented):** this technique is pure calendar/day-count division assigned to planets in a fixed rotation — no signs, no Lots, no "loosing of the bond." It is a separate time-lord system Valens presents as a real find of his own, not a restatement of releasing under different arithmetic.
+
+**Not currently in the engine.** Building it needs: the 10y9m major-period cascade from the sect light, the proportional VI.6 subdivision formula, and the VI.7 modulus shortcut for date lookup. None of the three pieces overlaps with the existing `valens_zodiacal_releasing` code path.
+
+Chapter VIII (length-of-life from the full-moon/horoscopic gnomon) begins at p. 257, visible in the same scan set but not yet read.
