@@ -177,8 +177,10 @@ def test_evidence_packet_excludes_protected_layers_and_outer_planets(chart_data)
         for item in timing
         if item.source_rule_id == "al_biruni_firdaria_seven_planet_core"
     )
-    assert annual.verification_status == "translation_inspected"
-    assert releasing.verification_status == "translation_inspected"
+    # Both upgraded this session: annual profection read from Paulus (Boer
+    # pp. 82-95) and releasing read from Valens IV.4-7 (Kroll pp. 160-189).
+    assert annual.verification_status == "greek_text_read_directly"
+    assert releasing.verification_status == "greek_text_read_directly"
     assert firdaria.verification_status == "translation_and_facing_text_inspected"
     aspect = next(item for item in evidence if item.category == "aspect")
     # Was "translation_inspected_partial" while ptolemaic_aspects cited Ashmand
@@ -189,7 +191,8 @@ def test_evidence_packet_excludes_protected_layers_and_outer_planets(chart_data)
     joy = next(item for item in evidence if item.category == "planetary_joy")
     assert joy.details == {"name": "Mercury", "house": 1}
     assert joy.source_rule_id == "paulus_planetary_joys"
-    assert joy.verification_status == "translation_inspected"
+    # Upgraded this session - the joys were read in Boer's Greek (pp. 53-95).
+    assert joy.verification_status == "greek_text_read_directly"
 
 
 def test_customer_topic_catalog_covers_all_twelve_places():

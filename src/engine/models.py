@@ -144,3 +144,4 @@ class LotName(Enum):
     RICE = "Rice"
     LENTILS = "Lentils"
     POVERTY = "Poverty"
+    CAUSATIVE_PLACE = "Causative_Place"

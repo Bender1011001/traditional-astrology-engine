@@ -945,6 +945,153 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
                     {"cycles": [{"malefic": m, "figure": f, "period": p} for m, f, p in cycles]},
                 )
 
+    # Valens V.1, printed pp. 207-209, Kroll 1908 Greek: the "causative place"
+    # (αἰτιατικὸς τόπος), a Lot built from Saturn and Mars alone - day the arc
+    # Saturn->Mars projected from the Ascendant, night Mars->Saturn - which
+    # Valens says is "responsible for fears and dangers and bonds/imprisonment."
+    # He tests it the same way III.15 tests the Lot of Fortune: whether a
+    # malefic owns the resulting sign, or aspects it.
+    saturn_p = planets.get("Saturn")
+    mars_p = planets.get("Mars")
+    if saturn_p and mars_p and saturn_p.get("sign") and mars_p.get("sign"):
+        is_day_causative = str(sect.get("type") or "").upper().startswith("DAY")
+        try:
+            sat_lon = float(saturn_p.get("longitude", 0.0))
+            mar_lon = float(mars_p.get("longitude", 0.0))
+            asc_lon = float(_mapping(_mapping(analysis.get("angles")).get("Ascendant")).get("longitude", 0.0))
+        except (TypeError, ValueError):
+            asc_lon = None
+        if asc_lon is not None:
+            if is_day_causative:
+                cp_lon = (asc_lon + mar_lon - sat_lon) % 360.0
+            else:
+                cp_lon = (asc_lon + sat_lon - mar_lon) % 360.0
+            cp_sign = _SIGN_SEQUENCE[int(cp_lon / 30.0) % 12]
+            owner_malefic = None
+            for malefic, msign in (("Saturn", str(saturn_p.get("sign"))), ("Mars", str(mars_p.get("sign")))):
+                if msign == cp_sign:
+                    owner_malefic = malefic
+            add(
+                "causative_place",
+                (
+                    f"The causative place (Saturn-Mars, projected from the Ascendant by sect) "
+                    f"falls in {cp_sign} at {cp_lon:.2f} degrees."
+                    + (
+                        f" {owner_malefic} owns that sign, which is the testimony Valens says makes "
+                        f"the place active rather than latent."
+                        if owner_malefic
+                        else " Neither malefic owns that sign; Valens's own test for whether this "
+                        "place is active is silent here."
+                    )
+                ),
+                "Vettius Valens, Anthologiae V.1, printed pp. 207-209, Kroll 1908 Greek",
+                "valens_causative_place",
+                "analysis.planets_forensic[Saturn,Mars]; analysis.angles.Ascendant",
+                (
+                    "A place Valens tests for malefic ownership or aspect, not a verdict about the "
+                    "reader. He states its topic directly - fears, dangers, confinement - as the "
+                    "SUBJECT the place concerns when active; whether it activates depends on the "
+                    "malefic testimony, which this reports rather than assumes."
+                ),
+                {"sign": cp_sign, "longitude": round(cp_lon, 2), "owner_malefic": owner_malefic},
+            )
+
+    # Valens V.2, printed p. 210: the climacteric YEAR. Profect one sign per
+    # year from the ascendant; where the profected sign is the pre-natal
+    # syzygy's sign, or its square or opposition, Valens calls the year
+    # "climacteric and disturbed". Distinct from III.15 above, which derives a
+    # climacteric PERIODICITY from a malefic's figure to the Lot of Fortune -
+    # that names an interval, this names specific years.
+    syzygy_lon_raw = _mapping(
+        _mapping(analysis.get("syzygy")).get("prenatal_syzygy")
+    ).get("longitude")
+    asc_sign_name = str(ascendant.get("sign") or "")
+    if syzygy_lon_raw is not None and asc_sign_name in _SIGN_SEQUENCE:
+        try:
+            syz_lon = float(syzygy_lon_raw)
+        except (TypeError, ValueError):
+            syz_lon = None
+        if syz_lon is not None:
+            syz_sign = _SIGN_SEQUENCE[int(syz_lon / 30.0) % 12]
+            asc_idx = _SIGN_SEQUENCE.index(asc_sign_name)
+            syz_idx = _SIGN_SEQUENCE.index(syz_sign)
+            # Ages 0-90 whose profected sign is conjunct/square/opposite the syzygy.
+            hits = []
+            for age in range(0, 91):
+                prof_idx = (asc_idx + age) % 12
+                sep = (prof_idx - syz_idx) % 12
+                if sep in (0, 3, 6, 9):
+                    hits.append(age)
+            if hits:
+                shown = ", ".join(str(a) for a in hits[:14])
+                more = f" (and {len(hits) - 14} further)" if len(hits) > 14 else ""
+                add(
+                    "climacteric_year",
+                    (
+                        f"The lunation before birth was a {str(_mapping(_mapping(analysis.get('syzygy')).get('prenatal_syzygy')).get('type', '')).lower() or 'syzygy'} "
+                        f"moon in {syz_sign}. Profecting one sign per year from the {asc_sign_name} "
+                        f"ascendant, the years that fall on that sign or its square or opposition "
+                        f"are ages {shown}{more}."
+                    ),
+                    "Vettius Valens, Anthologiae V.2, printed p. 210, Kroll 1908 Greek",
+                    "valens_syzygy_climacteric",
+                    "analysis.syzygy.prenatal_syzygy; analysis.angles.Ascendant",
+                    (
+                        "A list of years the method marks, not a forecast of events in them. "
+                        "Valens calls such a year 'climacteric and disturbed' and names one "
+                        "aggravating witness - transiting Saturn in a cadent place - which is a "
+                        "per-year transit and is not evaluated here. The years recur on a fixed "
+                        "three-year lattice because the rule is arithmetic, so their number says "
+                        "nothing about how hard a life is."
+                    ),
+                    {
+                        "syzygy_sign": syz_sign,
+                        "ascendant_sign": asc_sign_name,
+                        "climacteric_ages": hits,
+                    },
+                )
+
+    # Valens VI.5-6, printed pp. 251-254: the decennial cascade. Major periods
+    # of 129 months (10y 9m) in Chaldean order from the sect light, each
+    # subdivided among all seven in proportion to their minor years. The
+    # arithmetic self-verifies - the minor years sum to 129, which IS the major
+    # period in months - and reproduces Valens's own worked Saturn example.
+    sect_light_planet = "Sun" if str(sect.get("type") or "").upper().startswith("DAY") else "Moon"
+    try:
+        from src.engine.valens_periods import decennial_cascade
+
+        cascade = decennial_cascade(sect_light=sect_light_planet, levels=1, count=7)
+    except Exception:  # pragma: no cover - defensive, never blocks a reading
+        cascade = None
+    if cascade:
+        seq = " -> ".join(
+            f"{p['ruler']} (from age {p['start_age']:.2f})" for p in cascade["periods"][:5]
+        )
+        add(
+            "decennial_cascade",
+            (
+                f"Valens's decennial division runs in periods of 10 years 9 months - 129 months, "
+                f"which is exactly the sum of the seven planets' minor years. Ordered from the "
+                f"sect light ({sect_light_planet}): {seq}."
+            ),
+            "Vettius Valens, Anthologiae VI.5-6, printed pp. 251-254, Kroll 1908 Greek",
+            "valens_decennial_cascade",
+            "analysis.sect",
+            (
+                "A division of time, not a set of predictions. Valens presents this as a method he "
+                "recovered himself after finding it discarded. The SUBDIVISION arithmetic is "
+                "confirmed against his own worked example, but WHICH planet opens the sequence is "
+                "configured from the sect light and is not yet verified against the Greek - so the "
+                "order of the rulers should be treated as provisional even though the period "
+                "lengths are exact."
+            ),
+            {
+                "major_period_months": cascade["major_period_months"],
+                "order": cascade["order"],
+                "starting_planet_verified": False,
+            },
+        )
+
     # Valens II.35, pp. 106-108: eleven lunar configurations, each with the
     # topic it signifies and the planet prevailing through it. The engine
     # emitted a single undifferentiated lunar_cycle item.

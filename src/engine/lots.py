@@ -305,6 +305,18 @@ def calculate_all_lots(
         else calculate_lot(asc, moon.longitude, venus.longitude)
     )
 
+    # Causative Place (Valens, Anthologiae V.1): Saturn vs Mars, projected from
+    # the Ascendant. Day: Saturn -> Mars; night: Mars -> Saturn. Valens states
+    # its role directly - a place "responsible for fears and dangers and
+    # bonds/imprisonments" - checked by whether malefics own or aspect it.
+    # Distinct from every other Lot here: built from the two malefics only,
+    # with no luminary or benefic in its formula.
+    lots[LotName.CAUSATIVE_PLACE.value] = (
+        calculate_lot(asc, saturn.longitude, mars.longitude)
+        if is_day
+        else calculate_lot(asc, mars.longitude, saturn.longitude)
+    )
+
     # Poverty: Fortune vs Spirit (al-Biruni, Book of Instruction).
     # Day: Asc + Fortune - Spirit (from Spirit to Fortune); night reversed.
     # Distinct from Necessity, which is built from Mercury and Fortune.

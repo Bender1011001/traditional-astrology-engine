@@ -570,6 +570,177 @@ def test_the_malefic_timelord_rule_reaches_both_reference_charts():
         assert items[0].details["verdict"] in {"effective", "harder"}
 
 
+
+# ---------------------------------------------------------------------------
+# Valens V.1 (Kroll pp. 207-209): the causative place
+# ---------------------------------------------------------------------------
+
+
+def test_the_causative_place_is_built_from_the_two_malefics_by_sect():
+    """Valens V.1 builds this Lot from Saturn and Mars alone.
+
+    Day takes the arc Saturn->Mars projected from the Ascendant, night reverses
+    it. No luminary and no benefic enters the formula - that is what separates
+    it from every other Lot in the table, and reversing the sect direction
+    would silently land it in a different sign.
+    """
+    from src.engine.lots import calculate_lot
+
+    asc, saturn, mars = 0.0, 10.0, 70.0
+    day = calculate_lot(asc, saturn, mars)
+    night = calculate_lot(asc, mars, saturn)
+
+    assert day == pytest.approx(60.0)
+    assert night == pytest.approx(300.0)
+    assert day != night
+
+
+def test_the_causative_place_reports_malefic_testimony_rather_than_asserting_danger():
+    """Valens's test is whether a malefic owns the resulting place.
+
+    The engine must report that testimony, not convert the Lot's topic - fears,
+    dangers, confinement - into a claim about the reader. Where neither malefic
+    owns the sign, the emitted text has to say so rather than imply the danger
+    stands anyway.
+    """
+    items = [e for e in _evidence(DAY_CHART) if e.category == "causative_place"]
+    assert items, "no causative_place evidence emitted"
+    item = items[0]
+
+    assert "V.1" in item.authority and "Valens" in item.authority
+    assert item.source_rule_id == "valens_causative_place"
+    assert "not a verdict about the reader" in item.interpretive_limit
+
+    owner = item.details.get("owner_malefic")
+    if owner is None:
+        assert "silent" in item.fact
+    else:
+        assert owner in item.fact
+
+
+# ---------------------------------------------------------------------------
+# Valens V.2 (Kroll p. 210) and VI.5-6 (pp. 251-254): the period techniques
+# ---------------------------------------------------------------------------
+
+
+def test_the_minor_years_sum_to_the_major_period():
+    """VI.5's "10 years 9 months" and the minor years are the same fact.
+
+    129 months is 10y9m, and the seven minor years sum to 129. This identity is
+    what makes the cascade self-verifying, so if either number is ever edited
+    the other must move with it.
+    """
+    from src.engine.valens_periods import (MAJOR_PERIOD_MONTHS,
+                                           MINOR_YEARS_TOTAL,
+                                           VALENS_MINOR_YEARS)
+
+    assert MINOR_YEARS_TOTAL == 129
+    assert sum(VALENS_MINOR_YEARS.values()) == 129
+    assert MAJOR_PERIOD_MONTHS == 129.0
+    assert MAJOR_PERIOD_MONTHS / 12.0 == pytest.approx(10.75)  # 10 years 9 months
+
+
+def test_the_subdivision_reproduces_valenss_own_worked_example():
+    """VI.6 works Saturn's 30-month share out loud. We must match him.
+
+    Six of his seven figures reproduce to the day. Jupiter is the exception -
+    he prints 2m27d where the rule gives 2m23.7d - and that is recorded as a
+    likely OCR slip on the numeral rather than smoothed away, because six
+    independent agreements outweigh one disagreement.
+    """
+    from src.engine.valens_periods import CHALDEAN_ORDER, _subdivide
+
+    subs = {s["planet"]: s for s in _subdivide(30.0, CHALDEAN_ORDER)}
+
+    valens = {
+        "Saturn": (6, 29),
+        "Mars": (3, 14),
+        "Sun": (4, 12),
+        "Venus": (1, 25),
+        "Mercury": (4, 19),
+        "Moon": (5, 24),
+    }
+    for planet, (months, days) in valens.items():
+        assert subs[planet]["months"] == months, planet
+        assert subs[planet]["days"] == pytest.approx(days, abs=1.0), planet
+
+    # The parts must close back onto the whole.
+    assert sum(s["months_decimal"] for s in subs.values()) == pytest.approx(30.0)
+
+
+def test_the_decennial_cascade_does_not_claim_its_starting_planet_is_verified():
+    """The period lengths are confirmed; the opening planet is not.
+
+    VI.5's opening lines were not read closely enough to settle which planet
+    starts the sequence, so the engine must keep saying so rather than let a
+    configured default harden into a sourced claim.
+    """
+    from src.engine.valens_periods import decennial_cascade
+
+    result = decennial_cascade(sect_light="Sun", levels=1, count=3)
+    assert result["starting_planet_verified"] is False
+    assert result["major_period_months"] == 129.0
+
+
+def test_the_syzygy_climacteric_marks_the_syzygy_sign_and_its_hard_figures():
+    """V.2 marks the syzygy sign, its squares, and its opposition - nothing else.
+
+    That is a four-of-twelve lattice, so the marked ages recur every three
+    years. A rule that marked more or fewer signs would silently change how
+    much of a life gets called disturbed.
+    """
+    from src.engine.models import Sign
+    from src.engine.valens_periods import climacteric_year
+
+    # Ascendant Aries, syzygy at 0 Aries: age 0 is the syzygy sign itself.
+    conj = climacteric_year(
+        ascendant_sign=Sign.ARIES, prenatal_syzygy_longitude=0.0, age=0
+    )
+    assert conj["is_climacteric"] and conj["figure_to_syzygy"] == "the syzygy sign itself"
+
+    # Age 3 profects to Cancer - square. Age 6 to Libra - opposition.
+    assert climacteric_year(
+        ascendant_sign=Sign.ARIES, prenatal_syzygy_longitude=0.0, age=3
+    )["figure_to_syzygy"] == "square to the syzygy"
+    assert climacteric_year(
+        ascendant_sign=Sign.ARIES, prenatal_syzygy_longitude=0.0, age=6
+    )["figure_to_syzygy"] == "opposite the syzygy"
+
+    # Age 1 profects to Taurus - a soft figure, not marked.
+    assert not climacteric_year(
+        ascendant_sign=Sign.ARIES, prenatal_syzygy_longitude=0.0, age=1
+    )["is_climacteric"]
+
+
+def test_transiting_saturn_only_aggravates_a_year_that_is_already_climacteric():
+    """Valens gives Saturn as a witness to a climacteric year, not a cause of one.
+
+    A cadent Saturn in an unmarked year must not manufacture a climacteric, or
+    the technique would fire on roughly a third of all years by itself.
+    """
+    from src.engine.models import Sign
+    from src.engine.valens_periods import climacteric_year
+
+    # Age 1 is not climacteric; Saturn transiting Gemini is cadent (3rd) from Aries.
+    unmarked = climacteric_year(
+        ascendant_sign=Sign.ARIES,
+        prenatal_syzygy_longitude=0.0,
+        age=1,
+        transiting_saturn_longitude=65.0,
+    )
+    assert unmarked["saturn_in_cadent_place"] is True
+    assert unmarked["is_climacteric"] is False
+    assert unmarked["aggravated"] is False
+
+    marked = climacteric_year(
+        ascendant_sign=Sign.ARIES,
+        prenatal_syzygy_longitude=0.0,
+        age=3,
+        transiting_saturn_longitude=65.0,
+    )
+    assert marked["is_climacteric"] and marked["aggravated"] is True
+
+
 # --------------------------------------------------------------------------
 # The publication contract must not flag its own disclaimers.
 #

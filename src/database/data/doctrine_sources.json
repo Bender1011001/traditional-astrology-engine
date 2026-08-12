@@ -430,6 +430,27 @@
       "verification": "greek_text_read_in_full",
       "verified_summary": "Valens delineates each of the sixty Egyptian bounds individually. The degree boundaries were checked digit by digit against EGYPTIAN_TERMS in all twelve signs; Libra is a manuscript outlier Kroll flags at 16,18. All 60 delineations were read directly from the Greek and rendered into English in docs/sources/valens_translation.md. The chapter closes (p. 19,4-7) by stating that the degrees were set out ALONE for teaching, and that with the domicile lord lying upon them it accomplishes its own, either base or good.",
       "publication_limit": "A delineation of the DEGREES, not a verdict on the person. Never publish a bound line as a free-standing judgment: the overlying domicile lord decides whether what the degree carries comes out base or good, and placement and sect outweigh the bound. Valens attaches conditions constantly and they reverse outcomes - Sagittarius in Mercury bound gives philosophers when Mercury inclines and soldiers when Mars; Capricorn in Jupiter bound produces BOTH reputation and disrepute."
+    },
+    "valens_causative_place": {
+      "edition_id": "valens_anthologiae_kroll_1908",
+      "location": "Anthologiae V.1, printed pp. 207-209",
+      "verification": "greek_text_read_directly",
+      "verified_summary": "A Lot built from Saturn and Mars alone (day: Saturn->Mars from Asc; night: Mars->Saturn), which Valens states governs fears, dangers, and confinement when a malefic owns or aspects it.",
+      "publication_limit": "Reports the place and whether a malefic owns its sign; does not assert activation without that testimony."
+    },
+    "valens_syzygy_climacteric": {
+      "edition_id": "valens_anthologiae_kroll_1908",
+      "location": "Anthologiae V.2, printed p. 210",
+      "verification": "greek_text_read_directly",
+      "verified_summary": "Profect one sign per year from the ascendant; a year whose profected sign is the pre-natal syzygy sign, or its square or opposition, is climacteric and disturbed, especially with transiting Saturn in a cadent place.",
+      "publication_limit": "Lists the years the rule marks. Names no event and grades no severity beyond the aggravating Saturn witness Valens himself gives."
+    },
+    "valens_decennial_cascade": {
+      "edition_id": "valens_anthologiae_kroll_1908",
+      "location": "Anthologiae VI.5-6, printed pp. 251-254",
+      "verification": "greek_text_read_directly",
+      "verified_summary": "Major periods of 129 months (10y9m, the sum of the seven minor years), each subdivided among all seven planets in proportion to their minor years. Subdivision arithmetic confirmed against Valens's own worked Saturn example.",
+      "publication_limit": "The period LENGTHS are exact and self-verifying. WHICH planet opens the sequence is configured from the sect light and not yet verified against the Greek; the ruler order is provisional."
     }
   },
   "candidate_editions_from_binder": [

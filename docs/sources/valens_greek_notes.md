@@ -1637,3 +1637,33 @@ Folio-verified against the scan's own running heads: VI.5 at pp. 251–253, VI.6
 **Not currently in the engine.** Building it needs: the 10y9m major-period cascade from the sect light, the proportional VI.6 subdivision formula, and the VI.7 modulus shortcut for date lookup. None of the three pieces overlaps with the existing `valens_zodiacal_releasing` code path.
 
 Chapter VIII (length-of-life from the full-moon/horoscopic gnomon) begins at p. 257, visible in the same scan set but not yet read.
+
+---
+
+## VI.8 read — length of life from the full-moon/horoscopic gnomon (2026-08-11)
+
+Kroll pp. 257–259, folio-verified. Valens frames this as harder than finding the target facts themselves: judging death-timing precisely. Method combines two reference points as "gnomons" — the pre-natal full moon's degree and the Ascendant degree — and examines which releasing/destructive places (ἀφετικοὶ καὶ ἀναιρετικοὶ τόποι) fall near them by star, sign, or bound. He explicitly criticizes rival methods using "complicated numeric combinations" as false precision. A square/opposition distance rule between Ascendant and Moon degrees judges "deadly" testimonies (p. 258). Not a single output — a diagnostic framework, closer in spirit to how the engine already treats testimony-counting than to a mechanical formula. Chapter IX (Trutine of Hermes restatement, already logged) follows at p. 260; Book VI closes at p. 262.
+
+Not yet assessed for engine gap status — needs comparison against existing longevity/prorogation code before building.
+
+---
+
+## Built: V.1, V.2, VI.5-6 (2026-08-11)
+
+All three techniques found in this reading pass are now in the engine.
+
+**V.1 causative place** — `src/engine/lots.py`, `LotName.CAUSATIVE_PLACE`. Sect-conditional Saturn/Mars arc from the Ascendant. Emitter reports the sign and whether a malefic owns it; where neither does, it says Valens's own activation test is silent rather than asserting the place is active.
+
+**V.2 syzygy climacteric** — `src/engine/valens_periods.py::climacteric_year`. Profected ascendant against the pre-natal syzygy sign and its hard figures, with transiting Saturn in a cadent place as the aggravating witness Valens names.
+
+A property of this rule worth stating plainly, because it looks alarming otherwise: it marks four signs out of twelve, so the climacteric years fall on a **fixed three-year lattice for every chart** — only the offset varies. A native will always have roughly thirty marked years in a ninety-year span. The count is arithmetic, not a measure of how hard a life is, and the interpretive limit says so.
+
+A test locks the asymmetry Valens's own wording implies: transiting Saturn is a witness to a climacteric year, not a cause of one. A cadent Saturn in an unmarked year must not manufacture a climacteric, or the technique would fire on about a third of all years by itself.
+
+**VI.5-6 decennial cascade** — `src/engine/valens_periods.py::decennial_cascade`. 129-month major periods subdivided by `minor_years / 129`.
+
+**Why this could be implemented confidently from a single reading:** the arithmetic self-verifies. The seven minor years sum to 129, and 129 months *is* the 10-years-9-months period VI.5 names — the same fact stated twice. Subdividing by that ratio reproduces six of the seven figures in Valens's own worked Saturn example to the day. Jupiter is the exception (computed 2m23.7d against a transcribed 2m27d) and is recorded as a probable OCR slip on the numeral rather than smoothed away; six independent agreements outweigh one disagreement, but the disagreement stays visible in the code comment and the test docstring.
+
+**What is NOT verified, and is flagged everywhere it surfaces:** which planet opens the L1 sequence. VI.5's opening lines were not read closely enough to settle it. The engine configures it from the sect light, and `starting_planet_verified: False` rides in the payload, the interpretive limit, and an assertion — so a configured default cannot harden into a sourced claim. The period *lengths* are exact; the *ruler order* is provisional.
+
+**VI.7's shortcut is not built.** Its arithmetic (reduce elapsed days by cycles of 129) was read but not pinned down well enough to implement. `decennial_ruler_at_age` walks the cascade instead, which reaches the same answer without guessing at the modulus.
