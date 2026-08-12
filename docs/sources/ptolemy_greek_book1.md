@@ -321,3 +321,13 @@ A benefic ray rescuing the prorogator from a destroyer is admitted only within a
 **Not patched.** It belongs to the longevity path, which is protected output, and the change would alter which charts get a rescue. Recorded for a decision, with the numbers as Ptolemy states them so no one has to guess.
 
 **Next concrete step for this rule:** read **IV.10 at printed pp. 214–218** (≈ PDF 233–237) — the chapter the rule actually cites.
+
+## IV, final chapter — and a citation that points past the end of the book
+
+Printed p. 213 carries the subscription **τέλος τοῦ Πτολεμαίου** ("end of Ptolemy"), immediately followed by *ADDENDVM* (Heiberg's collected fragments). **The Tetrabiblos ends at printed p. 213 in Boll–Boer.**
+
+`ptolemy_prorogation_distributor` recorded its location as *"Book IV, Chapter X, Divisions of Times, printed pp. 214–218."* **Those pages do not exist as Tetrabiblos text in this edition.** The citation belongs to a different edition's pagination — most likely Robbins' Loeb, where IV.10 does fall around there.
+
+The final chapter's own content (printed 212–213) is the times material: *ἐπεμβάσεις τῶν ἀστέρων*, the transits of the stars, and *ἐνιαύσια καὶ μηνιαῖα τῶν ζῳδίων*, the annual and monthly divisions of the signs — so the chapter identification was right and only the page numbers were foreign.
+
+**Rule for mixed editions: cite the chapter, not the page.** A page range silently carried from one edition to another sends the next reader past the end of the book.
