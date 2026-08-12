@@ -554,7 +554,9 @@ def test_ptolemaic_doryphory_uses_sign_rule_and_rejects_royal_overclaim(chart_da
     doryphory = [item for item in packet["evidence"] if item["category"] == "doryphory"]
 
     assert len(doryphory) == 1
-    assert doryphory[0]["verification_status"] == "translation_inspected"
+    # Upgraded 2026-08-11: IV.3 read in the Boll-Boer Greek (printed pp. 176-179).
+    # Partial because III.5 on parents, which this rule also cites, is still unread.
+    assert doryphory[0]["verification_status"] == "greek_text_read_directly_partial"
     assert "prior fixed 30-degree shortcut was wrong" in report
     assert "Mercury is the Moon's spear-bearer" in report
     assert "royal or sovereign branch is not present" in report

@@ -264,3 +264,30 @@ The chapter assigns exaltations *by sign only*, and derives each from a physical
 2. **Add a third slot for Mars in the Ptolemaic water triplicity.** Ptolemy gives it and our two-slot structure cannot hold it.
 3. **Transcribe the I.21 bound table from the Greek** and verify `PTOLEMAIC_TERMS_LILLY1647` against Ptolemy rather than against Lilly's printing of Ptolemy.
 4. **Retire the Ashmand citations** for I.7, I.14, I.19 and I.20 in the doctrine registry and cite the Greek with these translations instead. The English above is ours and is quotable without restriction.
+
+---
+
+# IV.3 — γ΄. Περὶ τύχης ἀξιωματικῆς (2026-08-11)
+
+Read from the newly acquired Boll–Boer Teubner 1957 scan. Chapter heading at printed p. 176; pagination for this scan is `printed = pdf_page − 19`.
+
+## The doryphory list, p. 178 — and a gap that never existed
+
+> *ὁ μὲν οὖν τοῦ Κρόνου … ἐπὶ πολυκτημοσύνῃ καὶ συναγωγῇ χρημάτων καὶ δυναστείας ποιεῖ, **ὁ δὲ τοῦ Διὸς ἢ ὁ τῆς Ἀφροδίτης** ἐπὶ χάρισι καὶ δωρεαῖς καὶ τιμαῖς καὶ μεγαλοψυχίᾳ, ὁ δὲ τοῦ Ἄρεως ἐπὶ στρατηλασίαις καὶ νίκαις καὶ φόβοις τῶν ὑποτεταγμένων, ὁ δὲ τοῦ Ἑρμοῦ διὰ σύνεσιν ἢ παιδείαν καὶ ἐπιμέλειαν καὶ οἰκονομίαν τῶν πραγμάτων.*
+
+| attendant | what its attendance confers |
+|---|---|
+| Saturn | much property, the gathering of wealth, and power |
+| **Jupiter *or* Venus** | favours, gifts, honours, magnanimity |
+| Mars | generalships, victories, and the fears of subordinates |
+| Mercury | intelligence or education, and the care and management of affairs |
+
+**An earlier pass recorded "Jupiter's line lost to OCR." It was never lost.** Ptolemy gives Jupiter and Venus **one clause between them**, joined by ἤ — *Jupiter or Venus*. There is no separate Jupiter entry to recover, and any implementation that invents a distinct Jupiter rank-signification here is fabricating one.
+
+This is worth keeping as a methodological point: a recorded gap can be an artefact of expecting the wrong shape. The list has four clauses for five planets because two planets share one, and reading down a column looking for five made the fourth look like a hole.
+
+## Rank itself, pp. 176–177
+
+The chapter opens by directing attention to the attendance (δορυφορία) of the lights and its quality. The graded outcomes follow: attendants angular or configured to the place above the earth give the greatest rank, and more so when the attendants are themselves in the places above the earth — these become **"lords of life and death"** (ζωῆς καὶ θανάτου κύριοι). Where the attendants are not angular but bear witness to the angles, rank is great but of a second order — crown-bearing, camp-commanding, priestly. Where the lights are not angular and most attendants neither angular nor configured to the angles, the natives are undistinguished; and where nothing attends the lights at all, they are wholly lowly and unfortunate.
+
+**Still unread in this scan:** III.5 on parents, which this same rule also cites.
