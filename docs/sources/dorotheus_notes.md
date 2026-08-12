@@ -116,3 +116,27 @@ Pingree's English at printed p. 161 prints the earth-triplicity night third as *
 ### Still English-only
 
 Chapters 5 and 22–24 (printed pp. 183–189), which this rule also cites for fortune and elevation, have **not** been read in the Arabic. The rule's status is therefore `arabic_text_read_directly_partial`, not a clean pass.
+
+---
+
+## I.5 read in the Arabic — the ranking of the places (2026-08-11)
+
+Located at PDF 12–13; running heads read `I 4`, `I 5-6`, `I 7`. Chapter heading:
+
+> **⟨ه⟩ باب. في فضل الامكنة** — "Chapter 5. On the excellence of the places."
+
+> *فاحفظ ما اذكره لك من الامكنة وفضل بعضها على بعض في القوة. فان **افضل الامكنة الطالع**، ثم **وسط السماء**، ثم ما يلي وسط السماء وهو **الحادي عشر** من الطالع، ثم مقابلة هذا المكان … وهو **الخامس** من الطالع وهو الذي يسمى **بيت الولد**، ثم مقابلة الطالع وهو **موضع الغروب**…*
+
+Ranked by strength: **Ascendant → Midheaven → 11th → 5th (called "the house of the child") → 7th (the setting place)** → …
+
+Note his construction is by *opposition pairs*: the 11th, then the opposite of the 11th (the 5th), then the opposite of the Ascendant (the 7th). Chapters 6 (**قوة الكواكب السبعة**, the power of the seven planets) and 7 (**تربية المواليد**, the rearing of natives) follow immediately.
+
+### A ranking worth comparing, carefully
+
+`src/engine/decennials.py:20` holds `OPERATIVE_HOUSES = [1, 10, 11, 7, 5, 9, 4]` — same first three as Dorotheus, but **7 before 5**, where Dorotheus gives **5 before 7**.
+
+**This is NOT asserted as a defect.** `OPERATIVE_HOUSES` sits in the *Valens* decennial engine and may legitimately follow Valens's ordering rather than Dorotheus's; the two authors need not agree, and the project's own standing rule is that conflicting rules belong to different traditions and get different tables. Recorded as a **question to resolve by reading Valens on the same point**, not as a bug.
+
+### Status
+
+`dorotheus_sect_light_triplicity_fortune` cites chapters **1, 5, and 22–24**. Chapters 1 and 5 are now read in the Arabic; **22–24 are not**, so the rule stays `arabic_text_read_directly_partial`.
