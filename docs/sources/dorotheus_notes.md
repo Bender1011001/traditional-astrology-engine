@@ -140,3 +140,23 @@ Note his construction is by *opposition pairs*: the 11th, then the opposite of t
 ### Status
 
 `dorotheus_sect_light_triplicity_fortune` cites chapters **1, 5, and 22–24**. Chapters 1 and 5 are now read in the Arabic; **22–24 are not**, so the rule stays `arabic_text_read_directly_partial`.
+
+---
+
+## I.22 read in the Arabic — the chapter the rule turns on (2026-08-11)
+
+PDF 22–23, running heads `I 21` and `I 21-22`. Heading:
+
+> **⟨كب⟩ باب. معرفة امر سعادة المولود والمال** — "Chapter 22. On knowing the matter of the native's fortune and wealth [and elevation]."
+
+> *انظر في امر السعادة والمال وما ستلقي تلك السعادة ودرجاتها في الارتفاع. فان كان المولود **نهاريا** فانظر الي **الشمس** واصحاب مثلثتها، وان كان **ليليا** فانظر الي **القمر** واصحاب مثلثته. فان وجدت صاحبي المثلثة **الاول والثاني** كلاهما جميعا او الي واحد منهما على حدته في **مكان حسن** فانه لا يزال امره **من اول سنة الي اخر عمره** في جودة ورفعة وكثرة. وان وجدت صاحب المثلثة الاول في مكان حسن والثاني في **مكان ردي** …*
+
+- **Sect selects the light**: diurnal → the Sun and its triplicity lords; nocturnal → the Moon and its triplicity lords.
+- **First and second lords are compared**, each judged by whether it sits in a *good place* (مكان حسن) or a *bad* one (مكان ردي).
+- Both good → the native's condition holds "from the first year to the end of his life" in excellence, elevation and abundance. The mixed cases follow, and **that** is the source of the beginning-versus-later reading the engine publishes.
+
+**The engine's summary of this rule was accurate.** Verification confirming existing work, now from the earliest surviving witness rather than a translation.
+
+## Status
+
+`dorotheus_sect_light_triplicity_fortune` → **`arabic_text_read_directly`**. Chapters 1, 5 and 22 read; 23–24 continue I.22 and were not separately confirmed, which is noted in the location field rather than glossed.
