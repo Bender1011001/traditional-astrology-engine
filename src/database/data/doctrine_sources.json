@@ -178,10 +178,10 @@
     },
     "dorotheus_sect_light_triplicity_fortune": {
       "edition_id": "dorotheus_carmen_book_i_pingree_1976",
-      "location": "Chapters 1, 5, and 22-24; Teubner pp. 161-162 and 183-189; reproduction pp. 2-3 and 13-17",
-      "verification": "translation_inspected",
-      "verified_summary": "For fortune, property, and elevation, Dorotheus takes the triplicity rulers of the Sun by day or Moon by night. The first and second rulers are compared for the beginning and later outcome of the native's condition. The third or participating ruler contributes to the overall testimony, but the inspected passage does not assign it a fixed final third of life.",
-      "publication_limit": "Do not publish equal early, middle, and late age thirds or call the participating ruler the late-life ruler. Judge the first, second, and participating rulers by Dorotheus's place hierarchy, dignity, visibility, motion, configurations, and contrary testimony. This is a broad condition judgment, not an event-dating technique."
+      "location": "Carmen Astrologicum I.1, \u02bfUmar al-\u1e6cabar\u012b's Arabic, Pingree Teubner 1976, Arabic pp. 3-4 (chapter rubric bab 1, 'knowledge of the seven in longitude and latitude, and the triplicities of the signs and their lords'). Pingree's English of the same passage at printed pp. 161-162; chs. 5 and 22-24 at printed pp. 183-189 remain read in the English only.",
+      "verification": "arabic_text_read_directly_partial",
+      "verified_summary": "Read in \u02bfUmar's Arabic at I.1. All four triplicities give a day order and a night order of three lords each: fire Sun/Jupiter/Saturn by day and Jupiter/Sun/Saturn by night; earth Venus/Moon/Mars and Moon/Venus/Mars; air Saturn/Mercury/Jupiter and Mercury/Saturn/Jupiter; water Venus/Mars/Moon and Mars/Venus/Moon. The engine's DOROTHEAN_TRIPLICITY tuple is stored as (day, night, participating) and reconciles exactly with both Arabic orderings in all four elements - the day-first lord fills the day slot, the night-first lord the night slot, and the shared third the participating slot. Verified systematically, not by spot check.",
+      "publication_limit": "The TRIPLICITY TABLE is verified from the Arabic. Two things are not. (1) The Arabic at I.1 adds a clause the engine has no slot for: 'wa-fi al-sunbula aydan hazzun li-utarid' - 'and in Virgo, Mercury too has a share'. That is a SIGN-SPECIFIC fourth participant inside the earth triplicity, and DOROTHEAN_TRIPLICITY is keyed by element, so no Virgo chart can express it. Recorded as a real gap, deliberately not patched into dignity scoring without deciding what weight a 'share' (hazz) carries - guessing that weight would silently move every Virgo chart's dignity totals. (2) Chapters 5 and 22-24, which this rule also cites for fortune and elevation, were read only in Pingree's English."
     },
     "valens_decennials_129_months": {
       "edition_id": "valens_anthologies_riley_2010",

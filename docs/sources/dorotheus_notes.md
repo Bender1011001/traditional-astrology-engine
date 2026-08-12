@@ -42,3 +42,77 @@ I twice concluded this source was unavailable in its original language, and was 
 So the citation is accurate, but **pp. 161–162 are the translation, not the original**. Verifying this rule against the original means reading the corresponding Arabic in the first ~160 printed pages, which is now known to be available.
 
 **Status:** `translation_inspected` remains correct and honest. It is NOT upgraded on the strength of having found the Arabic — finding a source is not reading it.
+
+
+---
+
+## Cross-check: which other rules are genuinely blocked
+
+Having got the Dorotheus availability wrong, the same question was re-asked for every
+remaining rule by listing the actual scan collection rather than probing text layers.
+
+**Genuinely absent from `tmp/acquire/pdfs/` — these rules really are blocked on acquisition:**
+
+| rule | source needed | present? |
+|---|---|---|
+| `al_biruni_firdaria_seven_planet_core` | al-Bīrūnī, *Book of Instruction*, Arabic | no |
+| `al_biruni_hayz_halb` | same | no |
+| `ptolemy_doryphory_rank` | Tetrabiblos, Boll–Boer Greek | no |
+| `ptolemy_perseus_algol` | same | no |
+| `ptolemy_prorogation_distributor` | same | no |
+| `lilly_reception` | *Christian Astrology* 1647 facsimile | no |
+| `lilly_planetary_conditions` | same | no |
+| `ibn_ezra_triplicity_life_thirds` | Ibn Ezra, Hebrew | no |
+| `ibn_ezra_annual_revolution_core` | same | no |
+| `firmicus_antiscia_major_configurations` | Firmicus, *Mathesis*, Latin | no — **but see below** |
+| `picatrix_lunar_mansions_electional_scope` | *Ghāyat al-Ḥakīm*, Arabic | no |
+
+So the al-Bīrūnī claim stands: those two are blocked. The Ptolemy claim also stands — the
+three Ptolemy rules cite chapters that WERE read in the Greek earlier, but no Ptolemy scan is
+in the collection now, so they cannot be re-checked or transcribed without re-acquiring it.
+
+**One lead worth following:** Dorotheus Appendix I (printed ~427) is
+*Fragmentum e Firmici Materni Mathesios libro II 29,2* — a Firmicus fragment, in this volume,
+concerning **antiscia**. `firmicus_antiscia_major_configurations` is exactly an antiscia rule.
+That appendix will not carry the whole of Mathesis II.29, but it is a primary witness to the
+antiscia material and is on disk. Not yet read.
+
+**Also on disk and unread**, bearing on no currently-registered rule but relevant to the
+tradition: Hephaistio (Greek, 2 vols), Olympiodorus on Paulus (Greek), Abū Maʿshar's
+*Mudkhal al-Kabīr* (Arabic), Sahl ibn Bishr, Bonatti (Latin 1550), Morin (1661),
+Māshāʾallāh, Lydus, and three CCAG volumes.
+
+---
+
+## I.1 read in the Arabic (2026-08-11)
+
+Located at Arabic printed pp. 3–4 (PDF pp. 10–11), rubric **⟨١⟩ باب. معرفة السبعة بالطول والعرض ومثلثات البروج وأربابها** — "knowledge of the seven in longitude and latitude, and the triplicities of the signs and their lords." The chapter numeral is Pingree's supplement in ⟨ ⟩; باب itself is in the manuscripts.
+
+### The table as the Arabic gives it
+
+| triplicity | day (بالنهار) | night (بالليل) |
+|---|---|---|
+| مثلثة الحمل — fire | Sun, Jupiter, Saturn | Jupiter, Sun, Saturn |
+| مثلثة الثور — earth | Venus, Moon, Mars | Moon, Venus, Mars |
+| مثلثة الجوزاء — air | Saturn, Mercury, Jupiter | Mercury, Saturn, Jupiter |
+| مثلثة السرطان — water | Venus, Mars, Moon | Mars, Venus, Moon |
+
+**Checked systematically against `DOROTHEAN_TRIPLICITY`: all four consistent.** Our tuple is stored `(day, night, participating)`, and Dorotheus's two orderings compress onto it exactly — the day-first lord fills the day slot, the night-first lord the night slot, and the third, which is the same in both orderings, the participating slot. The table is right.
+
+Note the element names (نارية / ترابية / هوائية / مائية) are **not** in the text; the apparatus records them as `add. B`, present only in the Berlin manuscript. Our keys are element names, which is a convenience, not Dorotheus's own vocabulary.
+
+### ⚠ The clause with no slot
+
+> **وفي السنبلة أيضاً حظٌّ لعطارد** — *"and in Virgo, Mercury too has a share."*
+
+This sits inside the earth-triplicity entry and is **sign-specific**: a fourth participant belonging to Virgo alone, not to Taurus or Capricorn. `DOROTHEAN_TRIPLICITY` is keyed by *element*, so there is no place to put it and no Virgo chart can express it.
+
+**Deliberately not patched.** حظّ ("share", "portion") does not state a weight, and triplicity feeds dignity scoring — inventing a value would move every Virgo chart's totals on a guess. Recorded as a real, sourced gap for a decision, not silently filled.
+
+### A narrow text/translation mismatch
+
+Pingree's English at printed p. 161 prints the earth-triplicity night third as **"[then Mars]"**, and his own sigla mark `[]` as an editorial supplement. The Arabic at p. 4 line 2 prints **ثم المريخ** plainly — unbracketed, no ⟨ ⟩, no apparatus note. So the constituted Arabic presents as transmitted what the translation presents as supplied. Which side is inconsistent could not be settled from these pages; flagged rather than resolved.
+
+### Still English-only
+
+Chapters 5 and 22–24 (printed pp. 183–189), which this rule also cites for fortune and elevation, have **not** been read in the Arabic. The rule's status is therefore `arabic_text_read_directly_partial`, not a clean pass.
