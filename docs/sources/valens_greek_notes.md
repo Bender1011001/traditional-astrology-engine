@@ -1601,3 +1601,21 @@ Mechanism: (1) annual profection from the **ascendant** — a sign per year of a
 **III.15 (already implemented, `src/services/reading_evidence.py:908`)** derives climacteric *periodicity* from a malefic's aspect to the **Lot of Fortune** — a static natal figure, no profection, no transit, no syzygy. The two share only the label "climacteric." Implementing V.2 does not touch III.15's code path; it is additive.
 
 **Not yet built:** V.2 requires three pieces the engine doesn't currently compute for this purpose — the profected-ascendant sign for a given age, the pre-natal syzygy sign, and a transiting-Saturn-in-cadent-house check for the queried year. None of the three is present under `valens_lot_climacterics`.
+
+---
+
+## V.1 read in full — the causative place, a Lot not currently in the engine (2026-08-11)
+
+Folio-verified: p0225-0226.png right page carries the "Liber V" opening header and "cap. I," continuing directly into p0227-0228.png (209/210, already read). The chapter opens by referring back to earlier books' treatment of sect, then introduces this place as tested "from experience" (ἐκ πείρας).
+
+**Construction, from Kroll ~p. 207–208** — a Lot, built the same way Fortune and Spirit are:
+
+- By day: the Saturn→Mars arc, projected forward from the Ascendant.
+- By night: the Mars→Saturn arc, projected forward from the Ascendant.
+- A variant Valens attributes to "others" (ἄλλοι): the same arc projected from Mercury instead of the Ascendant.
+
+Valens states its function directly: "responsible for fears and dangers and bonds/imprisonments" (φόβων καὶ κινδύνων καὶ δεσμῶν παραίτιος). Once located, the astrologer checks whether it falls in a malefic's own sign, or whether Saturn/Mars apply to or aspect it — that testimony is what turns the place from background risk into an active threat of confinement.
+
+**Not currently in the engine.** This is a distinct Lot construction, unrelated to Fortune/Spirit/Daemon and unrelated to III.15's Lot-of-Fortune climacteric check. Building it would need: sect-conditional arc (Saturn→Mars day, Mars→Saturn night), projected from the Ascendant, plus the Mercury-based variant Valens flags as an alternate school. Then a malefic-testimony check identical in shape to the one already used for III.15's climacteric figure — reusable code, new Lot.
+
+V.1's tail (p. 209, already read) covers severity grading — how compromised the place is, from mere anxiety through to actual imprisonment, depending on the strength of malefic testimony against it.
