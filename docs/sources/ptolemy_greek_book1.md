@@ -353,3 +353,19 @@ By day, chiefly the **Sun and Venus**; by night, **Saturn and the Moon**. This i
 Set the paternal or maternal place of the sect **as if it were an ascendant**, then judge everything else as for a nativity. That is a whole derived-chart method, and the engine has no derived-ascendant treatment for parents.
 
 Recorded, not built — it would add a second chart layer to every reading and needs a deliberate decision.
+
+---
+
+# I.9 — Perseus, and a name that spans two different stars (2026-08-11)
+
+Printed p. 28, in the section **Περὶ τῶν βορειοτέρων τοῦ ζῳδιακοῦ**:
+
+> **Οἱ δὲ κατὰ τὸν Περσέα τῷ τε τοῦ Διὸς καὶ τῷ τοῦ Κρόνου· ἡ δὲ ἐν τῇ λαβῇ τῆς μαχαίρας συστροφὴ τῷ τοῦ Ἄρεως καὶ τῷ τοῦ Ἑρμοῦ.**
+
+Perseus generally: **Jupiter and Saturn**. The **cluster in the hilt of the sword**: **Mars and Mercury**. Our existing summary of this half was exact.
+
+**Third foreign citation today.** The rule recorded *"Book I, Chapter X, Constellations North of the Zodiac, printed p. 30."* In Boll–Boer the northern constellations are in **chapter 9 at printed 27–28**; printed 30 opens **ι΄. Περὶ τῶν ὡρῶν τοῦ ἔτους**, the seasons. Same defect as IV.10 and III.5.
+
+**A precision point the rule's name obscures.** The star Ptolemy singles out here is the cluster *ἐν τῇ λαβῇ τῆς μαχαίρας* — in the **sword hilt** (the Double Cluster, χ/h Persei). **That is not Algol.** Algol is the Gorgon's head, a different star, treated in the separate violent-death passage at III.9. The rule id `ptolemy_perseus_algol` covers both, and the I.9 sword-hilt nature must not be quoted as a statement about Algol.
+
+III.9 remains read only in translation, so the rule is `greek_text_read_directly_partial`.
