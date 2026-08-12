@@ -1951,8 +1951,25 @@ class Auditor:
             "dispositor": (
                 essentials.get("domicile").value if essentials.get("domicile") else None  # type: ignore
             ),
+            # Lilly 1647 p. 115 credits "mutuall reception by house" the same 5 as
+            # domicile, and "reception by exaltation" the same 4 as exaltation.
+            # That needs the other planets' positions, so the septener is passed
+            # in here. Outer planets are excluded - they are outside the declared
+            # traditional scope and must not create receptions.
             "dignities": DignityCalculator.calculate_planet_dignity(
-                planet.name, planet.longitude, sect
+                planet.name,
+                planet.longitude,
+                sect,
+                other_positions={
+                    p.name: p.longitude
+                    for p in chart.planets
+                    if p.name
+                    not in (
+                        PlanetName.URANUS,
+                        PlanetName.NEPTUNE,
+                        PlanetName.PLUTO,
+                    )
+                },
             ),
             "accidental": DignityCalculator.calculate_accidental_dignity(planet, chart),
             "sect_condition": hayz_halb,

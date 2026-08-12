@@ -421,15 +421,66 @@ class DignityCalculator:
         }
 
     @classmethod
+    def _mutual_reception(
+        cls,
+        planet_name: PlanetName,
+        sign: Sign,
+        other_positions: Dict[PlanetName, float],
+    ) -> Dict[str, PlanetName]:
+        """Which mutual receptions this planet has, by domicile and by exaltation.
+
+        Lilly, Christian Astrology 1647, printed p. 112: reception is MUTUAL -
+        "two Planets that are significators ... are in each others dignity".
+        A one-way placement is not reception.
+        """
+        found: Dict[str, PlanetName] = {}
+        lord_of_my_sign = None
+        for p, signs in cls.DOMICILES.items():
+            if sign in signs:
+                lord_of_my_sign = p
+                break
+        exalt_of_my_sign = None
+        for p, s in cls.EXALTATIONS.items():
+            if s == sign:
+                exalt_of_my_sign = p
+                break
+
+        for other, other_lon in other_positions.items():
+            if other == planet_name:
+                continue
+            other_sign = list(Sign)[int(other_lon / 30) % 12]
+            # By domicile: I sit in your house and you sit in mine.
+            if other == lord_of_my_sign and sign in cls.DOMICILES.get(planet_name, []):
+                pass  # cannot happen; a planet in its own sign is its own lord
+            if other == lord_of_my_sign and other_sign in cls.DOMICILES.get(planet_name, []):
+                found.setdefault("domicile", other)
+            # By exaltation: I sit in the sign of your exaltation and you in mine.
+            if other == exalt_of_my_sign and cls.EXALTATIONS.get(planet_name) == other_sign:
+                found.setdefault("exaltation", other)
+        return found
+
+    @classmethod
     def calculate_planet_dignity(
         cls,
         planet_name: PlanetName,
         longitude: float,
         sect: Sect,
         term_system: TermSystem = TermSystem.EGYPTIAN,
+        other_positions: Optional[Dict[PlanetName, float]] = None,
     ) -> Dict:
         """
         Calculates total essential dignity score for a planet.
+
+        `other_positions` is optional and, when supplied, enables Lilly's
+        reception fortitudes (1647, printed p. 115). His table reads "A Planet
+        in his own house, OR MUTUALL RECEPTION with another Planet by house"
+        for 5, and "In his exaltation, OR RECEPTION BY EXALTATION" for 4 - so
+        reception is an ALTERNATIVE ROUTE to the same fortitude, not a bonus
+        stacked on top of it. A planet already in its own house gains nothing
+        from a house reception; only a planet outside its dignity does.
+
+        The parameter is optional so every existing caller keeps its behaviour
+        unchanged and reception is opt-in at the call site.
         """
         sign_idx = int(longitude / 30) % 12
         sign = list(Sign)[sign_idx]
@@ -458,6 +509,12 @@ class DignityCalculator:
                 is_domicile = True
                 break
 
+        receptions = (
+            cls._mutual_reception(planet_name, sign, other_positions)
+            if other_positions
+            else {}
+        )
+
         if is_domicile:
             score += cls.DOMICILE
             score_breakdown["domicile"] = cls.DOMICILE
@@ -472,6 +529,23 @@ class DignityCalculator:
                 score += cls.DETRIMENT
                 score_breakdown["detriment"] = cls.DETRIMENT
                 details.append("Detriment (-5)")
+            # Lilly p. 115: "in his own house, OR MUTUALL RECEPTION ... by house"
+            # is one line worth 5, so reception substitutes for DOMICILE and is
+            # not awarded on top of it - hence this sits in the else branch.
+            #
+            # But it is NOT an escape from debility. His table runs two separate
+            # columns, Essential Dignities and Debilities, and a planet scores in
+            # both. Mars in Taurus received by Venus in Aries takes the -5 for
+            # detriment AND the +5 for the reception, netting zero on those two
+            # lines. An earlier draft of this code used elif here and let the
+            # reception cancel the detriment outright, which would have quietly
+            # rehabilitated every received malefic.
+            if "domicile" in receptions:
+                score += cls.DOMICILE
+                score_breakdown["reception_domicile"] = cls.DOMICILE
+                details.append(
+                    f"Mutual reception by house with {receptions['domicile'].value} (+5)"
+                )
 
         # 2. Exaltation (+4)
         if cls.EXALTATIONS.get(planet_name) == sign:
@@ -482,6 +556,18 @@ class DignityCalculator:
             score += cls.FALL
             score_breakdown["fall"] = cls.FALL
             details.append("Fall (-4)")
+        if (
+            "exaltation" in receptions
+            and cls.EXALTATIONS.get(planet_name) != sign
+        ):
+            # "In his exaltation, OR RECEPTION BY EXALTATION" - one line worth 4,
+            # so it does not stack on an actual exaltation. As with the house
+            # line above it also does not cancel Fall; both columns score.
+            score += cls.EXALTATION
+            score_breakdown["reception_exaltation"] = cls.EXALTATION
+            details.append(
+                f"Reception by exaltation with {receptions['exaltation'].value} (+4)"
+            )
 
         # 3. Triplicity (+3)
         element = cls.ZODIAC_ELEMENTS.get(sign)

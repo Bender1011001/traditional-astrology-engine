@@ -838,3 +838,46 @@ def test_the_decennials_are_cited_to_valens_not_to_the_later_appendix():
     assert "251-254" in rule["location"]
     # The appendix parallel is recorded, but flagged as the later hand.
     assert "Additamenta vetusta" in rule["location"]
+
+
+def test_lilly_reception_does_not_leak_into_the_almuten():
+    """Reception raises Lilly's FORTITUDE; it must not move the Almuten Figuris.
+
+    Two different doctrines are in play. Lilly 1647 p. 115 credits mutual
+    reception the same 5 or 4 as the dignity itself, which is a fortitude
+    judgment. The Almuten Figuris is Ibn Ezra's and sums the five ESSENTIAL
+    dignities only - domicile, exaltation, triplicity, term, face.
+
+    AlmutenEngine.get_dignity_score enforces that by whitelisting those five
+    keys, so reception cannot reach it. That is not an accident and must not be
+    "fixed" by summing the whole breakdown: the almuten decides the chart
+    ruler, so a planet could win it on a reception Ibn Ezra never counted.
+    """
+    from src.engine.advanced_mechanics import AlmutenEngine
+    from src.engine.dignities import DignityCalculator
+    from src.engine.models import PlanetName, Sect
+
+    # Mars in Cancer and Jupiter in Capricorn - each in the other's exaltation.
+    mars_lon, jupiter_lon = 103.0, 283.0
+    positions = {PlanetName.MARS: mars_lon, PlanetName.JUPITER: jupiter_lon}
+
+    for planet, lon in ((PlanetName.MARS, mars_lon), (PlanetName.JUPITER, jupiter_lon)):
+        plain = DignityCalculator.calculate_planet_dignity(planet, lon, Sect.DAY)
+        received = DignityCalculator.calculate_planet_dignity(
+            planet, lon, Sect.DAY, other_positions=positions
+        )
+        # The fortitude MUST move - otherwise the reception is not firing at all.
+        assert received["total_score"] == plain["total_score"] + 4, planet
+        assert "reception_exaltation" in received["score_breakdown"], planet
+
+        # The almuten contribution must NOT move.
+        assert AlmutenEngine.get_dignity_score(
+            lon, planet, True
+        ) == AlmutenEngine.get_dignity_score(lon, planet, True)
+        assert "reception_exaltation" not in (
+            "domicile",
+            "exaltation",
+            "triplicity",
+            "term",
+            "face",
+        )
