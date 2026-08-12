@@ -622,7 +622,10 @@ def test_picatrix_mansion_is_not_converted_into_natal_personality(chart_data):
     ]
 
     assert len(mansion) == 1
-    assert mansion[0]["verification_status"] == "translation_inspected_partial_boundaries"
+    # Upgraded 2026-08-11: read in Ritter's Arabic, folios 19-22. Still partial -
+    # mansions 13-25 read, 1-12 and 26-28 located but not yet read. The Arabic states
+    # each mansion's degree span explicitly, so boundaries are now checkable.
+    assert mansion[0]["verification_status"] == "arabic_text_read_directly_partial"
     assert "What the Source Does and Does Not Say" in report
     assert "no honest natal prediction is extracted" in report
     assert "invented mansion personality keywords" in report
