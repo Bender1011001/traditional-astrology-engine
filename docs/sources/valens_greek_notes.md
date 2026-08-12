@@ -1581,3 +1581,23 @@ Read for scope, not full transcription. Filenames in the composite batch run 18 
 **Open gaps, recorded rather than guessed:** VI cap. I's exact heading; VII cap. II–IV titles; VIII's start page and cap. I–II/IV/VI+ titles; IX cap. V, VI, X, XII, XVI, XVII titles. All fall in unscanned page ranges within the current composite batch, not places the reader looked and found nothing.
 
 **Not yet reflected in `verified_rules`:** nothing in V–IX has been transcribed to delineation-level detail yet, so no registry entries change from this pass. This is a scope map for the next reading session, not a verification.
+
+---
+
+## V.2 read in full — a second, distinct climacteric technique (2026-08-11)
+
+Offset re-verified directly against the scan's own printed folio (reads "209"/"210" in the running head) — confirmed, not assumed.
+
+**Gap, recorded not guessed:** V.1's opening/defining passage (Περὶ αἰτιαστικοῦ τόπου) falls on printed pp. 207–208, outside the pulled scan range. Only the tail of V.1 (p. 209, judging a "dynastic place" by malefic/benefic testimony) was read. Needs pp. 207–208 (PDF ~225–226) before any claim about V.1 is treated as settled.
+
+**Title correction:** V.2's heading reads Περὶ ἐνιαυτοῦ κλιμακτηρικοῦ καὶ ἐκλειπτικῶν τόπων καὶ **καταρχῶν** ("...and catarchic beginnings") — not "κατοχῶν" as an earlier structure-mapping pass had it. Valens distinguishes this from the dedicated chapter III, Περὶ καταρχῶν, immediately following.
+
+**V.2's method, read from Kroll p. 210** — this is a **different climacteric technique from III.15**, not a restatement:
+
+> *A climacteric year is found from the malefics' reception or transmission toward the luminaries and the ascendant, and toward one another; but generally, thus: one must always release the years from the ascending sign. If the year so brought down terminates in the sign of the [preceding] conjunction or full moon, or in their squares or oppositions, the year is climacteric and disturbed — especially if, these conditions holding, transiting Saturn is also found in one of the four cadent places from the nativity.*
+
+Mechanism: (1) annual profection from the **ascendant** — a sign per year of age; (2) the profected sign is checked against the **pre-natal syzygy** (last New or Full Moon before birth) and its square/opposition signs; (3) the year is climacteric if they coincide, and worse if **transiting Saturn** sits in one of the four cadent places that year.
+
+**III.15 (already implemented, `src/services/reading_evidence.py:908`)** derives climacteric *periodicity* from a malefic's aspect to the **Lot of Fortune** — a static natal figure, no profection, no transit, no syzygy. The two share only the label "climacteric." Implementing V.2 does not touch III.15's code path; it is additive.
+
+**Not yet built:** V.2 requires three pieces the engine doesn't currently compute for this purpose — the profected-ascendant sign for a given age, the pre-natal syzygy sign, and a transiting-Saturn-in-cadent-house check for the queried year. None of the three is present under `valens_lot_climacterics`.
