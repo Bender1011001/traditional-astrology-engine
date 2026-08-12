@@ -1500,6 +1500,54 @@ def _monomoiria_paragraphs(
     return paragraphs
 
 
+def _causative_place_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
+    """Render Valens V.1, printed pp. 207-209.
+
+    A Lot built from the two malefics alone. Valens names its subject outright -
+    fears, dangers, confinement - but makes it conditional: what decides whether
+    the place is live is malefic ownership of, or aspect to, the resulting sign.
+    Where no malefic testifies, the emitter says his test is silent, and that
+    silence is the finding. Printing the subject without the condition would be
+    the same error the bounds made in reverse.
+    """
+    if not items:
+        return []
+    paragraphs = ["## The Causative Place (Valens V.1)"]
+    for item in items:
+        paragraphs.append(_evidence_sentence(item))
+    return paragraphs
+
+
+def _climacteric_year_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
+    """Render Valens V.2, printed p. 210.
+
+    Distinct from the III.15 climacteric rendered elsewhere: that one derives a
+    PERIODICITY from a malefic's figure to the Lot of Fortune and names an
+    interval; this profects from the ascendant against the pre-natal syzygy and
+    names specific years.
+
+    The lattice note in the prose is not padding. The rule marks four signs of
+    twelve, so the marked years land every third year in every chart - only the
+    offset differs. A bare list of thirty ages reads as a catalogue of disaster
+    unless the arithmetic behind it is stated in the same breath.
+    """
+    if not items:
+        return []
+    paragraphs = ["## Climacteric Years from the Pre-Natal Syzygy (Valens V.2)"]
+    paragraphs.append(
+        "Valens marks a year as climacteric when the sign profected from the ascendant "
+        "falls on the sign of the lunation before birth, or square or opposite it. Because "
+        "that is four signs out of twelve, the marked years recur every third year in any "
+        "chart and only their offset differs from one nativity to another. The count below "
+        "is a property of the arithmetic, not a measure of how hard a life is, and Valens "
+        "names one aggravating witness for such a year - transiting Saturn in a cadent "
+        "place - which is a per-year transit and is not evaluated here."
+    )
+    for item in items:
+        paragraphs.append(_evidence_sentence(item))
+    return paragraphs
+
+
 def _bound_delineation_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
     """Render Valens I.3, printed pp. 14-19.
 
@@ -3294,6 +3342,8 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
     monomoiria_trigonal = _group(packet, "monomoiria_trigonal")
     degree_qualities = _group(packet, "degree_quality")
     bound_delineations = _group(packet, "bound_delineation")
+    causative_place = _group(packet, "causative_place")
+    climacteric_years = _group(packet, "climacteric_year")
     fixed_stars = _group(packet, "fixed_star")
     dispositors = _group(packet, "dispositor_network")
     lots = _group(packet, "lot")
@@ -3407,6 +3457,7 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
         )
     )
     lines.extend(_bound_delineation_paragraphs(bound_delineations))
+    lines.extend(_causative_place_paragraphs(causative_place))
     lines.extend(_degree_quality_paragraphs(degree_qualities))
     lines.extend(_lunar_cycle_paragraphs(lunar_cycle))
     lines.extend(_lunar_mansion_scope_paragraphs(lunar_mansion_scope))
@@ -3419,6 +3470,7 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
     )
     lines.extend(_life_chapter_paragraphs(life_chapters, planets))
     lines.extend(_timing_paragraphs(timing, planets, topical))
+    lines.extend(_climacteric_year_paragraphs(climacteric_years))
     lines.extend(_ranked_forecast_paragraphs(timing_maps, timing, planets))
     lines.extend(_long_range_timing_paragraphs(timing_maps, planets))
     lines.extend(_annual_context_paragraphs(annual_context))

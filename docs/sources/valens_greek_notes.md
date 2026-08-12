@@ -1667,3 +1667,17 @@ A test locks the asymmetry Valens's own wording implies: transiting Saturn is a 
 **What is NOT verified, and is flagged everywhere it surfaces:** which planet opens the L1 sequence. VI.5's opening lines were not read closely enough to settle it. The engine configures it from the sect light, and `starting_planet_verified: False` rides in the payload, the interpretive limit, and an assertion — so a configured default cannot harden into a sourced claim. The period *lengths* are exact; the *ruler order* is provisional.
 
 **VI.7's shortcut is not built.** Its arithmetic (reduce elapsed days by cycles of 129) was read but not pinned down well enough to implement. `decennial_ruler_at_age` walks the cascade instead, which reaches the same answer without guessing at the modulus.
+
+---
+
+## VII.2-4 read — the Book VII gap closed (2026-08-11)
+
+Folio-verified against the scan's own running heads (p0291-0292.png reads "273"/"274", not the assumed 265-266 — the earlier structure map's page estimates were off by several pages within Book VII, corrected here). Chapter I in fact runs through p. 266, not ending at p. 264 as first mapped.
+
+**VII.2** (Kroll pp. 267–271), Ἀγωγὴ δευτέρα περὶ χρόνων διαιρέσεως πρὸς τὰς τῶν ζωδίων ἀναφορὰς καὶ τὰς τῶν ἀστέρων περιόδους — a second chronocrator method, opened as "a more detailed division, discovered through experience and toil" (ἐκ πείρας καὶ πόνου). Combines the rising-times (anaphorai) of the zodiacal signs with planetary period-numbers. Several worked nativities. Closes with a quoted Cleanthes fragment on fate.
+
+**VII.3** (Kroll pp. 272–273), Ἀγωγὴ περὶ χρόνων ζωῆς πρὸς τὸν κλῆρον τῆς τύχης καὶ τὸν τούτου κύριον — **a fourth technique built from the Lot of Fortune**, distinct from every other Fortune-based method already read this session: II.22's acquisition-place split, III.15's climacteric periodicity, and IV.4-7's releasing. This one computes life-periods from Fortune's own degree and its ruling planet's period-years directly — no releasing arithmetic, no aspect-to-malefic test. Opens with a striking preface asking whether the ancients concealed prognostic method "out of envy" (φθόνῳ) or simply never grasped it. One full worked example given (Aphrodite/Aquarius ascendant, klima ε′).
+
+**VII.4** (Kroll pp. 274–276), Ἀγωγὴ λεπτομερεστέρα καὶ περὶ χρόνων ἐμπράκτων καὶ ἀπράκτων πρὸς τὰς ἀναφορὰς καὶ τὰς περιόδους τῶν ἀστέρων — VII.2's method refined to monthly resolution, distinguishing active (ἔμπρακτοι) from inactive (ἄπρακτοι) periods. Notes that neighboring co-rulers ("synmerizontes") modify outcomes, and that period boundaries need precise determination.
+
+**Running tally of Fortune-based timing techniques found in Valens: four.** None of VII.2-4 is implemented. Not assessed for build priority — recorded for the next pass.

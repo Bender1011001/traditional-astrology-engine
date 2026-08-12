@@ -13,21 +13,16 @@ and neither existed in the engine before that reading.
       naming an interval. This one names a specific year, from profection and a
       transit. They share only the word.
 
-  VI.5-6 (Kroll pp. 251-254) - the decennial cascade. Valens presents it as
-      something he recovered himself, "cast aside because its points of entry
-      are riddling".
+VI.5-6's decennial cascade was ALSO read this session and is deliberately NOT
+implemented here - `src/engine/decennials.py` already had it, and had it better:
+it resolves the starting planet by zodiacal order from the Ascendant (the one
+piece a fresh reading left unverified) and advances by real calendar months
+rather than flat 30-day months. Building a second copy was a mistake, caught by
+running the result against live output. What the reading did contribute is the
+CITATION - see docs/sources/valens_greek_notes.md.
 
-The arithmetic of VI.5-6 is self-verifying, which is why it can be implemented
-with confidence from a single reading: the seven planets' minor years sum to
-129, and 129 months is exactly the 10-years-9-months major period VI.5 names.
-Subdividing a parent period by (minor_years / 129) reproduces six of the seven
-figures in Valens's own worked Saturn example to the day. The seventh
-(Jupiter) is off by ~3 days against the transcription, which is far more
-likely an OCR slip on the numeral than a different rule, given the other six.
-That discrepancy is recorded rather than smoothed over.
-
-Months are 30 days here, matching the 360-day year Valens uses for releasing
-(confirmed at IV.10 by his own conversion table).
+The minor years are kept below because V.2 shares nothing with them but they
+document the 129 identity that makes the decennial period self-checking.
 """
 
 from __future__ import annotations
@@ -155,126 +150,3 @@ def climacteric_years_in_range(
         if result["is_climacteric"]:
             found.append(result)
     return found
-
-
-def _subdivide(parent_months: float, order: tuple[str, ...]) -> List[Dict[str, Any]]:
-    """VI.6: split a period among the seven, each taking minor_years/129 of it.
-
-    Verified against Valens's own Saturn example (parent = 30 months): six of
-    the seven sub-periods reproduce his figures to the day.
-    """
-    out = []
-    for planet in order:
-        months = parent_months * VALENS_MINOR_YEARS[planet] / MINOR_YEARS_TOTAL
-        whole_months = int(months)
-        days = (months - whole_months) * DAYS_PER_MONTH
-        out.append(
-            {
-                "planet": planet,
-                "months_decimal": round(months, 6),
-                "months": whole_months,
-                "days": round(days, 2),
-            }
-        )
-    return out
-
-
-def decennial_cascade(
-    *,
-    sect_light: str,
-    levels: int = 2,
-    count: int = 3,
-) -> Dict[str, Any]:
-    """Valens VI.5-6, Kroll pp. 251-254. The 10-year-9-month cascade.
-
-    Each major period runs 129 months (10y 9m) and is ruled by a planet in the
-    Chaldean order. Within it, all seven planets take a sub-period proportional
-    to their minor years. VI.6 calls a further subdivision of those sub-periods
-    "the third subdivision"; `levels=3` produces it.
-
-    CAVEAT, recorded rather than hidden: VI.5 says the sequence runs from the
-    sect light, and that is what `sect_light` sets here - but the exact rule for
-    which planet opens the cascade is the one part of this technique not
-    confirmed by internal arithmetic the way the subdivision is. Treat the
-    starting planet as configured, not verified, until VI.5's opening lines are
-    read again. Everything downstream of the start is self-checking; the start
-    itself is not.
-    """
-    if sect_light not in VALENS_MINOR_YEARS:
-        raise ValueError(f"sect_light must be one of the seven, got {sect_light!r}")
-
-    start = CHALDEAN_ORDER.index(sect_light)
-    order_from_light = tuple(
-        CHALDEAN_ORDER[(start + i) % 7] for i in range(7)
-    )
-
-    periods = []
-    for i in range(int(count)):
-        ruler = order_from_light[i % 7]
-        entry: Dict[str, Any] = {
-            "index": i,
-            "ruler": ruler,
-            "months": MAJOR_PERIOD_MONTHS,
-            "years": round(MAJOR_PERIOD_MONTHS / 12.0, 4),
-            "start_age": round(i * MAJOR_PERIOD_MONTHS / 12.0, 4),
-        }
-        if levels >= 2:
-            subs = _subdivide(MAJOR_PERIOD_MONTHS, order_from_light)
-            if levels >= 3:
-                for sub in subs:
-                    sub["sub_periods"] = _subdivide(
-                        sub["months_decimal"], order_from_light
-                    )
-            entry["sub_periods"] = subs
-        periods.append(entry)
-
-    return {
-        "technique": "Valens decennial cascade (VI.5-6)",
-        "sect_light": sect_light,
-        "order": list(order_from_light),
-        "major_period_months": MAJOR_PERIOD_MONTHS,
-        "major_period_label": "10 years 9 months",
-        "periods": periods,
-        "starting_planet_verified": False,
-    }
-
-
-def decennial_ruler_at_age(
-    *, sect_light: str, age: float
-) -> Dict[str, Any]:
-    """Which planet rules a given age, at both cascade levels.
-
-    Walks the cascade rather than using VI.7's arithmetical shortcut. That
-    shortcut (reduce elapsed days by cycles of 129) was read but its exact
-    arithmetic is not yet pinned down well enough to implement - see the notes.
-    Walking gives the same answer without guessing at it.
-    """
-    months_elapsed = float(age) * 12.0
-    major_index = int(months_elapsed // MAJOR_PERIOD_MONTHS)
-    into_major = months_elapsed - major_index * MAJOR_PERIOD_MONTHS
-
-    start = CHALDEAN_ORDER.index(sect_light)
-    order_from_light = tuple(CHALDEAN_ORDER[(start + i) % 7] for i in range(7))
-
-    major_ruler = order_from_light[major_index % 7]
-
-    cursor = 0.0
-    sub_ruler = None
-    sub_start = 0.0
-    for planet in order_from_light:
-        span = MAJOR_PERIOD_MONTHS * VALENS_MINOR_YEARS[planet] / MINOR_YEARS_TOTAL
-        if cursor <= into_major < cursor + span:
-            sub_ruler = planet
-            sub_start = cursor
-            break
-        cursor += span
-
-    return {
-        "age": float(age),
-        "major_ruler": major_ruler,
-        "major_index": major_index,
-        "months_into_major": round(into_major, 4),
-        "sub_ruler": sub_ruler,
-        "months_into_sub": round(into_major - sub_start, 4) if sub_ruler else None,
-        "starting_planet_verified": False,
-    }

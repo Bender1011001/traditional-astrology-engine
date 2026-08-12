@@ -185,9 +185,9 @@
     },
     "valens_decennials_129_months": {
       "edition_id": "valens_anthologies_riley_2010",
-      "location": "Book VI material and the Fifth-Century Addition, Riley pp. 168-172 (Kroll 367-372; Pingree 359-366); compare Schmidt Book IV chapter 26",
-      "verification": "translation_inspected_with_transmission_caveat",
-      "verified_summary": "The major decennial period is 129 months, or 10 years 9 months. The seven sub-period shares are Saturn 30 months, Jupiter 12, Mars 15, Sun 19, Venus 8, Mercury 20, and Moon 25, assigned in the chart's zodiacal planetary order from an eligible aphetic light or the planet following the Ascendant. The shares sum exactly to 129 months.",
+      "location": "Anthologiae VI.5-6, printed pp. 251-254 (Kroll 1908) - Valens proper. The same technique also appears at Kroll 367-372, but those pages fall inside the Additamenta vetusta (363-372), a later scribal appendix whose own Valentinian nativity (b. 419 CE) dates it three centuries after Valens.",
+      "verification": "greek_text_read_directly",
+      "verified_summary": "The major decennial period is 129 months, or 10 years 9 months. The seven sub-period shares are Saturn 30 months, Jupiter 12, Mars 15, Sun 19, Venus 8, Mercury 20, and Moon 25, assigned in the chart's zodiacal planetary order from an eligible aphetic light or the planet following the Ascendant. The shares sum exactly to 129 months. Read in the Greek at VI.5-6: the subdivision ratio minor_years/129 reproduces six of the seven figures in Valens's own worked Saturn example to the day (Jupiter differs by ~3 days, a probable OCR slip on the numeral).",
       "publication_limit": "Riley labels the detailed computational exposition a fifth-century addition, even though the addition says the method is also found in Valens. Publish this as a Valens-tradition transmission, not uncontested authorial wording. Customer dates use modern civil calendar months to preserve 10 years 9 months; do not replace the months with uninterrupted 30-day blocks or import the fourth-ruler reset from the separate lunar-quarter method."
     },
     "ibn_ezra_triplicity_life_thirds": {
@@ -444,13 +444,6 @@
       "verification": "greek_text_read_directly",
       "verified_summary": "Profect one sign per year from the ascendant; a year whose profected sign is the pre-natal syzygy sign, or its square or opposition, is climacteric and disturbed, especially with transiting Saturn in a cadent place.",
       "publication_limit": "Lists the years the rule marks. Names no event and grades no severity beyond the aggravating Saturn witness Valens himself gives."
-    },
-    "valens_decennial_cascade": {
-      "edition_id": "valens_anthologiae_kroll_1908",
-      "location": "Anthologiae VI.5-6, printed pp. 251-254",
-      "verification": "greek_text_read_directly",
-      "verified_summary": "Major periods of 129 months (10y9m, the sum of the seven minor years), each subdivided among all seven planets in proportion to their minor years. Subdivision arithmetic confirmed against Valens's own worked Saturn example.",
-      "publication_limit": "The period LENGTHS are exact and self-verifying. WHICH planet opens the sequence is configured from the sect light and not yet verified against the Greek; the ruler order is provisional."
     }
   },
   "candidate_editions_from_binder": [

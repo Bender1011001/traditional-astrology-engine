@@ -640,17 +640,31 @@ def test_the_minor_years_sum_to_the_major_period():
     assert MAJOR_PERIOD_MONTHS / 12.0 == pytest.approx(10.75)  # 10 years 9 months
 
 
-def test_the_subdivision_reproduces_valenss_own_worked_example():
+def test_the_minor_years_reproduce_valenss_own_vi6_worked_example():
     """VI.6 works Saturn's 30-month share out loud. We must match him.
+
+    The cascade ITSELF lives in src/engine/decennials.py, which predates this
+    reading and does the job better - it resolves the starting planet by
+    zodiacal order from the Ascendant (the one piece this reading left
+    unverified) and advances by real calendar months, not flat 30-day ones.
+    A duplicate was built here on the first pass and deleted once that was
+    found by checking live output, not local tests - the identity below is
+    the part of the reading worth locking regardless: subdividing any parent
+    period by minor_years/129 must reproduce Valens's own numbers.
 
     Six of his seven figures reproduce to the day. Jupiter is the exception -
     he prints 2m27d where the rule gives 2m23.7d - and that is recorded as a
     likely OCR slip on the numeral rather than smoothed away, because six
     independent agreements outweigh one disagreement.
     """
-    from src.engine.valens_periods import CHALDEAN_ORDER, _subdivide
+    from src.engine.valens_periods import CHALDEAN_ORDER, VALENS_MINOR_YEARS
 
-    subs = {s["planet"]: s for s in _subdivide(30.0, CHALDEAN_ORDER)}
+    parent_months = 30.0
+    subs = {}
+    for planet in CHALDEAN_ORDER:
+        months = parent_months * VALENS_MINOR_YEARS[planet] / sum(VALENS_MINOR_YEARS.values())
+        whole = int(months)
+        subs[planet] = (whole, (months - whole) * 30.0)
 
     valens = {
         "Saturn": (6, 29),
@@ -661,25 +675,9 @@ def test_the_subdivision_reproduces_valenss_own_worked_example():
         "Moon": (5, 24),
     }
     for planet, (months, days) in valens.items():
-        assert subs[planet]["months"] == months, planet
-        assert subs[planet]["days"] == pytest.approx(days, abs=1.0), planet
-
-    # The parts must close back onto the whole.
-    assert sum(s["months_decimal"] for s in subs.values()) == pytest.approx(30.0)
-
-
-def test_the_decennial_cascade_does_not_claim_its_starting_planet_is_verified():
-    """The period lengths are confirmed; the opening planet is not.
-
-    VI.5's opening lines were not read closely enough to settle which planet
-    starts the sequence, so the engine must keep saying so rather than let a
-    configured default harden into a sourced claim.
-    """
-    from src.engine.valens_periods import decennial_cascade
-
-    result = decennial_cascade(sect_light="Sun", levels=1, count=3)
-    assert result["starting_planet_verified"] is False
-    assert result["major_period_months"] == 129.0
+        got_months, got_days = subs[planet]
+        assert got_months == months, planet
+        assert got_days == pytest.approx(days, abs=1.0), planet
 
 
 def test_the_syzygy_climacteric_marks_the_syzygy_sign_and_its_hard_figures():
@@ -794,3 +792,49 @@ def test_a_negation_earlier_in_the_sentence_does_not_excuse_a_later_promise():
     """The guard looks back only within the current sentence, so a denial in a
     previous clause must not launder a promise that follows it."""
     assert _is_flagged("Nothing is fixed. Success is guaranteed for this native.")
+
+
+def test_the_new_v_book_techniques_reach_the_prose_not_only_the_packet():
+    """Emitting is not rendering. This is the third time on the same rake.
+
+    The bounds shipped an emitter with no renderer and printed the caveat with
+    no claim under it. V.1 and V.2 then did the same thing and it was only
+    caught by reading live output. An emitter without a call site in the
+    composer produces evidence nobody ever sees, and the appendix still cites
+    it, so the report looks sourced while saying nothing.
+    """
+    from src.services.reading_composer import compose_deterministic_draft
+
+    date_str, time_str, city, lat, lon = DAY_CHART
+    chart = json.loads(
+        generate_chart_data("T", date_str, time_str, city, latitude=lat, longitude=lon)
+    )
+    draft, packet = compose_deterministic_draft(chart)
+
+    emitted = {item.get("category") for item in packet["evidence"]}
+    for category, heading in (
+        ("causative_place", "## The Causative Place"),
+        ("climacteric_year", "## Climacteric Years from the Pre-Natal Syzygy"),
+    ):
+        if category in emitted:
+            assert heading in draft, f"{category} emitted but never rendered"
+
+
+def test_the_decennials_are_cited_to_valens_not_to_the_later_appendix():
+    """Kroll 367-372 sits inside the Additamenta vetusta, which is not Valens.
+
+    That appendix dates itself three centuries late by including a nativity for
+    Valentinian (b. 419 CE). The same technique is in Valens proper at VI.5-6,
+    Kroll 251-254, and that is what the rule must cite.
+    """
+    import json
+    import pathlib
+
+    data = json.loads(
+        pathlib.Path("src/database/data/doctrine_sources.json").read_text(encoding="utf-8")
+    )
+    rule = data["verified_rules"]["valens_decennials_129_months"]
+    assert "VI.5-6" in rule["location"]
+    assert "251-254" in rule["location"]
+    # The appendix parallel is recorded, but flagged as the later hand.
+    assert "Additamenta vetusta" in rule["location"]

@@ -1051,47 +1051,6 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
                     },
                 )
 
-    # Valens VI.5-6, printed pp. 251-254: the decennial cascade. Major periods
-    # of 129 months (10y 9m) in Chaldean order from the sect light, each
-    # subdivided among all seven in proportion to their minor years. The
-    # arithmetic self-verifies - the minor years sum to 129, which IS the major
-    # period in months - and reproduces Valens's own worked Saturn example.
-    sect_light_planet = "Sun" if str(sect.get("type") or "").upper().startswith("DAY") else "Moon"
-    try:
-        from src.engine.valens_periods import decennial_cascade
-
-        cascade = decennial_cascade(sect_light=sect_light_planet, levels=1, count=7)
-    except Exception:  # pragma: no cover - defensive, never blocks a reading
-        cascade = None
-    if cascade:
-        seq = " -> ".join(
-            f"{p['ruler']} (from age {p['start_age']:.2f})" for p in cascade["periods"][:5]
-        )
-        add(
-            "decennial_cascade",
-            (
-                f"Valens's decennial division runs in periods of 10 years 9 months - 129 months, "
-                f"which is exactly the sum of the seven planets' minor years. Ordered from the "
-                f"sect light ({sect_light_planet}): {seq}."
-            ),
-            "Vettius Valens, Anthologiae VI.5-6, printed pp. 251-254, Kroll 1908 Greek",
-            "valens_decennial_cascade",
-            "analysis.sect",
-            (
-                "A division of time, not a set of predictions. Valens presents this as a method he "
-                "recovered himself after finding it discarded. The SUBDIVISION arithmetic is "
-                "confirmed against his own worked example, but WHICH planet opens the sequence is "
-                "configured from the sect light and is not yet verified against the Greek - so the "
-                "order of the rulers should be treated as provisional even though the period "
-                "lengths are exact."
-            ),
-            {
-                "major_period_months": cascade["major_period_months"],
-                "order": cascade["order"],
-                "starting_planet_verified": False,
-            },
-        )
-
     # Valens II.35, pp. 106-108: eleven lunar configurations, each with the
     # topic it signifies and the planet prevailing through it. The engine
     # emitted a single undifferentiated lunar_cycle item.
