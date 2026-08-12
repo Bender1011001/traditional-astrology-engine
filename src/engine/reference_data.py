@@ -83,10 +83,27 @@ DOROTHEAN_TRIPLICITY = {
 # table like this must never be - if two rules conflict, they belong to
 # different traditions and get different tables. So they now do.
 #
-# Ptolemy on the watery triangle: Mars has familiarity with it through Scorpio,
-# "but, as the signs which compose this triplicity are feminine, the Moon by
-# night and Venus by day ... govern it, together with Mars." Mars stays a
-# co-ruler of the triangle; the SECT-DEPENDENT principals are Venus and Moon.
+# All four sect-splits below are now VERIFIED against the Greek - Boll-Boer,
+# Teubner 1957, printed pp. 41-43, the chapter immediately preceding
+# k'. Peri hypsomaton. Fire: "hemeras men ho helios, nyktos de ho tou Dios."
+# Earth: "nyktos men tes selenes, hemeras de tou tes Aphrodites." Air:
+# "hemeras men tou tou Kronou dia ten hairesin, nyktos de tou tou Hermou."
+# Water: "nyktos men he selene, hemeras de ho tes Aphrodites."
+#
+# On the watery triangle this comment used to quote Ashmand - which is English
+# of PROCLUS' PARAPHRASE, Ptolemy at two removes - and it inverted the roles.
+# The Greek says the fourth triangle "kateleiphthe mono loipo onti to tou
+# Areos": it was LEFT TO MARS ALONE, he being the only one remaining, having
+# relation to it through the house of Scorpio. Venus and the Moon then
+# "synoikodespotousi de auto" - they CO-rule WITH HIM, by night the Moon and by
+# day Venus, on account of the sect and the femininity of the signs.
+#
+# So Mars is the assignee and Venus/Moon are the co-rulers, not the reverse.
+# The SECT-SPLIT is unaffected and correct as coded (day Venus, night Moon);
+# only the framing was backwards. Ptolemy's own wind-direction remark confirms
+# the weighting - the triangle is western "dia ten tou Areos kai tes selenes
+# oikodespoteian", by the RULERSHIP of Mars and the Moon, and south-western only
+# "dia ten tes Aphrodites synoikodespoteian", by Venus's CO-rulership.
 PTOLEMAIC_TRIPLICITY = {
     "Fire": (PlanetName.SUN, PlanetName.JUPITER),
     "Earth": (PlanetName.VENUS, PlanetName.MOON),
