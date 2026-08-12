@@ -1559,3 +1559,25 @@ This is the methodological statement underneath everything: **the delineation li
 Three gestation intervals tied to the Moon's position at conception — the **Trutine of Hermes** family. I.24 treats seven-month births as a separate case.
 
 **Status:** I.22 complete (pp. 41–50); I.23–I.24 read.
+
+---
+
+## Books V–IX — structure map (2026-08-11)
+
+Read for scope, not full transcription. Filenames in the composite batch run 18 pages ahead of the true Kroll page (`printed = filename − 18`) — confirmed by reading the printed folio number off the scan itself, not assumed. Anyone resuming this batch should recompute from the scan, not the filename.
+
+**Book V (Kroll pp. 209–238)** — corrects the earlier estimate of "209–229"; it runs longer. Aitionology (the causative place), climacteric years, ecliptic places. This is the chapter that grounds the climacteric technique already in the engine (Valens III.15) — worth cross-checking III.15 against V's fuller statement next pass.
+
+**Book VI (Kroll pp. 239–262).** 9 chapters. VI.9 (pp. 260–262) is a second statement of the Trutine-of-Hermes gestation technique already read at I.23–I.24 — not a new technique, a restatement. VI.5–7 give a decennial + 9-month chronocrator subdivision distinct from the IV.16 releasing already implemented. **Not currently in the engine** — flagged as a gap, not built.
+
+**Book VII (Kroll pp. 263–294).** At least 5 chapters (II–IV titles fall in an unscanned gap, pp. 265–280 — a real gap, not filled). VII.5 gives klima-conditioned (latitude-band) decennial tables. Contains a full worked nativity, "the defeated woman" (τῆς ἡττηθείσης γυναικός, p. 285) — one of Valens's own example charts. Colophon styles the book "πρὸς Δάφνην," distinct from the "to Marcus" address used elsewhere.
+
+**Book VIII (Kroll pp. ~295–328).** Start page and several chapters unconfirmed (gaps at pp. 295–296, 303–320, 323+ — unscanned). Contains κανόνιον/πλινθίον degree-mapping boards tied to Nechepso/Petosiris "organa." No discursive nativity found in the sampled pages, but the gaps mean this isn't conclusive.
+
+**Book IX (Kroll pp. 329–362).** 19 chapters. Prooimion (329–330) is autobiographical: Valens names predecessors (Nechepso's 13th book, Critodemus, Timaeus, Asclation) and describes his own travels ("πελαγοδρομήσας... κλιμάτων τε καὶ ἐθνῶν κατόπτης γενόμενος"). IX.7 (pp. 341–342) treats **sex-determination and teratology of nativities** — a topic not seen in Books I–VIII and **not currently implemented** in the engine. IX.11 (pp. 353–354) is a doxography of rival solar-year theories (Euctemon, Philippus, Aristarchus, the Chaldaeans, Nechepso, plus apparatus citations of Sudines, Kidenas, Hipparchus) — historically valuable, not doctrine to implement.
+
+**End of the Anthologiae proper: Kroll p. 362** (IX.19). What follows (pp. 363–372, "Additamenta vetusta") is a **later scribal appendix, not Valens's text** — proven by internal evidence: it contains a dated nativity for Valentinian (b. 25 June 419), three centuries after Valens wrote. It has its own colophon and its own internal two-book numbering. Do not cite it as Valens. An Index Verborum follows from ~p. 383 to the end of the scanned volume.
+
+**Open gaps, recorded rather than guessed:** VI cap. I's exact heading; VII cap. II–IV titles; VIII's start page and cap. I–II/IV/VI+ titles; IX cap. V, VI, X, XII, XVI, XVII titles. All fall in unscanned page ranges within the current composite batch, not places the reader looked and found nothing.
+
+**Not yet reflected in `verified_rules`:** nothing in V–IX has been transcribed to delineation-level detail yet, so no registry entries change from this pass. This is a scope map for the next reading session, not a verification.
