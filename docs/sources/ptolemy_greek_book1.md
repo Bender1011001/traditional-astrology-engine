@@ -369,3 +369,21 @@ Perseus generally: **Jupiter and Saturn**. The **cluster in the hilt of the swor
 **A precision point the rule's name obscures.** The star Ptolemy singles out here is the cluster *ἐν τῇ λαβῇ τῆς μαχαίρας* — in the **sword hilt** (the Double Cluster, χ/h Persei). **That is not Algol.** Algol is the Gorgon's head, a different star, treated in the separate violent-death passage at III.9. The rule id `ptolemy_perseus_algol` covers both, and the I.9 sword-hilt nature must not be quoted as a statement about Algol.
 
 III.9 remains read only in translation, so the rule is `greek_text_read_directly_partial`.
+
+---
+
+# IV.10 located, and a fourth foreign citation (2026-08-11)
+
+Printed **206–213** in Boll–Boer is **IV.10, the divisions of times** — the chapter `ptolemy_prorogation_distributor` rests on. Confirmed by content: it opens with the **seven ages of man** allotted to the planets, visible at printed 207–208 —
+
+> *ἕκτος δὲ ὁ τοῦ **Διὸς** τὴν **πρεσβυτικὴν** ἡλικίαν λαχὼν ἐπὶ τὴν ἰδίαν περίοδον πάλιν **δωδεκαετίαν** … τελευταῖος δὲ ὁ τοῦ **Κρόνου** τὴν **ἐσχάτην καὶ γεροντικὴν** ἡλικίαν ἐκληρώθη*
+
+— Jupiter sixth with the elderly age for twelve years by his own period; Saturn last, allotted the final and aged period. It then moves into the *ἀφέσεις* (prorogations) and their oblique-ascension arithmetic at printed 209–210.
+
+**So the earlier note stands corrected in a useful direction:** IV.10 is not missing, it is at 206–213. What was wrong was only the recorded page range (214–218), which lands past the end of the book.
+
+**Fourth foreign citation.** `ptolemy_perseus_algol` records its second half as *"Book III, Chapter IX, printed pp. 209–210."* Printed 209–210 in this edition is **Book IV.10, the ages and prorogations** — not a Book III chapter and not about violent death. Ptolemy's death chapter is **IV.9, Περὶ θανάτου ποιότητος**, sitting just before IV.10.
+
+Running count of rules caught citing pages that belong to another edition: **IV.10, III.5, I.9, and now this one.** All four appear to carry Robbins-Loeb pagination inside Teubner citations. Treat every printed-page number in `verified_rules` as suspect until checked against the scan on disk.
+
+**Still unread:** IV.9 itself, which is what the Perseus rule actually needs.
