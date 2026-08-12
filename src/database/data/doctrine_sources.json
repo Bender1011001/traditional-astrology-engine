@@ -272,15 +272,17 @@
     },
     "lilly_reception": {
       "edition_id": "lilly_christian_astrology_1647",
-      "location": "An Introduction to Astrology, p. 112, Reception",
-      "verified_summary": "Lilly defines reception through one planet occupying another's dignity and distinguishes reception by house, triplicity, term, face, or other essential dignity.",
-      "publication_limit": "Reception is assistance or exchange; the text does not justify treating it as cancellation of every debility or an assured favorable outcome."
+      "location": "Christian Astrology, London 1647 first edition, printed p. 112 (Of Reception)",
+      "verified_summary": "Read in Lilly's own 1647 English. Reception is two significators each in the other's dignity. Reception by domicile he calls 'the strongest and best of all receptions'; it may also be by triplicity, term, face, or any essential dignity. Its stated use is to effect a matter that is otherwise denied.",
+      "publication_limit": "Reception is MUTUAL - both planets in each other's dignity. A one-way placement is not reception in Lilly's sense. He ranks domicile reception strongest but admits the minor dignities, so a term or face reception is real and weaker, not absent.",
+      "verification": "facsimile_inspected_1647_first_edition"
     },
     "lilly_planetary_conditions": {
       "edition_id": "lilly_christian_astrology_1647",
-      "location": "An Introduction to Astrology, planetary chapters and dignity tables, approximately pp. 57-83 and 104-117",
-      "verified_summary": "Lilly gives planetary natures, houses, exaltations, falls, triplicity rights, terms, and related conditions.",
-      "publication_limit": "The exact page image controls when OCR glyphs obscure signs or planetary symbols."
+      "location": "Christian Astrology, London 1647 first edition, printed p. 115, 'A ready Table whereby to examine the Fortitudes and Debilities of the Planets'",
+      "verified_summary": "Lilly gives planetary natures, houses, exaltations, falls, triplicity rights, terms, and related conditions. Verified against the 1647 table: house 5, exaltation 4, triplicity 3, term 2, face 1, detriment -5, fall -4, peregrine -5. All eight match DignityCalculator exactly.",
+      "publication_limit": "The exact page image controls when OCR glyphs obscure signs or planetary symbols. GAP: Lilly's table awards 'own house OR MUTUALL RECEPTION BY HOUSE' the same 5, and 'exaltation OR RECEPTION BY EXALTATION' the same 4. The engine implements neither - reception is computed in reception.py and never reaches the dignity score. The weight is explicit in the source so this is implementable without guessing, but it would change essential-dignity totals wherever a reception exists and the almuten is decided by those totals, so it is recorded for a deliberate decision rather than patched in passing.",
+      "verification": "facsimile_inspected_1647_first_edition"
     },
     "lilly_degree_quality_tables": {
       "edition_id": "lilly_christian_astrology_1647",
