@@ -101,3 +101,40 @@ This is the same failure the project already records for fixed stars — modern 
 ### A doctrinal condition worth capturing when that happens
 
 Mansion 5 carries an explicit gate: the marital-harmony talisman works *اذا كان القمر والطالع في **برج صور بني آدم** صالحا بريئا من النحوس والاحتراق* — **if the Moon and Ascendant are in a sign of human form**, sound and free of malefics and combustion. Ritter names them: **الجوزاء والسنبلة والميزان والدلو والقوس** — Gemini, Virgo, Libra, Aquarius, Sagittarius. The engine has no human-form-sign concept.
+
+---
+
+## Mansions 6–12 read — the divergence is systematic (2026-08-11)
+
+Folios 17–18 (pages 402–403). With 2–5 already read, **11 of 28 mansions** are now compared against Ritter. The pattern is not random error.
+
+| # | name | Ritter's Arabic | ours |
+|---|---|---|---|
+| 6 | al-Hanʿa | **corrupting cities and besieging them**, vengeance against kings, **destroying crops**, trusts and deposits, improving partners, land hunting, **corrupting the working of medicines when taken** | war, seeking justice, pursuing enemies, travel, forming partnership |
+| 7 | al-Dhirāʿ | **growth of trade and its blessing**, growth of crops, traveller's safety **in water**, improving what is between friends and partners, **binding flies**, attaining a wish **from the sultan**, the runaway slave | agriculture, **washing or purifying the body**, reconciliation with enemies |
+| 8 | al-Nathra | love and friendship **between those who hate each other**, traveller's welfare, **prolonging the binding of prisoners**, **driving away mice and bedbugs** | love and friendship, safe travel, friendship **between allies** |
+| 9 | al-Ṭarf | **corrupting farms**, tearing travellers' veils, **severing partners**, imprisoning the adversary | capturing individuals, **fortifying gates and defences** |
+| 10 | al-Jabha | marital harmony, **harming an enemy**, **binding the prisoner**, stability of what is built, partners' agreement | **healing of illness**, **ease of childbirth**, marriage, building |
+| 11 | al-Zubra | **releasing prisoners and captives**, **besieging cities**, growth of trade, stability of buildings | building, **renting lands**, agriculture, marriage, **putting on new garments** |
+
+### The bias has a direction
+
+Two consistent movements, across every mansion checked:
+
+**Omitted from ours** — the political and destructive: besieging cities, vengeance against kings, corrupting crops, severing partners, binding and releasing prisoners, corrupting medicines. Mansion 11's *releasing prisoners* is Ritter's **first** listed use and is absent from ours entirely.
+
+**Added to ours** — benign domestic material with no counterpart in the Arabic: healing illness, ease of childbirth, washing the body, putting on new garments, fortifying defences, seeking justice.
+
+One inversion of sense worth noting on its own: mansion 8 in Ritter makes friendship **between those who hate each other** (المتباغضين) — reconciling enemies. Ours reads *"creation of friendship between allies"*, which is close to the opposite claim and much weaker.
+
+**This reads as a sanitised, domesticated recension** — a talismanic magic text with the coercive and political operations filed off. That is a coherent editorial choice by whoever compiled the "Medieval Astrology Guide" our `source_refs` names second, but it is **not Picatrix**, and it currently ships cited as Picatrix.
+
+### Recommendation, now that the sample is large enough
+
+11 of 28 is enough to say the table's *contents* are not from the cited source, while its *boundaries* are exactly right. Three options, in order of how well they hold the project's own source-fidelity rule:
+
+1. **Read all 28 and rewrite from Ritter.** Correct, and the remaining 17 are on disk. Roughly one more focused pass.
+2. **Suppress mansion intents from customer output** until (1) is done, keeping the boundaries, which are sound. Stops shipping unsourced electional advice today.
+3. **Relabel** `source_refs` honestly as a modern compilation and drop the Picatrix citation. Cheapest, but leaves the content in.
+
+Doing nothing is the one option inconsistent with the rest of the project: every other rule in the registry now states exactly which edition it was read from.
