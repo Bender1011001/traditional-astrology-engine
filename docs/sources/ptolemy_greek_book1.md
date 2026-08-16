@@ -485,3 +485,22 @@ It is implementable without judgment — the aspects (square, trine), the orbs (
 > *ὅλως γὰρ τῶν ὑπὸ τὰς αὐγὰς ὄντων **οὐδένα παραληπτέον οὔτε πρὸς ἀναίρεσιν οὔτε πρὸς βοήθειαν***
 
 Nothing under the Sun's beams is to be taken **either for destroying or for helping** — except the Moon herself when waxing. A combust benefic does not rescue, and a combust malefic does not kill.
+
+## Implementing the rescue — the plumbing it needs, and why it was not built today
+
+The doctrine is settled (above). The **implementation is not trivial**, and the reason is worth recording so the next attempt does not rush it.
+
+**What the anaretic payload carries now** (`forensic_engine.py`, `dirs_json`): `significator`, `promittor`, `aspect`, `arc`, `years`, `date_offset`, `method`. Candidates are filtered to Mars/Saturn on conjunction, square or opposition.
+
+**What the rescue needs and the payload lacks: the longitude of the anaretic degree.** Ptolemy is specific — the benefic ray must fall *πρὸς αὐτὴν τὴν ἀναιρετικὴν μοῖραν ἢ εἰς τὰ ἑπόμενα αὐτῆς*, on the anaretic degree itself **or the degrees following it**. That is a directional window, not a symmetric orb, and it is anchored on the killing degree, not on the hyleg. Getting the anchor wrong would produce a rescue that fires on the wrong point and silently lengthens lives.
+
+**The check, once the anchor exists:**
+1. Does the anaretic degree fall inside **Jupiter's or Venus's bound**? → hindered.
+2. Does **Jupiter** cast a square or trine landing within **12°** *forward* of it? → hindered.
+3. Does **Venus** do the same within **8°**? → hindered.
+4. Latitude condition (*μὴ τὸ αὐτὸ πλάτος*) — Ptolemy attaches one; its exact force needs another pass.
+5. A benefic **under the beams counts for nothing** — *οὐδένα παραληπτέον … πρὸς βοήθειαν* — so combustion must gate the rescue.
+
+**Report, do not delete.** Ptolemy's word is **παραποδίσεις**, hindrances. The faithful rendering annotates a candidate as hindered and says why; it does not remove it from the list. Removing would convert a qualification into a silent erasure, which is the opposite of what the chapter says.
+
+**Why not today:** this is a change to published longevity figures made at the end of a long session, requiring new data plumbing (promittor/anaretic longitude into the payload) plus a latitude rule that is not yet pinned down. The session has already produced four retractions from claims made on insufficient care. Shipping a rushed longevity change would be the fifth. The doctrine is captured exactly; the build should start fresh.
