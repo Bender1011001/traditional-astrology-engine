@@ -982,3 +982,64 @@ Not a defect; the Aries-based sequence is standard and defensible. But this is t
 > *καὶ ἄλλας δέ τινας … προσηγορίας ἐφήρμοσαν ἀπὸ τῶν περὶ αὐτὰ **μορφώσεων**, λέγω δὲ οἷον **τετράποδα** καὶ **χερσαῖα** καὶ **ἡγεμονικὰ** καὶ **πολύσπορα***
 
 The shape-names — four-footed, land, ruling, **many-seeded** — are a recognised class, and Ptolemy declines to enumerate them as *περισσόν*, superfluous, their cause being self-evident. That confirms **πολύσπορος** at IV.6 (Pisces, Cancer, Scorpio giving many children) as a standing technical term rather than an ad-hoc description — the same word Valens applies to degrees at I.3.
+
+---
+
+# ⭐ I.2–I.3 read in the Greek — Ptolemy's own limits on what the art can claim (2026-08-11)
+
+Printed **7–10**. I.3 (Ὅτι καὶ ὠφέλιμος, "that it is also beneficial") opens at p. 10.
+
+This chapter is the intellectual foundation for every interpretive limit the engine ships — and it is **Ptolemy's**, not modern hedging bolted on for safety.
+
+### The failures belong to the practitioners, not the art
+
+> *τὰ πταίσματα τῶν **μὴ ἀκριβούντων τὸ ἔργον** … τοῖς ἀληθευομένοις τὴν τοῦ **ἐκ τύχης** παρέσχε δόξαν, **οὐκ ὀρθῶς**· τὸ γὰρ τοιοῦτον **οὐ τῆς ἐπιστήμης ἀλλὰ τῶν μεταχειριζομένων ἐστὶν ἀδυναμία***
+
+The blunders of those who do not practise accurately have made even the **true** results look like chance — **wrongly**, since that is *not the weakness of the science but of those who handle it*.
+
+### And a direct attack on selling what cannot be known
+
+> *οἱ πλεῖστοι **τοῦ πορίζεσθαι ἕνεκεν** ἑτέραν τέχνην τῷ ταύτης ὀνόματι καταξιοπιστευόμενοι τοὺς μὲν ἰδιώτας **ἐξαπατῶσι** πολλὰ προλέγειν δοκοῦντες καὶ **τῶν μηδεμίαν φύσιν ἐχόντων προγινώσκεσθαι***
+
+Most, **for the sake of gain**, pass off another art under this one's name and **deceive laymen** by professing to foretell many things — *including things that have no nature to be foreknown at all*.
+
+That is a sharper line than the engine currently draws. Ptolemy's objection is not merely that charlatans get things wrong; it is that they answer questions **which are not answerable in principle**.
+
+### The whole art is conjectural, and he says so
+
+> *πρὸς τῷ τὴν περὶ τὸ ποιὸν τῆς ὕλης θεωρίαν πᾶσαν **εἰκαστικὴν** εἶναι καὶ **οὐ διαβεβαιωτικήν***
+
+Every study concerning the quality of matter is **conjectural (εἰκαστική), not affirmative (οὐ διαβεβαιωτική)**.
+
+> *κἂν διερευνητικῶς τις ὡς ἔνι μάλιστα καὶ γνησίως τοῖς μαθήμασι προσέρχηται, **πολλάκις πταίειν αὐτὸν ἐνδέχεται**, δι᾽ οὐδὲν μὲν τῶν εἰρημένων, **δι᾽ αὐτὴν δὲ τὴν τοῦ πράγματος φύσιν***
+
+Even approaching it in the most inquiring and genuine way, **one may often fail** — not for any of the reasons above, but **because of the very nature of the thing**.
+
+### And an observational limit, stated as fact
+
+> *οἱ παλαιοὶ … συσχηματισμοί … **παρόμοιοι** μὲν δύνανται γίνεσθαι μᾶλλον ἢ ἧττον … **ἀπαράλλακτοι δὲ οὐδαμῶς***
+
+The ancient configurations, from which we transfer our predecessors' recorded outcomes to present cases, can become **more or less similar** — **never exactly identical**. Every prediction is therefore an inference from an approximate match, by his own account.
+
+### I.3: the two analogies he defends it with
+
+> *ὥσπερ **οὐδὲ τὴν κυβερνητικὴν διὰ τὸ πολλάκις πταίειν ἀποδοκιμάζομεν** … ἀποδέχεσθαι καὶ ἀγαπητὸν ἡγεῖσθαι **τὸ δυνατόν**, μήτ᾽ αὖ πάλιν **πάντα ἡμῖν αἰτεῖν παρ᾽ αὐτῆς**, ἀλλὰ **ἀνθρωπίνως καὶ ἐστοχασμένως***
+
+**Navigation** — we do not reject it because it often fails. Accept **what is possible**, do not **demand everything** of it, and proceed *humanly and by conjecture*.
+
+> *ὥσπερ τοῖς **ἰατροῖς** ὅταν ἐπιζητῶσί τινα καὶ περὶ αὐτῆς τῆς νόσου καὶ **περὶ τῆς τοῦ κάμνοντος ἰδιοτροπίας**, **οὐ μεμψόμεθα***
+
+**Medicine** — we do not blame physicians for asking about the disease *and about the individual constitution of the patient*.
+
+## Why this matters to the product
+
+The engine ships interpretive limits on nearly every evidence item, and the publication contract enforces them. Their justification has until now been prudential — our editorial choice. **It can now be the author's own position, quoted.**
+
+Four claims are available directly from Ptolemy, and they are stronger than anything written for us:
+
+1. The art is **conjectural, not affirmative** — his phrase, not a disclaimer.
+2. Even practised perfectly it **often fails**, from the nature of the subject.
+3. Configurations **never recur identically**, so every judgment is an inference from an approximate match.
+4. Foretelling **what has no nature to be foreknown** is the mark of someone selling deception for gain.
+
+The fourth is the sharpest and the most commercially relevant: it distinguishes this product from the market it sits in, on the authority of the tradition's most cited author, rather than on ours.
