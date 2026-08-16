@@ -613,3 +613,57 @@ Note **πολύσπερμος** is the same word Valens uses of degrees at I.3 (
 ### The children's disposition toward the parents
 
 Well-configured, they are *προσφιλῆ τοῖς γονεῦσι καὶ ἐπαφρόδιτα καὶ **κληρονομοῦντα τὰς οὐσίας*** — dear to their parents, charming, and **inheriting the estates**. Badly configured, *ἀντιλαμβανόμενα, μάχιμα καὶ ἐχθροποιούμενα καὶ ἐπιβλαβῆ* — opposing, quarrelsome, made into enemies, and harmful. Malefics holding the places outright are *τελείας ἀτεκνίας δηλωτικοί*, indicative of **complete** childlessness.
+
+---
+
+# IV.7, Περὶ φίλων καὶ ἐχθρῶν — friends and enemies, read in the Greek (2026-08-11)
+
+Printed **193–196**. This chapter is **synastry** — the comparison of two nativities — and the engine has no equivalent at all.
+
+### The distinction he opens with
+
+> *ὧν τὰς μὲν **μείζους καὶ πολυχρονίους** καλοῦμεν **συμπαθείας καὶ ἔχθρας**, τὰς δὲ **ἐλάττους καὶ προσκαίρους συναστείας καὶ ἀντιδικίας***
+
+The greater and long-lasting are **sympathies and enmities**; the lesser and temporary, **companionships and disputes**. A durability axis stated before any technique.
+
+### The method: four points from each chart
+
+> *παρατηρεῖν δεῖ τοὺς **ἀμφοτέρων τῶν γενέσεων** κυριωτάτους τόπους, τουτέστι τόν τε **ἡλιακὸν** καὶ τὸν **σεληνιακὸν** καὶ τὸν **ὡροσκοπικὸν** καὶ τὸν **τοῦ κλήρου τῆς τύχης***
+
+Compare **Sun, Moon, Ascendant and Lot of Fortune** across **both** nativities. Same twelfth-parts, or exchanged places, all or most of them → *συμπαθείας ἀδιαλείπτους καὶ ἀδιαλύτους καὶ ἀνεπηρεάστους*, **unbroken, indissoluble, unassailable** sympathies.
+
+**A hard number, and the only orb in the chapter:**
+
+> *μάλιστα, ὅταν οἱ ὡροσκοποῦντες περὶ τὰς **ἑπτακαίδεκα μοίρας** ἀλλήλων ἀπέχωσι*
+
+**especially when the two ascendants stand within seventeen degrees of each other.**
+
+Opposition of those points → *ἔχθρας μεγίστας καὶ ἐναντιώσεις πολυχρονίους*, greatest and long-lasting enmities. Trine or sextile → **lesser** sympathies; square → **lesser** antipathies.
+
+### ⭐ Aristotle, applied astrologically
+
+> *ἐπεὶ δὲ φιλίας καὶ ἔχθρας **εἴδη τρία**· ἢ γὰρ διὰ **προαίρεσιν** οὕτως ἔχουσι πρὸς ἀλλήλους ἢ διὰ **χρείαν** ἢ διὰ **ἡδονὴν καὶ λύπην***
+
+**Three kinds** of friendship and enmity — by **choice**, by **use**, or by **pleasure and pain**. That is the tripartition of the *Nicomachean Ethics* VIII, and Ptolemy assigns each kind to a different pair of points:
+
+| kind | read from |
+|---|---|
+| by **choice** (προαίρεσις) | the **Sun and Moon** places |
+| by **use** (χρεία) | the **Lot of Fortune** places |
+| by **pleasure and pain** (ἡδονή, λύπη) | the **Ascendant** places |
+
+He also names the best case: when the friendship arises through all three at once it is *ἥτις ἐστὶ φιλία καὶ βελτίστη καὶ ἀσφαλεστάτη*, **the best and safest friendship** — and its inverse, an enmity through all three, *ἄπιστος*, implacable.
+
+### The planetary pairs, for the KIND of bond
+
+Saturn–Jupiter, friendships through **farming or inheritances**. Saturn–Mars, **battles and plots** by deliberate choice. Saturn–Venus, entanglements **through kin**, quick to cool. Jupiter–Mercury, *συναναστροφὰς διὰ λόγους καὶ ἐπιστήμας καὶ προαίρεσιν φιλόσοφον* — **associations through words, sciences, and philosophical purpose**. Mars–Venus, *δι᾽ ἔρωτας καὶ μοιχείας ἢ νοθείας, ἐπισφαλεῖς δὲ καὶ οὐκ ἐπιπολὺ διευθυνούσας* — through loves, adulteries or bastardies, **unsafe and not long-lasting**. Mars–Mercury, **enmities, notorieties and lawsuits** through affairs or drugs. Venus–Mercury, cohabitations through **a craft or music** or acquaintance from letters or female persons.
+
+### IV.8 opens at p. 196
+
+*Ἴδιος δὲ ὁ περὶ **δούλων** τόπος … ἐκ τοῦ **κακοδαιμονοῦντος ζῳδίου** λαμβάνεται* — the place concerning servants, and the masters' sympathy or antipathy toward them, is taken from the **Bad Daimon sign, the 12th**.
+
+### What this means for the product
+
+The engine is **natal-only**. Ptolemy here supplies a complete, computable synastry method: four points per chart, a stated orb of **17°** on the ascendants, a three-way classification of *why* a bond exists, and planetary pairs giving its character. Nothing in the engine expresses any of it.
+
+This is the largest single unimplemented technique found in the whole session — not a refinement to an existing rule but an entire branch of judgment, fully specified in the primary text.
