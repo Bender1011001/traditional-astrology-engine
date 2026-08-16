@@ -160,3 +160,23 @@ PDF 22–23, running heads `I 21` and `I 21-22`. Heading:
 ## Status
 
 `dorotheus_sect_light_triplicity_fortune` → **`arabic_text_read_directly`**. Chapters 1, 5 and 22 read; 23–24 continue I.22 and were not separately confirmed, which is noted in the location field rather than glossed.
+
+---
+
+## I.23–24 read in the Arabic — his own worked charts (2026-08-11)
+
+PDF 23–24, running head `I 24`. These chapters are not further doctrine; they are **Dorotheus demonstrating I.22 on real nativities**, drawn as square horoscope diagrams with the sign names lettered into the boxes.
+
+**First example — diurnal:**
+> *وكان هذا المولود نهاريا وكان صاحب المثلثة **الاول الشمس والثاني المشترى** وكانا كلاهما **في الاوتاد** في صعودهما*
+
+A diurnal native; the **first** triplicity lord is the **Sun**, the **second Jupiter**, and both stand **in the angles** in their ascension → he prospers, *حمدة الملوك والاشراف*, praised by kings and nobles.
+
+**Second example — nocturnal:**
+> *وكان المولود الثاني ليلي وكان صاحب مثلثة **القمر الاول عطارد والثاني زحل** … كلاهما كانا **في السقوط** في ناحية تحت الارض*
+
+A nocturnal native; the **first** lord of the **Moon's** triplicity is **Mercury**, the **second Saturn**, and both are **cadent**, below the earth → the contrary outcome.
+
+**This closes the rule.** The mechanism the engine implements — take the sect light, take its first and second triplicity lords, judge the outcome by their placement — is confirmed by Dorotheus's own demonstrations, not by inference from a rule statement. Chapters 1, 5, 22, 23 and 24 are all now read in the Arabic, so `dorotheus_sect_light_triplicity_fortune` moves from `arabic_text_read_directly_partial` to **`arabic_text_read_directly`**.
+
+Worth noting for anyone reading further: the worked charts are a resource in their own right. Valens's example nativities have been used all session to check timing techniques against real lives; Dorotheus's serve the same purpose for the triplicity-fortune rule.

@@ -56,3 +56,48 @@ Two lessons, both cheap to state and expensive to relearn:
 `picatrix_lunar_mansions_electional_scope` — the 28 lunar mansions and their electional
 uses. Not located in the volume yet. Status stays `translation_inspected_partial_boundaries`;
 acquiring the Arabic does not upgrade it.
+
+---
+
+## Mansions 2–5 read in Ritter's Arabic — boundaries exact, contents divergent (2026-08-11)
+
+Pages 404–405 (folios 15–16). Each entry gives its span **to the arc-second**, then its uses.
+
+### The boundaries are exactly right
+
+Ritter prints mansion 2 as **12°51′26″ Aries → 25°42′52″ Aries**. One twenty-eighth of the zodiac is **12°51′26″**. Checked against `LunarMansionEngine.MANSION_WIDTH = 12.8571428571`:
+
+| mansion | our start | Ritter | |
+|---|---|---|---|
+| 2 al-Buṭayn | 12.857143 | 12°51′26″ | exact |
+| 3 al-Thurayyā | 25.714286 | 25°42′52″ | exact (1″ rounding) |
+| 4 al-Dabarān | 38.571429 | 8°34′17″ Tau | exact |
+| 5 al-Haqʿa | 51.428572 | 21°25′43″ Tau | exact |
+
+The arithmetic is equal 1/28 tropical division, and it matches to the arc-second.
+
+### ⚠ The intents do not match the Arabic
+
+**Mansion 2, al-Buṭayn.** Ritter: *يصنع فيها طلسمات **لحفر الآبار والانهار** واستخراج المطالب والكنوز المدفونة وطلسمات **لنمو الزرع*** — talismans for the **digging of wells and rivers**, the extraction of buried objects and treasures, and the **growth of crops**.
+
+Ours reads **"polluting rivers and waters"**. حفر is *digging/excavating*, not polluting. Treasure and crops match; the first item does not.
+
+**Mansion 4, al-Dabarān — this one is close to inverted.** Ritter: *طلسم **لفساد حال مدينة** … **لبناء لا يرجى بقاؤه** … **لفساد الزرع** … لحفظ الرقيق لمالكه … **لافساد ما بين الزوجين** والقاء القطيعة … **وعقد الحيات والعقارب*** — for **ruining a city's condition**, for **a building not expected to last**, for **corrupting crops**, keeping a slave for his owner, **corrupting what is between spouses**, and **binding snakes and scorpions**. فساد (ruin, corruption) recurs throughout.
+
+Ours reads: *"employing others, building and construction, investing capital, obtaining offices and positions"* — constructive where the Arabic is destructive.
+
+**Mansions 3 and 5 partially match.** Sea travel, love, education, marriage and journeys are all present in both. But ours adds items I did not find in the Arabic (*"making medicine", "favor from kings and officials", "divinatory dreams"*) and omits ones that are there (corrupting partnership, alchemy, land hunting, releasing **and** binding prisoners).
+
+### Where the divergence probably comes from
+
+Each entry carries `"source_refs": ["Picatrix Bk I, Ch 4", "Medieval Astrology Guide"]`. **The second reference is not a primary source.** The content that disagrees with Ritter is most likely from there, cited alongside Picatrix as though both were equal authorities.
+
+This is the same failure the project already records for fixed stars — modern popularisation shipping under a primary-source citation.
+
+### What was NOT done, and why
+
+**The table was not rewritten.** Four of twenty-eight mansions have been read. Correcting a few entries from a partial reading would leave the table half in one tradition and half in another — the exact blend the project's own rule forbids. All 28 need reading in one pass before any rewrite.
+
+### A doctrinal condition worth capturing when that happens
+
+Mansion 5 carries an explicit gate: the marital-harmony talisman works *اذا كان القمر والطالع في **برج صور بني آدم** صالحا بريئا من النحوس والاحتراق* — **if the Moon and Ascendant are in a sign of human form**, sound and free of malefics and combustion. Ritter names them: **الجوزاء والسنبلة والميزان والدلو والقوس** — Gemini, Virgo, Libra, Aquarius, Sagittarius. The engine has no human-form-sign concept.
