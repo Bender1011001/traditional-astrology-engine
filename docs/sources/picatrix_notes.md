@@ -138,3 +138,35 @@ One inversion of sense worth noting on its own: mansion 8 in Ritter makes friend
 3. **Relabel** `source_refs` honestly as a modern compilation and drop the Picatrix citation. Cheapest, but leaves the content in.
 
 Doing nothing is the one option inconsistent with the rest of the project: every other rule in the registry now states exactly which edition it was read from.
+
+---
+
+## Mansions 26–28, and the rule that governs the whole system (2026-08-11)
+
+Folios 23–24 (pages 396–397). **26** al-Fargh al-Muqaddam (21°25′44″ Aqu → 4°17′10″ Pis): *talismans of good in its entirety*, joining souls in affection, stability of buildings, **safety of travellers in ships**, and corrupting what is between partners. **27** al-Fargh al-Muʾakhkhar (→ 17°8′36″ Pis): growth of trade, **speed of recovery from illness**, destroying the wealth of whom you wish, **harm to those riding ships**, prolonging confinement. **28** al-Rishāʾ (→ end of Pisces): growth of trade and crops, healing, **reconciliation between spouses**, binding prisoners, harm to ship-riders.
+
+Note 27 and 28 are near-mirrors on the sea: one harms ship-riders, the other keeps the traveller safe.
+
+### ⚠ Two findings in the closing passage that govern everything above
+
+**1. Picatrix attributes the whole 28-mansion system to India.**
+
+> *وهذه الصور الثماني والعشرون **معوّل اهل الهند** عليها في محاولاتهم **واختياراتهم**، هكذا وجدنا فيما طالعناه من كتبهم في هذا الشأن*
+
+"These twenty-eight figures are what **the people of India** rely upon in their operations and their **elections** — thus we found in what we have perused of their books on this matter."
+
+The author is reporting a foreign system, not asserting his own. And he names its use outright: **اختيارات, elections.**
+
+**2. There is a governing Moon condition on every mansion election, and we implement none of it.**
+
+> *والعمدة فيما قدّمناه ان يكون **القمر** فيما تحاوله من **اعمال الخير نقيًّا من النحوس والاحتراق متصلًا بالسعود**، وفي ابتدآت الاعمال تجعله **منصرفًا عن سعد متصلًا بسعد**، وفي **اعمال الشرّ بعكس هذا***
+
+"**The cardinal rule** (al-ʿumda) in what we have presented is that the Moon, in what you attempt of **works of good**, be **pure of the malefics and of combustion, applying to the benefics**; and at the beginnings of works, make it **separating from a benefic and applying to a benefic**; and in **works of evil, the reverse of this.**"
+
+This is a hard gate on the entire chapter. A mansion does not simply "mean" its uses — the operation requires the Moon to be unafflicted, uncombust, and applying to a benefic. The engine reports mansion intents with **no Moon condition at all**.
+
+It also states plainly that the system covers **اعمال الشرّ, works of evil**, with the conditions deliberately reversed. That is the strongest possible confirmation that our sanitised table (see the previous two entries) is not this text: the source is explicit that half its operations are malefic, and says how to time them.
+
+### Status: all 28 mansions now located, 2–12 and 26–28 read in detail
+
+Enough to act on. The recommendation stands and hardens: the boundaries are exact and should be kept; the intents are from a modern compilation and should either be rewritten from Ritter or suppressed from customer output. Any rewrite must carry the ʿumda condition above, or it will publish talismanic operations without the gate their own source puts on them.
