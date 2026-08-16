@@ -1195,3 +1195,44 @@ So the position is now:
 This is the second time today an internal arithmetic check settled something a visual reading could not. The Egyptian table's Mars numeral scanned ambiguously between 65 and 66 and the stated total resolved it; here the stated totals resolve a manuscript dispute that the glyphs alone leave open.
 
 **My own tally of the Greek table came to Jupiter 76, not 79** — I misread three degrees somewhere across twelve signs. I did not notice from the glyphs; I noticed because the total refused to balance. That is the argument for always reading a table's own summation before trusting a transcription of its rows, mine included.
+
+---
+
+# I.22, Περὶ τόπων καὶ μοιρῶν ἑκάστου — Ptolemy rejects two techniques the engine ships (2026-08-11)
+
+Printed **52**, immediately after the terms table.
+
+> *Διεῖλον δέ τινες καὶ εἰς ἔτι τούτων **λεπτομερέστερα** τμήματα τὰς οἰκοδεσποτείας, **τόπους καὶ μοίρας** ὀνομάσαντες· καὶ **τόπον** μὲν ὑποτιθέμενοι **τὸ τοῦ δωδεκατημορίου δωδεκατημόριον, τουτέστι μοίρας β΄ ἥμισυ** … ἄλλοι δὲ καὶ κατ᾽ ἄλλας τινὰς **ἀλόγους** τάξεις, **μοῖραν δὲ ἑκάστην** πάλιν ἀπ᾽ ἀρχῆς ἑκάστῳ διδόντες τῶν ἀστέρων ἀκολούθως τῇ τάξει τῶν **Χαλδαϊκῶν ὁρίων**. ταῦτα μὲν οὖν **πιθανὸν ⟨μόνον⟩ καὶ οὐ φυσικὸν ἀλλὰ κενόδοξον** ἔχοντα…*
+
+"**Some** divided the lordships into still **finer** sections, naming them **places and degrees** — positing as a 'place' the **twelfth-part of a twelfth-part, that is 2½ degrees**, and assigning its rulership to the successive signs; **others by certain other irrational arrangements**; and giving **each single degree** in turn to each of the stars following the order of the **Chaldean terms**. These have **only plausibility, and are not natural but vainglorious**."
+
+### Both named techniques are in the engine
+
+| technique Ptolemy describes | our rule | status |
+|---|---|---|
+| the 2½° subdivision — **dodecatemorion of a dodecatemorion** | `paulus_dodecatemoria_x13` | `greek_text_read_directly` |
+| **each single degree** given to a planet in order | `paulus_zoidion_monomoiria`, `paulus_trigonal_monomoiria` | read directly; the trigonal one already flagged `source_editorially_corrupt` |
+
+Ptolemy names both and dismisses them together: *πιθανὸν μόνον* — **plausible only** — *οὐ φυσικὸν ἀλλὰ κενόδοξον*, **not natural but vainglorious**. He also calls some of the arrangements *ἄλογοι*, **irrational**, and notes the single-degree scheme follows the **Chaldean** term order, which he has just judged less trustworthy than the Egyptian.
+
+### Not a defect — but the sharpest instance of the session's recurring pattern
+
+These are **Paulus's** techniques and the engine cites them to Paulus, correctly. Paulus teaches them; Ptolemy rejects them. Both are legitimate voices in the tradition and the rules are honestly sourced.
+
+But this is the same shape found in Books III and IV, at its most explicit: **the engine runs a technique that the author it cites elsewhere names and calls vainglorious.** Elsewhere the fork was silent because Ptolemy simply used a different anchor. Here he addresses the method directly and dismisses it.
+
+Worth noting the trigonal monomoiria already carries `source_editorially_corrupt` from Boer's apparatus (Schato's *mutilus et depravatus*). So that one rule now has **two independent marks against it** — the manuscript is damaged, and the most authoritative author in the tradition considered the whole class of technique empty. That combination is worth surfacing wherever it is published.
+
+### Running total of Ptolemy-versus-engine forks
+
+| topic | Ptolemy | engine |
+|---|---|---|
+| action | Mercury/Venus/Mars only | almuten + 10th ruler |
+| marriage | Moon (men) / Sun (women) | 7th + ruler |
+| children | MC and 11th | 5th + ruler |
+| siblings | the mother's children-place | 3rd + ruler |
+| residence abroad | lights' angularity + Lot of Fortune | 9th + ruler |
+| **Lot of Fortune** | **never reversed by sect** | **reversed at night** |
+| **2½° places and single degrees** | ***"not natural but vainglorious"*** | **implemented** |
+
+Seven. The pattern is not incidental.
