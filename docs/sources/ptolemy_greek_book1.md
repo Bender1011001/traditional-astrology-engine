@@ -409,3 +409,39 @@ These deaths occur **when the stars controlling the anaretic places have fallen 
 **So a bare Algol contact licenses nothing.** The violent image is gated on a whole anaretic configuration. The engine's existing summary already said this; the Greek confirms it word for word, and the publication limit now carries the condition verbatim so it cannot be dropped in paraphrase.
 
 `ptolemy_perseus_algol` is now **fully** `greek_text_read_directly` — both I.9 and IV.9 read.
+
+---
+
+# IV.10 read — five parallel prorogations, and a constraint on how we may report a period (2026-08-11)
+
+Printed pp. 209–210. Chapter 10 runs pp. 204–213.
+
+### The five prorogations, each answering a different question
+
+> *τὴν δὲ ἀπὸ τοῦ **κλήρου τῆς τύχης** πρὸς τὰ τῆς **κτήσεως**, τὴν δὲ ἀπὸ τῆς **σελήνης** πρὸς τὰ τῆς **ψυχῆς** πάθη καὶ τὰς συμβιώσεις, τὴν δὲ ἀπὸ τοῦ **ἡλίου** πρὸς τὰ κατ᾽ **ἀξίαν καὶ δόξαν**, τὴν δὲ ἀπὸ τοῦ **μεσουρανήματος** πρὸς τὰς λοιπὰς … **πράξεις, φιλίας, τεκνοποιίας***
+
+Lot of Fortune → property. Moon → the affections of the soul and cohabitations. Sun → rank and reputation. Midheaven → actions, friendships, childbearing. Ascendant → the body and foreign travels.
+
+### The interval years are measured differently per prorogation
+
+> *κατὰ μὲν τὴν τοῦ **ὡροσκόπου** ἄφεσιν ἰσάριθμα τοῖς τοῦ οἰκείου **κλίματος** χρόνοις **ἀναφορικοῖς**, κατὰ δὲ τὴν ἀπὸ τοῦ **μεσουρανήματος** ἰσάριθμον τοῖς χρόνοις τῶν **μεσουρανήσεων***
+
+The Ascendant release uses the **ascensional times of the native's own climate**; the Midheaven release uses the times of **culminations**. Not one clock applied to everything.
+
+Annual chronocrators are then cast one sign per year **from each prorogatory place**, taking the domicile lord of the completed sign; months likewise from the places that took the year's rulership.
+
+### ⚠ The constraint that bears on every reading we publish
+
+> *οὕτω γὰρ ἂν ἐν τοῖς αὐτοῖς καιροῖς **οὐχ εἷς ἔσται** ἤτοι ἀγαθοποιὸς ἢ κακοποιὸς κύριος αὐτῶν, **πολλῶν** ὡς ἐπὶ τὸ πολὺ συμβαινόντων ὑπὸ τοὺς αὐτοὺς χρόνους **ἐναντίων συμπτωμάτων***
+
+"At the same times there will **not be one** benefic or malefic lord of them, since **many contrary events** for the most part happen at the same times."
+
+His own examples: someone loses a family member and receives an inheritance; is seized by illness and at the same time attains rank and advancement; is in poverty and becomes a father. And:
+
+> *τὸ αὐτὸ σώματος καὶ ψυχῆς καὶ κτήματος καὶ ἀξιώματος … **οὐ***
+
+"the lord of body and of soul and of property and of rank is **not the same**."
+
+A uniformly fortunate or wretched stretch — where all or most prorogations meet benefics, or all meet malefics — he says happens **σπανίως, rarely**, because of human nature.
+
+**This is a rule about reporting, not just calculation.** Any reading that collapses the prorogations into one verdict for a year, or calls a period simply good or simply bad, contradicts the chapter it cites. The engine currently publishes only the Ascendant distributor, so it cannot yet express the parallelism — but it must not present that single thread as Ptolemy's whole judgment of a time. Recorded in the rule's publication limit.
