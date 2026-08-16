@@ -939,3 +939,46 @@ Not a table but an argument:
 **The rulership table is a consequence of two things: each planet's temperament, and the aspect its assigned signs make to Cancer and Leo.** Saturn gets the opposition, Jupiter the trine, and so on down.
 
 The engine holds the table and not the derivation. That is fine for computation, but it means the report cannot answer *why* Saturn rules Capricorn — and Ptolemy can, in one sentence.
+
+---
+
+# I.12–I.13 read in the Greek — the quadruplicities and genders derived (2026-08-11)
+
+Printed **32–35**.
+
+### I.12: the quadruplicities are seasonal mechanics, not labels
+
+- **Tropical** — Cancer and Capricorn, *ἀπὸ τοῦ συμβεβηκότος εἴληφε τὴν ὀνομασίαν*, **named from what happens**: the Sun reaching their beginnings **turns** (τρέπεται), reversing its motion in latitude — summer at Cancer, winter at Capricorn.
+- **Equinoctial** — Aries and Libra, because the Sun there *ποιεῖ πανταχῇ τὰς νύκτας ταῖς ἡμέραις* — makes the nights everywhere equal to the days.
+- **Fixed** — Taurus, Leo, Scorpio, Aquarius, *τὰ ἑπόμενα* — **those following** the tropical and equinoctial, because the moistures, dryness, heat and cold of the seasons begun in the former reach us *μᾶλλον καὶ **στερεώτερον*** — more, and **more firmly** — while the Sun is in these.
+- **Bicorporeal** — Gemini, Virgo, Sagittarius, Pisces, *διὰ τὸ μεταξὺ εἶναι*, **because they lie between**, sharing the natural properties of both states at their ends and beginnings.
+
+The names are consequences of the solar year, argued in a sentence each.
+
+### I.13: the genders, and TWO alternatives the engine probably ignores
+
+The standard derivation:
+
+> *ἡ μὲν τάξις αὐτοῖς ἐδόθη **παρ᾽ ἕν** διὰ τὸ **συνεζεῦχθαι** καὶ ἐγγὺς ἀεὶ τυγχάνειν τὴν ἡμέραν τῇ νυκτὶ καὶ τὸ θῆλυ τῷ ἄρρενι … τοῦ **ἄρρενος ἄρχοντος καὶ πρωτεύοντος**, ἐπειδὴ καὶ **τὸ ποιητικὸν ἀεὶ τοῦ παθητικοῦ πρῶτόν ἐστι τῇ δυνάμει***
+
+Alternating, **because day is yoked to night and female to male**; beginning masculine at **Aries**, because *the active is always prior in power to the passive*.
+
+**But he then records two other schemes as current practice:**
+
+> *χρῶνται δέ τινες τῇ τάξει τῶν ἀρρενικῶν καὶ θηλυκῶν καὶ **ἀπὸ τοῦ ἀνατέλλοντος δωδεκατημορίου, ὃ δὴ καλοῦσιν ὡροσκοπεῖον**, τῆς ἀρχῆς τοῦ ἄρρενος ποιούμενοι*
+
+1. **Some begin the masculine series from the ASCENDING sign**, not from Aries — making the gender sequence chart-dependent rather than fixed.
+
+> *οἱ δὲ **καθ᾽ ὅλα τεταρτημόρια** διαιροῦντες, καὶ **ἑῷα μὲν … καὶ ἀρρενικὰ** τό τε ἀπὸ τοῦ **ὡροσκόπου μέχρι τοῦ μεσουρανοῦντος** καὶ τὸ κατ᾽ ἀντίθεσιν ἀπὸ τοῦ **δύνοντος μέχρι … ὑπὸ γῆν μεσουρανοῦντος**, **ἑσπέρια δὲ καὶ θηλυκὰ** τὰ λοιπὰ δύο*
+
+2. **Others divide by whole quadrants** — Ascendant→MC and Descendant→IC **eastern and masculine**; the other two **western and feminine**.
+
+**Sign gender is load-bearing in this engine.** It decides hayz and halb, it feeds the sect-condition scoring, and — per I.14 — it is the reason trines and sextiles are harmonious at all. Ptolemy presents the Aries-based scheme as his own but explicitly records two rivals, one of which makes gender depend on the Ascendant. The engine ships one scheme silently.
+
+Not a defect; the Aries-based sequence is standard and defensible. But this is the same shape as the Book III–IV forks: **a choice presented as a fact**, where the primary text says plainly that others choose otherwise.
+
+### A vocabulary note
+
+> *καὶ ἄλλας δέ τινας … προσηγορίας ἐφήρμοσαν ἀπὸ τῶν περὶ αὐτὰ **μορφώσεων**, λέγω δὲ οἷον **τετράποδα** καὶ **χερσαῖα** καὶ **ἡγεμονικὰ** καὶ **πολύσπορα***
+
+The shape-names — four-footed, land, ruling, **many-seeded** — are a recognised class, and Ptolemy declines to enumerate them as *περισσόν*, superfluous, their cause being self-evident. That confirms **πολύσπορος** at IV.6 (Pisces, Cancer, Scorpio giving many children) as a standing technical term rather than an ad-hoc description — the same word Valens applies to degrees at I.3.
