@@ -445,3 +445,43 @@ His own examples: someone loses a family member and receives an inheritance; is 
 A uniformly fortunate or wretched stretch — where all or most prorogations meet benefics, or all meet malefics — he says happens **σπανίως, rarely**, because of human nature.
 
 **This is a rule about reporting, not just calculation.** Any reading that collapses the prorogations into one verdict for a year, or calls a period simply good or simply bad, contradicts the chapter it cites. The engine currently publishes only the Ascendant distributor, so it cannot yet express the parallelism — but it must not present that single thread as Ptolemy's whole judgment of a time. Recorded in the rule's publication limit.
+
+---
+
+# III.11, the length of life, read in the Greek (2026-08-11)
+
+Printed **131–134**. This is the chapter the entire longevity module rests on, and it had never been read in the original.
+
+### The order of preference for the apheta
+
+> *προκριτέον δὲ … **ἡμέρας μὲν πρῶτον τὸν ἥλιον**, εἴπερ ἐν τοῖς ἀφετικοῖς τόποις, εἰ δὲ μή, **τὴν σελήνην**, εἰ δὲ μή, τὸν πλείους ἔχοντα λόγους οἰκοδεσποτείας πρός τε τὸν ἥλιον καὶ τὴν προγενομένην σύνοδον καὶ … τὸν ὡροσκόπον … **νυκτὸς δὲ πρῶτον τὴν σελήνην, εἶτα τὸν ἥλιον***
+
+By day the **Sun** first if it is in the aphetic places, else the **Moon**, else the planet having the most claims of lordship toward the Sun, the pre-natal syzygy and the ascendant. By night the **Moon** first, then the Sun. Where **both** lights qualify, take the one in the **more authoritative place** (τῷ κυριωτέρῳ τόπῳ).
+
+### Two directions of release
+
+> *τῶν ἀφέσεων **δύο τρόπους** παραληπτέον, τόν τε εἰς τὰ **ἑπόμενα** μόνον … ὅταν ἐν τοῖς ἀπηλιωτικοῖς τόποις … ἢ ὁ ἀφετικός, καὶ τὸν οὐ μόνον εἰς τὰ ἑπόμενα ἀλλὰ καὶ **εἰς τὰ προηγούμενα***
+
+Forward only in the eastern places; forward **and backward** in the cadent places of the MC or of the apheta.
+
+### The addition and subtraction of years
+
+> *καὶ προστιθέασιν μὲν οἱ **ἀγαθοποιοί**, ἀφαιροῦσι δὲ οἱ **κακοποιοί**, τοῦ τοῦ **Ἑρμοῦ** πάλιν **ὁποτέροις ἂν αὐτῶν συσχηματισθῇ** προστιθεμένου*
+
+Benefics add, malefics subtract, and **Mercury joins whichever of the two it is configured with** — Ptolemy's common-planet rule applied to longevity. The amount is taken from the degree-position: as many years as each has **hourly degrees**, day-hours by day and night-hours by night.
+
+### ⚠ The benefic rescue, with its orbs — NOT implemented
+
+> *παραποδίσεις γάρ, ἐάν τε εἰς ἀγαθοποιοῦ **ὅριον** ἐμπέσωσιν, ἐάν τέ τις τῶν ἀγαθοποιῶν ἀκτῖνα συνεπιφέρῃ **τετράγωνον ἢ τρίγωνον** ἤτοι πρὸς αὐτὴν τὴν ἀναιρετικὴν μοῖραν ἢ εἰς τὰ ἑπόμενα αὐτῆς, ἐπὶ μὲν **Διὸς μὴ ὑπὲρ τὰς δώδεκα μοίρας**, ἐπὶ δὲ **Ἀφροδίτης μὴ ὑπὲρ τὰς ὀκτώ**, ἐπί τε τῶν ἀμφοτέρων … μὴ τὸ αὐτὸ **πλάτος***
+
+The anaretic degree is **hindered** (παραποδίσεις) if it falls in a **benefic's bound**, or if a benefic throws a **square or trine** ray to it or to the degrees following it — **Jupiter within twelve degrees, Venus within eight** — with a **latitude** condition attached.
+
+**Verified absent from our anaretic path.** This is the "benefic rescue orbs" item that has been sitting on the pending-decisions list; it is now confirmed word-for-word in Ptolemy's own text, with his own numbers, rather than resting on a secondary report.
+
+It is implementable without judgment — the aspects (square, trine), the orbs (12°, 8°), the direction (to the anaretic degree or the degrees following) and the alternative condition (the benefic's bound) are all stated. It remains a **decision** rather than a silent addition because it changes published longevity figures: a chart whose killing degree currently stands unrescued may cease to be killed.
+
+### Closing caution in the same chapter
+
+> *ὅλως γὰρ τῶν ὑπὸ τὰς αὐγὰς ὄντων **οὐδένα παραληπτέον οὔτε πρὸς ἀναίρεσιν οὔτε πρὸς βοήθειαν***
+
+Nothing under the Sun's beams is to be taken **either for destroying or for helping** — except the Moon herself when waxing. A combust benefic does not rescue, and a combust malefic does not kill.
