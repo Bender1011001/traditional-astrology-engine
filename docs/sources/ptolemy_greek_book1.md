@@ -504,3 +504,35 @@ The doctrine is settled (above). The **implementation is not trivial**, and the 
 **Report, do not delete.** Ptolemy's word is **παραποδίσεις**, hindrances. The faithful rendering annotates a candidate as hindered and says why; it does not remove it from the list. Removing would convert a qualification into a silent erasure, which is the opposite of what the chapter says.
 
 **Why not today:** this is a change to published longevity figures made at the end of a long session, requiring new data plumbing (promittor/anaretic longitude into the payload) plus a latitude rule that is not yet pinned down. The session has already produced four retractions from claims made on insufficient care. Shipping a rushed longevity change would be the fifth. The doctrine is captured exactly; the build should start fresh.
+
+---
+
+# IV.4, Περὶ πράξεως — action and profession, read in the Greek (2026-08-11)
+
+Printed **181–184**; IV.5 (Περὶ συναρμογῶν, on conjugal unions) opens at p. 184.
+
+### The structural rule the engine does not have
+
+**Ptolemy takes only THREE planets as significators of action: Mercury, Venus and Mars.** Every delineation in the chapter is built on which of the three holds the lordship of praxis, alone or paired. Jupiter and Saturn appear **only as modifiers** — *ἐὰν μὲν ὁ τοῦ Κρόνου αὐτοῖς μαρτυρήσῃ… ἐὰν δὲ ὁ τοῦ Διός…*, "if Saturn testifies to them… but if Jupiter…". Neither ever takes the lordship itself.
+
+Verified absent: nothing in the engine restricts the action significator to that trio. Career judgment runs through the almuten and the 10th-place ruler, which can hand career to Jupiter or Saturn as principal — a thing Ptolemy's method structurally cannot do.
+
+This is not a defect to patch blindly. Our 10th-house chain is Paulus-derived and legitimately different doctrine. But the engine currently presents career judgment without noting that **the Ptolemaic method it cites elsewhere admits only three candidates**, and that is a fork worth surfacing rather than silently resolving.
+
+### The delineations, by lordship
+
+**Mercury alone** — scribes, men of business, calculators, teachers, merchants, bankers, diviners, astrologers; also *ὑποκριτάς, σωματεμπόρους, ὀργανοποιούς, χορδοστρόφους, ὀρχηστάς, ὑφάντας, κηροπλάστας, ζωγράφους* — actors, body-merchants, instrument-makers, string-twisters, dancers, weavers, wax-modellers, painters.
+
+**Mercury with Jupiter testifying** — *δικολόγους, λογιστηρίων προϊσταμένους, ἐν δημοσίοις ἀσχολουμένους, παίδων διδασκάλους, ὄχλων προεστῶτας*: advocates, heads of accounting-offices, men busied in public affairs, teachers of children, leaders of crowds.
+
+**Mercury and Mars together** — *ἀνδριαντοποιούς, ὁπλοποιούς, ἱερογλύφους, ζωοπλάστας, παλαιστάς, ἰατρούς, χειρουργούς, κατηγόρους* — statue-makers, armourers, hieroglyph-carvers, wrestlers, physicians, surgeons, accusers; **with Saturn also** *φονεῖς, ἅρπαγας, λῃστάς, ἀπελάτας* — murderers, robbers, brigands, cattle-rustlers.
+
+**Venus and Mars together** — *βαφεῖς, μυραψούς, κασσιτεροποιούς, μολυβδουργούς, χρυσοχόους, ἀργυροχόους, φαρμακοποιούς, ἰατρούς* — dyers, perfumers, tin- and lead-workers, gold- and silversmiths, drug-makers, and physicians *who treat by drugs*; **with Saturn** *ζῴων θεραπευτάς, ἀνθρώπων ἐνταφιαστάς, θρηνῳδούς, τυμβαύλας* — animal-healers, embalmers, dirge-singers, tomb-pipers, "those who make their living where there are mysteries and laments and blood"; **with Jupiter** *ἱεροπροσπλόκους, οἰωνιστάς, γυναικῶν προϊσταμένους, γάμων ἑρμηνέας* — temple-attendants, augurs, those set over women, interpreters of marriages.
+
+### Two further layers
+
+**The signs give the KIND** (p. 183): human-shaped signs incline to scientific and humane pursuits; four-footed to metallurgy, commerce, building and carpentry; tropical and equinoctial to interpretation, exchange, measuring, agriculture and priestly work; watery to nautical, botanical and *ταριχείας ἢ ἁλιείας* — salting and fishing.
+
+**Angularity gives the MAGNITUDE** (p. 184): eastern or angular planets make the action *αὐθεντικάς* — **authoritative, self-directed**; western or cadent make it *ὑποπρακτικάς* — **subordinate**. Under benefics great, glorious and profitable; under malefics *ταπεινὰς καὶ ἀδόξους καὶ ἀπερικτήτους* — humble, inglorious, unprofitable. Mars adds recklessness and notoriety; Saturn and Mars together bring *τελείας ἀναστάσεις*, complete overthrows.
+
+**The authoritative-versus-subordinate axis is the most immediately usable finding here** — a clean, computable distinction (angular/eastern vs cadent/western) that speaks directly to how a career reads, and it is not currently expressed.
