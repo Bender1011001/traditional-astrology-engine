@@ -1043,3 +1043,58 @@ Four claims are available directly from Ptolemy, and they are stronger than anyt
 4. Foretelling **what has no nature to be foreknown** is the mark of someone selling deception for gain.
 
 The fourth is the sharpest and the most commercially relevant: it distinguishes this product from the market it sits in, on the authority of the tradition's most cited author, rather than on ours.
+
+---
+
+# The terms chapters read in the Greek — and our table verified (2026-08-11)
+
+Printed **44–47**, including the printed **Ὅρια κατ᾽ Αἰγυπτίους** table.
+
+### Two systems, and what each is supposed to rest on
+
+> *Περὶ δὲ τῶν ὁρίων **δισσοὶ** μάλιστα φέρονται τρόποι· καὶ ὁ μέν ἐστιν **Αἰγυπτιακός** (ὁ πρὸς τὰς τῶν **οἴκων** ὡς ἐπίπαν κυρείας), ὁ δὲ **Χαλδαϊκός** (ὁ πρὸς τὰς τῶν **τριγώνων** οἰκοδεσποτείας)*
+
+**Egyptian** terms are meant to follow the lordships of the **houses**; **Chaldean**, the rulerships of the **triangles**.
+
+### ⚠ Ptolemy does not believe the Egyptian rationale
+
+> *ὁ μὲν οὖν Αἰγυπτιακὸς … **οὐ πάνυ τι σῴζει τὴν ἀκολουθίαν οὔτε τῆς τάξεως οὔτε τῆς καθ᾽ ἕκαστον ποσότητος***
+
+It **preserves consistency neither of order nor of the quantity** assigned to each. He then asks three questions that no defender can answer:
+
+- If they followed the **houses** — why is **Saturn** first in **Libra** and not **Venus**?
+- Why **Jupiter** first in **Aries** and not **Mars**?
+- If the **triangles** — why **Mercury** in **Capricorn** and not **Venus**?
+
+On the amounts: *ἡ ποσότης τῶν ὁρίων **οὐδεμίαν ἀκολουθίαν ἔχουσα φαίνεται*** — the quantities appear to have **no consistency**, and the per-planet totals *"have no proper or demonstrable rationale."* He then dismantles the attempt to justify them by ascensional times as *ψεῦδος*, **false**, noting its defenders are *"forced to falsify much and even to use fractions of fractions to save their thesis."*
+
+### And yet he prints the table anyway
+
+> *τὰ μέντοι φερόμενα παρὰ τοῖς πολλοῖς ὅρια καὶ **διὰ τὴν τῆς … παραδόσεως ἀξιοπιστίαν** τούτων ὑπόκειται τὸν τρόπον*
+
+**On account of the credibility of the tradition**, the commonly circulated terms are set out — followed immediately by the full Egyptian table.
+
+That is a striking methodological moment: Ptolemy **uses a table whose stated rationale he has just refuted**, on the authority of transmission alone. He separates *"this is what is handed down"* from *"this is why it should be so"* and is explicit that only the first holds.
+
+The **Chaldean** he calls *ἁπλῆν … καὶ μᾶλλον πιθανήν* — simpler and **more plausible** — but *οὐχ οὕτως … αὐτάρκη*, not self-sufficient.
+
+### ✅ Our table verified against his printed totals
+
+> *Συνάγεται δὲ ἑκάστου αὐτῶν ὁ ἀριθμὸς οὕτως· **Κρόνου** μοῖραι **νζ΄**, **Διὸς οθ΄**, **Ἄρεως ξϛ΄**, **Ἀφροδίτης πβ΄**, **Ἑρμοῦ οϛ΄**· γίνεται ὁμοῦ **τξ΄***
+
+| planet | Ptolemy | `EGYPTIAN_TERMS` |
+|---|---|---|
+| Saturn | 57 | **57** |
+| Jupiter | 79 | **79** |
+| Mars | 66 | **66** |
+| Venus | 82 | **82** |
+| Mercury | 76 | **76** |
+| **total** | **360** | **360** |
+
+**All five match exactly.** Verification confirming existing work, against the author's own printed figures rather than a modern table.
+
+A reading check worth recording: the Mars numeral scanned ambiguously between ξε΄ (65) and ξϛ΄ (66). **The stated total of τξ΄ = 360 settles it** — 57 + 79 + 82 + 76 = 294, so Mars must be 66. The document checks itself, which is the safest kind of confirmation and the opposite of the truncation errors made earlier today.
+
+### What this licenses in the product
+
+The engine ships Egyptian terms and cites Ptolemy for much else. It can now say something more interesting than "these are the terms": **the most authoritative source in the tradition used this table while rejecting its justification, on the strength of transmission alone.** That is a defensible position honestly stated, and it is his, not ours.
