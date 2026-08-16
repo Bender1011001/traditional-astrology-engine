@@ -577,3 +577,39 @@ The valuable clause is about **divorce**: benefics testifying to a separation *�
 *συγγένειαν γὰρ ὥσπερ ἔχει πρὸς ἑκάτερον τῶν εἰρημένων ἀστέρων ἡ Ἀφροδίτη* — Venus holds a **kinship** toward both Mars and Saturn, because their exaltations stand in **trine** to hers. Hence Venus with Mars gives *ἁπλῶς ἐρωτικὰς διαθέσεις*, simply erotic dispositions. A structural justification for a rulership relation, argued from exaltation geometry rather than asserted — worth noting as an instance of Ptolemy showing his reasoning.
 
 **Most usable finding:** the benefic-at-separation clause. It distinguishes a rupture that **recovers** from one that ends, on testimony rather than on sentiment, and the engine has nothing that makes that distinction.
+
+---
+
+# IV.6, Περὶ τέκνων — children, read in the Greek (2026-08-11)
+
+Chapter opens at printed **191**; pp. 189–190 are the tail of IV.5.
+
+### Ptolemy does not judge children from the 5th
+
+> *σκοπεῖν δεήσει τοὺς **τῷ κατὰ κορυφὴν τόπῳ ἢ τῷ ἐπιφερομένῳ, τουτέστι τὸ ἀγαθοῦ δαίμονος**, προσόντας ἢ συσχηματιζομένους, εἰ δὲ μή, τοὺς τοῖς διαμέτροις αὐτῶν*
+
+The places to examine are **the culminating place (the MC) and the one following it — the Good Daimon, the 11th** — or failing those, the places diametrically opposite. **The 5th does not appear in the chapter.**
+
+Our children judgment runs through the 5th place and its ruler, Paulus-derived. That is now the **third** structural fork found in three consecutive chapters: IV.4 admits only Mercury/Venus/Mars for action, IV.5 reads marriage from the Moon or Sun by sex and never touches the 7th, and IV.6 puts children at the MC and 11th rather than the 5th.
+
+**The pattern is worth stating plainly.** Ptolemy is not a variant of the place-based system the engine publishes; he is a different system that reaches the same topics by other anchors. Citing him alongside Paulus-derived house judgments, without saying so, implies an agreement that does not exist.
+
+### The giving and denying of children
+
+> *καὶ **σελήνην μὲν καὶ Δία καὶ Ἀφροδίτην πρὸς δόσιν τέκνων** λαμβάνειν, τὸν δὲ **Ἄρη καὶ Κρόνον πρὸς ἀτεκνίαν ἢ ὀλιγοτεκνίαν**, τὸν δὲ τοῦ **Ἑρμοῦ … ἐπίκοινον**, καὶ **ἐπιδοτῆρα μὲν ὅταν ἀνατολικὸς ᾖ, ἀφαιρέτην δ᾽ ὅταν δυτικός***
+
+- **Moon, Jupiter, Venus** — givers of children
+- **Mars, Saturn** — childlessness (ἀτεκνία) or few children (ὀλιγοτεκνία)
+- **Mercury** — **common**, taking the side of whichever it is configured with; a **giver when oriental**, a **taker-away when occidental**
+
+That last clause is the same orientality principle already verified for Mercury's sect at I.7 — here applied to a topic rather than to sect. Consistent doctrine across two chapters, which is itself a check that the reading is right.
+
+### Number, from the sign
+
+Givers placed alone give **single** children; in **double-bodied** and in **feminine** signs, and likewise in the **many-seeded** signs — *πολυσπέρμοις, οἷον **Ἰχθύσι καὶ Καρκίνῳ καὶ Σκορπίῳ*** — **two or more**.
+
+Note **πολύσπερμος** is the same word Valens uses of degrees at I.3 ("many-seeded degrees"), where it already reaches the engine through the bounds table. Same technical vocabulary, two authors, applied at different scales — sign here, degree there.
+
+### The children's disposition toward the parents
+
+Well-configured, they are *προσφιλῆ τοῖς γονεῦσι καὶ ἐπαφρόδιτα καὶ **κληρονομοῦντα τὰς οὐσίας*** — dear to their parents, charming, and **inheriting the estates**. Badly configured, *ἀντιλαμβανόμενα, μάχιμα καὶ ἐχθροποιούμενα καὶ ἐπιβλαβῆ* — opposing, quarrelsome, made into enemies, and harmful. Malefics holding the places outright are *τελείας ἀτεκνίας δηλωτικοί*, indicative of **complete** childlessness.
