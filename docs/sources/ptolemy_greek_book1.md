@@ -848,3 +848,51 @@ The planet **taking the lordship of the soul alone**, in a **dignified condition
 Four ordered steps, each with stated inputs. This is the most completely specified character-delineation procedure encountered in the session, and the engine's character output does not follow it — it reads planets in signs and houses rather than establishing a soul-lord and grading it by a single dignified/contrary switch.
 
 **The binary is the point.** Ptolemy does not give Venus a fixed meaning that gets nudged; he gives Venus **two opposite meanings** selected by condition. An engine that blends toward the middle produces neither.
+
+---
+
+# III.15, Περὶ παθῶν ψυχικῶν — diseases of the soul, read in the Greek (2026-08-11)
+
+Printed **169–172**. This closes Book III.
+
+### The distinction that opens it
+
+The **moderate** afflictions, he says, were already treated under the soul's *qualities* in III.14. **These** are the ones *τὰ δὲ ἐξαίρετον ἔχοντα τὴν **ἀμετρίαν** καὶ ὥσπερ **νοσηματώδη** καὶ **παρὰ ὅλην τὴν φύσιν*** — having **exceptional excess, disease-like, and against the whole of nature**.
+
+That is a deliberate clinical boundary between *character* and *pathology*, drawn by the author himself. It is exactly the line the engine needs when it reports difficult character material, and Ptolemy draws it explicitly rather than leaving it to the reader.
+
+### The trigger
+
+Same two significators as III.14 — **Mercury and the Moon** — but now examined for how they stand *toward each other, toward the angles, and toward the malefics*:
+
+> *ἐάν τε αὐτοὶ **ἀσύνδετοι** ὄντες πρὸς ἀλλήλους, ἐάν τε πρὸς τὸν ἀνατολικὸν ὁρίζοντα **καθυπερτερηθῶσιν ἢ ἐμπεριεσχεθῶσιν ἢ διαμηκισθῶσιν** ὑπὸ τῶν … βλαπτικῶς ἐσχηματισμένων*
+
+**Mercury and the Moon in aversion to one another** — or overcome, **besieged**, or opposed relative to the eastern horizon by ill-configured malefics.
+
+### The specific conditions
+
+- **Epileptics** — Moon and Mercury unconnected, with **Saturn angular by day** or **Mars angular by night**, overlooking the figure.
+- **Manic** (μανιώδεις) — the sects **reversed**: **Saturn by night**, **Mars by day**, and *μάλιστα ἐν Καρκίνῳ ἢ Παρθένῳ ἢ Ἰχθύσι* — especially in **Cancer, Virgo or Pisces**.
+- **δαιμονιόπληκτοι καὶ ὑγροκέφαλοι** — "demon-struck and water-headed" — with Saturn joined to the Moon, or Mars especially in **Sagittarius and Pisces**.
+
+### ⭐ The third benefic rescue
+
+> *μόνοι μὲν οὖν **οἱ κακοποιοὶ** … τὴν ἐπικράτησιν τοῦ σχήματος λαβόντες **ἀνίατα** καὶ ἀνεπίληπτα καὶ ἐπαραδειγμάτιστα ποιοῦσι … **συνοικειωθέντων δὲ τῶν ἀγαθοποιῶν Διός τε καὶ Ἀφροδίτης** … **ἰάσιμα** μὲν εὐπαραδειγμάτιστα δὲ ὅμως ποιοῦσι τὰ πάθη*
+
+**Malefics alone** holding the configuration → **incurable**, unrelenting, notorious. **Jupiter and Venus allied** → **curable** (ἰάσιμα), though still conspicuous.
+
+And the mode of cure, again named by planet:
+- **Jupiter** — *διὰ ἰατρικῶν ἤτοι **διαιτητικῆς ἀγωγῆς** ἢ **φαρμακείας***: through medicine, whether by **dietary regimen** or **drugs**.
+- **Venus** — *διὰ **χρησμῶν** καὶ τῆς **ἀπὸ θεῶν ἐπικουρίας***: through **oracles and help from the gods**.
+
+## The pattern is now definitive: three rescues, one architecture
+
+| chapter | topic | malefics alone | benefics overcoming |
+|---|---|---|---|
+| **III.11** | the anaretic degree | kills | **hindered** — Jupiter 12°, Venus 8°, or a benefic's bound |
+| **III.13** | bodily afflictions | *incurable and grievous* | **seemly, moderate, easily relieved** |
+| **III.15** | diseases of the soul | *incurable, unrelenting, notorious* | **curable**, though conspicuous |
+
+**In Ptolemy a malefic verdict is never final.** It is a first reading that must then be tested against whether a benefic overcomes it — and the outcome is graded, not binary. Three chapters state this independently, with different vocabulary each time, which is as strong an internal confirmation as this text offers.
+
+**The engine implements none of the three.** That is the single most consistent doctrinal gap found in the session — not a missing delineation but a missing *step* in how every malefic judgment should be reached.
