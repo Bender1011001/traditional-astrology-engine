@@ -625,7 +625,12 @@ def test_picatrix_mansion_is_not_converted_into_natal_personality(chart_data):
     # Upgraded 2026-08-11: read in Ritter's Arabic, folios 19-22. Still partial -
     # mansions 13-25 read, 1-12 and 26-28 located but not yet read. The Arabic states
     # each mansion's degree span explicitly, so boundaries are now checkable.
-    assert mansion[0]["verification_status"] == "arabic_text_read_directly_partial"
+    # 2026-08-11: split verdict after reading Ritter. The BOUNDARIES verify to the
+    # arc-second; the INTENTS diverge systematically from the Arabic and are most
+    # likely from the modern compilation cited second in source_refs. The status
+    # says "boundaries_only" so nothing downstream can read this as a clean pass
+    # on the electional content.
+    assert mansion[0]["verification_status"] == "arabic_text_read_directly_boundaries_only"
     assert "What the Source Does and Does Not Say" in report
     assert "no honest natal prediction is extracted" in report
     assert "invented mansion personality keywords" in report

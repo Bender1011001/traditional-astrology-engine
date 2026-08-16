@@ -560,14 +560,38 @@ def test_an_injurious_place_overrides_being_in_sect():
     assert _malefic_timelord_verdict("Saturn", True, 8) == "harder"
 
 
-def test_the_malefic_timelord_rule_reaches_both_reference_charts():
+def test_the_malefic_timelord_rule_fires_exactly_when_the_lord_is_a_malefic():
+    """The rule is gated on the lord of the year BEING a malefic, so whether it
+    fires depends on the native's current age - which moves every birthday.
+
+    The earlier version of this test simply asserted the rule fired on both
+    reference charts. It passed for as long as it did by coincidence: the day
+    chart's native was 29, profecting from Virgo to Aquarius, whose lord Saturn
+    is a malefic. He turned 30 on 1996-08-13 + 30 years, the profection moved to
+    Pisces under Jupiter, and the assertion broke - with the engine behaving
+    correctly throughout.
+
+    A test that depends on today's date is a time bomb. This asserts the
+    CONDITIONAL instead, which is what the rule actually claims and is true in
+    every year: the item is present if and only if the lord of the year is
+    Saturn or Mars, and carries a verdict when it is.
+    """
     for chart in (DAY_CHART, NIGHT_CHART):
+        evidence = _evidence(chart)
+        lord = None
+        for item in evidence:
+            lord = (item.details or {}).get("lord_of_year") or lord
         items = [
-            e for e in _evidence(chart)
+            e for e in evidence
             if e.source_rule_id == "valens_malefic_timelord_by_sect"
         ]
-        assert items, "malefic time-lord rule did not fire"
-        assert items[0].details["verdict"] in {"effective", "harder"}
+        if lord in {"Saturn", "Mars"}:
+            assert items, f"lord of the year is {lord}, a malefic - the rule must fire"
+            assert items[0].details["verdict"] in {"effective", "harder"}
+        else:
+            assert not items, (
+                f"lord of the year is {lord}, not a malefic - the rule must stay silent"
+            )
 
 
 

@@ -8,6 +8,46 @@ class LunarMansionEngine:
     Picatrix Book I, Chapter 4 supplies electional/talismanic operations, not
     natal delineations.  Callers must not turn ``intents_good`` or
     ``intents_bad`` into character statements or birth-chart predictions.
+
+    PROVENANCE WARNING, from reading Ritter's Arabic on 2026-08-11
+    ---------------------------------------------------------------
+    The BOUNDARIES below are exactly right.  Ritter prints each mansion's span
+    to the arc-second and they are equal 1/28 divisions of 12d51'26"; mansions
+    1-12 and 26-28 were checked and agree to the second.  ``MANSION_WIDTH`` is
+    correct.  Chapter 4 is also the correct citation - the Arabic heading is
+    ``fasl (4)``.
+
+    The INTENTS are a different matter and should not be treated as Picatrix
+    until rewritten.  Comparing 12 mansions against Ritter showed a systematic,
+    directional divergence: the political and coercive operations are missing
+    (besieging cities, vengeance against kings, corrupting crops, severing
+    partners, binding and RELEASING prisoners - the last is Ritter's first
+    listed use for mansion 11 and absent here), while benign domestic material
+    with no counterpart in the Arabic has been added (healing illness, ease of
+    childbirth, washing the body, putting on new garments).  Mansion 8 is
+    inverted in sense: Ritter makes friendship *between those who hate each
+    other*, this table says *between allies*.  Each entry cites
+    ``source_refs`` of ["Picatrix Bk I, Ch 4", "Medieval Astrology Guide"]; the
+    divergent content is most likely the second, cited as though co-equal.
+
+    TWO CONDITIONS FROM THE SOURCE THAT THIS ENGINE DOES NOT IMPLEMENT
+    -----------------------------------------------------------------
+    1. The Moon gate.  Picatrix states it at both ends of the chapter.  At the
+       opening: "do not perform any of the works until the MOON IS IN THE
+       DEGREE AGREEING WITH THAT WORK".  At the close, as ``al-'umda``, the
+       cardinal rule: in works of GOOD the Moon must be "pure of the malefics
+       and of combustion, applying to the benefics", and at the beginnings of
+       works "separating from a benefic and applying to a benefic" - and in
+       works of EVIL, the reverse.  A mansion therefore does not simply "mean"
+       its uses; the operation is gated on lunar condition.  Nothing here
+       evaluates that.
+    2. The attribution.  Picatrix credits the whole 28-mansion system to India
+       - "what the PEOPLE OF INDIA rely upon in their operations and their
+       elections" - at both the opening (``al-Hindiyyun``) and the close.  He
+       is reporting a foreign system, not asserting his own.
+
+    See docs/sources/picatrix_notes.md for the passages and the per-mansion
+    comparison.
     """
 
     MANSION_WIDTH = 12.8571428571  # 360 / 28
