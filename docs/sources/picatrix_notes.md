@@ -170,3 +170,45 @@ It also states plainly that the system covers **اعمال الشرّ, works of 
 ### Status: all 28 mansions now located, 2–12 and 26–28 read in detail
 
 Enough to act on. The recommendation stands and hardens: the boundaries are exact and should be kept; the intents are from a modern compilation and should either be rewritten from Ritter or suppressed from customer output. Any rewrite must carry the ʿumda condition above, or it will publish talismanic operations without the gate their own source puts on them.
+
+---
+
+## Mansions 16–22 read — a direct inversion, and a missing signature clause (2026-08-11)
+
+Folios 20–21. **22 of 28 mansions are now compared at full depth** (1–12, 16–22, 26–28); 13–15 and 23–25 are read at name-and-span level only.
+
+| # | Ritter's Arabic | ours |
+|---|---|---|
+| 16 al-Zubānā | **فساد المتاجر — corrupting trade**, corrupting plantings and farms, severing friends and spouses, punishing a wife if her husband wishes, **freeing the prisoner from his bonds** | **"making money through buying and selling"**, prosperity, favour from authorities |
+| 17 al-Iklīl | improving livestock, besieging cities, stability of building, traveller's safety in water — **and the friendship clause below** | placement of armies, strong buildings, safety of sailors |
+| 18 al-Qalb | **binding banners for kings** for victory over their enemies, **preservation of kings**, stability of buildings, growth of plantings, discord among partners; *whoever marries while the Moon is here **with Mars**, she will be thayyib* | building, renting and purchasing land, getting promoted, eastward journeys |
+| 19 al-Shawla | besieging cities, victory over enemies, destroying wealth, **the slave's escape from his master**, **wrecking and breaking ships**, **escape of the prisoner and captive** | sieges, litigation, land journeys, planting trees, **hurrying the menses of women** |
+| 20 al-Naʿāʾim | taming a difficult beast, speed of travel, **drawing whom you desire** and affection, **constricting prisoners**, corrupting partners | **"hunting on land"** — one item against Ritter's five |
+| 21 al-Balda | stability of buildings, growth of crops, preserving wealth and livestock for their owners, travellers' safety, and **a talisman for a woman divorced from her husband so that she never marries after him** | strengthening buildings, planting, big purchases |
+
+### Mansion 16 is a straight inversion
+
+Ritter opens it with **فساد المتاجر**, *the corruption of trade*. Ours opens with *"making money through buying and selling"*. Not a softening — the opposite claim, in the first listed use.
+
+### Mansion 17 drops the clause that defines the mansion
+
+> *واجمعوا انّ من صادق صديقًا والقمر في هذه المنزلة فان **صداقته لا تنقطع** فلأجل ذلك **يختارونها لطلسمات المصادقة***
+
+"**They agreed** that whoever befriends a friend while the Moon is in this mansion, **his friendship will not be severed** — and for that reason **they elect it for talismans of friendship**."
+
+Ritter states outright that this is *why* the mansion is chosen. Ours omits friendship from mansion 17 entirely.
+
+### The suppressed material is consistently the coercive material
+
+Mansions 16, 19 and 21 each carry an operation aimed at a person against their will — punishing a wife at her husband's request, a slave's escape, wrecking ships, and a divorce-curse ensuring a woman never remarries. **None of these appear in our table.** Nor do the royal operations of 18 (binding banners for kings, preserving kings), nor the erotic compulsion of 20 (*drawing whom you desire*).
+
+This is now beyond doubt about its direction. The table is a **deliberately sanitised recension** of a talismanic magic text — a defensible editorial choice by whoever made it, and not a defensible citation of Picatrix.
+
+### Final verdict on this rule
+
+- **Boundaries: verified exact.** Keep them.
+- **Chapter citation: correct.** Book I ch. 4, Arabic *fasl (4)*.
+- **Intents: not Picatrix.** 22 of 28 checked; divergence is systematic, directional, and includes at least two outright inversions of sense (16 trade, 8 friendship).
+- **Two source conditions unimplemented:** the *ʿumda* Moon gate, and the attribution to India.
+
+Registry status `arabic_text_read_directly_boundaries_only` reflects exactly this and should not be rounded up.
