@@ -212,3 +212,48 @@ This is now beyond doubt about its direction. The table is a **deliberately sani
 - **Two source conditions unimplemented:** the *ʿumda* Moon gate, and the attribution to India.
 
 Registry status `arabic_text_read_directly_boundaries_only` reflects exactly this and should not be rounded up.
+
+---
+
+## All 28 read — correcting my own verdict, and one concrete data bug (2026-08-11)
+
+Mansions 13–15 and 23–25 read at depth. **The audit now covers 28 of 28**, and it forces a correction to what I wrote two entries ago.
+
+### I overstated "systematic sanitisation". The divergence is not uniform.
+
+Several mansions match Ritter closely:
+
+| # | Ritter | ours | |
+|---|---|---|---|
+| 13 al-ʿAwwāʾ | growth of trade, growth of crops, **releasing the prisoner**, connection with kings | increasing trade and money, increase of harvests, **liberation** | good |
+| 14 al-Simāk | marital harmony, **completing recovery through treatment**, ship-riders' welfare | causing marital love, **curing the sick**, helping sailors | good |
+| 15 al-Ghafr | **حفر الآبار والكنوز — digging wells and treasures**, obstructing the traveller, separating spouses, ruining dwellings | **"digging wells and canals"**, healing, employment, moving house | opening matches |
+
+So the table is a genuine transmission with real fidelity in places, not a wholesale substitution. My earlier "deliberately sanitised recension" was too strong a claim from a partial sample, and I am withdrawing it as a blanket characterisation. What is true is narrower: **specific entries diverge, several badly, and the coercive material is disproportionately among the missing.**
+
+### Mansion 2's "polluting" is an internal contradiction, not a translation policy
+
+Mansion 15 in **our own table** renders حفر الآبار as **"digging wells and canals"** — correctly. Mansion 2 renders the same phrase حفر الآبار والانهار as **"polluting rivers and waters"**. The table gets the word right in one entry and wrong in another, which proves the mansion 2 reading is **an error in that entry**, not a consistent editorial stance. That is a one-line fix.
+
+### ⚠ A concrete data bug: mansions 24 and 25 are duplicates in our table
+
+Ours reads, for both:
+
+> 24 Saʿd al-Suʿūd — *sieges, seeking fights, taking revenge on enemies*
+> 25 Saʿd al-Akhbiyah — *sieges, seeking fights, taking revenge on enemies*, safety in travel
+
+Ritter's two are **entirely different from each other**:
+
+- **24 Saʿd al-Suʿūd** — *improving trade*, improving the spouses' arrangement, **victory of armies and raiding parties**, corrupting partners, **freeing the bound**; and *whoever attempts a craft in it, what he attempts is spoiled and not completed*.
+- **25 Saʿd al-Akhbiya** — **besieging cities**, harming enemies and victory over them, **talismans for sending messengers and spies**, severing spouses, corrupting crops, **عقد الزوج وجميع الاعضاء — binding the husband and all his members** (impotence magic), binding the prisoner, founding buildings.
+
+Our 25 is a fair match for Ritter's 25. **Our 24 is a copy of our 25** and bears no relation to Ritter's 24, which is largely benefic. This is not a translation dispute — it is a duplicated entry, and it means every chart with the Moon in Saʿd al-Suʿūd currently receives the wrong mansion's electional advice.
+
+### Revised final verdict
+
+- **Boundaries: exact.** Verified to the arc-second across all 28.
+- **Chapter citation: correct.**
+- **Intents: mixed fidelity.** Some entries good (13, 14, 15, 25), some diverging, at least two inverted in sense (16 trade, 8 friendship), one internally contradictory (2 vs 15), and **one duplicated (24 = 25)**.
+- **Two source conditions unimplemented:** the *ʿumda* Moon gate; the attribution to India.
+
+The duplicate at 24 is worth fixing on its own merits regardless of the larger rewrite decision — it is a plain bug with a known correct value.
