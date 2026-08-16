@@ -1150,3 +1150,48 @@ Boll–Boer record at lines 16–18, for Π (Gemini):
 ### Why this one matters as method
 
 Every other divergence found today turned out to be my own error — truncated output, a bad probe, an untested search. This is the first that is **genuinely in the sources**, and it was only distinguishable from a bug by reading the **apparatus** rather than the text alone. A translation, or a table keyed from a reprint, cannot show you that a row is disputed. That is the whole argument for critical editions in one example.
+
+---
+
+# ⚠ CORRECTION to the entry above: Ptolemy's own totals adjudicate the Gemini variant
+
+The second half of the table (printed **52**, Libra–Pisces) carries a summation I had not yet seen when I called Gemini "a variant, not a bug":
+
+> *γίνεται καὶ τούτων ἐκ τῆς ἐπισυνθέσεως **Κρόνου** μοῖραι **νζ΄**, **Διὸς οθ΄**, **Ἄρεως ξϛ΄**, **Ἀφροδίτης πβ΄**, **Ἑρμοῦ οϛ΄**· ὁμοῦ **τξ΄***
+
+**Saturn 57, Jupiter 79, Mars 66, Venus 82, Mercury 76 — total 360.** These are Ptolemy's own per-planet totals for *his own* table.
+
+### Our table fails that check, and the Gemini row is exactly why
+
+| planet | `PTOLEMAIC_TERMS_LILLY1647` | Ptolemy states |
+|---|---|---|
+| Saturn | 57 | 57 ✅ |
+| **Jupiter** | **80** | **79** ❌ |
+| **Mars** | **65** | **66** ❌ |
+| Venus | 82 | 82 ✅ |
+| Mercury | 76 | 76 ✅ |
+
+The two errors are **+1 and −1**, and the Gemini variant accounts for both precisely:
+
+- Boll–Boer text: Jupiter **6**, Mars **6**
+- Manuscript D (ours, via Lilly): Jupiter **7**, Mars **5**
+
+Swap Gemini to the Boll–Boer reading and the totals become **Jupiter 79, Mars 66** — matching Ptolemy exactly, with all five planets and the 360 sum correct.
+
+### What this changes
+
+My earlier entry concluded "a textual variant, not an error — recorded rather than fixed." **That was too weak, and the totals show why.** Manuscript D is attested, but it is **arithmetically inconsistent with the author's own summation printed one page later**. The Boll–Boer editors did not choose their reading arbitrarily; it is the one that makes Ptolemy's own numbers add up.
+
+So the position is now:
+
+- Our table is **correctly named and correctly transcribed** — it faithfully reproduces Lilly's 1647 rendering.
+- Lilly followed a manuscript tradition whose Gemini row **fails Ptolemy's own arithmetic check**.
+- Anyone using this table as *Ptolemy's* rather than *Lilly's* is off by one degree on the Jupiter/Mars boundary in Gemini.
+
+**Not silently changed.** The constant is explicitly named `..._LILLY1647`, and altering it would make the name a lie. The choice — keep Lilly's faithful rendering, or add a Boll–Boer variant table and switch the Ptolemaic-terms path to it — is a decision, and it moves dignity scores for Gemini placements between 13° and 14°, and between 25° and 26°.
+
+### Method note
+
+This is the second time today an internal arithmetic check settled something a visual reading could not. The Egyptian table's Mars numeral scanned ambiguously between 65 and 66 and the stated total resolved it; here the stated totals resolve a manuscript dispute that the glyphs alone leave open.
+
+**My own tally of the Greek table came to Jupiter 76, not 79** — I misread three degrees somewhere across twelve signs. I did not notice from the glyphs; I noticed because the total refused to balance. That is the argument for always reading a table's own summation before trusting a transcription of its rows, mine included.
