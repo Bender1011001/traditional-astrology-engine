@@ -704,3 +704,41 @@ Four consecutive chapters, four topics the engine also judges, and **not one of 
 The honest options are to surface the fork where both are cited, or to stop citing Ptolemy on topics where his method is not the one being run. Recorded as the largest doctrinal finding of the session, above any individual delineation.
 
 **Two things in Book IV are additionally not implemented at all**, rather than being forks: the **synastry method of IV.7** (four points per chart, a 17° ascendant orb, Aristotle's three kinds of friendship), and the **benefic rescue of III.11** (Jupiter 12°, Venus 8°, on the anaretic degree).
+
+---
+
+# ⭐ IV.2, Περὶ τύχης κτητικῆς — property, and the Lot of Fortune controversy settled in his own words (2026-08-11)
+
+Printed **175**.
+
+> *Τὰ μὲν οὖν τῆς κτήσεως ὁποῖά τινα ἔσται, ληπτέον ἀπὸ τοῦ καλουμένου **κλήρου τῆς τύχης, μόνου μέντοι**, καθ᾽ ὃν **πάντοτε** τὴν ἀπὸ **τοῦ ἡλίου ἐπὶ τὴν σελήνην** διάστασιν ἐκβάλλομεν ἀπὸ τοῦ ὡροσκόπου **καὶ ἐπὶ τῶν ἡμέρας καὶ ἐπὶ τῶν νυκτὸς γεννωμένων***
+
+"Property is taken from the so-called Lot of Fortune — **and from that alone** — by which we **always** cast the distance **from the Sun to the Moon** from the ascendant, **both for those born by day and for those born by night**."
+
+## Ptolemy does not reverse Fortune by sect. We do.
+
+`src/engine/lots.py`:
+
+```python
+lots[LotName.FORTUNE.value] = (
+    calculate_lot(asc, sun.longitude, moon.longitude)   # day:  Sun -> Moon
+    if is_day
+    else calculate_lot(asc, moon.longitude, sun.longitude)  # night: Moon -> Sun
+)
+```
+
+He forecloses exactly this with **πάντοτε** — *always* — and then names both sects explicitly so the point cannot be read as an omission. He even cross-references his own reasoning in the length-of-life section rather than leaving it bare.
+
+**This is the single highest-impact divergence found in the session.** The Lot of Fortune is not a peripheral point in this engine — it feeds the Fortune-based topical layer (Valens II.22, already published), the climacteric periodicity (III.15), the places-from-Fortune chain, and the zodiacal releasing that every timing claim rests on. On a night chart, Ptolemy's Fortune and ours sit in **different signs**, so every one of those layers reads a different house.
+
+**It is not a bug.** The sect-reversed Fortune is the majority tradition — Valens, Paulus, Dorotheus and the later Arabic and Renaissance authors all reverse it, and the engine's chain is Paulus-derived throughout. Ptolemy is the **outlier**, and knowingly so.
+
+**But it is a fork the engine currently hides.** The report cites Ptolemy on Fortune-adjacent judgments while computing Fortune by a rule he explicitly rejects. That is the same defect as the Book IV topical forks, in the one place where it changes the most downstream output.
+
+### The rest of the chapter
+
+Property is judged from the **lords of the twelfth-part containing the Lot**, and the manner of acquisition from which planet holds it: **Saturn** through *θεμελίων ἢ γεωργιῶν ἢ ναυκληρίων* — building-foundations, farming, shipowning; **Jupiter** through *πίστεων ἢ ἐπιτροπείων ἢ ἱερατειῶν* — trusts, guardianships, priesthoods; **Mars** through *στρατειῶν καὶ ἡγεμονιῶν* — campaigns and commands; **Venus** through *φιλικῶν καὶ γυναικείων δωρεῶν* — gifts from friends and from women; **Mercury** through *λόγων καὶ ἐμπορείας* — words and commerce.
+
+### And IV.4's significator rule completed
+
+Printed 178 opens IV.4 with the determination I could not see from the later pages: *ὁ δὲ τῆς **πράξεως** τὴν κυρίαν ἔχων λαμβάνεται κατὰ **τρόπους δύο**, ἀπό τε **τοῦ ἡλίου** καὶ **τοῦ μεσουρανοῦντος*** — the lord of action is found **two ways: from the Sun** (the planet rising before it) **and from the culminating place** — and only then is it restricted to Mercury, Venus or Mars.
