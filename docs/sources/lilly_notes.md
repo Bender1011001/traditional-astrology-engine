@@ -46,3 +46,41 @@ Also worth noting for the accidental-fortitude table on the same page (angularit
 ## Status
 
 Both `lilly_reception` and `lilly_planetary_conditions` move from `translation_inspected` to `facsimile_inspected_1647_first_edition` — the correct status for an author who wrote in English.
+
+---
+
+## The accidental fortitudes table read (printed p. 115) — ours matches, with one real gap (2026-08-11)
+
+Read from the facsimile image, not the OCR. **All seven house tiers match `calculate_accidental_dignity` exactly:**
+
+| position | Lilly | ours |
+|---|---|---|
+| Mid-heaven or Ascendant | 5 | +5 |
+| 7th, 4th, 11th | 4 | +4 |
+| 2nd and 5th | 3 | +3 |
+| 9th | 2 | +2 |
+| **3rd** | **1** | **+1** |
+| **8th and 6th** | **2** (debility) | **−2** |
+| 12th | 5 (debility) | −5 |
+
+### A near-miss worth recording
+
+The OCR of this page rendered the 3rd house as **2** and the 8th/6th as **4**, which would have made two discrepancies against a table our code cites to "Lilly, CA p. 115". **Both were OCR artifacts.** The printed page gives 1 and 2, exactly as we have them.
+
+This is the fourth time in one session that rendering the page instead of trusting extracted text prevented a false bug report — after the Firmicus midpoint miscalculation, the Ptolemy "missing Jupiter line", and the three Picatrix truncation retractions. **Extracted text is a lead, never a verdict.**
+
+### The real gap: Lilly's fixed-star fortitudes
+
+Verified absent from our accidental scoring (`'Regulus' in block or 'Cor Leonis' in block or 'Spica' in block` → False):
+
+| Lilly | value |
+|---|---|
+| In conjunction with **Cor Leonis** (Regulus), 24° Leo | **+6** — his single largest accidental fortitude |
+| In conjunction with **Spica**, 18° Libra | **+5** |
+| In conjunction with **Caput Algol**, 20° Taurus, or within five degrees | **−5** |
+| Partill conjunction with the Dragon's Head ☊ | +4 |
+| Partill conjunction with the Dragon's Tail ☋ | −4 |
+
+Regulus at +6 outranks every other item in the table, including the Mid-heaven at 5. A planet on Regulus is, for Lilly, more accidentally fortified than a planet on the MC. We score neither star.
+
+This is implementable without judgment — the degrees and values are printed — but it is a scoring change and belongs with the other pending decisions, not a silent addition. Note it interacts with the existing project caution about fixed-star output carrying modern popular boilerplate: these five are Lilly's own, with his own numbers.
