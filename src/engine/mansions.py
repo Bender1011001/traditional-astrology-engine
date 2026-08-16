@@ -246,14 +246,33 @@ class LunarMansionEngine:
             "name": "Al-Sarfah",
             "start_lon_deg": 141.428572,
             "end_lon_deg": 154.285715,
+            # CORRECTED 2026-08-11 from Ritter's Arabic, folio 19. This entry had
+            # absorbed MANSION 14's content - marital love, curing the sick,
+            # helping sailors - which is why 14 read as a strict subset of it.
+            # It also inverted the sense: Ritter's al-Sarfa gives KHARAB AL-SUFUN,
+            # the WRECKING of ships, where this said "helping sailors". Mansion 14
+            # is the entry that was correct.
+            #
+            # yusna' fiha talsam li-NUMUW AL-ZAR' WA'L-GHIRASAT wa-li-ITLAF MAL
+            # insan yata'arrad lahu al-darar bi-dhalik wa-talsam li-KHARAB AL-SUFUN
+            # wa-talsam li-islah ahwal al-shuraka' wa-TASLUH FIHA MUHAWALAT AL-SAN'A
+            # wa-talsam li-islah ahwal al-'abid wa-ibqa'ihim.
+            #
+            # Note the deliberate contrast with mansion 24, where a craft attempted
+            # is spoiled and left unfinished. Here it succeeds.
             "intents_good": [
-                "causing marital love",
-                "curing the sick",
-                "helping sailors",
-                "planting crops",
+                "growth of crops and plantings",
+                "destroying a person's wealth so that harm befalls him",
+                "wrecking ships",
+                "improving the condition of partners",
+                "undertaking a craft or manufacture (it succeeds here)",
+                "improving the condition of slaves and keeping them",
             ],
-            "intents_bad": ["marriage", "land journeys"],
-            "source_refs": ["Picatrix Bk I, Ch 4", "Medieval Astrology Guide"],
+            # Ritter names no prohibitions for this mansion. The previous
+            # ["marriage", "land journeys"] had no counterpart in the Arabic and is
+            # removed rather than replaced with a guess.
+            "intents_bad": [],
+            "source_refs": ["Picatrix Bk I, Ch 4 (Ritter Arabic, folio 19)"],
         },
         {
             "mansion_id": 13,
@@ -422,15 +441,32 @@ class LunarMansionEngine:
             "name": "Sa'd al-Su'ud",
             "start_lon_deg": 295.714286,
             "end_lon_deg": 308.571429,
-            "intents_good": ["sieges", "seeking fights", "taking revenge on enemies"],
-            "intents_bad": [
-                "marriage",
-                "planting",
-                "partnerships",
-                "purchasing animals",
-                "employment",
+            # CORRECTED 2026-08-11 from Ritter's Arabic, folio 22. This entry was
+            # a DUPLICATE of mansion 25 - its intents_good were a strict subset of
+            # 25's and its intents_bad identical - and it cited "Picatrix Bk I,
+            # Ch 4" alone, claiming pure source authority for another mansion's
+            # content. Every chart with the Moon here received Sa'd al-Akhbiya's
+            # siege-and-enemies advice, where Ritter's Sa'd al-Su'ud is largely
+            # benefic. See docs/sources/picatrix_notes.md.
+            #
+            # yusna' fiha talsamat SALAH AL-MATAJIR wa-salah hal nizam al-zawjayn
+            # wa-talsamat li-ZAFAR AL-JUYUSH WA'L-SARAYA wa-fasad ahwal al-shuraka'
+            # aydan wa-KHALAS AL-MAWTHUQIN; wa-man hawala fiha AL-SINA'A fasada ma
+            # yuhawiluhu wa-lam yatimm.
+            "intents_good": [
+                "improving trade",
+                "improving the arrangement between spouses",
+                "victory of armies and raiding parties",
+                "corrupting the condition of partners",
+                "freeing those held bound",
             ],
-            "source_refs": ["Picatrix Bk I, Ch 4"],
+            # Ritter names one thing spoiled in this mansion, and only one:
+            # "whoever attempts a craft in it, what he attempts is spoiled and is
+            # not completed." The list previously here belonged to mansion 25.
+            "intents_bad": [
+                "undertaking a craft or manufacture (it is spoiled and left unfinished)",
+            ],
+            "source_refs": ["Picatrix Bk I, Ch 4 (Ritter Arabic, folio 22)"],
         },
         {
             "mansion_id": 25,

@@ -905,3 +905,54 @@ def test_lilly_reception_does_not_leak_into_the_almuten():
             "term",
             "face",
         )
+
+
+# ---------------------------------------------------------------------------
+# Picatrix Bk I ch. 4, read in Ritter's Arabic
+# ---------------------------------------------------------------------------
+
+
+def test_no_two_lunar_mansions_carry_the_same_electional_advice():
+    """Mansion 24 was a duplicate of 25 and nobody noticed.
+
+    Its intents_good were a strict subset of mansion 25's and its intents_bad
+    identical, so every chart with the Moon in Sa'd al-Su'ud was given Sa'd
+    al-Akhbiya's siege-and-enemies advice - where Ritter's Sa'd al-Su'ud is
+    largely benefic (improving trade, the spouses' arrangement, freeing those
+    held bound). A copy-paste between adjacent entries is invisible by reading
+    and obvious by comparison, so compare.
+    """
+    from src.engine.mansions import LunarMansionEngine
+
+    mansions = LunarMansionEngine.MANSIONS
+    assert len(mansions) == 28
+    assert len({m["mansion_id"] for m in mansions}) == 28
+
+    signatures = [tuple(m["intents_good"]) for m in mansions]
+    assert len(set(signatures)) == 28, "two mansions carry identical intents"
+
+    # And no mansion's advice may be wholly contained in another's, which is
+    # how the 24/25 duplicate actually presented.
+    for i, a in enumerate(mansions):
+        for j, b in enumerate(mansions):
+            if i != j:
+                assert not set(a["intents_good"]) <= set(b["intents_good"]), (
+                    f"mansion {a['mansion_id']} advice is a subset of "
+                    f"mansion {b['mansion_id']}"
+                )
+
+
+def test_the_mansion_boundaries_are_exact_28ths_as_ritter_prints_them():
+    """Ritter gives each span to the arc-second and they are equal 1/28ths.
+
+    12d51'26" is one twenty-eighth of the zodiac, and mansion 2 opens at
+    exactly that figure in the Arabic. The boundaries are the part of this
+    table that IS verified against the source, so lock them.
+    """
+    from src.engine.mansions import LunarMansionEngine
+
+    width = 360.0 / 28.0
+    assert LunarMansionEngine.MANSION_WIDTH == pytest.approx(width, abs=1e-9)
+    for m in LunarMansionEngine.MANSIONS:
+        expected = (m["mansion_id"] - 1) * width
+        assert m["start_lon_deg"] == pytest.approx(expected, abs=1e-4), m["name"]
