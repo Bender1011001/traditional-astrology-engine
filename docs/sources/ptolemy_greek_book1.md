@@ -778,3 +778,42 @@ And the relationship itself, which is the usable part:
 Harmoniously configured with the lord of the sibling-place → **affectionate** siblings. If also with the **Lot of Fortune** → **partners in livelihood**. In aversion or opposition → **enemies, envious, and generally plotting**.
 
 That last is a clean, computable three-way outcome on a topic the engine currently reports only as a place-and-ruler condition.
+
+---
+
+# III.13 close and III.14, Περὶ ποιότητος ψυχῆς — read in the Greek (2026-08-11)
+
+Printed **153–156**.
+
+## A second benefic rescue, on afflictions — three graded outcomes
+
+> *ἐὰν μὲν **μηδεὶς τῶν ἀγαθοποιῶν συσχηματίζηται** τοῖς τὸ αἴτιον ποιοῦσι κακοποιοῖς ἢ τοῖς κεκεντρωμένοις φωσίν, **ἀνίατα καὶ ἐπαχθῆ** τά τε σίνη καὶ τὰ πάθη γενήσεται· ὡσαύτως δέ, κἂν συσχηματίζωνται μέν, **καθυπερτερῶνται δὲ** ὑπὸ τῶν κακοποιῶν ἐν δυνάμει ὄντων· ἐὰν δὲ καὶ αὐτοὶ κατὰ κυρίων ὄντες σχημάτων **καθυπερτερῶσι** τοὺς τὸ αἴτιον ἐμποιοῦντας κακοποιούς, τότε τὰ σίνη **εὐσχήμονα καὶ οὐκ ἐπονείδιστα** γίνεται καὶ τὰ πάθη **μέτρια καὶ εὐπαρηγόρητα***
+
+| condition | outcome |
+|---|---|
+| **no benefic** configured to the causing malefics or the angular lights | *ἀνίατα καὶ ἐπαχθῆ* — **incurable and grievous** |
+| benefics configured **but overcome** (καθυπερτερῶνται) by malefics in power | same — incurable and grievous |
+| benefics hold the ruling configurations and **overcome** (καθυπερτερῶσι) the malefics | *εὐσχήμονα καὶ οὐκ ἐπονείδιστα* — **seemly, not disgraceful**; afflictions **moderate and easily relieved** |
+| benefics additionally **oriental** | *εὐαπάλλακτα* — **easily got rid of** |
+
+**Structurally identical to the III.11 anaretic rescue**, on a different topic: a malefic verdict is not final until you ask whether a benefic *overcomes* it. Two chapters, same architecture. The engine implements neither.
+
+### And the mode of relief is named by planet
+
+- **Jupiter** — hides the injuries and relieves the afflictions *βοηθείαις ἀνθρωπίναις διὰ πλούτων ἢ ἀξιωμάτων*: by **human help, through wealth or rank**.
+- **Jupiter with Mercury** — additionally *φαρμακείαις ἢ ἰατρῶν ἀγαθῶν ἐπικουρίαις*: by **drugs, or the aid of good physicians**.
+- **Venus** — through *προσφάσεως θεῶν καὶ χρησμῶν*, divine intercession and oracles; makes the injuries somehow *εὔμορφα καὶ ἐπιχάριτα*, **comely and graceful**, and the afflictions relievable *ταῖς ἀπὸ θεῶν ἰατρείαις*, by **cures from the gods** — temple medicine.
+- **Saturn** present — adds *παραδειγματισμῶν καὶ ἐξαγωγῶν*, **public exposure and exhibition**.
+- **Mercury** — adds *ἐπικουρίας καὶ πορισμοῦ τινος*, aid and **a means of gain**: the sufferers **making a living from the very injuries or afflictions**.
+
+That last pair is unusually concrete social observation for this text, and it is not a delineation of character — it is a description of what happens to disabled people in his world.
+
+## III.14: the soul is split between two significators
+
+> *τῶν δὲ ψυχικῶν ποιοτήτων αἱ μὲν περὶ τὸ **λογικὸν καὶ νοερὸν** μέρος καταλαμβάνονται διὰ τῆς κατὰ τὸν τοῦ **Ἑρμοῦ** ἀστέρα … περιστάσεως, αἱ δὲ περὶ τὸ **αἰσθητικὸν καὶ ἄλογον** ἀπὸ τοῦ **σωματωδεστέρου τῶν φώτων***
+
+The **rational and intellectual** part of the soul is read from **Mercury**; the **sensitive and irrational** part from **the more corporeal of the lights** — confirmed at p. 155 as *τῆς σελήνης*, **the Moon**.
+
+A clean two-significator division of character, stated as the governing rule before any delineation. The signs then modify: tropical signs give souls *δημοτικωτέρας*, fit for public affairs, political and ambitious; bicorporeal *ποικίλας, εὐμεταβόλους, δυσκαταλήπτους* — complex, changeable, hard to grasp, erotic, music-loving; fixed *δικαίας, ἀκολακεύτους, ἐπιμόνους, βεβαίας, συνετάς … σκληράς, ἐγκρατεῖς, μνησικάκους* — just, unflattering, persistent, steadfast, prudent, but harsh and grudge-bearing.
+
+Eastern and independent configurations give souls *ἐλευθερίους … αὐθάδεις καὶ ἰσχυρὰς καὶ εὐφυεῖς καὶ ὀξείας καὶ ἀπαρακαλύπτους* — free, self-willed, strong, well-natured, sharp, unconcealed; western give *ἀσθενεῖς, ἀφρεπτόνους, ἐμπαθεῖς, ταπεινάς, δειλάς, ἀμφιβόλους* — weak, passive, humble, timid, ambiguous.
