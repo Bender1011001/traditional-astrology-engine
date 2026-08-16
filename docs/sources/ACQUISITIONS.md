@@ -108,3 +108,18 @@ Running tally of the same failure shape in one session:
 | 4 | one unsuccessful search | Ibn Ezra's Hebrew not available | LJS 57, freely digitized, two queries |
 
 **Every instance: a negative result from an incomplete check, stated as a fact about the world.** Three of the four were corrected only because the owner pushed back. That is the finding worth carrying forward — not any individual retraction, but that the reflex to convert "I didn't find it" into "it isn't there" survived being caught three times in one day.
+
+### A capability limit, stated before the claim rather than after
+
+I attempted to read the triplicity doctrine in LJS 57 to check `ibn_ezra_triplicity_life_thirds` against a parallel witness. **I cannot do it reliably, and I am saying so instead of producing a reading.**
+
+What I *can* read from the manuscript:
+
+- **Structure.** Folio 46 shows **השער השלישי** — "the Third Gate" — as a display-script chapter heading, and **ואלה** as a section marker. *Reshit Ḥokhmah* is organised in ten Gates, so this both confirms the identification and gives a navigation handle for anyone who can read it.
+- **Isolated vocabulary** — מזל, כוכב, טוב, and planet rubrics such as מאדים.
+
+What I cannot: **continuous sentences.** The hand is 14th-century Sephardic semi-cursive with heavy scribal abbreviation. I can recognise words, not construe doctrine from them with enough confidence to put it in a rule.
+
+This matters because the failure mode available here is precisely the one that recurred four times today — producing a confident-sounding claim from evidence that does not support it. A plausible paraphrase of a triplicity passage I cannot actually read would be indistinguishable, in the notes, from one I could. **The rule stays at `parallel_text_and_translation_inspected`.**
+
+What would close it: someone who reads the hand, or a printed edition of *Reshit Ḥokhmah* in Hebrew type rather than manuscript. The latter is worth searching for — and on today's record, I should assume it exists until a real search says otherwise.
