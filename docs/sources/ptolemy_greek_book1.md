@@ -1098,3 +1098,55 @@ A reading check worth recording: the Mars numeral scanned ambiguously between ξ
 ### What this licenses in the product
 
 The engine ships Egyptian terms and cites Ptolemy for much else. It can now say something more interesting than "these are the terms": **the most authoritative source in the tradition used this table while rejecting its justification, on the strength of transmission alone.** That is a defensible position honestly stated, and it is his, not ours.
+
+---
+
+# ⭐ The Ptolemaic terms table verified against the Greek — and a manuscript variant found (2026-08-11)
+
+Printed **49–51**, ending in the printed **Ὅρια κατὰ Πτολεμαῖον** table. This closes the task the rule itself flagged: `PTOLEMAIC_TERMS_LILLY1647` was keyed from photographs of **Lilly's 1647 printing**, never from Ptolemy's Greek.
+
+### Where his own table comes from
+
+> *ἤδη μέντοι περιετετυχήκαμεν ἡμεῖς **ἀντιγράφῳ παλαιῷ καὶ τὰ πολλὰ διεφθαρμένῳ**, περιέχοντι **φυσικὸν καὶ σύμφωνον λόγον** τῆς τε τάξεως καὶ τῆς ποσότητος αὐτῶν … τὸ δὲ κατὰ λέξιν τοῦ βιβλίου **πάνυ μὲν μακρὸν** ἦν καὶ μετὰ πολλῆς τινος ἀποδείξεως, **δυσδιάγνωστον δὲ διὰ τὸ διεφθάρθαι** καὶ **μόλις** ἡμῖν αὐτὴν τὴν καθόλου προαίρεσιν δυνάμενον ὑποδεῖξαι*
+
+He came upon **an ancient copy, much damaged**, containing a *natural and consistent* rationale for both the order and the amounts — **very long, with much demonstration, but hard to read because of its damage, and barely able to show him its general intention.**
+
+So the "Ptolemaic" terms are Ptolemy's **reconstruction from a damaged manuscript he could barely read**, stated as such. He is candid about the provenance in a way the later tradition is not.
+
+### His stated construction rules
+
+- Order runs by **exaltation → triplicity → house**; a planet holding **two** of these in the same sign goes **first, even if malefic**; otherwise **malefics are always placed last**.
+- **Terms are not given to the lights.** Cancer and Leo, being their houses, are assigned to the malefics instead — **Cancer to Mars, Leo to Saturn**.
+- Base amounts: **Jupiter 7, Venus 7, Saturn 5, Mars 5, Mercury 6** — summing to 30.
+- A planet with two claims gets **one extra degree**, *οἷς καὶ παρέκειντο στιγμαί* — "beside which dots were placed" — subtracted from Saturn, or Jupiter, *διὰ τὸ βραδύτερον αὐτῶν τῆς κινήσεως*, on account of the slowness of their motion.
+
+### The verification
+
+Read for **Aries–Virgo** and compared against `PTOLEMAIC_TERMS_LILLY1647`:
+
+| sign | result |
+|---|---|
+| Aries, Taurus, Cancer, Leo, Virgo | **match** |
+| **Gemini** | **differs** |
+
+Boll–Boer's text gives Gemini as Mercury 7, Jupiter 13, Venus 20, **Mars 26, Saturn 30**. Ours gives Mercury 7, Jupiter 14, Venus 21, **Saturn 25, Mars 30** — different boundaries *and* the last two planets in the opposite order.
+
+### ✅ But the apparatus on that same page resolves it
+
+Boll–Boer record at lines 16–18, for Π (Gemini):
+
+```
+16  (Π) ♀ ♂ κ΄  ]  ♂ ζ΄ κα΄   D
+17  (Π) ♂ ϛ΄ κϛ΄ ]  ♄ δ΄ κε΄   D
+18  (Π) ♄ δ΄ λ΄  ]  ♂ ε΄ λ΄    D
+```
+
+**Manuscript D reads Gemini exactly as our table has it** — Venus to 21, Saturn to 25, Mars to 30.
+
+**This is a textual variant, not an error.** Boll–Boer print one manuscript tradition in the text and record ours in the apparatus; Lilly's 1647 printing followed the D tradition. Our table is a legitimate witness, and the divergence is a fact about the transmission rather than a defect in our data.
+
+**Recorded rather than "fixed".** Changing our Gemini row to match Boll–Boer's text would silently discard a reading the same editors preserve, and would not make the table *more* correct — only differently attested. What was missing was the knowledge that Gemini is contested at all, and that is now written down.
+
+### Why this one matters as method
+
+Every other divergence found today turned out to be my own error — truncated output, a bad probe, an untested search. This is the first that is **genuinely in the sources**, and it was only distinguishable from a bug by reading the **apparatus** rather than the text alone. A translation, or a table keyed from a reprint, cannot show you that a row is disputed. That is the whole argument for critical editions in one example.
