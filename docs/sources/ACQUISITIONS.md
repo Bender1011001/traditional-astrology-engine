@@ -75,3 +75,36 @@ That is the third instance today of the same error:
 **Checked against `FIRDARIA_DAY` / `FIRDARIA_NIGHT` — both match.** Day opens Sun → Venus; night opens Moon → Saturn; both continue in descending order. The rule is sound.
 
 **One nuance not yet checked:** he says the second sub-period belongs to the chronocrator **in partnership with** the next planet, not to the next planet alone. Whether our sub-period rendering matches that co-rulership reading is an open question — flagged, not asserted, since it rests on one OCR'd line.
+
+---
+
+## Ibn Ezra acquired in Hebrew — the fourth time "not available" was wrong (2026-08-11)
+
+`ibn_ezra_ljs57_hebrew_1361.pdf` — **LJS 57**, Kislak Center, Penn. Catalonia, **1361**. 249 pages, vellum, two columns, Sephardic semi-cursive, chapter rubrics in red. Verified by rendering folio 51: Hebrew throughout, with **מאדים** (Mars) as a rubric — a planetary-natures chapter.
+
+Contents per the catalogue: a calendar treatise compiled for **Pedro IV of Aragon**, an almanac of syzygies and eclipse predictions, **four short works by Abraham Ibn Ezra** — *"an introduction to astrology, choosing the most auspicious moment for a given activity, the zodiac, and astrology concerning humankind collectively"* — and a **Hebrew Almagest**.
+
+Those four are **Reshit Ḥokhmah**, **Sefer ha-Mivḥarim**, a zodiac treatise, and **Sefer ha-Olam**.
+
+### What this does and does not give us
+
+**Does not** contain *Sefer ha-Moladot* or *Sefer ha-Tequfah*, which are what `ibn_ezra_triplicity_life_thirds` and `ibn_ezra_annual_revolution_core` cite via Sela's 2014 Brill edition. Those two rules are **not** upgraded on this.
+
+**Does** give Ibn Ezra's astrological doctrine in the original Hebrew, in a manuscript copied two centuries after he wrote. The triplicity-and-thirds-of-life doctrine also appears in *Reshit Ḥokhmah*, so the rule may be checkable here against a **parallel witness** — which is worth more than nothing and less than the cited text. Reading it is the next step; the status stays where it is until then.
+
+**Deliberately not taken:** `dokumen.pub` is hosting Sela's Brill 2014 edition. That book is in current copyright and the site is a piracy mirror. The manuscript route is free, legal, and closer to the source anyway.
+
+### Fourth instance of the same error
+
+I said Ibn Ezra's Hebrew astrological works "aren't on archive.org". They are, in a freely digitized medieval manuscript, found in two searches once I actually looked.
+
+Running tally of the same failure shape in one session:
+
+| # | the partial check | what I concluded | the truth |
+|---|---|---|---|
+| 1 | text-layer codepoint probe | Dorotheus scan has no Arabic or Greek | it has both — OCR cannot see non-Latin script |
+| 2 | print truncated at ~86 chars | three Picatrix mansions lack material | all three had it, past the cut |
+| 3 | one unsuccessful search | al-Bīrūnī not digitised | Wright's English and the Persian critical edition, one query each |
+| 4 | one unsuccessful search | Ibn Ezra's Hebrew not available | LJS 57, freely digitized, two queries |
+
+**Every instance: a negative result from an incomplete check, stated as a fact about the world.** Three of the four were corrected only because the owner pushed back. That is the finding worth carrying forward — not any individual retraction, but that the reflex to convert "I didn't find it" into "it isn't there" survived being caught three times in one day.
