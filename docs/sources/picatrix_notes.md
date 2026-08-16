@@ -289,3 +289,40 @@ Claims made from lists short enough to be shown in full, or verified by dumping 
 **The characterisation that the coercive and political operations are systematically absent.** Mansions 6 and 11 carry besieging cities, revenge on enemies, and redemption of captives. The table is closer to Ritter than my earlier entries claim, and I have now overstated the divergence twice — first as "deliberately sanitised", then again after partially withdrawing that.
 
 **Revised position, stated conservatively:** the boundaries are exact; two entries were duplicated and are fixed; at least one entry (16) inverts its source and one (20) is severely thin; the rest require a careful full-list comparison that has NOT yet been done properly. The earlier per-mansion tables in this file should be re-derived against untruncated data before any rewrite decision rests on them.
+
+---
+
+## The comparison redone properly, against untruncated lists (2026-08-11)
+
+The per-mansion tables earlier in this file were built from output truncated at ~86 characters and **must not be used**. This is the same comparison done against the complete `intents_good` for all 28.
+
+### Mansions that match Ritter well
+
+**1, 3, 5, 6, 8, 11, 13, 15, 25** — and several match closely enough to settle earlier doubts:
+
+- **6 al-Hanʿa** carries *besieging cities and castles*, *exact revenge on enemies*, *excellent hunting* — Ritter's حصر المدائن, الانتقام, صيد البر.
+- **8 al-Nathra** carries *driving out pests* — Ritter's **طرد الفيران وطرد البق**, driving away mice and bedbugs. I had called this missing; it is a second truncation casualty.
+- **11 al-Zubra** carries *redemption of captives* and *voyages and maritime trade* — Ritter's اطلاق المسجونين and نمو التجارة.
+- **13 al-ʿAwwāʾ** carries increasing trade, harvests, *liberation of captives* — a clean match.
+- **15 al-Ghafr** opens with *digging wells and canals*, correctly rendering حفر.
+
+### Divergences that survive the full-list check
+
+| # | Ritter | ours | issue |
+|---|---|---|---|
+| **2** al-Buṭayn | **حفر** الآبار والانهار — **digging** wells and rivers | *"**polluting** rivers and waters"* | inversion; and our own **15** renders حفر correctly, so this is an error in this entry |
+| **4** al-Dabarān | ruining a city, **a building not expected to last**, corrupting crops, corrupting marriage | *"building and construction, investing capital, obtaining offices"* | constructive where the Arabic is destructive |
+| **7** al-Dhirāʿ | **نموّ التجارة** — growth of trade — first listed | four items, **no trade**; includes *"washing or purifying the body"* with no Arabic counterpart | omission + unsourced addition |
+| **9** al-Ṭarf | corrupting farms, severing partners, imprisoning the adversary | two items only | thin |
+| **10** al-Jabha | marital harmony, **harming an enemy**, **binding the prisoner**, stability of building | adds *healing of illness*, *ease of childbirth*; drops the coercive pair | substitution |
+| **16** al-Zubānā | **فساد المتاجر** — the corruption of trade | *"making money through buying and selling"* | **inversion**, full 75-char list, nothing cut |
+| **20** al-Naʿāʾim | five operations incl. **drawing whom you desire**, constricting prisoners | *"hunting on land"* — 15 characters, the whole entry | severely thin |
+| **21** al-Balda | preserving wealth for owners, travellers' safety, **the divorce-curse** | three generic items | omission |
+
+### Honest summary
+
+Of 28 mansions: **roughly nine match well**, **two were duplicates now fixed** (12, 24), **two invert their source** (2, 16), and **six are thin or substituted** (4, 7, 9, 10, 20, 21). The remainder are partial matches not worth calling either way without a line-by-line pass.
+
+That is a materially different picture from "systematically sanitised", which I asserted twice and have now withdrawn twice. **The table is a real transmission with genuine fidelity in about a third of entries, clear corruption in a handful, and drift in the rest.**
+
+The boundaries remain exact and are not in question.
