@@ -257,3 +257,35 @@ Our 25 is a fair match for Ritter's 25. **Our 24 is a copy of our 25** and bears
 - **Two source conditions unimplemented:** the *ʿumda* Moon gate; the attribution to India.
 
 The duplicate at 24 is worth fixing on its own merits regardless of the larger rewrite decision — it is a plain bug with a known correct value.
+
+---
+
+## ⚠ RETRACTION: several "missing" claims above were my own truncation artifact (2026-08-11)
+
+**Three of the absence claims in the entries above are wrong, and the error is mine.**
+
+When comparing our table against Ritter I printed our `intents_good` truncated to ~86 characters. Several mansions have lists longer than that, so material I reported as *absent* was simply past the cut. Checked against the full lists:
+
+| mansion | what I claimed | reality |
+|---|---|---|
+| 6 al-Hanʿa | "MISSES besieging cities" | **present** — *"besieging cities and castles"*, and *"exact revenge on enemies"*, and *"excellent hunting"* (171-char list; I saw 88) |
+| 11 al-Zubra | "*releasing prisoners* is Ritter's **first** listed use and is **absent from ours entirely**" | **present** — *"redemption of captives"*, plus *"voyages and maritime trade"* and *"gaining by merchandise"* for Ritter's growth of trade (164-char list) |
+| 17 al-Iklīl | "omits friendship from mansion 17 entirely" | the entry ends *"ordinary durability **loves**"* — garbled, but the friendship material is evidently there, not omitted |
+
+**This is the same error as the text-layer probe earlier in the day**: concluding *absence* from an incomplete view. A truncated list can prove something is PRESENT; it can never prove something is ABSENT. I drew the stronger conclusion from the weaker evidence twice in one session.
+
+### What survives the correction
+
+Claims made from lists short enough to be shown in full, or verified by dumping the whole entry:
+
+- **Mansion 16 is still an inversion.** Its full list is 75 chars — *"making money through buying and selling, prosperity, favour from authorities"* — against Ritter's **فساد المتاجر**, the corruption of trade. Nothing was cut.
+- **Mansion 20 is still thin.** Its entire list is 15 characters: *"hunting on land"*, against Ritter's five operations.
+- **Mansion 21 still lacks the divorce-curse.** Full list is 70 chars.
+- **Mansion 2 "polluting" vs mansion 15 "digging"** — both short lists, the internal contradiction stands.
+- **The 12/24 duplicates** — verified by dumping complete entries as JSON, not by truncated print. Those fixes stand.
+
+### What does NOT survive
+
+**The characterisation that the coercive and political operations are systematically absent.** Mansions 6 and 11 carry besieging cities, revenge on enemies, and redemption of captives. The table is closer to Ritter than my earlier entries claim, and I have now overstated the divergence twice — first as "deliberately sanitised", then again after partially withdrawing that.
+
+**Revised position, stated conservatively:** the boundaries are exact; two entries were duplicated and are fixed; at least one entry (16) inverts its source and one (20) is severely thin; the rest require a careful full-list comparison that has NOT yet been done properly. The earlier per-mansion tables in this file should be re-derived against untruncated data before any rewrite decision rests on them.
