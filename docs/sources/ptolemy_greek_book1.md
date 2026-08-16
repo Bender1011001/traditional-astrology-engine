@@ -742,3 +742,39 @@ Property is judged from the **lords of the twelfth-part containing the Lot**, an
 ### And IV.4's significator rule completed
 
 Printed 178 opens IV.4 with the determination I could not see from the later pages: *ὁ δὲ τῆς **πράξεως** τὴν κυρίαν ἔχων λαμβάνεται κατὰ **τρόπους δύο**, ἀπό τε **τοῦ ἡλίου** καὶ **τοῦ μεσουρανοῦντος*** — the lord of action is found **two ways: from the Sun** (the planet rising before it) **and from the culminating place** — and only then is it restricted to Mercury, Venus or Mars.
+
+---
+
+# III.6, Περὶ ἀδελφῶν — siblings, read in the Greek (2026-08-11)
+
+Printed **120–122**; III.7 (male and female) opens at 122, III.8 (twins) at 123.
+
+> *λαμβάνοιτο ἂν φυσικώτερον ὅ τε περὶ **ὁμομητρίων** μόνον ἀπὸ τοῦ **μεσουρανοῦντος δωδεκατημορίου τοῦ μητρῴου τόπου**, τουτέστι τοῦ περιέχοντος **ἡμέρας μὲν τὸν τῆς Ἀφροδίτης, νυκτὸς δὲ τὴν σελήνην***
+
+Siblings — specifically **those by the same mother** — are taken from the **culminating twelfth-part of the MATERNAL place**, that is the sign holding **Venus by day, the Moon by night**.
+
+**The 3rd house does not appear.** Fifth consecutive structural fork.
+
+### But this one shows the reasoning
+
+> *τὸν τῆς **μητρὸς** ὁ περὶ **τέκνων** τόπος ὁ αὐτὸς **ὀφείλων εἶναι** τῷ τοῦ γινομένου περὶ **ἀδελφῶν***
+
+*"the **mother's** children-place **ought to be the same as** the native's siblings-place."*
+
+That is **derived-house logic**, stated explicitly and argued from the family relation rather than asserted as a convention. Ptolemy's topical anchors are not arbitrary alternatives to the place system — they are **derived** from the significator of the relevant person. Siblings are the mother's children, so you find the mother, then take her fifth.
+
+It also explains the earlier forks. Children at the MC and 11th (IV.6), marriage from the luminary of the opposite sex (IV.5), siblings from the mother's children-place — these are all **person-first** derivations, where the place system is **house-first**. Two coherent methods, not one method and one deviation.
+
+### The delineation
+
+Benefics configured to that place give **many** siblings; malefics or opposition, **few** — especially if they also take up the Sun. Saturn there makes the native the **firstborn or first-reared**; Mars brings the **death of the remaining** siblings.
+
+Givers well placed cosmically make the siblings *ἐνδόξους*, distinguished; ill placed, *ταπεινοὺς καὶ ἀνεπιφάντους*, humble and inconspicuous. **Masculinized** planets give brothers, **feminized** sisters; **oriental** give the **elder**, **occidental** the **younger**.
+
+And the relationship itself, which is the usable part:
+
+> *ἐὰν οἱ διδόντες τοὺς ἀδελφοὺς **συμφώνως ἐσχηματισμένοι** τυγχάνωσι τῷ **κυριεύοντι τοῦ περὶ τῶν ἀδελφῶν** δωδεκατημορίῳ, **προσφιλεῖς** ποιήσουσι τοὺς διδομένους ἀδελφούς, ἐὰν δὲ καὶ τῷ **κλήρῳ τῆς τύχης, καὶ κοινωνοὺς βίου**, ἐὰν δὲ ἐν τοῖς **ἀσυνδέτοις** τύχωσιν ἢ κατὰ τὴν ἐναντίαν στάσιν, **ἐχθροὺς καὶ φθονεροὺς** καὶ ὡς ἐπίπαν **ἐπιβουλευτικούς***
+
+Harmoniously configured with the lord of the sibling-place → **affectionate** siblings. If also with the **Lot of Fortune** → **partners in livelihood**. In aversion or opposition → **enemies, envious, and generally plotting**.
+
+That last is a clean, computable three-way outcome on a topic the engine currently reports only as a place-and-ruler condition.
