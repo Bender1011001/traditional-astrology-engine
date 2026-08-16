@@ -896,3 +896,46 @@ And the mode of cure, again named by planet:
 **In Ptolemy a malefic verdict is never final.** It is a first reading that must then be tested against whether a benefic overcomes it — and the outcome is graded, not binary. Three chapters state this independently, with different vocabulary each time, which is as strong an internal confirmation as this text offers.
 
 **The engine implements none of the three.** That is the single most consistent doctrinal gap found in the session — not a missing delineation but a missing *step* in how every malefic judgment should be reached.
+
+---
+
+# I.14–I.18 read in the Greek — why the aspects and the rulerships are what they are (2026-08-11)
+
+Printed **36–39**.
+
+### Aspect quality is derived from GENDER, not asserted
+
+> *τῶν συσχηματισμῶν οἱ μὲν **τρίγωνοι καὶ ἑξάγωνοι σύμφωνοι** καλοῦνται **διὰ τὸ ἐξ ὁμογενῶν συγκεῖσθαι δωδεκατημορίων** ἤτοι ἐκ πάντων ἀρρενικῶν ἢ θηλυκῶν, **ἀσύμφωνοι** δὲ οἱ **τετράγωνοι** καὶ οἱ **κατὰ διάμετρον**, διότι **κατ᾽ ἀντίθεσιν τῶν ὁμογενῶν** τὴν στάσιν λαμβάνουσι*
+
+**Trines and sextiles are harmonious because they join signs of the SAME gender** — all masculine or all feminine. **Squares and oppositions are inharmonious because they stand across the opposition of genders.**
+
+The benefic/malefic character of the aspects is not a convention. It follows from the alternating masculine–feminine sequence of the signs: skip two or three and you land on like; skip one or six and you cross.
+
+### I.17: aversion defined exactly
+
+> *Ἀσύνδετα δὲ καὶ ἀπηλλοτριωμένα καλεῖται τμήματα, ὅσα **μηδένα λόγον ἔχει** πρὸς ἄλληλα τῶν προκατειλεγμένων οἰκειώσεων … **δι᾽ ἑνὸς ἢ διὰ πέντε** γινόμενα δωδεκατημόρια*
+
+**Disjunct and alienated** are the signs having **no relation whatsoever** — neither commanding/obeying, nor beholding/equipollent, nor in any of the four configurations. They are the ones **one or five signs apart**.
+
+This matters because *ἀσύνδετος* is the exact term used as the **trigger** for the diseases of the soul at III.15 (Mercury and the Moon in aversion). The definition is here, in Book I, and it is stricter than "no aspect" — it is no relation of *any* kind in his whole scheme of familiarities.
+
+### I.15–I.16: two relations the engine likely does not carry
+
+- **Commanding and obeying** (προστάσσοντα καὶ ὑπακούοντα) — signs equidistant from the same equinox, ascending in equal times. Those in the **summer** semicircle **command**; those in the **winter** semicircle **obey** — because when the Sun is among the former it makes the day longer than the night.
+- **Beholding and equipollent** (βλέποντα καὶ ἰσοδυναμοῦντα) — signs equidistant from the same **tropic**, whose days equal each other's days and nights each other's nights. They "behold one another" because each rises from equal parts of the horizon.
+
+Both are **familiarities** in Ptolemy's sense — they count as relation, which is why their absence is part of the definition of aversion above.
+
+### I.18: the domicile scheme derived from first principles
+
+Not a table but an argument:
+
+1. **Cancer and Leo** are taken first, being the most northern and nearest our zenith — hence the most productive of heat. **Leo, masculine, to the Sun; Cancer, feminine, to the Moon.**
+2. **Leo → Capricorn** is therefore the **solar** semicircle; **Aquarius → Cancer** the **lunar**; so each of the five planets receives one sign in each half.
+3. **Saturn**, cold and opposed in nature to the lights' heat, receives the signs **diametrically opposite** theirs — **Capricorn and Aquarius** — cold and wintry, and *the diametrical configuration is unfavourable*.
+4. **Jupiter**, temperate and beneath Saturn's sphere, receives the next pair — **Sagittarius and Pisces** — windy and fruitful, and **in trine to the lights**, *a harmonious and beneficent configuration*.
+5. **Mars**, dry in nature, receives the next — continuing outward by planetary nature and by the aspect each pair makes to the luminaries.
+
+**The rulership table is a consequence of two things: each planet's temperament, and the aspect its assigned signs make to Cancer and Leo.** Saturn gets the opposition, Jupiter the trine, and so on down.
+
+The engine holds the table and not the derivation. That is fine for computation, but it means the report cannot answer *why* Saturn rules Capricorn — and Ptolemy can, in one sentence.
