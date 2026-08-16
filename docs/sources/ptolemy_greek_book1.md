@@ -536,3 +536,44 @@ This is not a defect to patch blindly. Our 10th-house chain is Paulus-derived an
 **Angularity gives the MAGNITUDE** (p. 184): eastern or angular planets make the action *αὐθεντικάς* — **authoritative, self-directed**; western or cadent make it *ὑποπρακτικάς* — **subordinate**. Under benefics great, glorious and profitable; under malefics *ταπεινὰς καὶ ἀδόξους καὶ ἀπερικτήτους* — humble, inglorious, unprofitable. Mars adds recklessness and notoriety; Saturn and Mars together bring *τελείας ἀναστάσεις*, complete overthrows.
 
 **The authoritative-versus-subordinate axis is the most immediately usable finding here** — a clean, computable distinction (angular/eastern vs cadent/western) that speaks directly to how a career reads, and it is not currently expressed.
+
+---
+
+# IV.5, Περὶ συναρμογῶν — conjugal unions, read in the Greek (2026-08-11)
+
+Printed **185–188**. The same structural shape as IV.4: a significator rule that governs every delineation after it.
+
+### The significator rule
+
+**For men, the MOON. For women, the SUN.** — *ἐπὶ μὲν τῶν γυναικῶν ἀφ᾽ οὗ ἂν δεῖ τὸν ἥλιον… ἐπὶ δὲ τῶν ἀνδρῶν τὴν σελήνην.* Everything in the chapter — timing, number of marriages, the character of the spouse — is read from that one body, by sex.
+
+Our marriage judgment runs through the 7th place and its ruler, Paulus-derived. **Ptolemy's method does not use the 7th at all here.** As with IV.4's three-planet praxis rule, that is a genuine fork between traditions rather than a defect, but the engine does not currently surface it.
+
+### Timing and number, from the significator's placement
+
+- **Eastern quadrants** (ἀπηλιωτικοῖς τεταρτημορίοις) → *νεογάμους*, **marrying young**, or joined to younger partners.
+- **Western** (λιβικοῖς) → *βραδυγάμους*, **marrying late**, or joined to older.
+- **Single-form sign**, or with eastern stars → *μονογάμους*.
+- **Double-bodied or many-formed sign** (δισώμῳ … πολυμόρφῳ), or with several eastern stars → *πολυγάμους*.
+
+### The spouse's character, by the planet configured
+
+| configured planet | wives (Moon, for men) | husbands (Sun, for women) |
+|---|---|---|
+| **Saturn** | *ἐπιπόνους καὶ αὐστηράς* — laborious, austere | *καθεστῶτας καὶ χρησίμους καὶ φιλοπόνους* — steady, useful, hard-working |
+| **Jupiter** | *σεμνὰς καὶ οἰκονομικάς* — dignified, household-managing | *σεμνοὺς καὶ μεγαλοψύχους* — dignified, magnanimous |
+| **Mars** | *θρασείας καὶ ἀνυποτάκτους* — bold, insubordinate | *δραστάς καὶ ἀστόργους καὶ ἀνυποτάκτους* — active, unaffectionate, insubordinate |
+| **Venus** | *ἱλαρὰς καὶ εὐμόρφους καὶ ἐπιχαρίτους* — cheerful, well-formed, graceful | *καθαρίους καὶ εὐμόρφους* — neat, well-formed |
+| **Mercury** | *συνετὰς καὶ ὀξείας* — intelligent, sharp | *συνετούς* — intelligent |
+
+### Durability, and what happens at a separation (p. 187)
+
+Benefics looking on the configurations make the cohabitations *ἡδείας καὶ προσηνεῖς καὶ ὀνησιφόρους* — pleasant, agreeable, profitable; malefics *ἀηδεῖς καὶ ἐπιζημίους* — unpleasant and damaging.
+
+The valuable clause is about **divorce**: benefics testifying to a separation *οὐ τέλεον ἀπορρήγνυσι τὰς συμβιώσεις, ἀλλὰ ποιοῦσιν ἐπανόδους καὶ ἀναμνήσεις* — do **not** utterly break the union off, but produce **returns and recollections**, restoring goodwill and affection. Malefics make the break bitter; **with Mercury** the parties are *περιβοησίαις καὶ ἐγκλήμασι περικυλίονται*, rolled about in notoriety and accusations; **with Venus**, adulteries or poisonings.
+
+### The Venus kinship rule
+
+*συγγένειαν γὰρ ὥσπερ ἔχει πρὸς ἑκάτερον τῶν εἰρημένων ἀστέρων ἡ Ἀφροδίτη* — Venus holds a **kinship** toward both Mars and Saturn, because their exaltations stand in **trine** to hers. Hence Venus with Mars gives *ἁπλῶς ἐρωτικὰς διαθέσεις*, simply erotic dispositions. A structural justification for a rulership relation, argued from exaltation geometry rather than asserted — worth noting as an instance of Ptolemy showing his reasoning.
+
+**Most usable finding:** the benefic-at-separation clause. It distinguishes a rupture that **recovers** from one that ends, on testimony rather than on sentiment, and the engine has nothing that makes that distinction.
