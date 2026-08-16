@@ -817,3 +817,34 @@ The **rational and intellectual** part of the soul is read from **Mercury**; the
 A clean two-significator division of character, stated as the governing rule before any delineation. The signs then modify: tropical signs give souls *δημοτικωτέρας*, fit for public affairs, political and ambitious; bicorporeal *ποικίλας, εὐμεταβόλους, δυσκαταλήπτους* — complex, changeable, hard to grasp, erotic, music-loving; fixed *δικαίας, ἀκολακεύτους, ἐπιμόνους, βεβαίας, συνετάς … σκληράς, ἐγκρατεῖς, μνησικάκους* — just, unflattering, persistent, steadfast, prudent, but harsh and grudge-bearing.
 
 Eastern and independent configurations give souls *ἐλευθερίους … αὐθάδεις καὶ ἰσχυρὰς καὶ εὐφυεῖς καὶ ὀξείας καὶ ἀπαρακαλύπτους* — free, self-willed, strong, well-natured, sharp, unconcealed; western give *ἀσθενεῖς, ἀφρεπτόνους, ἐμπαθεῖς, ταπεινάς, δειλάς, ἀμφιβόλους* — weak, passive, humble, timid, ambiguous.
+
+## III.14 continued, printed 165–168 — the soul-lord's two states
+
+Every planet's soul-delineation is built on **one binary**, stated the same way each time:
+
+> *ὁ δὲ τῆς Ἀφροδίτης **μόνος τὴν οἰκοδεσποτείαν τῆς ψυχῆς λαβών** — **ἐπὶ μὲν ἐνδόξου διαθέσεως** ποιεῖ … **ἐπὶ δὲ τῆς ἐναντίας** …*
+
+The planet **taking the lordship of the soul alone**, in a **dignified condition** (ἔνδοξος διάθεσις) versus **the contrary**. Same planet, opposite outcomes — not a spectrum, a fork.
+
+**Venus dignified** — *προσηνεῖς, ἀγαθούς, λογίους, καθαρίους, εὐφροσύνους, φιλοτέχνους, φιλοθεοτάτους, εὐσχήμονας, φιλοστόργους, εὐεργετικούς, ἐλεήμονας, εὐσυναλλάκτους καὶ ὅλως ἐπαφροδίτους*: gentle, good, eloquent, clean, cheerful, art-loving, most god-loving, well-formed, affectionate, beneficent, merciful, easy to deal with, altogether charming.
+**Venus contrary** — *ῥᾳθύμους, ἐρωτικούς, ἀτόλμους, ἀδιαφόρους, καταφερεῖς, ἐπιψόγους*: lazy, erotic, timid, indifferent, lecherous, blameworthy.
+
+**Mercury dignified** — *φιλότεχνους, ἐμφιλοσόφους, ἐπιστημονικούς, εὐφυεῖς, ποιητικούς, συνετούς, πολυμηχάνους, διανοητικούς, ταχυμαθεῖς, ζηλωτὰς τῶν ἀρίστων, μιμητὰς τῶν καλῶν, εὐστόμους καὶ ἐπιχάριτας τῷ λόγῳ, κριτικούς, μεγαλόφρονας*: art-loving, philosophical, scientific, well-natured, poetic, intelligent, resourceful, quick to learn, **emulators of the best, imitators of the beautiful**, eloquent and graceful in speech, critical, magnanimous.
+**Mercury contrary** — *πανούργους, προπετεῖς, ἐπιλήσμονας, κούφους, εὐμεταβόλους, μωροκάκους, ψεύστας, ἀστάτους, ἀπίστους, πλεονέκτας, ἀδίκους καὶ ὅλως σφαλεροὺς τῇ διανοίᾳ*: knavish, rash, forgetful, light, changeable, foolishly wicked, liars, unstable, faithless, greedy, unjust, **altogether slippery in mind**.
+
+### Then two independent modifiers
+
+**The Moon's own condition** (§37) — at the **turning-points of the northern and southern limits** (extreme latitude): more versatile, resourceful, changeable. At the **nodes** (συνδέσμων): sharper, more practical, more easily moved. In **rising and increasing light**: better-natured, more conspicuous, firmer, **more outspoken** (παρρησιαστικώτερον). In **waning or hidden light**: more sluggish, duller, more careless, more cautious, less conspicuous.
+
+**The Sun's condition** (§38) — allied to the soul's lord, in the **dignified** state: more just, more effective, more dignified, more god-fearing. In **the contrary**: more humble, more toilsome, crueller, **more solitary** (μονοτρυμονέστερον), harsher, harder to live with, *ὅλως ἐπὶ τὸ δυσκατορθώτερον* — altogether **harder to set right**.
+
+### The whole system, in order
+
+1. **Split the soul** — Mercury for the rational part, the Moon for the irrational (III.14 opening).
+2. **Find the soul-lord** and read its **dignified-or-contrary** list.
+3. **Modify by the Moon's own latitude, nodal position and light.**
+4. **Modify by the Sun's condition.**
+
+Four ordered steps, each with stated inputs. This is the most completely specified character-delineation procedure encountered in the session, and the engine's character output does not follow it — it reads planets in signs and houses rather than establishing a soul-lord and grading it by a single dignified/contrary switch.
+
+**The binary is the point.** Ptolemy does not give Venus a fixed meaning that gets nudged; he gives Venus **two opposite meanings** selected by condition. An engine that blends toward the middle produces neither.
