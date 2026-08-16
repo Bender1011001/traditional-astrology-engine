@@ -667,3 +667,40 @@ Saturn–Jupiter, friendships through **farming or inheritances**. Saturn–Mars
 The engine is **natal-only**. Ptolemy here supplies a complete, computable synastry method: four points per chart, a stated orb of **17°** on the ascendants, a three-way classification of *why* a bond exists, and planetary pairs giving its character. Nothing in the engine expresses any of it.
 
 This is the largest single unimplemented technique found in the whole session — not a refinement to an existing rule but an entire branch of judgment, fully specified in the primary text.
+
+---
+
+# IV.8, Περὶ ξενιτείας — residence abroad, read in the Greek (2026-08-11)
+
+Printed **197–199**; IV.9 (Περὶ θανάτου ποιότητος) opens at p. 199.
+
+> *Ὁ δὲ περὶ ξενιτείας τόπος καταλαμβάνεται διὰ τῆς **τῶν φώτων πρὸς τὰ κέντρα στάσεως**, ἀμφοτέρων μέν, **μάλιστα δὲ τῆς σελήνης**· **δύνουσα γὰρ ἢ ἀποκεκλικυῖα** τῶν κέντρων ξενιτείας καὶ τόπων μεταβολὰς ποιεῖ*
+
+Foreign residence is judged from **the standing of the lights relative to the angles** — both, but **especially the Moon**. **Setting or cadent** from the angles makes changes of residence and of place.
+
+> *ἐὰν δὲ καὶ ὁ **κλῆρος τῆς τύχης** ἐν τοῖς ποιοῦσι τὴν ἀποδημίαν ζῳδίοις ἐκπέσῃ, καὶ **τοὺς βίους ὅλους** καὶ τὰς ἀναστροφὰς καὶ τὰς πράξεις **ἐπὶ τῆς ξένης** ἔχοντες διατελοῦσιν*
+
+If the **Lot of Fortune** also falls in those signs, the native lives out **his whole livelihood, dealings and actions in a foreign land** — an emigration reading, not a travel reading.
+
+Benefics overlooking give the sojourn *ἐνδόξως* — gloriously and profitably; Jupiter and Venus as lords give good air, abundance of necessities and friendly assistance. Malefics give it *ἐπικινδύνους καὶ δυσανακομίστους* — **dangerous and hard to return from**.
+
+**The 9th place does not appear.**
+
+---
+
+# The Book IV pattern, stated once
+
+Four consecutive chapters, four topics the engine also judges, and **not one of them uses the house our engine uses**:
+
+| topic | Ptolemy's anchor | the engine's |
+|---|---|---|
+| **action / profession** (IV.4) | only Mercury, Venus, Mars as significators | almuten + 10th ruler, any planet |
+| **marriage** (IV.5) | Moon for men, Sun for women | 7th place + ruler |
+| **children** (IV.6) | the MC and the 11th | 5th place + ruler |
+| **residence abroad** (IV.8) | the lights' angularity, esp. Moon setting/cadent, + Lot of Fortune | 9th place + ruler |
+
+**Ptolemy is not a variant of the place-based system; he is a parallel system that reaches the same topics by different anchors.** Every one of these is a legitimate tradition and the engine's Paulus-derived chain is defensible — but the report cites Ptolemy *alongside* those house judgments, which implies a concord that the primary text does not support.
+
+The honest options are to surface the fork where both are cited, or to stop citing Ptolemy on topics where his method is not the one being run. Recorded as the largest doctrinal finding of the session, above any individual delineation.
+
+**Two things in Book IV are additionally not implemented at all**, rather than being forks: the **synastry method of IV.7** (four points per chart, a 17° ascendant orb, Aristotle's three kinds of friendship), and the **benefic rescue of III.11** (Jupiter 12°, Venus 8°, on the anaretic degree).
