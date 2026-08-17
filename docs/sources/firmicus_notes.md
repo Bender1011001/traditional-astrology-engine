@@ -53,3 +53,39 @@ An editor prints a *testimonium* in an appendix when the primary text is lost. *
 So `firmicus_antiscia_major_configurations` citing Firmicus is **correct and not second-best**. He is the surviving witness, and Pingree's own edition of Dorotheus says so. The earlier note here — that Firmicus "points away from himself" and the attribution was therefore unchecked — is resolved: it was checkable, it has been checked, and the answer is that there is nothing behind Firmicus to check against.
 
 **This also closes the "read Dorotheus IV on antiscia" item.** There is no Dorotheus IV antiscia text to read.
+
+---
+
+# Book III located and sampled in the Latin (2026-08-11)
+
+**The text layer is usable.** Unlike the Greek and Arabic scans, Firmicus's Teubner OCRs into legible Latin — running heads, apparatus and all. That makes this the **cheapest source in the collection to read at volume**: no page rendering, no image tokens, direct text extraction.
+
+Mapping: PDF page ≈ printed − 15 (pdf 146 = printed 131). Running heads carry book and chapter, e.g. `III 5, 8–13`.
+
+## What Book III is
+
+**The planets in the twelve houses**, one chapter per planet, each running through all twelve places with sub-cases for aspects from benefics and malefics. Sampled III.5, the Sun:
+
+> *Si vero nocte Sol in horoscopi signo fuerit inventus, **sordidiore genere facit procreari***
+
+Sun in the 1st by night — **causes birth into a lowlier family**. With Saturn or Mars square, opposed or conjunct: *maiores fratres perimit* — **destroys the elder brothers**, and the patrimony with them. In any angle, the Sun *maiores fratres omnes debilitabit* — weakens all elder brothers — **or makes the native the firstborn**.
+
+> *In secundo loco Sol ab horoscopo constitutus faciet **per semetipsos patrimonia quaerentes** … Sed hos eosdem **languidos** facit et **parvae vitae***
+
+Sun in the 2nd — **self-made in acquiring patrimony**, pleasant and good throughout life; but **sickly and short-lived**, impeded by adversities, *semper in vita sua varia terroris trepidatione solliciti* — always anxious with a shifting trepidation of terror.
+
+With Venus and Jupiter in trine, sextile or conjunction: *iacentes homines et abiectos ad rem publicam faciet incremento dignitatis adduci* — **raises men who are prostrate and abject to public dignity** — but *cum maximo impedimento … et cum patrimonii iactura voluntaria*, with the greatest impediment and voluntary loss of patrimony.
+
+## Two things worth knowing before anyone mines this
+
+**1. The volume is large and entirely unused.** Only `firmicus_antiscia_major_configurations` cites Firmicus, and only for II.29. Books III–VI are essentially all delineation — planets in houses, planets in aspect, the *sphaera barbarica*. That is hundreds of pages of specific, vivid material the engine does not draw on at all.
+
+**2. The register is markedly more fatalistic than Ptolemy's, and it gives direct advice.** The Sun-in-2nd passage ends:
+
+> *Unde quicumque sic Solem habuerit constitutum, **nihil adpetat, ad nullam rem audeat***
+
+*"Whoever has the Sun so placed, let him **attempt nothing, dare nothing**."*
+
+That is second-person directive counsel, and `_PROTECTED_DIRECTIVE` in the publication contract would block it on sight — correctly, since it is the engine telling a reader how to live. Anyone importing Firmicus delineations will hit this repeatedly: he does not merely describe, he instructs.
+
+Compare Ptolemy at I.2–3, who insists the art is *conjectural, not affirmative*. **The two authors differ in kind, not just in table.** Firmicus asserts outcomes and prescribes conduct where Ptolemy hedges the whole enterprise. Recorded because that difference is an editorial decision for whoever mines this material, not a technical one — and because the contract will enforce Ptolemy's register whether or not the choice is made deliberately.
