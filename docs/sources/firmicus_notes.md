@@ -89,3 +89,59 @@ With Venus and Jupiter in trine, sextile or conjunction: *iacentes homines et ab
 That is second-person directive counsel, and `_PROTECTED_DIRECTIVE` in the publication contract would block it on sight — correctly, since it is the engine telling a reader how to live. Anyone importing Firmicus delineations will hit this repeatedly: he does not merely describe, he instructs.
 
 Compare Ptolemy at I.2–3, who insists the art is *conjectural, not affirmative*. **The two authors differ in kind, not just in table.** Firmicus asserts outcomes and prescribes conduct where Ptolemy hedges the whole enterprise. Recorded because that difference is an editorial decision for whoever mines this material, not a technical one — and because the contract will enforce Ptolemy's register whether or not the choice is made deliberately.
+
+---
+
+# ⭐ Firmicus III.25, *Quis deorum quot annos decernat* — the planetary years (2026-08-11)
+
+PDF 88–90. Read from the text layer.
+
+### He gives a METHOD before any number
+
+> *Cum **datorem vitae** diligenter inspexeris, id est **dominum geniturae**, et videris, **quo sit in loco positus et in quali signo et in qualibus partibus**, sed et **dominus signi ipsius, in quo est vitae dator** constitutus, simili ratione perspexeris, **Solem quoque et Lunam** quatenus dator vitae et benivolae stellae respiciant, facile totius vitae poteris definire substantiam*
+
+Inspect the **giver of life** — that is the **lord of the nativity** — its place, sign and degrees; then the **lord of the sign the giver occupies**, likewise; then how **the Sun, the Moon and the benefics** regard it. Only then is the number read.
+
+> *Nam si et ipse dator vitae **bono in loco** sit positus et in bono signo et in bonis partibus, **integer annorum decernitur numerus**, praesertim si datorem vitae **Iuppiter in diurna genitura, Venus in nocturna** prospera radiatione sustentent*
+
+**The full number is decreed only when the giver of life is well placed** — and especially when **Jupiter by day, or Venus by night**, supports it.
+
+That is a **sect-conditional benefic support** on the years, structurally the same shape as Ptolemy's three rescues (III.11, III.13, III.15): the number is not a property of the planet but of the planet *in condition*.
+
+### Three tiers, not two
+
+Firmicus grades **bene / medie / male** — well, middlingly, badly:
+
+| planet | *bene* | *medie* | *male* |
+|---|---|---|---|
+| Saturn | **57** | — | — |
+| Jupiter | **79** | — | 12 (or 12 months) |
+| Mars | **63** | — | 15 (or 15 months) |
+| Sun | **120** | **45** | 18 |
+| Venus | **84** | — | 8 yrs 8 days 12 hrs |
+| Mercury | **108** | **79** | 20 (or 20 months) |
+| Moon | **84** | — | 25 |
+
+Note the *male* values are given with alternate units — *"XII annos aut menses XII et dies…"*, twelve **years or twelve months**. The badly-placed giver may yield the number in a smaller unit entirely.
+
+### ⚠ Four of seven greatest-years disagree with `hyleg.PLANETARY_YEARS`
+
+| planet | Firmicus | ours (`major`) | |
+|---|---|---|---|
+| Saturn | 57 | 57 | ✅ |
+| Jupiter | 79 | 79 | ✅ |
+| Sun | 120 | 120 | ✅ |
+| **Mars** | **63** | **66** | ❌ |
+| **Venus** | **84** | **82** | ❌ |
+| **Mercury** | **108** | **76** | ❌ |
+| **Moon** | **84** | **108** | ❌ |
+
+The *minor* years all agree (30/12/15/19-18/8/20/25), so this is not a wholesale different tradition — the **least** years are the common inheritance and the **greatest** diverge.
+
+**Mercury 108 and Moon 84 look transposed** against the standard set, where Mercury is 76 and the Moon 108. That may be Firmicus's tradition, a manuscript corruption, or my misreading of the Roman numerals — **I am not asserting which.** Today has already produced one numeral misreading caught only by a failing total, and this chapter prints no summation to check against.
+
+**Not changed.** Our table is the standard Arabic-Latin set and is internally consistent; Firmicus is one witness among several and the divergence needs a second source before anyone touches numbers that feed published longevity figures. Recorded as a sourced discrepancy for a decision.
+
+### What is worth taking regardless of the numbers
+
+**The three-tier structure and its condition.** Our `PLANETARY_YEARS` carries `minor`/`mean`/`major`, and `hyleg.py` selects among them — but Firmicus states the *criterion* explicitly: the full number requires the giver of life well placed **by place, sign and degree**, with its dispositor examined, and benefic support **by sect**. That is a checkable rule, and it is the same architecture as the Ptolemaic rescues found earlier today.
