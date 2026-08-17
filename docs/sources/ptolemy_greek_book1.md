@@ -1236,3 +1236,48 @@ Worth noting the trigonal monomoiria already carries `source_editorially_corrupt
 | **2½° places and single degrees** | ***"not natural but vainglorious"*** | **implemented** |
 
 Seven. The pattern is not incidental.
+
+---
+
+# I.22 close, I.23–I.24 read in the Greek (2026-08-11)
+
+Printed **53–54**.
+
+## ⭐ The tropical zodiac, justified and with the consequence stated
+
+> *ἐκεῖνο δὲ ἐπιστάσεως ἄξιον … ὅτι καὶ τὰς τῶν δωδεκατημορίων καὶ τὰς τῶν ὁρίων **ἀρχὰς ἀπὸ τῶν τροπικῶν καὶ τῶν ἰσημερινῶν σημείων** εὔλογόν ἐστι ποιεῖσθαι … **ἄλλων γὰρ ἀρχῶν ὑποτιθεμένων ἢ μηκέτι συγχρῆσθαι ταῖς φύσεσιν αὐτῶν εἰς τὰς προτελέσεις ἀναγκασθησόμεθα ἢ συγχρώμενοι διαπίπτειν***
+
+The beginnings of **both the signs and the terms** are to be reckoned **from the tropical and equinoctial points** — and if other beginnings are posited, *"we shall either be forced no longer to use their natures for predictions, or, using them, **to fail**."*
+
+That is the source statement for the engine's tropical zodiac, with Ptolemy's own reason: the signs' natures **are** the seasonal quarters (cf. I.12), so detaching them from the solstices destroys the thing that made them meaningful. Worth having, because "tropical vs sidereal" is the first question a sceptical customer asks.
+
+## ⚠ I.23: his "face" is NOT our face
+
+> *λέγονται δὲ καὶ **ἰδιοπροσωπεῖν** μὲν ὅταν ἕκαστος αὐτῶν **τὸν αὐτὸν διασῴζῃ πρὸς ἥλιον ἢ σελήνην σχηματισμόν, ὅνπερ καὶ ὁ οἶκος αὐτοῦ πρὸς τοὺς ἐκείνων οἴκους***
+
+**Being in one's own face** = a planet **keeping the same configuration to the Sun or Moon that its own house keeps to their houses**. His example: Venus in sextile to the lights, **western to the Sun and eastern to the Moon**, matching how Libra and Taurus stand to Leo and Cancer.
+
+**Our `FACES_ORDER` is the 10° Chaldean decan.** These are two different things sharing one English word. Ptolemy's πρόσωπον is a *relational* condition computed from a planet's domicile and the luminaries; the decan-face is a fixed positional table. The engine scores the latter and cites Ptolemy elsewhere.
+
+## ⚠ And his "joy" is not Paulus's joy either
+
+> *καὶ **λαμπήναις** δ᾽ ἐν ἰδίαις … καὶ **θρόνοις** … ὅταν **κατὰ δύο ἢ καὶ πλείους** τῶν προεκτεθειμένων τρόπων συνοικειούμενοι τυγχάνωσι τοῖς τόποις … τότε μάλιστα τῆς δυνάμεως αὐτῶν πρὸς ἐνέργειαν **αὐξομένης***
+>
+> ***χαίρειν** δέ φασιν αὐτούς, ὅταν … μὴ πρὸς αὐτοὺς ᾖ ἡ συνοικείωσις τῶν περιεχόντων ζῳδίων, **ἀλλὰ … πρὸς τοὺς τῶν αὐτῶν αἱρέσεων***
+
+- **Chariots and thrones** — a planet related to its place by **two or more** of the dignities; its power for action is then **most increased**. That is a compound-dignity bonus the engine does not score.
+- **Rejoicing (χαίρειν)** — when the sign's familiarity is **not to the planet itself but to a member of its own sect**. A weaker, shared sympathy.
+
+`DignityCalculator.calculate_planetary_joy` implements **Paulus's fixed house-joys** (Mercury 1st, Moon 3rd, and so on). Ptolemy's χαίρειν is a different relation entirely — sect-mate familiarity, not a house assignment. Correctly sourced to Paulus; simply not the same concept Ptolemy names by that verb.
+
+And the inverse, which is implementable and currently missing: in **alienated places and those of the contrary sect**, *πολὺ παραλύεται τῆς οἰκείας αὐτῶν δυνάμεως* — **much of a planet's own power is dissolved**, the mixture yielding some other, mixed nature.
+
+## I.24: applications and separations
+
+> *Καθόλου **συνάπτειν** μὲν λέγονται τοῖς ἑπομένοις οἱ **προηγούμενοι**, **ἀπερρυηκέναι** δὲ οἱ ἑπόμενοι τῶν προηγουμένων, **ἐφ᾽ ὅσον ἂν μὴ μακρὸν ᾖ τὸ μεταξὺ αὐτῶν διάστημα**. παραλαμβάνεται δὲ … **ἐάν τε σωματικῶς ἐάν τε καὶ κατά τινα τῶν παραδεδομένων σχηματισμῶν***
+
+The **preceding apply to the following**; the following **separate from** the preceding; valid while the interval is not great, and holding **both bodily (by conjunction) and by any of the transmitted aspects**. Straightforward, and consistent with the engine.
+
+---
+
+**Fork count now nine.** Added: Ptolemy's *face* is a luminary-relative configuration, not the decan; his *joy* is sect-mate familiarity, not a house. Both of ours are correctly sourced to other authors — the issue remains that the report cites Ptolemy as an authority beside them without noting he uses the same words for different things.
