@@ -1412,3 +1412,48 @@ The cheap, honest version is a sentence in the method section: **Ptolemy holds t
 α΄ division of general inquiry · β΄ characteristics of whole climes · γ΄ familiarity of regions with the triangles and stars · δ΄ regions belonging to each sign · ε΄ method of prediction for general events · ϛ΄ classification of countries affected · ζ΄ timing · η΄ the class of those affected · θ΄ quality of the effect · ι΄ colours of eclipses and comets · ια΄ the new moon of the year · ιβ΄–ιδ΄ weather and meteorological signs.
 
 Book II is **mundane and meteorological throughout** and backs no registered natal rule. Recorded so that a future reader knows its contents without re-deriving them, and knows that skipping it is a defensible scope choice rather than an oversight.
+
+---
+
+# ⚠⚠ MAJOR RETRACTION: the "Ptolemy fork" defect was never checked, and is not real
+
+Across several entries above I built a claim that the engine **"cites Ptolemy as an authority while running a substantially different system"** — nine forks, escalating from "worth surfacing" to "the largest doctrinal finding of the session."
+
+**I never checked whether the report actually cites Ptolemy on those topics. It does not.**
+
+### What the live report actually does
+
+Grepping the generated reading for authority names inside the topical sections:
+
+| section | authorities cited |
+|---|---|
+| House 3: Siblings | **none** |
+| House 5: Creative Work, Children | **none** |
+| House 7: Partnership | **none** |
+| House 10: Action, Rank | **none** |
+
+The house-topic sections **attribute nothing to anyone**. There is no Ptolemy citation beside them to create a false concord.
+
+### Where Ptolemy is actually cited — and it is correct everywhere
+
+All 20 mentions in the live report fall into three groups, and every one is a place his doctrine is genuinely in use:
+
+1. **Doryphory** — *"Ptolemy places a bodily attendant in the luminary's own sign…"*, and *"Neither luminary is angular, so Ptolemy's royal or sovereign branch is not present."* That is IV.3, read and verified this session.
+2. **Perseus and Algol** — with the constellation-versus-star distinction and the IV.9 anaretic condition both stated. Read and verified this session.
+3. **The dignity forks** — *"authorities differ on triplicity dignity: Dorothean (Dorotheus, Bonatti): none; Ptolemaic (Ptolemy, Lilly): +3"* and *"Egyptian bounds (Valens): +2; Ptolemaic bounds (Ptolemy): none."*
+
+**That third group is the disclosure I was proposing to build.** It already exists, already names both traditions, already shows both values, and already carries the standing line that *"fidelity to traditional astrology requires preserving disagreement rather than silently combining incompatible tables."*
+
+### What survives, and what does not
+
+**Survives — the doctrinal facts.** Ptolemy really does judge action from Mercury/Venus/Mars, marriage from the sect luminary, children from the MC and 11th, siblings from the mother's children-place, travel from the lights' angularity, and Fortune without sect reversal. Those readings are accurate and worth having recorded. They are a genuine map of where his system diverges from the Paulus-derived chain.
+
+**Does not survive — the accusation.** The engine is not misattributing anything. It cites Ptolemy where it uses him and stays silent where it does not, which is exactly right. My framing implied a fidelity defect in a system that is, on this specific point, already doing the careful thing.
+
+### Why this one matters most
+
+This is the **seventh** self-correction of the session and by far the largest, because it is the conclusion I pushed hardest and repeated most. The mechanism was the same as all the others — **asserting from a partial view** — but the partial view here was *my own inference about the product*, never tested against a single line of its output, while I had a generated report sitting on disk the whole time.
+
+Six earlier instances were about sources. This one was about our own software, which I could have checked in one grep at any point over several hours.
+
+**The rule that follows, stated for the next reader:** before claiming the product does something wrong, *run it and look*. The report is cheap to generate and its text is searchable. An argument about what the engine "implies" is worth nothing next to a grep of what it actually prints.
