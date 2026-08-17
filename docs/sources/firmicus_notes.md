@@ -273,3 +273,42 @@ When only Ptolemy restricted action to three planets, that was one author's syst
 **With Firmicus independently agreeing, the position changes.** Two of the tradition's major sources, in two languages, exclude Jupiter and Saturn from *ever* signifying profession. Our engine can and does hand career to either. That is now a **majority position we depart from**, not one author's idiosyncrasy — the mirror image of the Lot of Fortune case, where Ptolemy was the outlier and we followed the majority.
 
 Recorded as such. Still not a defect — the Paulus-derived chain is a real tradition — but the weight of evidence on this specific point has moved, and it is worth knowing which side of it the engine sits on.
+
+---
+
+# Firmicus II.6, *De finibus* — the Egyptian terms confirmed, and a dignity claim we do not follow (2026-08-11)
+
+PDF 61–62.
+
+> *hos fines Graeci **oria** vocant*
+
+The Latin *fines* renders the Greek **ὅρια** — terminology confirmed across both languages.
+
+### ✅ Third independent witness for the Egyptian set
+
+Firmicus gives Aries as: **Jupiter 1–6, Venus 7–12, Mercury 13–20, Mars 21–25, Saturn 26–30**; Taurus opening **Venus 1–8**.
+
+| | Aries |
+|---|---|
+| **Firmicus** (Latin) | Jupiter 6 · Venus 12 · Mercury 20 · Mars 25 · Saturn 30 |
+| **our `EGYPTIAN_TERMS`** | Jupiter 6 · Venus 12 · Mercury 20 · Mars 25 · Saturn 30 |
+
+**Exact match**, and Taurus agrees on its opening boundary too.
+
+That makes **three independent confirmations of the Egyptian table this session** — Ptolemy printing it at I.21 with his own per-planet totals (57/79/66/82/76 = 360, all five matching ours), Valens using it throughout, and now Firmicus setting it out sign by sign in Latin. The table the engine runs is as well attested as anything in the tradition.
+
+Note also that Firmicus gives the **Egyptian** set as *the* terms, without presenting alternatives. Ptolemy at I.21 knew of two systems and built a third; Firmicus, writing later, simply transmits the Egyptian. That is itself evidence about which set had won by the fourth century.
+
+### ⚠ But a dignity claim the engine does not follow
+
+> *nam cum **in finibus suis stella fuerit inventa, sic est tamquam in suo domicilio constituta***
+
+**"For when a planet is found in its own terms, it is as if placed in its own domicile."**
+
+Our `DignityCalculator` — following Lilly, verified from the 1647 earlier today — scores **domicile 5** and **term 2**. Firmicus makes term **equivalent to domicile in effect**.
+
+That is a real divergence on dignity weighting, and it is not a small one: a planet in its own term but otherwise peregrine would move from a weak +2 to something like domicile strength. It would change almuten outcomes wherever a term-lord placement is decisive.
+
+**Not changed, and not proposed.** Lilly's table is verified from the facsimile, internally consistent, and the engine's numbers match it exactly. Firmicus is one witness and his phrasing is *tamquam* — "as if", a comparison rather than a scoring instruction. It may be rhetorical emphasis on the term's importance rather than a claim of numerical parity.
+
+Recorded because the distinction matters for anyone reading Firmicus's delineations: when he says a planet is strong in its own terms, he means considerably more by it than a +2 in our scheme.
