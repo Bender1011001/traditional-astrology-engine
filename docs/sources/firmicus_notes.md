@@ -354,3 +354,45 @@ That pairing is worth having, because it answers the "why" question two ways for
 Firmicus credits **Aesculapius**, **Hanubius** (Anubis), and — in the apparatus — **Nechepso and Petosiris**, the standard pseudepigraphic authorities of the Hellenistic tradition. Ptolemy, by contrast, cites no divine authorities anywhere in Book I; he argues from the solar year.
 
 The two authors differ in **kind of authority as well as kind of argument**: Firmicus transmits what was revealed to sages, Ptolemy derives what follows from the seasons. Recorded alongside the earlier note that Firmicus *instructs* where Ptolemy *hedges* — the same divide, showing up in the foundations rather than the delineations.
+
+---
+
+# ⭐ Firmicus II.19, *De duodecim locorum potestatibus* — he uses EQUAL houses, and the 2nd is the lower gate (2026-08-11)
+
+PDF 76–77.
+
+## The house system is equal, measured from the ascendant degree
+
+> **1st** — *hic locus **ab ea parte, in qua fuerit horoscopus**, vires suas **per residuas partes XXX** extendit*
+> **2nd** — *accipit initium **a XXX horoscopi parte** et vires suas per XXX residuas partes extendit*
+> **3rd** — *qui **a LX ab horoscopo parte** initium accipiens **in XC desinit***
+
+The 1st extends **thirty degrees from the ascendant's own degree**; the 2nd runs **30°–60°** from it; the 3rd **60°–90°**.
+
+**That is the equal-house system**, not whole signs. Firmicus does say each place *"is constituted in"* the corresponding sign — *in secundo signo constituitur* — but he then gives **degree boundaries**, and the boundaries are what he computes with.
+
+**Our engine uses whole-sign houses throughout**, and says so in the report: *"whole-sign houses are used for house topics."* This is therefore a genuine **house-system fork** with a source that is otherwise central to the tradition.
+
+Not a defect — whole-sign is Hellenistic, well attested, and the project's declared method. But it means **Firmicus's house delineations do not map cleanly onto our house assignments** for any chart where the ascendant is not near 0° of its sign. Anyone importing his Book III material (planets in the twelve houses) must know this: a planet our engine puts in the 5th may be in his 4th.
+
+That is a **prerequisite**, not a footnote, for the largest untapped body of delineation in the collection.
+
+## ⭐ The 2nd place is the *lower gate*, and he gives the reason
+
+> *Est autem **piger locus** ab horoscopo **alienus**; ideo et **inferna appellatur porta**, quod **nulla cum horoscopo radiatione coniungitur***
+
+**"It is a sluggish place, alien from the ascendant; therefore it is also called the LOWER GATE, because it is joined to the ascendant by no ray."**
+
+This confirms from a second language what the Valens notes already recorded: Valens calls the 2nd **Ἅιδου πύλη**, the **Gate of Hades**. Firmicus calls it ***inferna porta***, the lower gate — **and both give the same reason**: it stands in aversion to the Ascendant, connected by no aspect.
+
+The engine names the 2nd *"livelihood and movable resources"* after Paulus. `valens_greek_notes.md` already flagged that as a fork; it is now **attested twice, independently, in Greek and Latin**, with the underlying geometry stated both times.
+
+The two names are not decorative. *Gate of Hades* and *lower gate* encode a structural fact — **the 2nd cannot see the 1st** — which is why both authors treat it as a weak place. Our label carries the topic and drops the warning.
+
+## Topics as he gives them
+
+- **1st** — *vita hominum et spiritus*, life and breath; *totius geniturae fundamenta*, the foundations of the whole nativity; *cardo primus … compago atque substantia*, the first angle, the joint and substance of it all.
+- **2nd** — *spei ac possessionis incrementa*, the increases of **hope and possession** — note **hope**, which pairs with the *spes* lot he lists at IV.17 and which `LotName` lacks.
+- **3rd** — *de fratribus et de amicis*, **brothers and friends**, with *Dea* — the Goddess, the Moon — assigned to it.
+
+The 3rd holding **both siblings and friends** is worth noting: our chain gives siblings to the 3rd and friends to the 11th. Another quiet divergence in the topical map.
