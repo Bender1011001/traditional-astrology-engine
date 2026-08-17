@@ -1,7 +1,39 @@
 # HANDOFF — Full Project State
 
-**Written:** 2026-08-02
-**Read this first.** It assumes no prior context. Companion document: `docs/SOURCE_ATTRIBUTED_READING_PLAN.md` (the forward plan).
+**Written:** 2026-08-02; **section 0 updated:** 2026-08-16
+**Read this first.** It assumes no prior context. Companion documents: `docs/DEVELOPER_HANDOFF.md` (run / edit / ship) and `docs/SOURCE_ATTRIBUTED_READING_PLAN.md` (the forward plan).
+
+---
+
+# 0. STATE AS OF 2026-08-16
+
+Claude's source session ended at `07a132e` (Firmicus II.26). This file was not updated that day; this block is the compact resume. How-to: `docs/DEVELOPER_HANDOFF.md`. The day's finding: `docs/sources/THE_CONDITION_RULE.md`. Notes: `ptolemy_greek_book1.md`, `firmicus_notes.md`, `picatrix_notes.md`, `ACQUISITIONS.md`.
+
+**Shipped and live.** Valens V.1 causative place, V.2 syzygy climacteric, Lilly reception fortitudes. Mansions 12 and 24 were serving another mansion's electional advice; fixed in `src/engine/mansions.py`. The birthday-triggered test was rewritten. Suite was 1252 green at session end.
+
+**Acquisition.** All 37 `verified_rules` have an original-language source on disk. al-Biruni: Wright 1934 English plus the Persian *Tafhim* critical edition (not the Arabic facing MS the registry cites). Ibn Ezra: LJS 57 (Catalonia 1361) — *Reshit Hokhmah*, *Sefer ha-Mivharim*, *Sefer ha-Olam*, **not** *Sefer ha-Moladot* or *Sefer ha-Tequfah*. Claude cannot read the 14th-c. Sephardic semi-cursive; those two Ibn Ezra rules stay `parallel_text_and_translation_inspected`.
+
+**Do not implement without Andrew.** Ptolemy III.11 benefic rescue (Jupiter 12° / Venus 8°). The doctrine is sourced; the payload lacks the anaretic degree's longitude; the window is directional on the killing degree, not a symmetric orb on the hyleg; *parapodiseis* (παραποδίσεις) means annotate the candidate as hindered, do not delete it. Same architecture at III.13, III.15, and Firmicus III.25 / IV.19 / IV.21. Implementing this changes published longevity figures and makes some readings harder, not softer.
+
+**Retracted — do not re-open.** The claim that the engine "cites Ptolemy while running Paulus house topics." A live report's topical houses cite no authority. The Ptolemy mentions are doryphory, Algol, and the already-disclosed dignity-table forks.
+
+**Settled — do not "fix."**
+- Night Fortune: Ptolemy does not reverse; Dorotheus, Paulus, and Firmicus do. `lots.py` follows the majority.
+- Egyptian terms: Ptolemy's totals, Valens, and Firmicus all match ours.
+- Water triplicity: confirmed from Greek I.19.
+- Ptolemaic Gemini terms: Lilly / MS D vs Boll–Boer. The author's own totals favor Boll–Boer. The constant is `_LILLY1647` — do not silently rename it.
+- The Algol entry was already correct (constellation nature + IV.9 in `nemesis`).
+
+**Open. Pick one; do not resume by transcribing unread volumes.**
+1. The condition-rule gate (six attestations, zero code).
+2. III.11 rescue plumbing (anaretic longitude first).
+3. Book I derivations in the report — why Saturn rules Capricorn, etc. Already written in the notes. Commercially useful.
+4. Chart lord: Firmicus prefers the lord of the Moon's next sign, not the Ibn Ezra almuten. Surface the method. Do not silently switch.
+5. Decennials: Firmicus says the sect light opens (confirms our default) but orders from the sect light's sign, not the Ascendant. Valens VI.5 is still unread on that point. Do not change `decennials.py` yet.
+6. Firmicus Book III planets-in-houses: unused, **equal houses** (not whole-sign), and `_PROTECTED_DIRECTIVE` will block his second-person counsel.
+7. Picatrix intents; Dorotheus Virgo/Mercury share (no stated weight); Lilly Regulus +6 / Spica +5; a printed Hebrew Reshit Hokhmah.
+
+**Standing failure mode from this session.** A negative result from a partial check is not a fact about the world. Say "I have not found it yet." Four false unavailable claims; three were caught only because Andrew pushed.
 
 ---
 
@@ -289,6 +321,6 @@ Ascendant **Scorpio 10°35′** · MC **Leo 26°57′** · **NIGHT** chart (Sun 
 
 - [ ] **Free or paid?** Undecided. Data point: the two most recent sales delivered flawlessly and the customer bought twice, unprompted, then praised the methodology.
 - [ ] **Location-based pricing.** $20 was priced as $20-in-California. In Kazakhstan (median wage ~$300–400/mo) that's proportionally $80–100. Detail in the plan doc.
-- [ ] **Water triplicity fork** — resolve or keep surfacing as a disagreement.
+- [x] **Water triplicity** — confirmed from Ptolemy I.19 Greek on 2026-08-16. Old (MARS, MOON) row was wrong.
 - [ ] **Multi-tradition project** — owner exploring ~20 traditions, same source-first method, with an idea of keeping only those that converge across charts. Early stage.
 - [ ] **How much commentary in readings**, if any. Spec says minimal and clearly separated.

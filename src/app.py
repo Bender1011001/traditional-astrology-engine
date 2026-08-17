@@ -144,6 +144,10 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["X-XSS-Protection"] = "1; mode=block"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        if request.url.scheme == "https":
+            response.headers["Strict-Transport-Security"] = (
+                "max-age=31536000; includeSubDomains"
+            )
         csp = (
             "default-src 'self'; "
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://js.stripe.com; "
@@ -170,6 +174,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "/forgot-password.html",
             "/reset-password.html",
             "/owner.html",
+            "/hyleg-calculator.html",
         }
         if path in noindex_paths or path.startswith("/api/"):
             response.headers["X-Robots-Tag"] = "noindex, nofollow"
@@ -227,7 +232,6 @@ _default_origins = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "http://localhost:3000",
-    "null",  # For file:// origins
 ]
 _env_origins = settings.CORS_ORIGINS.split(",") if settings.CORS_ORIGINS else []
 _cors_origins = list(

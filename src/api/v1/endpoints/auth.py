@@ -1,73 +1,36 @@
 import logging
 
-from fastapi import (APIRouter, BackgroundTasks, Depends, HTTPException, status)
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from src.api.v1.auth import create_access_token, get_current_user
-from src.api.v1.schemas import (ForgotPasswordRequest, LoginRequest,  # type: ignore
-                                RegisterRequest, ResetPasswordRequest)
+from src.api.v1.auth import get_current_user
+from src.api.v1.schemas import (
+    ForgotPasswordRequest,
+    LoginRequest,
+    RegisterRequest,
+    ResetPasswordRequest,
+)
 from src.database.core import get_db
 from src.database.models import User
-from src.engine.user_auth import get_user_manager
-from src.services.admin_notifier import notify_user_registered
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
-user_manager = get_user_manager()
+
+_ACCOUNTS_RETIRED = HTTPException(
+    status_code=status.HTTP_410_GONE,
+    detail="Accounts are retired. Readings and checkout do not require an account.",
+)
 
 
 @router.post("/register")
 async def register(request: RegisterRequest, background_tasks: BackgroundTasks):
-    result = user_manager.create_user(
-        request.email, request.password, request.name, plan_tier=request.plan_tier or ""
-    )
-    if not result["success"]:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=result["message"]
-        )
-
-    user = result["user"]
-    # Auto-login: Create token
-    access_token = create_access_token(
-        chart_hash="",  # Not relevant for general user token
-        tier=user.get("subscription_tier", "free"),
-        data={"user_id": user["id"]},
-    )
-    logger.info("New user registered: %s", request.email)
-
-    # Discord notification — runs after response is sent, never blocks the caller.
-    background_tasks.add_task(
-        notify_user_registered,
-        email=request.email,
-        name=request.name or "",
-        plan_tier=user.get("subscription_tier", "free"),
-    )
-
-    return {
-        "success": True,
-        "token": access_token,
-        "user": user,
-    }
+    raise _ACCOUNTS_RETIRED
 
 
 @router.post("/login")
 async def login(request: LoginRequest):
-    result = user_manager.authenticate(request.email, request.password)
-    if not result["success"]:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail=result["message"]
-        )
-
-    user = result["user"]
-    access_token = create_access_token(
-        chart_hash="",
-        tier=user.get("subscription_tier", "free"),
-        data={"user_id": user["id"]},
-    )
-    logger.info("User logged in: %s", request.email)
-
-    return {"success": True, "token": access_token, "user": user}
+    raise _ACCOUNTS_RETIRED
 
 
 @router.get("/me")
@@ -103,13 +66,11 @@ async def restore_session(token: str):
     if not payload:
         raise HTTPException(status_code=400, detail="Invalid token")
 
-    # Check for nested data 'd'
     data = payload.get("d", {})
     if not isinstance(data, dict):
         data = {}
 
     chart_input = data.get("chart_input")
-    # Also check top level just in case textual modification happened
     if not chart_input:
         chart_input = payload.get("chart_input")
 
@@ -121,39 +82,9 @@ async def restore_session(token: str):
 
 @router.post("/forgot-password")
 async def forgot_password(request: ForgotPasswordRequest):
-    from src.core.config import settings
-    from src.engine.email_service import render_template, send_email
-
-    result = user_manager.create_password_reset_token(request.email)
-
-    # Always return success to prevent email enumeration
-    if result["success"] and result["token"]:
-        token = result["token"]
-        reset_link = f"{settings.SITE_BASE_URL}/reset-password.html?token={token}"
-
-        email_html = render_template(
-            "reset_password.html", {"link": reset_link, "email": request.email}
-        )
-
-        send_email(
-            to_email=request.email,
-            subject="Reset Your Password - Traditional Astrology",
-            html_content=email_html,
-        )
-
-    return {
-        "success": True,
-        "message": "If an account exists with this email, you will receive password reset instructions.",
-    }
+    raise _ACCOUNTS_RETIRED
 
 
 @router.post("/reset-password")
 async def reset_password(request: ResetPasswordRequest):
-    result = user_manager.reset_password_with_token(request.token, request.new_password)
-
-    if not result["success"]:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=result["message"]
-        )
-
-    return {"success": True, "message": "Password has been reset successfully."}
+    raise _ACCOUNTS_RETIRED

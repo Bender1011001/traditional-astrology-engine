@@ -204,7 +204,7 @@ birth data
    ↓  src/engine/forensic_engine.py :: Auditor          → analysis{} (all the astrology)
    ↓  src/services/reading_evidence.py :: build_reading_evidence  → evidence packet
    ↓  src/services/reading_composer.py :: compose_deterministic_draft → markdown draft
-   ↓  LLM editor pass (free tier: 1 iteration)
+   ↓  LLM editor pass (tier `free` / `free_instant`: 0, deterministic; some other free_* tiers: 1)
    ↓  src/services/reading_contract.py :: validate/enforce   ← FAIL-CLOSED
    ↓  report_markdown
 ```
@@ -259,7 +259,7 @@ py -3.13 scripts/composite_pages.py <pdf> <outdir> --start N --count M --per-ima
 
 On disk and **unread**: Hephaistio (2 vols, Greek), Olympiodorus on Paulus (Greek), Abū Maʿshar (Arabic), Sahl, Bonatti, Morin, Māshāʾallāh, Lydus, three CCAG volumes. Plus most of Lilly's 894 pages and Firmicus's 938.
 
-**Genuinely blocked on acquisition** (searched; not digitised anywhere reachable): Ibn Ezra ×2 rules (Sela's Brill editions, in copyright) and al-Bīrūnī ×2 (Ramsay Wright 1934 facing-Arabic). These need purchase or library access.
+**Acquisition as of 2026-08-16:** all 37 rules have an original-language source on disk. al-Biruni: Wright 1934 English + Persian *Tafhim* (not the Arabic facing MS). Ibn Ezra: LJS 57 (1361 Hebrew) — *Reshit Hokhmah* / *Mivharim* / *Olam*, not *Moladot* or *Tequfah*. Claude cannot read the Sephardic semi-cursive; those two rules stay at parallel-text status. See `docs/sources/ACQUISITIONS.md`.
 
 ---
 
@@ -276,4 +276,4 @@ On disk and **unread**: Hephaistio (2 vols, Greek), Olympiodorus on Paulus (Gree
 
 - [ ] **Ptolemy's benefic rescue orbs** — Jupiter 12°, Venus 8°. Explicit in the source; sits on the protected longevity path, so the blast radius is larger than Lilly's reception was.
 - [ ] **Dorotheus Virgo/Mercury triplicity share** — حظّ states no weight. Implementing means inventing a number. Recommend leaving out unless you want a documented house-rule.
-- [ ] Everything in `docs/HANDOFF.md` §11 (pricing, free-vs-paid, water triplicity fork, multi-tradition scope).
+- [ ] Everything in `docs/HANDOFF.md` section 11 (pricing, free-vs-paid, multi-tradition scope). Water triplicity is confirmed; see the 2026-08-16 state block.
