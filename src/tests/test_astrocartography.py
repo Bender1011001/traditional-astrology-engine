@@ -127,4 +127,4 @@ def test_frontend_assets_reference_astrocartography_renderer():
 
     assert "renderAstrocartographyMap" in reading_app
     assert "/js/astrocartography-map.js" in sw
-    assert "rev20260526support1" in index
+    assert "rev20260816convert1" in index

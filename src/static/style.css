@@ -1015,6 +1015,54 @@ body.nav-open .nav-backdrop { display: block; }
   box-shadow: var(--shadow-sm);
 }
 
+.result-conversion-bar--upgrade {
+  grid-template-columns: 1fr;
+  border-color: rgba(232, 184, 75, 0.48);
+  box-shadow: 0 0 0 1px rgba(232, 184, 75, 0.2), var(--shadow-sm);
+  padding: 1.4rem 1.3rem 1.25rem;
+}
+
+.result-conversion-bar--upgrade .result-conversion-kicker {
+  color: var(--gold);
+}
+
+.result-conversion-bar--upgrade .result-conversion-copy h2 {
+  font-size: 1.45rem;
+  line-height: 1.28;
+  max-width: 38rem;
+}
+
+.result-conversion-bar--upgrade .result-conversion-copy > p {
+  max-width: 42rem;
+  margin-top: 0.5rem;
+}
+
+.result-conversion-bar--upgrade .result-conversion-support {
+  margin-top: 1.05rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.result-conversion-bar--upgrade .result-support-actions .btn-cta {
+  width: auto;
+  min-width: 16.5rem;
+  margin-top: 0;
+  font-size: 1rem;
+  padding: 0.95rem 1.4rem;
+}
+
+.result-conversion-bar--upgrade .result-conversion-fineprint {
+  margin-top: 0.7rem !important;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.result-conversion-bar--upgrade .result-conversion-actions {
+  max-width: 22rem;
+}
+
+
 .result-conversion-kicker {
   font-size: 0.7rem;
   text-transform: uppercase;

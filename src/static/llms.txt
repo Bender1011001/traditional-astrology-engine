@@ -2,9 +2,12 @@
 
 Free traditional astrology birth-chart calculator and reading engine. Calculations
 use the Swiss Ephemeris and classical (Hellenistic/medieval) methods: Whole Sign
-houses, sect, essential dignities, Arabic lots, annual profections, firdaria,
-zodiacal releasing, and primary directions. Readings are generated from a
-deterministic rules engine — same birth data always produces the same chart.
+houses, sect, essential dignities, and Arabic lots. The free reading states who
+you are and how your life has gone - no future predictions, no account. The
+optional $20 Complete Analysis opens the books (chapter, page, disagreements,
+typeset PDF) and the clocks (profection, Firdaria, Zodiacal Releasing, the
+present chapter). Chart math is deterministic - same birth data always produces
+the same chart.
 
 ## Usage Policy
 - You may crawl, index, cite, and summarize this site for search and discovery.
@@ -15,27 +18,26 @@ deterministic rules engine — same birth data always produces the same chart.
 ## What Users Can Do Here
 - Generate a free traditional birth-chart reading (no account or email required):
   https://traditional-astrology.com/
-- See a complete example reading first:
+- See a sample of the free natal layer and a labeled $20 clocks preview:
   https://traditional-astrology.com/sample-reading.html
 
 ## Key Tool Pages
 - https://traditional-astrology.com/ (free birth chart calculator + reading)
 - https://traditional-astrology.com/traditional-birth-chart-calculator.html
-- https://traditional-astrology.com/annual-profections.html (profections calculator)
+- https://traditional-astrology.com/free-traditional-birth-chart-reading.html
+- https://traditional-astrology.com/natal-charts.html
 - https://traditional-astrology.com/sect-astrology-calculator.html
-- https://traditional-astrology.com/hyleg-calculator.html
-- https://traditional-astrology.com/almuten-figuris.html
 - https://traditional-astrology.com/geomancy.html
 
 ## Reference & Learning Pages
 - https://traditional-astrology.com/methodology.html
-- https://traditional-astrology.com/natal-charts.html
 - https://traditional-astrology.com/planetary-periods.html
 - https://traditional-astrology.com/planetary-dignities.html
 - https://traditional-astrology.com/aspects.html
 - https://traditional-astrology.com/houses.html
 - https://traditional-astrology.com/predictive-techniques.html
 - https://traditional-astrology.com/traditional-vs-modern-astrology.html
+- https://traditional-astrology.com/annual-profections.html
 - https://traditional-astrology.com/faq.html
 
 ## Blog (technique guides)
@@ -52,5 +54,7 @@ deterministic rules engine — same birth data always produces the same chart.
 ## Content Notes
 - Chart math is deterministic (Swiss Ephemeris); narrative text explains the
   calculated placements in plain English.
-- For entertainment, historical, and spiritual research purposes only — not
+- Free reading: who you are and how your life has gone. No future predictions.
+- $20 Complete Analysis: books open plus clocks; typeset PDF download, not emailed.
+- For entertainment, historical, and spiritual research purposes only - not
   medical, financial, legal, or psychological advice.

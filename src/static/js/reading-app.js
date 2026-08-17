@@ -621,24 +621,16 @@ function buildPremiumUpsell() {
     return `
         <div class="premium-bottom-banner" id="premiumUpsell">
             <div class="premium-bottom-banner-inner">
-                <span class="premium-trial-badge">✦ GO DEEPER</span>
-                <h3 class="premium-bottom-title">The Complete Astrological Analysis — ${PREMIUM_PRICE_LABEL}</h3>
+                <span class="premium-trial-badge">WHEN THINGS HAPPEN</span>
+                <h3 class="premium-bottom-title">If the free reading sounded like your life, $20 opens when things happen and shows the books.</h3>
                 <p class="premium-bottom-sub">
-                    The Complete Analysis is a source-cited, sect-first reading that integrates
-                    planetary condition, shared-ruler life topics, annual profections, Firdaria,
-                    Zodiacal Releasing, and the places where traditional authorities disagree.
+                    The Complete Astrological Analysis is the clocks — profection, Firdaria, Zodiacal Releasing, the present chapter — and the books: chapter, page, and where the authors disagree. Typeset PDF, downloaded instantly on this page. No account.
                 </p>
-                <p class="premium-bottom-sub" style="margin-top:0.5rem;">
-                    No account needed. Your analysis is generated instantly after checkout — read it
-                    right here and download the typeset PDF on the spot.
-                </p>
-                <button class="btn-cta" type="button" data-premium-checkout data-default-label="Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}" style="width:auto; margin-top:1rem;">
-                    ✦ Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}
+                <button class="btn-cta" type="button" data-premium-checkout data-default-label="Open the clocks and the books — ${PREMIUM_PRICE_LABEL}" style="width:auto; margin-top:1rem;">
+                    Open the clocks and the books — ${PREMIUM_PRICE_LABEL}
                 </button>
                 <p class="premium-bottom-sub" style="margin-top:0.75rem; font-size:0.8rem;">
-                    One-time payment. No subscription. Every purchase directly keeps this site
-                    online — it is built and paid for by one person. If anything goes wrong with
-                    delivery, you keep the reading and get your money back.
+                    One-time payment. No subscription. If anything goes wrong with delivery, you keep the reading and get your money back.
                 </p>
                 <p class="reading-support-status" data-premium-status aria-live="polite"></p>
             </div>
@@ -1239,24 +1231,22 @@ function buildReadingShareActions() {
 
 function buildInstantConversionBar(freeRemaining) {
     return `
-        <div class="result-conversion-bar" aria-label="Free reading actions">
+        <div class="result-conversion-bar result-conversion-bar--upgrade" aria-label="Upgrade after free reading">
             <div class="result-conversion-copy">
-                <div class="result-conversion-kicker">Your free reading</div>
-                <h2>Your traditional astrology reading is ready.</h2>
-                <p>Calculated from your real chart: sect, dignities, houses, lots, fixed stars, and classical interpretation.</p>
+                <div class="result-conversion-kicker">Natal only so far — no clocks, no books</div>
+                <h2>If that sounded like your life, $20 opens when things happen and shows the books.</h2>
+                <p>The free reading is who you are and how life has gone. The Complete Astrological Analysis opens the clocks — profection, Firdaria, Zodiacal Releasing, the present chapter — and shows the books: chapter, page, and where the authors disagree. Typeset PDF, downloaded instantly. No account. No email.</p>
+                <div class="result-conversion-support" id="support-the-work">
+                    <div class="result-support-actions">
+                        <button class="btn-cta" type="button" data-premium-checkout data-default-label="Open the clocks and the books — ${PREMIUM_PRICE_LABEL}">Open the clocks and the books — ${PREMIUM_PRICE_LABEL}</button>
+                    </div>
+                    <p class="result-conversion-fineprint">One-time. No subscription. If anything goes wrong with delivery, you keep the reading and get your money back.</p>
+                    <p class="reading-support-status" data-premium-status aria-live="polite"></p>
+                </div>
                 <div class="result-conversion-meta">
                     <span>No account or email required</span>
                     <span>Generate another chart whenever you want</span>
-                    <span>Free reading stays free</span>
-                </div>
-                <p class="feedback-reassurance" style="margin:0.85rem 0 0; max-width:none; text-align:left;"><strong>Feedback matters:</strong> use the Good/Bad buttons and comment box at the bottom to tell us how accurate the reading felt.</p>
-                <div class="result-conversion-support" id="support-the-work">
-                    <p><strong>A note from the person who built this:</strong> this site isn't free for me — server time, source texts, and a lot of nights went into it. If the reading was worth something to you, the ${PREMIUM_PRICE_LABEL} Complete Analysis PDF (or any tip below) is what keeps it online.</p>
-                    <p style="margin-top:0.5rem;">The Complete Astrological Analysis (${PREMIUM_PRICE_LABEL}, one-time) is a source-cited sect-first nativity with integrated life topics, current time lords, and explicit doctrinal disagreements — generated instantly, downloadable as a typeset PDF, no account needed.</p>
-                    <div class="result-support-actions">
-                        <button class="support-action-btn support-action-primary" type="button" data-premium-checkout data-default-label="Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}">Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}</button>
-                    </div>
-                    <p class="reading-support-status" data-premium-status aria-live="polite"></p>
+                    <span>Instant PDF download</span>
                 </div>
             </div>
             <div class="result-conversion-actions">
