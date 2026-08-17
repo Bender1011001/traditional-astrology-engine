@@ -11,6 +11,8 @@ Claude's source session ended at `07a132e` (Firmicus II.26). This file was not u
 
 **Shipped and live.** Valens V.1 causative place, V.2 syzygy climacteric, Lilly reception fortitudes. Mansions 12 and 24 were serving another mansion's electional advice; fixed in `src/engine/mansions.py`. The birthday-triggered test was rewritten. Suite was 1252 green at session end.
 
+**Product.** The free edition is natal character + life-so-far, no future; the $20 report has time lords and the books.
+
 **Acquisition.** All 37 `verified_rules` have an original-language source on disk. al-Biruni: Wright 1934 English plus the Persian *Tafhim* critical edition (not the Arabic facing MS the registry cites). Ibn Ezra: LJS 57 (Catalonia 1361) — *Reshit Hokhmah*, *Sefer ha-Mivharim*, *Sefer ha-Olam*, **not** *Sefer ha-Moladot* or *Sefer ha-Tequfah*. Claude cannot read the 14th-c. Sephardic semi-cursive; those two Ibn Ezra rules stay `parallel_text_and_translation_inspected`.
 
 **Do not implement without Andrew.** Ptolemy III.11 benefic rescue (Jupiter 12° / Venus 8°). The doctrine is sourced; the payload lacks the anaretic degree's longitude; the window is directional on the killing degree, not a symmetric orb on the hyleg; *parapodiseis* (παραποδίσεις) means annotate the candidate as hindered, do not delete it. Same architecture at III.13, III.15, and Firmicus III.25 / IV.19 / IV.21. Implementing this changes published longevity figures and makes some readings harder, not softer.

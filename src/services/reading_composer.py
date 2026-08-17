@@ -81,6 +81,80 @@ Requirements:
 """
 
 
+NATAL_EDITOR_SYSTEM_PROMPT = """You are the final judging astrologer and editorial layer for a free natal report.
+
+The JSON evidence packet is the complete universe of facts you may use. You do
+not calculate, infer missing placements, invent events, diagnose the reader, or
+add doctrine from memory. Preserve every [E#] citation and add at least one
+evidence citation to every substantive interpretive paragraph.
+
+The deterministic draft contains a chart-specific hierarchy as well as the
+complete natal proof. Preserve its facts, but do not preserve its mechanical wording.
+Write as an astrologer who has reached a judgment: identify the strongest source
+of agency, the governing contradiction, the principal pressure network, and the
+few life topics that those structures control. Then state what kind of person
+and biography those testimonies describe. Do not walk through evidence in the
+order it arrived and do not turn every modifier into a separate paragraph.
+
+Be direct. Source-supported harsh testimony is mandatory and must not be
+softened into vague possibility language. Equally, do not intensify a rule past
+its stated condition or methodological limit. Distinguishing what a technique
+does not establish is doctrinal accuracy, not emotional reassurance. Reception
+assists without cancellation; sect moderates a malefic without making it benefic.
+
+The opening judgment must be memorable and specific to this chart. Prefer a
+clear contrast such as "This is not a chart of effortless support; it is a chart
+of skill forced to operate under pressure" when the evidence supports it. End
+the life judgment with a blunt synthesis of the native's strongest capacity,
+chief recurrent danger, and most credible form of achievement.
+
+Use exactly these top-level headings, once each, in this order:
+# Your Nativity at a Glance
+# The Leading Testimonies
+# Life Topics
+# Where the Sources Differ
+# Method and Limits
+
+Write in present and past tense only. Make direct "you are" and "your life has"
+statements about who the native is and how the life has gone so far.
+
+Forbidden:
+- Future predictions and the phrase "you will"
+- Dated forecasts
+- This year's profection as a coming chapter
+- Firdaria, zodiacal releasing, or decennials as upcoming periods
+- A ranked forecast
+- "the coming years"
+- The heading "# The Present Chapter"
+
+Requirements:
+- Roughly 2,500 to 8,000 words is enough. Do not pad to 7,000-14,000.
+- Plain, dignified English suitable for a reader judging whether the chart is accurate.
+- Seven visible planets only. Never mention Uranus, Neptune, or Pluto.
+- Do not publish length-of-life arithmetic, Hyleg, Alcocoden, or anaretic windows.
+- No medical, surgery, remediation, investment, estate, contract, legal, or
+  safety direction.
+- No retrodicted events presented as validation.
+- No raw JSON paths, field names, enum names, scores with false precision, or
+  claims that a technique overrides all other testimony.
+- No guarantees, commands, cosmic demands, or fear-based language.
+- When sources disagree, name both positions supplied by the packet.
+- Begin with the historical-use notice supplied in the draft. The evidence ledger is appended after editorial validation.
+"""
+
+
+ALLOWED_READING_SCOPES = frozenset({"full", "natal"})
+
+
+def _normalize_reading_scope(scope: str) -> str:
+    normalized = str(scope or "full").strip().lower()
+    if normalized not in ALLOWED_READING_SCOPES:
+        raise ValueError(
+            f"Unsupported reading scope {scope!r}; expected 'full' or 'natal'."
+        )
+    return normalized
+
+
 def _group(packet: Mapping[str, Any], category: str) -> list[Mapping[str, str]]:
     return [
         item
@@ -3319,8 +3393,10 @@ def _ranked_forecast_paragraphs(
     return paragraphs
 
 
-def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dict[str, Any]]:
+def compose_deterministic_draft(chart_data: Mapping[str, Any], scope: str = "full") -> tuple[str, dict[str, Any]]:
     """Return a safe, fully deterministic reading draft and its evidence packet."""
+    scope = _normalize_reading_scope(scope)
+    natal = scope == "natal"
     packet = evidence_packet(chart_data)
     judgment_plan = build_judgment_plan(packet)
     subject = packet.get("subject") or "the native"
@@ -3358,11 +3434,19 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
     forks = _group(packet, "doctrinal_fork")
 
     lines = [REPORT_NOTICE, "", "# Your Nativity at a Glance", ""]
-    lines.append(
-        f"This is a judgment of {subject}'s nativity, not a list of placements. It states what the chart says about "
-        "your capacities, difficulties, relationships, work, losses, conflicts, and likely periods of change. Each "
-        "conclusion is weighted through sect, planetary condition, rulership, configuration, reception, and time lords."
-    )
+    if natal:
+        lines.append(
+            f"This is a judgment of {subject}'s nativity, not a list of placements. It states who you are and how "
+            "the life has gone so far: capacities, difficulties, relationships, work, losses, and conflicts. It does "
+            "not predict what happens next. Each conclusion is weighted through sect, planetary condition, rulership, "
+            "configuration, and reception."
+        )
+    else:
+        lines.append(
+            f"This is a judgment of {subject}'s nativity, not a list of placements. It states what the chart says about "
+            "your capacities, difficulties, relationships, work, losses, conflicts, and likely periods of change. Each "
+            "conclusion is weighted through sect, planetary condition, rulership, configuration, reception, and time lords."
+        )
     sect_label: Optional[str] = None
     if foundation:
         lines.append(_evidence_sentence(foundation[0]))
@@ -3435,7 +3519,8 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
     lines.extend(["## The Twelve Places: Complete Reference"])
     lines.extend(_topic_full_paragraphs(topical, planets))
     lines.extend(_lot_paragraphs(lots, planets))
-    lines.extend(_longevity_paragraphs(longevity))
+    if not natal:
+        lines.extend(_longevity_paragraphs(longevity))
     lines.extend(["## The Secondary Doctrine and Derived Degrees"])
     lines.append(
         "The main judgment is already complete. The following techniques are retained because they either confirm it, qualify it, or expose a real disagreement; none is allowed to replace the natal planets, places, and rulers."
@@ -3462,18 +3547,19 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
     lines.extend(_lunar_cycle_paragraphs(lunar_cycle))
     lines.extend(_lunar_mansion_scope_paragraphs(lunar_mansion_scope))
 
-    lines.extend(["", "# The Present Chapter", ""])
-    lines.append(
-        "Timing activates the events promised by the nativity. One clock gives a broad subject; repetition across "
-        "profection, Firdaria, releasing, decennials, and the solar return makes manifestation more likely. The report "
-        "therefore names the probable event fields and distinguishes ordinary activation from severe convergence."
-    )
-    lines.extend(_life_chapter_paragraphs(life_chapters, planets))
-    lines.extend(_timing_paragraphs(timing, planets, topical))
-    lines.extend(_climacteric_year_paragraphs(climacteric_years))
-    lines.extend(_ranked_forecast_paragraphs(timing_maps, timing, planets))
-    lines.extend(_long_range_timing_paragraphs(timing_maps, planets))
-    lines.extend(_annual_context_paragraphs(annual_context))
+    if not natal:
+        lines.extend(["", "# The Present Chapter", ""])
+        lines.append(
+            "Timing activates the events promised by the nativity. One clock gives a broad subject; repetition across "
+            "profection, Firdaria, releasing, decennials, and the solar return makes manifestation more likely. The report "
+            "therefore names the probable event fields and distinguishes ordinary activation from severe convergence."
+        )
+        lines.extend(_life_chapter_paragraphs(life_chapters, planets))
+        lines.extend(_timing_paragraphs(timing, planets, topical))
+        lines.extend(_climacteric_year_paragraphs(climacteric_years))
+        lines.extend(_ranked_forecast_paragraphs(timing_maps, timing, planets))
+        lines.extend(_long_range_timing_paragraphs(timing_maps, planets))
+        lines.extend(_annual_context_paragraphs(annual_context))
 
     lines.extend(["", "# Where the Sources Differ", ""])
     if forks:
@@ -3506,12 +3592,20 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any]) -> tuple[str, dic
         "edition, the system must describe it as a configured method rather than "
         "claiming universal or perfect textual authority."
     )
-    lines.append(
-        "This edition publishes the supplied historical length-of-life arithmetic, including competing branches, "
-        "failed results, and anaretic testimony. It does not convert that historical judgment into medical direction. "
-        "Protected professional domains, prescriptive remediation, and concrete practical instructions remain outside "
-        "the customer report."
-    )
+    if natal:
+        lines.append(
+            "This free edition is natal only: character and the life so far. Time lords, the present chapter, and "
+            "dated forecasts belong to the $20 source-cited Complete Analysis — this edition does not publish "
+            "length-of-life arithmetic. Protected professional domains, prescriptive remediation, and concrete "
+            "practical instructions remain outside the customer report."
+        )
+    else:
+        lines.append(
+            "This edition publishes the supplied historical length-of-life arithmetic, including competing branches, "
+            "failed results, and anaretic testimony. It does not convert that historical judgment into medical direction. "
+            "Protected professional domains, prescriptive remediation, and concrete practical instructions remain outside "
+            "the customer report."
+        )
     lines.extend(["", REPORT_NOTICE])
     return "\n\n".join(lines), packet
 
@@ -3634,6 +3728,7 @@ def compose_customer_reading(
     llm_request: Callable[..., str | None] | None = None,
     model: str | None = None,
     require_comprehensive: bool = False,
+    scope: str = "full",
 ) -> tuple[str, dict[str, Any]]:
     """Compose and validate a customer report.
 
@@ -3641,9 +3736,14 @@ def compose_customer_reading(
     is supplied, its output replaces the draft only after evidence and publication
     validation.  Invalid model output never silently falls back and ship as paid
     prose; it raises for retry or owner review.
+
+    ``scope="full"`` is the paid report (Present Chapter and time lords).
+    ``scope="natal"`` is the free edition: character and life so far, no future.
     """
-    draft, packet = compose_deterministic_draft(chart_data)
-    if require_comprehensive:
+    scope = _normalize_reading_scope(scope)
+    natal = scope == "natal"
+    draft, packet = compose_deterministic_draft(chart_data, scope=scope)
+    if require_comprehensive and not natal:
         coverage_violations = _coverage_violations(packet)
         if coverage_violations:
             raise ReadingContractError(coverage_violations)
@@ -3654,13 +3754,14 @@ def compose_customer_reading(
             f"EVIDENCE PACKET:\n{json.dumps(packet, ensure_ascii=False, indent=2)}\n\n"
             f"DETERMINISTIC DRAFT:\n{draft}"
         )
+        editor_prompt = NATAL_EDITOR_SYSTEM_PROMPT if natal else EDITOR_SYSTEM_PROMPT
         response = llm_request(
             messages=[
-                {"role": "system", "content": EDITOR_SYSTEM_PROMPT},
+                {"role": "system", "content": editor_prompt},
                 {"role": "user", "content": user_prompt},
             ],
             temperature=0.1,
-            max_tokens=14_000,
+            max_tokens=8_000 if natal else 14_000,
             top_p=0.8,
             model=model,
         )
@@ -3673,5 +3774,9 @@ def compose_customer_reading(
     citation_violations = _citation_violations(final, allowed_ids)
     if citation_violations:
         raise ReadingContractError(citation_violations)
-    enforce_customer_reading(final, minimum_words=900 if llm_request is None else 1_200)
+    if natal:
+        minimum_words = 900 if llm_request is None else 1_200
+    else:
+        minimum_words = 900 if llm_request is None else 1_200
+    enforce_customer_reading(final, minimum_words=minimum_words, scope=scope)
     return final, packet

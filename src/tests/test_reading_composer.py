@@ -860,3 +860,32 @@ def test_no_alcocoden_renders_honest_absence_not_unknown_placeholder():
     assert "finds no qualifying Alcocoden" in text
     # The found branch still renders normally
     assert "Sun" in text and "19" in text
+
+
+def test_natal_scope_omits_present_chapter_and_forecasts(chart_data):
+    draft, _packet = compose_deterministic_draft(chart_data, scope="natal")
+    assert "# Your Nativity at a Glance" in draft
+    assert "# Life Topics" in draft
+    assert "# The Present Chapter" not in draft
+    assert "Ranked Forecast" not in draft
+    assert "Annual Profection" not in draft
+    assert "Lord of the Year" not in draft
+    assert "advancement is not simply handed over by family or authority" in draft
+    assert "does not predict what happens next" in draft
+    assert "likely periods of change" not in draft
+
+
+def test_natal_scope_customer_reading_stays_natal(chart_data):
+    report, _packet = compose_customer_reading(chart_data, llm_request=None, scope="natal")
+    assert "# Your Nativity at a Glance" in report
+    assert "# Life Topics" in report
+    assert "# The Present Chapter" not in report
+    assert "Ranked Forecast" not in report
+    assert "this free edition is natal only" in report.lower()
+
+
+def test_full_scope_default_keeps_present_chapter(chart_data):
+    default_draft, _packet = compose_deterministic_draft(chart_data)
+    full_draft, _ = compose_deterministic_draft(chart_data, scope="full")
+    assert "# The Present Chapter" in default_draft
+    assert "# The Present Chapter" in full_draft

@@ -1583,13 +1583,29 @@ def _run_premium_report_legacy(chart_data, output_file, iterations=6, model=None
     return final_report
 
 
-def run_premium_report(chart_data, output_file, iterations=1, model=None):
+_NATAL_REPORT_TIERS = frozenset(
+    {
+        "free",
+        "free_instant",
+        "free_chart",
+        "free_llm_chart",
+        "free_premium",
+        "free_premium_trial",
+    }
+)
+
+
+def run_premium_report(chart_data, output_file, iterations=1, model=None, scope=None, tier=None):
     """Generate the evidence-first customer report.
 
     ``iterations`` remains in the signature for stored tasks and older callers.
     The v2 pipeline intentionally uses at most one optional editorial pass;
     astrological facts and limits come from a deterministic evidence packet,
     not a multi-turn model conversation.
+
+    ``scope`` is ``"natal"`` (free character + life so far) or ``"full"`` (paid).
+    If ``scope`` is omitted, a natal ``tier`` selects the free edition; otherwise
+    the report stays full.
     """
     from src.services.reading_composer import compose_customer_reading
 
@@ -1597,17 +1613,25 @@ def run_premium_report(chart_data, output_file, iterations=1, model=None):
     if not isinstance(parsed, dict):
         raise ValueError("Premium report generation requires a chart-data object")
 
+    if scope is None:
+        normalized_tier = str(tier or "").strip().lower()
+        scope = "natal" if normalized_tier in _NATAL_REPORT_TIERS else "full"
+    else:
+        scope = str(scope).strip().lower() or "full"
+
     editor_mode = os.getenv("PREMIUM_READING_EDITOR", "disabled").strip().lower()
     llm_request = (
         None
         if editor_mode in {"0", "false", "off", "disabled", "none"}
         else _openrouter_request
     )
+    natal = scope == "natal"
     report, _packet = compose_customer_reading(
         parsed,
         llm_request=llm_request,
         model=model,
-        require_comprehensive=True,
+        require_comprehensive=not natal,
+        scope=scope,
     )
     with open(output_file, "w", encoding="utf-8") as handle:
         handle.write(report)

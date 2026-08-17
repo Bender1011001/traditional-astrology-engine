@@ -122,3 +122,37 @@ def test_the_report_still_may_not_direct_the_reader_about_their_health():
         )
     }
     assert "protected_directive" in codes
+
+
+
+NATAL_HEADINGS = """# Your Nativity at a Glance
+# The Leading Testimonies
+# Life Topics
+# Where the Sources Differ
+# Method and Limits
+"""
+
+
+def _natal_body(extra: str = "") -> str:
+    prose = " ".join(
+        [
+            "Traditional doctrine treats this testimony as symbolic and conditional.",
+            "Its expression depends on the planet's dignity, place, sect, and relationships.",
+            "No single factor cancels the rest of the nativity.",
+        ]
+        * 45
+    )
+    return f"{NATAL_HEADINGS}\n{prose}\n{extra}"
+
+
+def test_natal_scope_requires_natal_headings_and_rejects_present_chapter():
+    assert validate_customer_reading(_natal_body(), scope="natal") == ()
+    leaked = validate_customer_reading(_valid_body(), scope="natal")
+    assert "future_scope_leak" in {violation.code for violation in leaked}
+    forecast = validate_customer_reading(
+        _natal_body("\n# Ranked Forecast\nMore symbolic testimony about the nativity."),
+        scope="natal",
+    )
+    assert "future_scope_leak" in {violation.code for violation in forecast}
+    missing_present = validate_customer_reading(_natal_body())
+    assert "missing_structure" in {violation.code for violation in missing_present}

@@ -100,6 +100,20 @@ _REQUIRED_HEADINGS = (
     "# Method and Limits",
 )
 
+_NATAL_REQUIRED_HEADINGS = (
+    "# Your Nativity at a Glance",
+    "# The Leading Testimonies",
+    "# Life Topics",
+    "# Where the Sources Differ",
+    "# Method and Limits",
+)
+
+_NATAL_FORBIDDEN_HEADINGS = (
+    "# The Present Chapter",
+    "# Ranked Forecast",
+    "## Ranked Forecast",
+)
+
 
 def _excerpt(text: str, match: re.Match[str], radius: int = 85) -> str:
     start = max(0, match.start() - radius)
@@ -157,6 +171,7 @@ def validate_customer_reading(
     *,
     require_v2_structure: bool = True,
     minimum_words: int = 1_200,
+    scope: str = "full",
 ) -> tuple[ReadingViolation, ...]:
     """Return every publication violation found in ``markdown``.
 
@@ -201,7 +216,8 @@ def validate_customer_reading(
             violations.append(violation)
 
     if require_v2_structure:
-        missing = [heading for heading in _REQUIRED_HEADINGS if heading not in markdown]
+        required = _NATAL_REQUIRED_HEADINGS if scope == "natal" else _REQUIRED_HEADINGS
+        missing = [heading for heading in required if heading not in markdown]
         if missing:
             violations.append(
                 ReadingViolation(
@@ -210,6 +226,16 @@ def validate_customer_reading(
                     ", ".join(missing),
                 )
             )
+        if scope == "natal":
+            leaked = [heading for heading in _NATAL_FORBIDDEN_HEADINGS if heading in markdown]
+            if leaked:
+                violations.append(
+                    ReadingViolation(
+                        "future_scope_leak",
+                        "The free natal report contains future-timing headings.",
+                        ", ".join(leaked),
+                    )
+                )
 
     repeated = _repeated_paragraph(markdown)
     if repeated:

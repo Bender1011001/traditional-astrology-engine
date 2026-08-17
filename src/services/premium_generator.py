@@ -50,6 +50,29 @@ PAID_READING_TIERS = {
     "premium",
 }
 
+NATAL_TIERS = {
+    "free",
+    "free_instant",
+    "free_chart",
+    "free_llm_chart",
+    "free_premium",
+    "free_premium_trial",
+}
+
+
+def reading_scope_for_tier(tier: str | None, *, paid: bool = False) -> str:
+    """Map a product tier to the composer scope.
+
+    Paid orders always receive the full report, even if a free tier name was
+    attached to the request. Everything outside ``NATAL_TIERS`` is full.
+    """
+    if paid:
+        return "full"
+    normalized = str(tier or "").strip().lower()
+    if normalized in NATAL_TIERS:
+        return "natal"
+    return "full"
+
 
 def _collapse_blank_lines(markdown: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", markdown).strip() + "\n"
@@ -309,7 +332,10 @@ def _send_report_email(
 class PremiumGenerator:
     @staticmethod
     def generate_premium_report_markdown(
-        chart_data: dict, tier: str | None = None, iterations: int | None = None
+        chart_data: dict,
+        tier: str | None = None,
+        iterations: int | None = None,
+        paid: bool = False,
     ) -> str:
         """
         Generates the premium report markdown for a given chart data.
@@ -324,6 +350,7 @@ class PremiumGenerator:
         )
         if iteration_count < 1:
             raise ValueError("Premium report generation requires at least one LLM pass")
+        scope = reading_scope_for_tier(tier, paid=bool(paid))
 
         # Create temp file for output
         with tempfile.NamedTemporaryFile(suffix=".md", delete=False) as tmp:
@@ -340,6 +367,7 @@ class PremiumGenerator:
                 output_path,
                 iterations=iteration_count,
                 model=model_for_tier(tier),
+                scope=scope,
             )
 
             with open(output_path, "r", encoding="utf-8") as f:
@@ -411,7 +439,10 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         report_markdown = await loop.run_in_executor(
             None,
             lambda: PremiumGenerator.generate_premium_report_markdown(
-                chart_data, tier=tier, iterations=iteration_count
+                chart_data,
+                tier=tier,
+                iterations=iteration_count,
+                paid=bool(request_data.get("paid")),
             ),
         )
 
