@@ -228,3 +228,48 @@ Our `AlmutenEngine` computes the chart lord by **summing five essential dignitie
 - and his verdict *"verissima et ab omnibus comprobata"*, truest and approved by all, is **exactly the kind of claim the project's own standards treat with suspicion**, since three rival methods are listed on the same page.
 
 Recorded as a sourced fork on a determination the report presents as settled. **The honest surface would be one line noting that the chart lord is method-dependent and naming which method we run** — the same treatment the dignity tables already get in "Where the Sources Differ."
+
+---
+
+# ⭐ Firmicus IV.21, *De actibus* — independent confirmation of Ptolemy's three (2026-08-11)
+
+PDF 275–276.
+
+> *Sunt autem, qui **actus decernunt hominibus, Mars Venus et Mercurius***
+
+**"There are those who decree actions for men: Mars, Venus, and Mercury."**
+
+That is **exactly** Ptolemy IV.4's restriction, arrived at independently — a different author, a different language, a different transmission line, naming the **same three planets and no others** as significators of profession.
+
+Two originals agreeing on a restriction this specific is much stronger evidence than either alone. Ptolemy read in Greek, Firmicus in Latin, both excluding Jupiter, Saturn, the Sun and the Moon from ever *taking* the lordship of action.
+
+## The selection rule differs, and the difference is small
+
+| | how the one of the three is chosen |
+|---|---|
+| **Ptolemy** IV.4 | *"two ways: from the **Sun** (the planet rising before it) and from the **culminating place**"* |
+| **Firmicus** IV.21 | the one found *"either **in the MC**, or in the **right trine of the MC**, or in the **left**, or in the **other angles**"* |
+
+Both anchor on the **Midheaven**. Ptolemy adds the pre-solar riser; Firmicus adds the MC's trines and the remaining angles. **Same doctrine, slightly different reach.**
+
+## And the same conditional architecture, a sixth time
+
+> *Si ergo Mars actus decreverit et **bene fuerit collocatus** et **benivolis stellis oportuna fuerit radiatione coniunctus** et sit **nocturna genitura**, dat **arma ducatus ac gloriam, licentiam gladii** … aut certe **claras artes et nobiles ex igni et ex ferro***
+
+Mars as lord of action, **well placed**, **joined by benefics with timely radiation**, and **in a nocturnal nativity** — his own sect — gives **arms, generalships and glory, the licence of the sword**, or **bright and noble arts from fire and iron**.
+
+> *In **pigris autem et deiectis locis** constitutus et in his signis, **in quibus non gaudet** …*
+
+But set in the **sluggish and cast-down places** — the cadent houses — and in signs **where he does not rejoice**, the contrary follows.
+
+**Three conditions again: good placement, benefic support, own sect.** Sixth instance today of the architecture found in Ptolemy III.11, III.13, III.15, and Firmicus III.25 and IV.19. It is not a stylistic tic of one author; it is how this tradition reasons about malefics.
+
+Note also *"ex igni et ex ferro"* — **from fire and iron** — matching Ptolemy's Mars professions exactly: armourers, surgeons, statue-makers, all trades of forge and blade.
+
+## What this does to the earlier finding
+
+When only Ptolemy restricted action to three planets, that was one author's system against our almuten-plus-10th-ruler chain — a fork, and I over-claimed it as a defect before retracting.
+
+**With Firmicus independently agreeing, the position changes.** Two of the tradition's major sources, in two languages, exclude Jupiter and Saturn from *ever* signifying profession. Our engine can and does hand career to either. That is now a **majority position we depart from**, not one author's idiosyncrasy — the mirror image of the Lot of Fortune case, where Ptolemy was the outlier and we followed the majority.
+
+Recorded as such. Still not a defect — the Paulus-derived chain is a real tradition — but the weight of evidence on this specific point has moved, and it is worth knowing which side of it the engine sits on.
