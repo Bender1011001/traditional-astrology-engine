@@ -13,6 +13,7 @@ ACQUISITION_PAGES = [
     "free-natal-chart-pdf.html",
     "astrology-reading-for-clients.html",
     "sect-astrology-calculator.html",
+    "whole-sign-houses-calculator.html",
 ]
 
 DEPRECATED_BUSINESS_PAGES = [
