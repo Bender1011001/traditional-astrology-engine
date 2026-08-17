@@ -396,3 +396,44 @@ The two names are not decorative. *Gate of Hades* and *lower gate* encode a stru
 - **3rd** — *de fratribus et de amicis*, **brothers and friends**, with *Dea* — the Goddess, the Moon — assigned to it.
 
 The 3rd holding **both siblings and friends** is worth noting: our chain gives siblings to the 3rd and friends to the 11th. Another quiet divergence in the topical map.
+
+## The twelve places completed (PDF 77–79)
+
+Every place carries an explicit degree range from the ascendant, which settles the equal-house reading beyond doubt — it is not an artefact of one passage:
+
+| place | degrees from Asc | Firmicus's name / topic |
+|---|---|---|
+| 1 | 0–30 | *vita hominum et spiritus* — life and breath; the foundation of the whole nativity |
+| 2 | 30–60 | *spei ac possessionis incrementa*; ***inferna porta***, the lower gate |
+| 3 | 60–90 | *de fratribus et de amicis* — brothers **and friends**; ***Dea***, the Goddess |
+| 4 | 90–120 | the IMC; ***parentes*** — parents |
+| 5 | 120–150 | *filiorum numerus* — the **number** of children |
+| 6 | 150–180 | *causam **vitii ac valitudinis*** — the cause of defect and of health |
+| 7 | 180–210 | (marriage and partnership) |
+| 8 | 210–240 | ***epicatafora dicitur*** — "it is called the *epikataphora*" |
+| 9 | 240–270 | ***dei Solis locus*** — the place of the god the Sun; *hominum sectas*, men's religions |
+| 10 | 270–300 | ***principalis*** — the principal place |
+| 11 | 300–330 | ***Bonus daemon*** — the Good Daimon |
+| 12 | 330–360 | — |
+
+## ⭐ He preserves the Greek place-names, confirming Valens
+
+`valens_greek_notes.md` recorded Valens's divine names for the places: 3rd *θεᾶς Σελήνης* (of the goddess Moon), 9th *θεοῦ / Ἡλίου τόπος* (of the God, of the Sun), 11th *Ἀγαθὸς Δαίμων*, 2nd *Ἅιδου πύλη* (Gate of Hades).
+
+**Firmicus carries every one of them into Latin:**
+
+| place | Valens (Greek) | Firmicus (Latin) |
+|---|---|---|
+| 2 | Ἅιδου πύλη — Gate of Hades | *inferna porta* — lower gate |
+| 3 | θεᾶς Σελήνης — of the goddess Moon | ***Dea*** — the Goddess |
+| 8 | — | *epicatafora* (ἐπικαταφορά, transliterated) |
+| 9 | θεοῦ / Ἡλίου τόπος — of the God, the Sun | ***dei Solis locus*** |
+| 11 | Ἀγαθὸς Δαίμων | ***Bonus daemon*** |
+
+Two authors, two languages, one naming system — and Firmicus transliterates *epicatafora* rather than translating it, which is the mark of a technical term received intact rather than reinvented.
+
+**Our engine replaces all of this with topic labels** — the 9th becomes *"Religion, Study, Divination, and Long Journeys"*, the 11th *"Friends, Patrons, Hopes, and Alliances"*. Those are accurate to Paulus and perfectly usable. But the older names carry information the topics do not: the 2nd is weak **because it cannot see the 1st**, the 11th is *good* daimon against the 12th's bad, and the 9th and 3rd are the places of the two lights' deities.
+
+That is a **naming layer, not a doctrinal fork** — nothing computes differently. But it is the sort of thing that distinguishes a reading grounded in the tradition from one that reproduces a modern house-meanings table, and it is now attested twice.
+
+Two smaller divergences from our chain, recorded: his **3rd holds friends** as well as siblings (we give friends to the 11th), and his **5th is specifically the *number* of children** rather than children generally.
