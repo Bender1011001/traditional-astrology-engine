@@ -1326,3 +1326,38 @@ Read end to end, Book I is not a reference table with commentary. It is a **deri
 Every table the engine holds as data, Ptolemy holds as a **consequence**. The engine can compute all of it and explain none of it.
 
 That is the most straightforwardly commercial finding of the whole session. A report that says *"Saturn rules Capricorn"* is a lookup. A report that says *"Saturn takes the signs opposite the lights', because where heat increases cold diminishes"* is the thing customers cannot get from free chart sites — and it is one sentence per rule, already written, by the tradition's most cited author.
+
+---
+
+# I.9 read in the Greek — the fixed-star natures, and our table checked (2026-08-11)
+
+Printed **24–25**, the zodiacal constellations.
+
+### Verified against `src/engine/stars.py`
+
+| star | Ptolemy | ours | |
+|---|---|---|---|
+| **Βασιλίσκος** (Regulus), *"the bright one on the heart"* of Leo | **Mars and Jupiter** | `Mars/Jupiter` | ✅ |
+| **Στάχυς** (Spica) | **Venus, and slightly Mars** | `Venus/Mars` | ✅ |
+| **Ἀντάρης** (Antares), *"the middle of the three in the body, tawny and brighter"* | **Mars, and slightly Jupiter** | `Mars/Jupiter` | ✅ |
+
+Three named stars, three exact matches, from the Greek rather than a modern list. Given the project's standing caution that fixed-star output can carry modern popular boilerplate, that is worth having settled.
+
+### ⚠ One entry to correct
+
+`Algol` is recorded as *"Jupiter/Saturn (Ptolemy: Perseus generally)"*. That parenthesis is now demonstrably the wrong attribution. Per I.9 at printed p. 28, **Jupiter–Saturn is the nature of the stars of Perseus as a group**; the **Gorgoneion**, where Algol sits, is treated separately, and its violent-death significance belongs to **IV.9**. Our own note flags the substitution, so this is a labelling fix rather than a data error — but the nature we publish for Algol is the constellation's, not the star's.
+
+### Two stars Ptolemy names that we do not carry
+
+- **Φάτνη** (Praesepe), *"the nebulous cluster in the breast"* of Cancer — **Mars and the Moon**; flanked by the **Ὄνοι** (the Asses) — **Mars and the Sun**.
+- **Προτρυγητήρ** (Vindemiatrix), *"the bright one on the northern wing"* of Virgo — **Saturn and Mercury**.
+
+Both are standard in the tradition and absent from `stars.py`. Praesepe is the more notable omission: it is one of the few *nebulous* objects Ptolemy singles out, and the later tradition attaches heavy significance to it.
+
+### A pattern in how he assigns them
+
+The natures are consistently given as **one primary and one qualified secondary** — *τῷ τε τοῦ Ἄρεως καὶ **ἠρέμα** τῷ τοῦ Διός*, "of Mars, and **gently** of Jupiter." The engine's `nature="Mars/Jupiter"` string flattens that weighting; Ptolemy distinguishes the dominant from the mild in nearly every entry. Not worth restructuring for, but worth knowing the slash is hiding a hierarchy.
+
+### Cross-check with Lilly
+
+Lilly's accidental fortitudes (1647, p. 115) give **Regulus +6** and **Spica +5** — his two largest single accidental bonuses. Ptolemy supplies the *natures* of exactly those two stars, and they are the benefic-leaning pairs: Mars–Jupiter and Venus–Mars. The two authorities are consistent, and neither is currently expressed in the engine's scoring.
