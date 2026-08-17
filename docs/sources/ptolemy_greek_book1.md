@@ -1343,9 +1343,19 @@ Printed **24–25**, the zodiacal constellations.
 
 Three named stars, three exact matches, from the Greek rather than a modern list. Given the project's standing caution that fixed-star output can carry modern popular boilerplate, that is worth having settled.
 
-### ⚠ One entry to correct
+### ~~One entry to correct~~ — RETRACTED, the entry is right
 
-`Algol` is recorded as *"Jupiter/Saturn (Ptolemy: Perseus generally)"*. That parenthesis is now demonstrably the wrong attribution. Per I.9 at printed p. 28, **Jupiter–Saturn is the nature of the stars of Perseus as a group**; the **Gorgoneion**, where Algol sits, is treated separately, and its violent-death significance belongs to **IV.9**. Our own note flags the substitution, so this is a labelling fix rather than a data error — but the nature we publish for Algol is the constellation's, not the star's.
+I first wrote that `Algol`'s nature was mislabelled. **It is not.** Checking the actual entry:
+
+```
+name="Caput Algol", nature="Jupiter/Saturn (Ptolemy: Perseus generally)",
+nemesis="Ptolemy's violent Gorgon judgment requires Mars and anaretic
+         conditions; angular contact alone does not establish it",
+```
+
+I.9 gives Perseus generally as **Jupiter–Saturn** and the **sword-hilt cluster** as Mars–Mercury. It gives the **Gorgoneion no separate nature at all** — the violent material for it is at IV.9 and is conditional. So the constellation's nature is the *only sourced answer available* for Algol, the parenthesis says exactly that, and the `nemesis` field already carries the IV.9 condition correctly.
+
+The entry is more careful than my criticism of it. **Sixth self-correction of the session**, and the same shape as the others: I asserted a defect from a partial look — here, from the `nature` field without reading the `nemesis` field beside it.
 
 ### Two stars Ptolemy names that we do not carry
 
