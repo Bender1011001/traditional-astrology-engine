@@ -187,3 +187,44 @@ Firmicus records the whole-sign shortcut and then tells the reader **not to use 
 Life, hope, brothers, parents, children, health, spouse, death, actions, friends, enemies — each with its own partile lot, *"and all the rest that are required in the substance of the human race."*
 
 `LotName` already carries Life, Siblings, Father, Mother, Children, Sickness, Marriage, Death, Friends and Enemies. **Ten of Firmicus's eleven are present.** The one absent is ***spes*, hope** — which is interesting, because the 11th place in the Hellenistic scheme is *Ἀγαθὸς Δαίμων* and carries hopes; a Lot of Hope would be its degree-precise counterpart. Recorded as a gap, not built: Firmicus names it here without giving its formula, and the formula would have to come from elsewhere.
+
+---
+
+# ⭐ Firmicus IV.19, *De domino geniturae* — four methods for the chart lord, and his own is none of ours (2026-08-11)
+
+PDF 258–259.
+
+> *geniturae dominum, quem Graeci **oecodespoten** vocant … ipse enim **totius geniturae possidet summam** et ab ipso **stellae singulae decreti licentiam sortiuntur***
+
+The lord of the nativity, whom the Greeks call *oikodespotes* — **he possesses the sum of the whole nativity, and from him the individual stars receive the licence of their decree.** That is a stronger claim than "chart ruler": the other planets' verdicts are *licensed* by him.
+
+## The condition test, and its link to the planetary years
+
+> *qui si **bene fuerit collocatus** in his, in quibus **gaudet** signis vel in quibus **exaltatur**, vel in **domiciliis suis** … nec **malivolarum nociva radiatione pulsatus** nec **benivolarum stellarum praesidio destitutus**, omnia bona … decernit **et integrum annorum numerum**. Si vero **impeditus a malivolis vel a benivolis desertus** fuerit, **omnis eius efficacia debilitata languescit***
+
+Well placed — in signs of **joy**, **exaltation**, or **own domicile** — of his own sect, **neither struck by malefic radiation nor deserted by benefic protection** — he decrees all goods **and the full number of years**. Impeded by malefics *or* **deserted by benefics**, **all his efficacy weakens and languishes**.
+
+That is the **same rule as III.25** stated a second time, and it settles what "*bene collocatus*" meant there. Note the **double condition**: malefic absence is not sufficient; **benefic protection must be present**. Fifth instance today of that architecture — Ptolemy's three rescues, Firmicus's years, and now this.
+
+## Four historical methods, recorded as such
+
+1. ***Quidam*** — the planet in the **principal places (angles)** found in **its own signs or its own terms**.
+2. ***Alii*** — the planet **in whose terms the Sun by day, or the Moon by night, is found** — *"et habet rationem,"* and it has reason.
+3. ***Alii*** — the lord of the **Moon's exaltation**.
+4. ***Alii*** — the lord of **the sign the Moon enters next** after birth, leaving the one she is in.
+
+> *Sed et nos **hanc rationem sequimur**; haec enim est **verissima et ab omnibus comprobata***
+
+**"And we too follow THIS method; for it is the truest and approved by all"** — referring to the immediately preceding, **the fourth**: the ruler of the sign the Moon next enters.
+
+## ⚠ This is a fork on the most central determination in the chart
+
+Our `AlmutenEngine` computes the chart lord by **summing five essential dignities in points** — the Ibn Ezra / Arabic-Latin method. Firmicus's preferred method is **not that, and not any of his other three either as we implement them**: it is a single, purely lunar criterion requiring no scoring at all.
+
+**Not a defect.** Ours is a legitimate and later-standard method, and the engine's almuten is correctly attributed. But it is worth knowing that:
+
+- **the chart ruler is not a settled question in the tradition** — Firmicus lists four live methods in the fourth century and picks the simplest;
+- **his second method is close to something we already compute** — the term-lord of the sect light — which appears in the engine's dignity chain without being elevated to chart lord;
+- and his verdict *"verissima et ab omnibus comprobata"*, truest and approved by all, is **exactly the kind of claim the project's own standards treat with suspicion**, since three rival methods are listed on the same page.
+
+Recorded as a sourced fork on a determination the report presents as settled. **The honest surface would be one line noting that the chart lord is method-dependent and naming which method we run** — the same treatment the dignity tables already get in "Where the Sources Differ."
