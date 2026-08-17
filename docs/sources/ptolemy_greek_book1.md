@@ -1371,3 +1371,44 @@ The natures are consistently given as **one primary and one qualified secondary*
 ### Cross-check with Lilly
 
 Lilly's accidental fortitudes (1647, p. 115) give **Regulus +6** and **Spica +5** — his two largest single accidental bonuses. Ptolemy supplies the *natures* of exactly those two stars, and they are the benefic-leaning pairs: Mars–Jupiter and Venus–Mars. The two authorities are consistent, and neither is currently expressed in the engine's scoring.
+
+---
+
+# Book I closes, Book II opens — read in the Greek (2026-08-11)
+
+Printed **55–58**. Book I ends at 55; **ΒΙΒΛΙΟΝ Β΄** with its chapter list at 56.
+
+## The closing summary of Book I: a complete strength hierarchy
+
+> *τὴν δὲ **δύναμιν** πρῶτον μὲν ἐκ τοῦ ἤτοι **ἀνατολικοὺς** αὐτοὺς εἶναι καὶ **προσθετικοὺς ταῖς ἰδίαις κινήσεσι**, τότε γὰρ **μάλιστά εἰσιν ἰσχυροί**, ἢ **δυτικοὺς καὶ ἀφαιρετικούς**, τότε γὰρ **ἀσθενεστέραν** ἔχουσι τὴν ἐνέργειαν· ἔπειτα καὶ ἐκ τοῦ πως ἔχειν πρὸς τὸν ὁρίζοντα· **μεσουρανοῦντες** μὲν γὰρ ἢ **ἐπαναφερόμενοι τῷ μεσουρανήματι μάλιστά εἰσι δυναμικοί**, δεύτεροι δὲ ὅταν **ἐπ᾽ αὐτοῦ τοῦ ὁρίζοντος** ὦσι ἢ ἐπαναφέρωνται, καὶ **μᾶλλον ὅταν ἐπὶ τοῦ ἀνατολικοῦ**, ἧττον δὲ ὅταν **ὑπὸ γῆν μεσουρανῶσιν** … **μὴ οὕτως δὲ ἔχοντες ἀδύνατοι παντελῶς τυγχάνουσιν***
+
+Two axes, in stated order:
+
+1. **Motion** — **oriental and additive in their own motion** (direct, increasing speed) → *strongest*. **Western and subtractive** (retrograde, slowing) → *weaker in energy*.
+2. **Position** — **culminating or succeeding the MC** → *most powerful*; **on the horizon or succeeding it** → second, **and more on the eastern**; **culminating below the earth** → less; **and otherwise placed, utterly powerless** (ἀδύνατοι παντελῶς).
+
+Note the ranking differs from Lilly's, which gives **MC and Ascendant equal 5**. Ptolemy puts **the MC first**, the horizon second. Another quiet fork between the two authorities the engine cites together.
+
+## ⭐ Book II.1: you cannot judge a nativity without the general first
+
+Prediction divides in two — the **καθολικόν**, concerning whole nations, countries and cities, and the **γενεθλιαλογικόν**, concerning individuals. And then:
+
+> *ἐπειδήπερ ταῦτα μὲν καὶ **μείζους καὶ ἰσχυροτέρας αἰτίας** τρέπεσθαι πέφυκε μᾶλλον τῶν μερικῶν ἀποτελουμένων· **ὑποπιπτουσῶν δὲ ἀεὶ τῶν ἀσθενεστέρων φύσεων ταῖς δυνατωτέραις** καὶ τῶν κατὰ μέρος ταῖς καθόλου, **πανταπάσιν ἀναγκαῖον** ἂν εἴη τοῖς προαιρουμένοις περὶ ἑνὸς ἑκάστου σκοπεῖν **πολὺ πρότερον περὶ τῶν ὁλοσχερεστέρων προδιειληφέναι***
+
+The general has **greater and stronger causes** than particular outcomes. **The weaker natures always fall under the stronger, and the particular under the general.** Therefore it is **absolutely necessary** for anyone examining an individual to have **first grasped the more general matters**.
+
+**This is a direct methodological challenge to a natal-only engine.** Ptolemy does not present mundane astrology as a separate speciality one may skip — he says the individual chart is **subsumed** by conditions of nation, clime and era, and that judging the particular without the general is doing it in the wrong order.
+
+He then subdivides the general: by **whole countries** versus **cities**, and by **greater periodic circumstances** — *πολέμων ἢ λιμῶν ἢ λοιμῶν ἢ σεισμῶν ἢ κατακλυσμῶν*, wars, famines, plagues, earthquakes, floods — versus **lesser seasonal ones**.
+
+### What this means for us
+
+It is **not** a call to build mundane astrology. But it does mean the engine's silence about the general is itself a departure from Ptolemy, and one he flags as *πανταπάσιν ἀναγκαῖον*, absolutely necessary — stronger language than he uses for most of his own techniques.
+
+The cheap, honest version is a sentence in the method section: **Ptolemy holds that a nativity is subsumed by the conditions of its place and time, and that a natal reading taken alone is therefore partial by his own standard.** That is more interesting than silence, costs nothing to compute, and is the kind of intellectual honesty the rest of this project already practises.
+
+### Book II's contents, for the record
+
+α΄ division of general inquiry · β΄ characteristics of whole climes · γ΄ familiarity of regions with the triangles and stars · δ΄ regions belonging to each sign · ε΄ method of prediction for general events · ϛ΄ classification of countries affected · ζ΄ timing · η΄ the class of those affected · θ΄ quality of the effect · ι΄ colours of eclipses and comets · ια΄ the new moon of the year · ιβ΄–ιδ΄ weather and meteorological signs.
+
+Book II is **mundane and meteorological throughout** and backs no registered natal rule. Recorded so that a future reader knows its contents without re-deriving them, and knows that skipping it is a defensible scope choice rather than an oversight.
