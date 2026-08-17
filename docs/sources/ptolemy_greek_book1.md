@@ -1281,3 +1281,48 @@ The **preceding apply to the following**; the following **separate from** the pr
 ---
 
 **Fork count now nine.** Added: Ptolemy's *face* is a luminary-relative configuration, not the decan; his *joy* is sect-mate familiarity, not a house. Both of ours are correctly sourced to other authors — the issue remains that the report cites Ptolemy as an authority beside them without noting he uses the same words for different things.
+
+---
+
+# I.19–20 read in the Greek — the water triplicity confirmed, the exaltations derived (2026-08-11)
+
+Printed **42–43**.
+
+### The water triplicity, settling a table the engine already corrected
+
+> *τὸ δὲ **τέταρτον** τρίγωνον, ὅ ἐστι διά τε **Καρκίνου καὶ Σκορπίου καὶ Ἰχθύων**, κατελείφθη μόνῳ λοιπῷ ὄντι τῷ τοῦ **Ἄρεως** … συνοικοδεσποτοῦσι δὲ αὐτῷ … **νυκτὸς μὲν ἡ σελήνη, ἡμέρας δὲ ὁ τῆς Ἀφροδίτης***
+
+Left to **Mars** as the only planet remaining, through his house Scorpio; **co-ruled by the Moon at night and Venus by day**, through sect and the feminine nature of the signs.
+
+That is exactly what `PTOLEMAIC_TRIPLICITY` holds — Venus by day, Moon by night, with Mars a co-ruler of the triangle rather than a sect principal. The comment in `reference_data.py` recording why the old `(MARS, MOON)` row was wrong is **confirmed from the Greek**.
+
+### The exaltations are derived, not tabulated
+
+> *ἐπειδὴ γὰρ ὁ **ἥλιος** ἐν μὲν τῷ **Κριῷ** γενόμενος τὴν εἰς τὸ **ὑψηλὸν καὶ βόρειον** ἡμικύκλιον μετάβασιν ποιεῖται … εἰκότως τὸν μὲν Κριὸν **ὡς ὕψωμα** ἀνατεθείκασιν αὐτῷ, καθ᾽ ὃν **ἄρχεται** καὶ τὸ τῆς ἡμέρας μέγεθος καὶ τὸ τῆς φύσεως αὐτοῦ θερμαντικὸν **αὔξεσθαι**, τὰς δὲ **Χηλὰς ὡς ταπείνωμα** διὰ τὰ ἐναντία*
+
+**Sun exalted in Aries** because there he crosses into the **high and northern** semicircle, where both the day's length and his own heating nature **begin to increase**; **fallen in Libra** for the contrary reason.
+
+> *ὁ δὲ τοῦ **Κρόνου** … ἵνα πρὸς τὸν ἥλιον ἔχῃ **διάμετρον στάσιν** ὥσπερ καὶ ἐπὶ τῶν οἴκων, τὸν μὲν **Ζυγὸν** … **ὡς ὕψωμα** ἔλαβε, τὸν δὲ **Κριὸν ὡς ταπείνωμα**. **ὅπου γὰρ τὸ θερμὸν αὔξεται, ἐκεῖ μειοῦται τὸ ψυχρόν, καὶ ὅπου τὸ ψυχρὸν αὔξεται, ἐκεῖ μειοῦται τὸ θερμόν***
+
+**Saturn** takes **Libra** exalted and **Aries** fallen, standing **diametrically opposite the Sun** exactly as he does in the houses — on the stated principle that *"where the hot increases, there the cold diminishes; and where the cold increases, there the hot diminishes."*
+
+> *πάλιν ἐπειδὴ ἐν τῷ ὑψώματι τοῦ ἡλίου τῷ Κριῷ **συνοδεύσασα ἡ σελήνη πρώτην ποιεῖται φάσιν καὶ ἀρχὴν τῆς τοῦ φωτὸς αὐξήσεως***
+
+**The Moon** exalted in **Taurus** because, having conjoined the Sun in *his* exaltation, that is where she makes her **first phase and the beginning of her light's increase**.
+
+## What Book I actually is
+
+Read end to end, Book I is not a reference table with commentary. It is a **derivation of the entire dignity system** from two inputs — the solar year and the planets' physical natures:
+
+| doctrine | derived from |
+|---|---|
+| quadruplicities | where the Sun turns, and where the season's quality reaches us most firmly |
+| sign genders | the alternation of day and night; the active preceding the passive |
+| aspect quality | whether the configuration joins same-gender signs or crosses them |
+| **domiciles** | Cancer/Leo to the lights by latitude and gender, then outward by each planet's nature and the **aspect** its signs make to theirs |
+| **exaltations** | the Sun's northward crossing; Saturn by **opposition** to him; the Moon by her **first light-increase** |
+| tropical zodiac | the signs' natures *are* the seasons, so the reckoning must start at the solstices |
+
+Every table the engine holds as data, Ptolemy holds as a **consequence**. The engine can compute all of it and explain none of it.
+
+That is the most straightforwardly commercial finding of the whole session. A report that says *"Saturn rules Capricorn"* is a lookup. A report that says *"Saturn takes the signs opposite the lights', because where heat increases cold diminishes"* is the thing customers cannot get from free chart sites — and it is one sentence per rule, already written, by the tradition's most cited author.
