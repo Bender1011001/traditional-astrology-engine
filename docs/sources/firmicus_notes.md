@@ -145,3 +145,45 @@ The *minor* years all agree (30/12/15/19-18/8/20/25), so this is not a wholesale
 ### What is worth taking regardless of the numbers
 
 **The three-tier structure and its condition.** Our `PLANETARY_YEARS` carries `minor`/`mean`/`major`, and `hyleg.py` selects among them — but Firmicus states the *criterion* explicitly: the full number requires the giver of life well placed **by place, sign and degree**, with its dispositor examined, and benefic support **by sect**. That is a checkable rule, and it is the same architecture as the Ptolemaic rescues found earlier today.
+
+---
+
+# ⭐ Firmicus IV.17, *De loco et de efficacia Fortunae* — the sect question settled (2026-08-11)
+
+PDF 252–253.
+
+> *In omni genitura **nocturna** computa **a Luna usque ad Solem**, in **diurna** genitura **a Sole** computa rursus **ad Lunam**, et quantuscumque signorum fuerit numerus, tanta **ab horoscopo** incipiens signa numera*
+
+**In every nocturnal nativity count from the Moon to the Sun; in a diurnal nativity from the Sun to the Moon** — then that many from the ascendant.
+
+## Firmicus reverses by sect. That makes Ptolemy the outlier, confirmed.
+
+Earlier this session, Ptolemy IV.2 was read insisting the arc runs Sun→Moon *πάντοτε*, **always**, *"both for those born by day and for those born by night"* — and `lots.py` was noted as diverging from him.
+
+**A third independent witness, read in its own original language, now sides with the engine:**
+
+| author | day | night | read in |
+|---|---|---|---|
+| **Ptolemy** (IV.2) | Sun→Moon | **Sun→Moon** | Greek |
+| **Dorotheus** | Sun→Moon | Moon→Sun | Arabic |
+| **Paulus** (ch. 23) | Sun→Moon | Moon→Sun | Greek |
+| **Firmicus** (IV.17) | Sun→Moon | **Moon→Sun** | Latin |
+| **our `lots.py`** | Sun→Moon | Moon→Sun | — |
+
+Three of four majority authors reverse; Ptolemy alone does not. **The engine follows the majority, and that is now demonstrated from three originals rather than assumed.** The earlier note calling this "the highest-impact divergence found in the session" stands as a *doctrinal* fact about Ptolemy, but it is no longer a reason to doubt our implementation — he is the minority view and knowingly so.
+
+## And a methodological instruction we already satisfy
+
+> *Sed haec **platica** computatio est, quam ideo posuimus, ne quid a nobis praetermissum esse videatur; **partiliter** vero locus Fortunae ista ratione colligitur, **quam tu sequi in omni disputatione debebis***
+
+"But this is the **platic** [whole-sign] computation, which we set down lest anything seem omitted; the place of Fortune is properly gathered **partilely** [by exact degree], **which you ought to follow in every discussion**."
+
+Firmicus records the whole-sign shortcut and then tells the reader **not to use it**. `calculate_lot` works in absolute longitudes throughout, so the engine already does what he instructs — verification confirming existing practice.
+
+## A topical lot system, listed
+
+> *Sic **vitam**, sic **spem**, sic **fratres**, sic **parentes**, sic **filios**, sic **valitudines**, sic **coniugem**, sic **mortem**, sic **actus**, sic **amicos**, sic **inimicos**, sic cetera omnia*
+
+Life, hope, brothers, parents, children, health, spouse, death, actions, friends, enemies — each with its own partile lot, *"and all the rest that are required in the substance of the human race."*
+
+`LotName` already carries Life, Siblings, Father, Mother, Children, Sickness, Marriage, Death, Friends and Enemies. **Ten of Firmicus's eleven are present.** The one absent is ***spes*, hope** — which is interesting, because the 11th place in the Hellenistic scheme is *Ἀγαθὸς Δαίμων* and carries hopes; a Lot of Hope would be its degree-precise counterpart. Recorded as a gap, not built: Firmicus names it here without giving its formula, and the formula would have to come from elsewhere.
