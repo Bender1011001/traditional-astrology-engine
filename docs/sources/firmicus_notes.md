@@ -437,3 +437,50 @@ Two authors, two languages, one naming system — and Firmicus transliterates *e
 That is a **naming layer, not a doctrinal fork** — nothing computes differently. But it is the sort of thing that distinguishes a reading grounded in the tradition from one that reproduces a modern house-meanings table, and it is now attested twice.
 
 Two smaller divergences from our chain, recorded: his **3rd holds friends** as well as siblings (we give friends to the 11th), and his **5th is specifically the *number* of children** rather than children generally.
+
+---
+
+# ⭐ Firmicus II.26, *De temporum domino* — resolves a question I flagged as unverified (2026-08-11)
+
+PDF 90–91.
+
+> ***Chronocratorem** dixerunt Graeci **temporum dominum**; sed **initium temporum in diurnis genituris Sol accipit** et ceteris dividit, **in nocturnis Luna**; nec aliam rationem admittas, quia haec ab omnibus probatur*
+
+"The Greeks called the lord of times *chronocrator*; but **the Sun takes the beginning of times in diurnal nativities** and divides to the rest, **the Moon in nocturnal** — and admit no other reckoning."
+
+## This answers the open question from Valens VI.5
+
+Earlier this session I read Valens VI.5–6 and built the decennial cascade, but recorded explicitly:
+
+> *"which planet opens the L1 sequence… VI.5's opening lines were not read closely enough to settle it. The engine configures it from the sect light, and `starting_planet_verified: False` rides in the payload… so a configured default cannot harden into a sourced claim."*
+
+**Firmicus settles it.** *Initium temporum in diurnis genituris Sol accipit, in nocturnis Luna* — the **sect light** opens the sequence, stated flatly and with the instruction to admit no other reckoning. The configured default was right.
+
+## And the rest of the system matches Valens exactly
+
+> *Cum itaque Sol dominus temporum fuerit, tenet dominatum **annos decem menses novem***
+
+**Ten years, nine months** — Valens's 129 months, independently attested in Latin. The identity that made the cascade self-checking (129 = the sum of the seven minor years) now has a second witness for the period length itself.
+
+> *primum decennium Sol accipit, secundum, **qui in genitura per signorum cursum in secundo loco** fuerit inventus, tertium, qui post secundum fuerit*
+
+Order runs by **the course of the signs from the sect light's own position**. His worked example: Sun in Aries takes the first; whoever is **in Taurus** takes the second; whoever follows Taurus, the third.
+
+> *omnibus tamen stellis totam decennii substantiam dividit **a se incipiens** et postea illis tradens, qui sunt per ordinem positi*
+
+The major lord **divides the whole decennium among all seven, beginning from himself**, then handing on in order — confirming Valens VI.6's subdivision, including that the major lord takes the first sub-period.
+
+## ⚠ One divergence from `decennials.py`
+
+Our implementation sorts the planets **from the Ascendant degree**:
+
+```python
+# Sort by longitude relative to Ascendant
+sorted_planets = sorted(planets, key=lambda p: (p.longitude - chart.ascendant) % 360.0)
+```
+
+Firmicus orders them **from the sect light's sign**, not the Ascendant. The registry entry already hedges this — *"from an eligible aphetic light **or the planet following the Ascendant**"* — so both readings were known to be in play, but the code commits to the Ascendant.
+
+**On the evidence now in hand, Firmicus is explicit and the Ascendant is not mentioned.** That is one witness against our implementation on a question the registry itself flags as uncertain. It affects which planet rules which decade, so it changes timing output.
+
+**Not changed.** One Latin witness against a hedged registry note is not enough to move a live timing path, and Valens VI.5's own opening — the primary source for this technique — remains unread on this specific point. Recorded as a **sourced challenge to a known-uncertain implementation choice**, which is the most useful shape a finding can take: it names the doubt, supplies a witness, and points at the passage that would settle it.
