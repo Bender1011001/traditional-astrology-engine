@@ -312,3 +312,45 @@ That is a real divergence on dignity weighting, and it is not a small one: a pla
 **Not changed, and not proposed.** Lilly's table is verified from the facsimile, internally consistent, and the engine's numbers match it exactly. Firmicus is one witness and his phrasing is *tamquam* — "as if", a comparison rather than a scoring instruction. It may be rhetorical emphasis on the term's importance rather than a claim of numerical parity.
 
 Recorded because the distinction matters for anyone reading Firmicus's delineations: when he says a planet is strong in its own terms, he means considerably more by it than a +2 in our scheme.
+
+---
+
+# Firmicus III.1, *Thema Mundi* — the world's own nativity (2026-08-11)
+
+PDF 106–107. Attributed to **Aesculapius and Hanubius**, *"to whom the most powerful divinity of Mercury entrusted the secrets of this science."*
+
+| body | position |
+|---|---|
+| **Sun** | Leo 15° |
+| **Moon** | Cancer 15° |
+| **Saturn** | Capricorn 15° |
+| **Jupiter** | Sagittarius 15° |
+| **Mars** | Scorpio 15° |
+| **Venus** | Libra 15° |
+| **Mercury** | Virgo 15° |
+| **Ascendant** (*hora*) | Cancer 15° |
+
+**Every planet in its own domicile, all at the fifteenth degree, with Cancer rising** — and the Moon exactly on the Ascendant.
+
+> *secundum istas rationes etiam **hominum volunt fata disponi**, sicut in illo libro continetur **Aesculapii, qui Myriogenesis appellatur**, prorsus ut **nihil ab ista mundi genitura in singulis hominum genituris alienum esse videatur***
+
+*"…they hold that the fates of men too are arranged accordingly — as is contained in that book of Aesculapius called the **Myriogenesis** — so that **nothing in individual human nativities should appear alien to this nativity of the world**."*
+
+## The same table, two incompatible justifications
+
+This is the doctrinal foundation of the domicile system — and it is **not** the one Ptolemy gives.
+
+| | why Saturn rules Capricorn |
+|---|---|
+| **Ptolemy I.18** | **Physical.** Cancer and Leo are nearest our zenith and hottest, so they go to the lights. Saturn, cold and opposed in nature to their heat, takes the signs **diametrically opposite** theirs, *"because the diametrical configuration is unfavourable."* |
+| **Firmicus III.1** | **Archetypal.** Saturn *was in Capricorn* when the world was born, and every human chart is a variation on that founding figure. |
+
+**Identical assignments, entirely different grounds** — one causal and physical, the other mythological and precedent-based. Neither author acknowledges the other's reasoning.
+
+That pairing is worth having, because it answers the "why" question two ways for the same fact. A reader who finds the physical argument unpersuasive may find the archetypal one compelling, and vice versa. **The engine currently offers neither.**
+
+## A note on the attribution
+
+Firmicus credits **Aesculapius**, **Hanubius** (Anubis), and — in the apparatus — **Nechepso and Petosiris**, the standard pseudepigraphic authorities of the Hellenistic tradition. Ptolemy, by contrast, cites no divine authorities anywhere in Book I; he argues from the solar year.
+
+The two authors differ in **kind of authority as well as kind of argument**: Firmicus transmits what was revealed to sages, Ptolemy derives what follows from the seasons. Recorded alongside the earlier note that Firmicus *instructs* where Ptolemy *hedges* — the same divide, showing up in the foundations rather than the delineations.
