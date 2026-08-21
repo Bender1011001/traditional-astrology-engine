@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://traditional-astrology.com/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,7 +13,7 @@
   <!-- Core product / calculator pages -->
   <url>
     <loc>https://traditional-astrology.com/natal-charts.html</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://traditional-astrology.com/pt/natal-charts.html"/>

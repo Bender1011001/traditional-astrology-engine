@@ -3532,9 +3532,20 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any], scope: str = "ful
             planets, aspects, chart_rulers, sect_type=sect_label
         )
     )
-    lines.extend(_antiscia_paragraphs(antiscia, planets))
-    lines.extend(_doryphory_paragraphs(doryphory, planets))
-    lines.extend(_dispositor_paragraphs(dispositors))
+    # The free edition carries the judgment; the paid edition carries the
+    # apparatus behind it. Antiscia, doryphory and the dispositor chain are
+    # supporting machinery - they qualify a verdict the reader has already been
+    # given, and none is what makes a stranger say "how does it know that."
+    #
+    # The Paulus place rules are NOT machinery and stay free. They read as
+    # blunt, personal statements ("advancement is not simply handed over by
+    # family or authority") rather than as technique, and they are among the
+    # lines most likely to land. Fixed stars stay free for the same reason:
+    # short, concrete, striking.
+    if not natal:
+        lines.extend(_antiscia_paragraphs(antiscia, planets))
+        lines.extend(_doryphory_paragraphs(doryphory, planets))
+        lines.extend(_dispositor_paragraphs(dispositors))
     lines.extend(_paulus_place_rule_paragraphs(paulus_place_rules, planets))
     lines.extend(_fixed_star_paragraphs(fixed_stars))
     if receptions:
@@ -3553,38 +3564,52 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any], scope: str = "ful
         "topic directly. A difficult ruler means a difficult topic unless stronger, specifically identified testimony mitigates it."
     )
     lines.extend(_integrated_life_judgments(topical, planets, aspects))
-    lines.extend(["## The Twelve Places: Complete Reference"])
-    lines.extend(_topic_full_paragraphs(topical, planets))
-    lines.extend(_lot_paragraphs(lots, planets))
     if not natal:
-        lines.extend(_longevity_paragraphs(longevity))
-    lines.extend(["## The Secondary Doctrine and Derived Degrees"])
-    lines.append(
-        "The main judgment is already complete. The following techniques are retained because they either confirm it, qualify it, or expose a real disagreement; none is allowed to replace the natal planets, places, and rulers."
-    )
-    lines.extend(_joy_paragraphs(joys, planets))
-    lines.extend(_sect_condition_paragraphs(hayz_halb, planets))
-    lines.extend(
-        _dodecatemoria_paragraphs(
-            dodecatemoria_x12,
-            dodecatemoria_x13,
-            planets,
-        )
-    )
-    lines.extend(
-        _monomoiria_paragraphs(
-            monomoiria_zoidion,
-            monomoiria_trigonal,
-            planets,
-        )
-    )
-    lines.extend(_bound_delineation_paragraphs(bound_delineations))
-    lines.extend(_causative_place_paragraphs(causative_place))
+        # A house-by-house walkthrough of all twelve places is the longest and
+        # most generic block in the report - every free astrology site produces
+        # something like it. The integrated life judgments above already state
+        # the same topics as verdicts, which is the part worth reading free.
+        lines.extend(["## The Twelve Places: Complete Reference"])
+        lines.extend(_topic_full_paragraphs(topical, planets))
+    lines.extend(_lot_paragraphs(lots, planets))
+
+    # Manners and profession stay in the free edition deliberately. Of every
+    # technique in this engine these two are the ones that have actually been
+    # scored against a living person and landed: the manners cascade produced a
+    # character reading the native called accurate, and the profession cascade
+    # independently pointed at the trade he really works in. They are also
+    # short. That combination - high hit rate, high specificity, low word count
+    # - is exactly what earns the "how does it know that" reaction.
     lines.extend(_manners_significator_paragraphs(manners_significator))
     lines.extend(_profession_significator_paragraphs(profession_significator))
-    lines.extend(_degree_quality_paragraphs(degree_qualities))
     lines.extend(_lunar_cycle_paragraphs(lunar_cycle))
-    lines.extend(_lunar_mansion_scope_paragraphs(lunar_mansion_scope))
+
+    if not natal:
+        lines.extend(_longevity_paragraphs(longevity))
+        lines.extend(["## The Secondary Doctrine and Derived Degrees"])
+        lines.append(
+            "The main judgment is already complete. The following techniques are retained because they either confirm it, qualify it, or expose a real disagreement; none is allowed to replace the natal planets, places, and rulers."
+        )
+        lines.extend(_joy_paragraphs(joys, planets))
+        lines.extend(_sect_condition_paragraphs(hayz_halb, planets))
+        lines.extend(
+            _dodecatemoria_paragraphs(
+                dodecatemoria_x12,
+                dodecatemoria_x13,
+                planets,
+            )
+        )
+        lines.extend(
+            _monomoiria_paragraphs(
+                monomoiria_zoidion,
+                monomoiria_trigonal,
+                planets,
+            )
+        )
+        lines.extend(_bound_delineation_paragraphs(bound_delineations))
+        lines.extend(_causative_place_paragraphs(causative_place))
+        lines.extend(_degree_quality_paragraphs(degree_qualities))
+        lines.extend(_lunar_mansion_scope_paragraphs(lunar_mansion_scope))
 
     if not natal:
         lines.extend(["", "# The Present Chapter", ""])
