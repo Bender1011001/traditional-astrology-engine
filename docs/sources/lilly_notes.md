@@ -84,3 +84,35 @@ Verified absent from our accidental scoring (`'Regulus' in block or 'Cor Leonis'
 Regulus at +6 outranks every other item in the table, including the Mid-heaven at 5. A planet on Regulus is, for Lilly, more accidentally fortified than a planet on the MC. We score neither star.
 
 This is implementable without judgment — the degrees and values are printed — but it is a scoring change and belongs with the other pending decisions, not a silent addition. Note it interacts with the existing project caution about fixed-star output carrying modern popular boilerplate: these five are Lilly's own, with his own numbers.
+
+---
+
+## 2026-08-20 — Book III read end to end, all ~40 nativity chapters, plus rectification and directions
+
+Session goal: read every chapter of *Christian Astrology* Book III (nativities) that hadn't already been read, in parallel, then decide what changes in the system. Full source-registry entries for each chapter are in `src/database/data/doctrine_sources.json` under `verified_rules`, keys prefixed `lilly_` (14 new entries added this session, alongside the pre-existing `lilly_hyleg_alcocoden_and_years`, `lilly_reception`, `lilly_planetary_conditions`, `lilly_degree_quality_tables`). This note is the human-readable summary; the JSON is the source of truth for citations.
+
+### What got wired into the engine
+
+Two significator-selection cascades, chosen because they were the two techniques that scored real, checkable hits during live testing this session (against a real chart and real photographs) rather than because they were the easiest to code:
+
+- **`lilly_manners_significator_cascade`** (CVII–CVIII) — five ordered fallback rules across all seven planets select the significator of manners; a two-state (well-/ill-dignified) character table then reads that specific planet. Implemented in `src/services/reading_evidence.py` (category `manners_significator`), rendered in `src/services/reading_composer.py` (`_manners_significator_paragraphs`). Lilly gives no Sun/Moon rows in CVIII — if one of the lights wins the cascade, the emitter says so explicitly rather than inventing an entry.
+- **`lilly_profession_significator_cascade`** (CXLVIII–CXLIX) — the significator of profession is chosen from exactly three candidates, Mars/Venus/Mercury, through five ordered rules; a planet in strong aspect to a second candidate can "relinquish its claim" and the trade follows both. Implemented the same way (category `profession_significator`).
+
+Both were tested against four real charts (the project's own natal chart, plus Kovalev, Nixon, and Jobs test fixtures) and correctly exercised different rule branches on each — rule 1 on some, rule 2/3/5 on others — with no crashes and no silent empty results. `test_reading_composer.py` and `test_reading_contract.py` pass unchanged.
+
+Both use **Lilly's own orbs** (`_LILLY_ORB` in `reading_evidence.py`: Sun 15°, Moon 12°, Mercury/Venus/Mars 7°, Jupiter/Saturn 9°), not the engine's general Ptolemaic `MOIETIES` table used elsewhere — the two traditions disagree on orb size and mixing them would misattribute the result.
+
+### The other concrete fix: directions now default to Naibod
+
+Lilly names three competing arc-to-time keys (Ptolemy, Maginus, Naibod) and states his own preference explicitly: Naibod "when he has sufficient time to do a nativity properly," in his own words "the most exactest measure that hitherto hath been found out." The engine's `PrimaryDirectionsEngine` already had Naibod implemented (`0.9856°/year`) but every function defaulted to Ptolemy's simpler `1°/year`, and the JSON output labeled every direction "Ptolemy (1 degree = 1 year)" regardless of which key actually ran. Fixed in `src/engine/primary_directions.py` (defaults changed) and `src/engine/forensic_engine.py` (label corrected, key requested explicitly at the call site). **One deliberate exception**: `calculate_circumambulations` stayed on Ptolemy's key — that function implements Ptolemy's own bound-circumambulation technique (Tetrabiblos IV.10), a different author's different technique that happens to share this module; Lilly's stated preference doesn't apply to it. Caught by the test suite (`test_circumambulation_transitions_are_solved_between_year_samples` failed on the first blanket change, which is exactly why it's a good test).
+
+### What was deliberately NOT wired in, and why
+
+- **Physiognomy** (stature, form, grossness — CX/CXI/CXII). Tested against two real photographs of one native this session: two hits, two misses, one confound. Recorded in the doctrine registry as unvalidated; not implemented as delineation code. If it's ever added, it should ship with the same confidence caveat given to the customer that was given here.
+- **Violent death** (CLVI) and **falling-sickness/madness** (the 6th-house chapter). Both are severe claims from a source with no modern validation. This matches the project's own existing exclusion of length-of-life/manner-of-death material (see `scope.excluded` and `scope.included_historical_techniques` in `reading_evidence.evidence_packet` — length-of-life techniques are explicitly named as *included for research*, not for customer delineation). Recorded in the registry with an explicit `publication_limit` reinforcing that exclusion; not implemented as customer-facing code.
+- **Hyleg/Alcochodon years.** Already covered by the pre-existing `lilly_hyleg_alcocoden_and_years` entry. Confirmed again this session by actually running the full selection procedure end to end (syzygy-ruler test, essential-dignity tally) rather than assuming the fallback — it resolves cleanly on a real chart, but Lilly's own stated doubt ("I rest not satisfied... whom most properly to call the killing planet") and the project's own 11-of-20 failure rate on this technique family stand as the reasons it stays out of customer reports regardless of how cleanly any single chart resolves.
+- **Everything else read this session** (general fortune, riches, brethren, parents, marriage/wife-description, children, journeys, religion, dreams, honours, friends, enemies, captivity, revolutions, rectification) — extracted and cited in the doctrine registry, not yet wired into `reading_evidence.py`. These are real, well-sourced techniques and reasonable next candidates; they weren't added this pass because doing seven more cascades in one sitting without the same live-chart testing given to manners and profession would be shipping unverified code, which is the mistake this whole session was trying to catch elsewhere.
+
+### The worked-nativity finding worth remembering on its own
+
+Lilly's own demonstration nativity (pp. 742–764) shows him reverse-engineering sibling-count testimonies to match a known biographical fact after his own stated method predicts the opposite, without flagging the fit as post-hoc — and one of his own predictions (no throat blemish) is corrected by the book's own marginal annotation, which says the native had one. The tradition's founder retrofits known outcomes onto ambiguous rules in his own flagship example. That's a standing caution for reading any of his aphorisms, not just the ones implemented here.

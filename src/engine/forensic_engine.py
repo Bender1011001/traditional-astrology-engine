@@ -335,7 +335,6 @@ class Auditor:
         # Store aspects in a JSON-serializable format for auditability.
         # Split into "core" (septener-only) vs "shadow" (involving outer planets) to preserve metric purity.
         _aspects_raw = AspectEngine.calculate_aspects(chart)
-        analysis["aspects_raw"] = _aspects_raw  # type: ignore
         core_names = {
             PlanetName.SUN,
             PlanetName.MOON,
@@ -356,6 +355,12 @@ class Auditor:
                 "is_applying": bool(asp.is_applying),
                 "text": asp.text,
             }
+
+        # The dataclass list stays local for the PlanetName comparisons below,
+        # but what lands in `analysis` must survive json.dumps(): the paid
+        # fulfillment path serializes the whole chart-data payload before
+        # handing it to the report generator.
+        analysis["aspects_raw"] = [_asp_to_dict(a) for a in _aspects_raw]  # type: ignore
 
         try:
             core = []
@@ -1302,14 +1307,18 @@ class Auditor:
             age_years = 0
 
         # 1. Primary Directions
+        # Naibod (0.9856 deg/year) is Lilly's own stated first choice, used
+        # "when he has sufficient time to do a nativity properly" (Christian
+        # Astrology, "Of the measure of time in Directions," p.712) -
+        # requested explicitly rather than left to each function's default.
         directions = PrimaryDirectionsEngine.calculate_directions_to_angles(
-            chart, chart.geo_lat  # type: ignore
+            chart, chart.geo_lat, key="Naibod"  # type: ignore
         )
         planet_directions = PrimaryDirectionsEngine.calculate_directions_to_planets(
-            chart, chart.geo_lat  # type: ignore
+            chart, chart.geo_lat, key="Naibod"  # type: ignore
         )
         distributor = PrimaryDirectionsEngine.calculate_current_distributor(
-            chart, age_years, chart.geo_lat  # type: ignore
+            chart, age_years, chart.geo_lat, key="Naibod"  # type: ignore
         )
 
         # Serialize and Filter Active (for Ledger)
@@ -1324,7 +1333,7 @@ class Auditor:
                 "years": d.years,
                 "date_offset": d.date_offset,
                 "method": d.method,
-                "key": "Ptolemy (1 degree = 1 year)",
+                "key": "Naibod (0.9856 deg = 1 year) - Lilly's own stated preference",
                 "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point).",
             }
             p_dirs_json.append(d_json)
@@ -1672,6 +1681,31 @@ class Auditor:
             pn = alc.get("name")
             alc_name = pn.value if hasattr(pn, "value") else (str(pn) if pn else None)  # type: ignore
 
+        def _serializable_alc_details(details: Any) -> Any:
+            """Strip enum/dataclass values out of an alcocoden details payload.
+
+            The paid fulfillment path json.dumps() the whole chart-data object
+            before generating a report, so nothing stored here may be a raw
+            PlanetName or Planet. Only `name` is read downstream; the rest is
+            preserved for auditability in a serializable form.
+            """
+            if not isinstance(details, dict):
+                return details
+            out: Dict[str, Any] = {}
+            for key, value in details.items():
+                if hasattr(value, "value") and not isinstance(value, (str, int, float, bool)):
+                    out[key] = value.value
+                elif hasattr(value, "name") and hasattr(value, "longitude"):
+                    out[key] = {
+                        "name": getattr(value.name, "value", str(value.name)),
+                        "longitude": float(value.longitude),
+                        "latitude": float(getattr(value, "latitude", 0.0) or 0.0),
+                        "speed": float(getattr(value, "speed", 0.0) or 0.0),
+                    }
+                else:
+                    out[key] = value
+            return out
+
         return {
             "hyleg": hyleg,
             "alcocoden": {"name": alc_name},
@@ -1687,7 +1721,7 @@ class Auditor:
                         and alc_valens.get("name") is not None
                         else None
                     ),
-                    "details": alc_valens,
+                    "details": _serializable_alc_details(alc_valens),
                 },
                 "bonatti_points": {
                     "name": (
@@ -1700,7 +1734,7 @@ class Auditor:
                         and alc_bonatti.get("name") is not None
                         else None
                     ),
-                    "details": alc_bonatti,
+                    "details": _serializable_alc_details(alc_bonatti),
                 },
                 "note": "Multiple longevity branches exist. The legacy valens_term key is a configured strict bound-lord branch and is not text-attributed to Valens; the second branch uses dignity points and degree aspects in a Bonatti/Lilly style.",
             },

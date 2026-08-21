@@ -222,7 +222,7 @@ class PrimaryDirectionsEngine:
 
     @classmethod
     def calculate_current_distributor(
-        cls, chart: Chart, age_years: float, geo_lat: float, key: str = "Ptolemy"
+        cls, chart: Chart, age_years: float, geo_lat: float, key: str = "Naibod"
     ) -> Dict:
         """
         Calculates the current 'Distributor' (Term Ruler of Directed Ascendant).
@@ -312,6 +312,10 @@ class PrimaryDirectionsEngine:
     ) -> List[Dict]:
         """
         Circumambulations through the Bounds (Ptolemy Tetrabiblos IV.10).
+        Kept on Ptolemy's own 1deg=1yr key: this is Ptolemy's technique, not
+        Lilly's - Lilly's stated preference for Naibod applies to his own
+        primary-directions chapters (Christian Astrology pp.708-715), not to
+        a different author's different technique reusing this module.
 
         The master predictive technique of Ptolemaic astrology:
         - Directs the Ascendant forward (Ptolemy/Naibod Key).
@@ -459,7 +463,7 @@ class PrimaryDirectionsEngine:
 
     @classmethod
     def calculate_directions_to_angles(
-        cls, chart: Chart, geo_lat: float, key: str = "Ptolemy"
+        cls, chart: Chart, geo_lat: float, key: str = "Naibod"
     ) -> List[DirectionResult]:
         """
         Calculates directions of all planets to Conjunction/Opposition/Square/Trine/Sextile of Asc/MC.
@@ -592,7 +596,7 @@ class PrimaryDirectionsEngine:
         geo_lat: float,
         target_lon: float,
         target_label: str = "Point",
-        key: str = "Ptolemy",
+        key: str = "Naibod",
     ) -> List[DirectionResult]:
         """
         Calculate zodiacal primary directions of promittors to a generic ecliptic point.
@@ -678,7 +682,7 @@ class PrimaryDirectionsEngine:
 
     @classmethod
     def calculate_directions_to_planets(
-        cls, chart: Chart, geo_lat: float, key: str = "Ptolemy"
+        cls, chart: Chart, geo_lat: float, key: str = "Naibod"
     ) -> List[DirectionResult]:
         """
         Directs each traditional planet to every other planet's natal position.
@@ -786,13 +790,13 @@ class PrimaryDirectionsEngine:
         return arc / 0.9856
 
     @classmethod
-    def get_years_from_arc(cls, arc: float, key: str = "Ptolemy") -> float:
+    def get_years_from_arc(cls, arc: float, key: str = "Naibod") -> float:
         if key == "Naibod":
             return cls.naibod_key(arc)
         return cls.ptolemy_key(arc)
 
     @classmethod
-    def get_arc_from_years(cls, years: float, key: str = "Ptolemy") -> float:
+    def get_arc_from_years(cls, years: float, key: str = "Naibod") -> float:
         if key == "Naibod":
             return years * 0.9856
         return years

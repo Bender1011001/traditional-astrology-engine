@@ -14,7 +14,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Optional
 from src.engine.valens_delineations import (BOUND_QUALIFIER,
                                           BOUND_SIGN_NOTES,
                                           PLANET_COLOUR_TASTE,
@@ -223,6 +223,11 @@ _DOMICILE_BY_SIGN = {
     "Leo": "Sun", "Virgo": "Mercury", "Libra": "Venus", "Scorpio": "Mars",
     "Sagittarius": "Jupiter", "Capricorn": "Saturn", "Aquarius": "Saturn",
     "Pisces": "Jupiter",
+}
+
+_EXALTATION_BY_SIGN = {
+    "Aries": "Sun", "Taurus": "Moon", "Cancer": "Jupiter", "Virgo": "Mercury",
+    "Libra": "Saturn", "Capricorn": "Mars", "Pisces": "Venus",
 }
 
 
@@ -1050,6 +1055,313 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
                         "climacteric_ages": hits,
                     },
                 )
+
+    # Lilly, Christian Astrology, Book III, Chap. CVII (significator selection,
+    # printed pp. 534-539) and Chap. CVIII (planet-by-planet table, pp.
+    # 539-542): the significator of manners, found through five ordered
+    # fallback rules over all seven planets, then read well- or ill-dignified.
+    # No Sun/Moon rows exist in Lilly's own CVIII table - if one of the lights
+    # resolves as significator, that gap is reported rather than papered over.
+    # Lilly's own orbs (Christian Astrology, "Of severall Termes, Aspects...",
+    # read this session), shared below with the profession-significator block -
+    # these are Lilly's orbs specifically, distinct from the engine's general
+    # Ptolemaic MOIETIES table used elsewhere in this file.
+    _LILLY_ORB = {"Sun": 15.0, "Moon": 12.0, "Mercury": 7.0, "Venus": 7.0, "Mars": 7.0, "Jupiter": 9.0, "Saturn": 9.0}
+    _MANNERS_CHAR = {
+        "Saturn": (
+            "grave, austere, deliberate, taciturn, solitary, laborious, sparing and thrifty",
+            "abject, low in his own estimation, negligent, timorous, suspicious, backbiting, deceitful",
+        ),
+        "Jupiter": (
+            "honest, just, liberal, magnanimous, sober, prudent, living orderly",
+            "self-loving in an open-hearted way but obscure and imperfect, or scornful, superstitious, prodigal",
+        ),
+        "Mars": (
+            "generous, valiant, full of courage, apt with his hands, open in speech",
+            "cruel, quarrelsome, rash, headstrong, boastful, impatient of servitude or affronts",
+        ),
+        "Venus": (
+            "pleasant, cheerful, fair-conditioned, bountiful, merciful, elegant",
+            "fearful, given over-much to women, of no spirit, not respecting his own credit",
+        ),
+        "Mercury": (
+            "sharp-fancied, extremely studious, capable of learning almost anything without a teacher, witty, of good carriage",
+            "inconstant, malicious, turbulent, envious, perfidious - and if with Mars or hard-aspected by the Moon or Venus in an airy sign, actively destructive",
+        ),
+    }
+    manners_pool = {n: planets.get(n) for n in SEPTENER if planets.get(n)}
+
+    def _manners_lon(p: Mapping[str, Any]) -> Optional[float]:
+        try:
+            return float(p.get("longitude"))
+        except (TypeError, ValueError):
+            return None
+
+    def _manners_sep(a: float, b: float) -> float:
+        d = abs(a - b) % 360.0
+        return d if d <= 180.0 else 360.0 - d
+
+    def _manners_conjunct(name_a: str, name_b: str) -> bool:
+        pa, pb = manners_pool.get(name_a), manners_pool.get(name_b)
+        la, lb = (_manners_lon(pa) if pa else None), (_manners_lon(pb) if pb else None)
+        if la is None or lb is None:
+            return False
+        moiety = (_LILLY_ORB.get(name_a, 8.0) + _LILLY_ORB.get(name_b, 8.0)) / 2.0
+        return _manners_sep(la, lb) <= moiety
+
+    manners_sig: Optional[str] = None
+    manners_rule: Optional[int] = None
+    asc_sign_ruler = _DOMICILE_BY_SIGN.get(asc_sign_name)
+
+    # Rule 1: any planet occupying the ascending sign, most dignified if several.
+    in_asc = [n for n, p in manners_pool.items() if p.get("house") == 1]
+    if in_asc:
+        manners_sig = max(
+            in_asc,
+            key=lambda n: _mapping(manners_pool[n].get("dignities")).get("total_score", 0) or 0,
+        )
+        manners_rule = 1
+
+    # Rule 2: joined (conjunct) to the Moon or Mercury.
+    if manners_sig is None:
+        joined = [
+            n for n in manners_pool
+            if n not in ("Moon", "Mercury")
+            and (_manners_conjunct(n, "Moon") or _manners_conjunct(n, "Mercury"))
+        ]
+        if joined:
+            manners_sig = joined[0]
+            manners_rule = 2
+
+    # Rule 3: Lord of the ascendant, provided his own dispositor beholds him with aspect.
+    if manners_sig is None and asc_sign_ruler and asc_sign_ruler in manners_pool:
+        ruler_p = manners_pool[asc_sign_ruler]
+        disposer = ruler_p.get("dispositor")
+        if disposer and disposer in manners_pool and disposer != asc_sign_ruler:
+            lon_r, lon_d = _manners_lon(ruler_p), _manners_lon(manners_pool[disposer])
+            if lon_r is not None and lon_d is not None:
+                moiety = (_LILLY_ORB.get(asc_sign_ruler, 8.0) + _LILLY_ORB.get(disposer, 8.0)) / 2.0
+                for asp_deg in (0.0, 60.0, 90.0, 120.0, 180.0):
+                    if abs(_manners_sep(lon_r, lon_d) - asp_deg) <= moiety:
+                        manners_sig, manners_rule = asc_sign_ruler, 3
+                        break
+
+    # Rule 4: any planet in partile aspect to the Moon or Mercury.
+    if manners_sig is None:
+        partile_candidates = []
+        for n in manners_pool:
+            if n in ("Moon", "Mercury"):
+                continue
+            for target in ("Moon", "Mercury"):
+                pt = manners_pool.get(target)
+                ln, lt = _manners_lon(manners_pool[n]), (_manners_lon(pt) if pt else None)
+                if ln is None or lt is None:
+                    continue
+                sep = _manners_sep(ln, lt)
+                for asp_deg in (0.0, 60.0, 90.0, 120.0, 180.0):
+                    if abs(sep - asp_deg) <= 1.0:
+                        partile_candidates.append((abs(sep - asp_deg), n))
+        if partile_candidates:
+            manners_sig = min(partile_candidates)[1]
+            manners_rule = 4
+
+    # Rule 5: most essential dignity (domicile/exaltation) in the Moon's and
+    # Mercury's own degrees. Scoped to domicile+exaltation rulers, which the
+    # evidence layer can look up reliably; term/face rulers are not exposed
+    # as plain sign-lookups here, so are left out rather than guessed at.
+    if manners_sig is None:
+        tally: dict[str, int] = {}
+        for target in ("Moon", "Mercury"):
+            pt = manners_pool.get(target)
+            t_sign = str((pt or {}).get("sign") or "")
+            for ruler in (_DOMICILE_BY_SIGN.get(t_sign), _EXALTATION_BY_SIGN.get(t_sign)):
+                if ruler:
+                    tally[ruler] = tally.get(ruler, 0) + 1
+        if tally:
+            manners_sig = max(tally, key=lambda n: tally[n])
+            manners_rule = 5
+
+    if manners_sig and manners_rule:
+        sig_p = manners_pool.get(manners_sig)
+        score = (_mapping(sig_p.get("dignities")).get("total_score", 0) or 0) if sig_p else 0
+        afflicted = bool(_sequence(sig_p.get("maltreatments"))) if sig_p else False
+        well_dignified = score > 0 and not afflicted
+        table_entry = _MANNERS_CHAR.get(manners_sig)
+        rule_desc = {
+            1: "occupying the ascending sign",
+            2: "joined to the Moon or Mercury",
+            3: "Lord of the ascendant, his own dispositor beholding him with aspect",
+            4: "in partile aspect to the Moon or Mercury",
+            5: "holding most essential dignity in the places of the Moon and Mercury",
+        }[manners_rule]
+        if table_entry:
+            character = table_entry[0] if well_dignified else table_entry[1]
+            char_clause = f" Well-dignified {manners_sig} reads: {character}." if well_dignified else f" Ill-dignified {manners_sig} reads: {character}."
+        else:
+            char_clause = (
+                f" Lilly's own Chapter CVIII gives no separate character entry for {manners_sig} as "
+                "significator - the Sun and Moon there only modify another planet's manners by "
+                "combustion or increasing light, so no table lookup is reported for this branch."
+            )
+        add(
+            "manners_significator",
+            (
+                f"{manners_sig} is the significator of manners, selected by rule {manners_rule} of five "
+                f"({rule_desc})." + char_clause
+            ),
+            "William Lilly, Christian Astrology (1647)",
+            "lilly_manners_significator_cascade",
+            "analysis.planets_forensic[all]; analysis.angles.Ascendant",
+            (
+                "Names the significator and which of five ordered rules resolved it, then reads "
+                "Lilly's own two-state table (well- or ill-dignified) for that specific planet. Do "
+                "not blend the two states; the chart's own dignity score and affliction status pick "
+                "exactly one."
+            ),
+            {"significator": manners_sig, "rule": manners_rule, "well_dignified": well_dignified},
+        )
+
+    # Lilly, Christian Astrology, Book III, Chap. CXLVIII, printed pp. 624-626:
+    # the significator of profession is chosen from exactly three candidates -
+    # Mars, Venus, Mercury - through five ordered fallback rules, each used
+    # only if the previous fails to resolve. Orbs and the "rises before the
+    # Sun" (oriental) test are Lilly's own, read from the facsimile this
+    # session; they are not the engine's general Ptolemaic moieties.
+    mars_p, venus_p, mercury_p, moon_p, sun_p = (
+        planets.get("Mars"), planets.get("Venus"), planets.get("Mercury"),
+        planets.get("Moon"), planets.get("Sun"),
+    )
+    mc_sign = str(midheaven.get("sign") or "")
+    if mars_p and venus_p and mercury_p and moon_p and sun_p and mc_sign:
+        def _lon(p: Mapping[str, Any]) -> Optional[float]:
+            try:
+                return float(p.get("longitude"))
+            except (TypeError, ValueError):
+                return None
+
+        def _sep(a: float, b: float) -> float:
+            d = abs(a - b) % 360.0
+            return d if d <= 180.0 else 360.0 - d
+
+        def _is_combust(p: Mapping[str, Any]) -> bool:
+            status = str(p.get("solar_status") or "").upper()
+            return "COMBUST" in status or "UNDER" in status
+
+        def _own_dignity(p: Mapping[str, Any]) -> bool:
+            breakdown = _mapping(_mapping(p.get("dignities")).get("score_breakdown"))
+            return bool(breakdown.get("domicile")) or bool(breakdown.get("exaltation"))
+
+        candidates = {"Mars": mars_p, "Venus": venus_p, "Mercury": mercury_p}
+        chosen: Optional[str] = None
+        rule_no: Optional[int] = None
+        moon_lon = _lon(moon_p)
+        sun_lon = _lon(sun_p)
+
+        # Rule 1: in the 10th/1st/7th, in its own domicile or exaltation, clear of the Sun.
+        for name, p in candidates.items():
+            if p.get("house") in (10, 1, 7) and _own_dignity(p) and not _is_combust(p):
+                chosen, rule_no = name, 1
+                break
+
+        # Rule 2: Lord of the Midheaven sign, and essentially dignified.
+        if chosen is None:
+            mc_ruler = _DOMICILE_BY_SIGN.get(mc_sign)
+            if mc_ruler in candidates and _own_dignity(candidates[mc_ruler]):
+                chosen, rule_no = mc_ruler, 2
+
+        # Rules 3-4: aspect to the Moon - partile first, then within Lilly's moiety.
+        moon_aspects: dict[str, tuple[float, str] | None] = {}
+        if moon_lon is not None:
+            for name, p in candidates.items():
+                lon = _lon(p)
+                if lon is None:
+                    continue
+                sep = _sep(lon, moon_lon)
+                best = None
+                for asp_name, asp_deg in (("conjunction", 0.0), ("sextile", 60.0), ("square", 90.0),
+                                           ("trine", 120.0), ("opposition", 180.0)):
+                    orb = abs(sep - asp_deg)
+                    moiety = (_LILLY_ORB["Moon"] + _LILLY_ORB[name]) / 2.0
+                    if orb <= moiety and (best is None or orb < best[0]):
+                        best = (orb, asp_name)
+                moon_aspects[name] = best
+        if chosen is None:
+            partile = {n: b for n, b in moon_aspects.items() if b and b[0] <= 1.0}
+            if partile:
+                chosen = min(partile, key=lambda n: partile[n][0])
+                rule_no = 3
+        if chosen is None:
+            in_orb = {n: b for n, b in moon_aspects.items() if b}
+            unafflicted = {
+                n: b for n, b in in_orb.items()
+                if not _is_combust(candidates[n])
+                and not _sequence(candidates[n].get("maltreatments"))
+            }
+            if unafflicted:
+                chosen = min(unafflicted, key=lambda n: unafflicted[n][0])
+                rule_no = 4
+
+        # Rule 5: last resort, whichever next rises before the Sun (oriental).
+        if chosen is None and sun_lon is not None:
+            oriental = [n for n, p in candidates.items() if p.get("is_oriental")]
+            if oriental:
+                chosen = min(oriental, key=lambda n: _sep(_lon(candidates[n]) or 0.0, sun_lon))
+                rule_no = 5
+
+        if chosen and rule_no:
+            chosen_p = candidates[chosen]
+            others = [n for n in candidates if n != chosen]
+            mixing = None
+            for other in others:
+                lon_o, lon_c = _lon(candidates[other]), _lon(chosen_p)
+                if lon_o is None or lon_c is None:
+                    continue
+                sep = _sep(lon_o, lon_c)
+                moiety = (_LILLY_ORB[chosen] + _LILLY_ORB[other]) / 2.0
+                for asp_name, asp_deg in (("conjunction", 0.0), ("sextile", 60.0), ("trine", 120.0)):
+                    if abs(sep - asp_deg) <= moiety:
+                        mixing = other
+                        break
+                if mixing:
+                    break
+            rule_desc = {
+                1: "posited in an angle, in his own domicile or exaltation, clear of the Sun",
+                2: "Lord of the Midheaven sign and essentially dignified",
+                3: "in partile aspect to the Moon",
+                4: "aspecting the Moon within orb, unafflicted",
+                5: "the last-resort candidate, rising before the Sun",
+            }[rule_no]
+            late_note = (
+                " Lilly notes natives resolved only by rules three through five typically handle "
+                "an ignoble trade or none at all; this native resolved by rule "
+                f"{rule_no}, which falls in that range."
+                if rule_no >= 3
+                else ""
+            )
+            mixing_note = (
+                f" {chosen} stands in a good aspect to {mixing}, which by Lilly's own mixture rule "
+                f"means the trade may follow {mixing}'s signification as well as {chosen}'s."
+                if mixing
+                else ""
+            )
+            add(
+                "profession_significator",
+                (
+                    f"{chosen} is the significator of profession, selected by rule {rule_no} of five "
+                    f"({rule_desc})."
+                    + late_note + mixing_note
+                ),
+                "William Lilly, Christian Astrology (1647)",
+                "lilly_profession_significator_cascade",
+                "analysis.planets_forensic[Mars,Venus,Mercury,Moon,Sun]; analysis.angles.Midheaven",
+                (
+                    "Names which planet governs the native's trade and by which of five ordered "
+                    "rules, not the trade itself. The candidate pool is fixed at three planets by "
+                    "Lilly's own text; do not substitute a different planet even if better dignified "
+                    "elsewhere in the chart."
+                ),
+                {"significator": chosen, "rule": rule_no, "mixing_planet": mixing},
+            )
 
     # Valens II.35, pp. 106-108: eleven lunar configurations, each with the
     # topic it signifies and the planet prevailing through it. The engine

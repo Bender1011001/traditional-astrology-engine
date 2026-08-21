@@ -1592,6 +1592,41 @@ def _causative_place_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
     return paragraphs
 
 
+def _manners_significator_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
+    """Render Lilly, Christian Astrology, Book III, Chap. CVII-CVIII.
+
+    Five ordered fallback rules select a single significator of manners across
+    all seven planets, then his own two-state (well/ill dignified) character
+    table reads that specific planet. Report exactly which rule resolved it
+    and which of the two states fired; Lilly gives no Sun/Moon rows in his own
+    table, so that gap is stated rather than filled in from elsewhere.
+    """
+    if not items:
+        return []
+    paragraphs = ["## Significator of Manners (Lilly, Christian Astrology III.CVII-CVIII)"]
+    for item in items:
+        paragraphs.append(_evidence_sentence(item))
+    return paragraphs
+
+
+def _profession_significator_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
+    """Render Lilly, Christian Astrology, Book III, Chap. CXLVIII-CXLIX.
+
+    The significator of profession is chosen from exactly three candidates -
+    Mars, Venus, Mercury - through five ordered rules; which rule resolved it
+    changes how the result should read (Lilly's own text says natives resolved
+    late in the cascade typically handle an ignoble trade or none at all). The
+    emitter reports the rule number and any mixture with a second candidate;
+    this renders that as written, without collapsing it to a single planet.
+    """
+    if not items:
+        return []
+    paragraphs = ["## Significator of Profession (Lilly, Christian Astrology III.CXLVIII-CXLIX)"]
+    for item in items:
+        paragraphs.append(_evidence_sentence(item))
+    return paragraphs
+
+
 def _climacteric_year_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
     """Render Valens V.2, printed p. 210.
 
@@ -3419,6 +3454,8 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any], scope: str = "ful
     degree_qualities = _group(packet, "degree_quality")
     bound_delineations = _group(packet, "bound_delineation")
     causative_place = _group(packet, "causative_place")
+    profession_significator = _group(packet, "profession_significator")
+    manners_significator = _group(packet, "manners_significator")
     climacteric_years = _group(packet, "climacteric_year")
     fixed_stars = _group(packet, "fixed_star")
     dispositors = _group(packet, "dispositor_network")
@@ -3543,6 +3580,8 @@ def compose_deterministic_draft(chart_data: Mapping[str, Any], scope: str = "ful
     )
     lines.extend(_bound_delineation_paragraphs(bound_delineations))
     lines.extend(_causative_place_paragraphs(causative_place))
+    lines.extend(_manners_significator_paragraphs(manners_significator))
+    lines.extend(_profession_significator_paragraphs(profession_significator))
     lines.extend(_degree_quality_paragraphs(degree_qualities))
     lines.extend(_lunar_cycle_paragraphs(lunar_cycle))
     lines.extend(_lunar_mansion_scope_paragraphs(lunar_mansion_scope))
