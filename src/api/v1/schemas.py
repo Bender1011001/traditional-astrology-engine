@@ -1,6 +1,11 @@
+import re
 from typing import List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+
+# Plausible address only — not RFC 5322. Invalid values are dropped to None
+# so a typo never 422s a free reading request.
+_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
 class ChartRequest(BaseModel):
@@ -9,6 +14,21 @@ class ChartRequest(BaseModel):
     city: str = Field(..., max_length=150)
     state: Optional[str] = Field(None, max_length=100)
     name: Optional[str] = Field(None, max_length=150)
+    email: Optional[str] = Field(None, max_length=255)
+
+    @field_validator("email", mode="before")
+    @classmethod
+    def coerce_optional_email(cls, value):
+        if value is None:
+            return None
+        if not isinstance(value, str):
+            return None
+        stripped = value.strip()
+        if not stripped or len(stripped) > 255:
+            return None
+        if not _EMAIL_RE.match(stripped):
+            return None
+        return stripped.lower()
     age: Optional[int] = Field(None, ge=0, le=150)
     analysis_date: Optional[str] = Field(None, max_length=20)
     house_system: Optional[str] = Field(None, max_length=20)

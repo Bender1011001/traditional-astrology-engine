@@ -4,6 +4,7 @@ import logging
 import re
 import time
 import uuid
+from datetime import datetime, timezone
 from typing import Any
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
@@ -13,7 +14,13 @@ from src.api.v1.auth import get_current_user
 from src.api.v1.client_ip import get_client_ip
 from src.api.v1.schemas import ChartRequest  # type: ignore
 from src.database.core import get_db
-from src.database.models import AsyncReportTask, ChartEvent, Lead, User
+from src.database.models import (
+    AsyncReportTask,
+    ChartEvent,
+    Lead,
+    ReadingEmailOptIn,
+    User,
+)
 from src.services.admin_notifier import notify_chart_created
 from src.services.premium_generator import (
     generate_premium_report_task,
@@ -35,6 +42,7 @@ FREE_CHART_EVENT_TYPE = "free_complete_analysis"
 def _safe_chart_payload(chart_request: ChartRequest) -> dict[str, Any]:
     payload = chart_request.model_dump()
     payload.pop("access_token", None)
+    payload.pop("email", None)
     return payload
 
 
@@ -127,6 +135,10 @@ async def request_premium_guest_reading(
         request_meta["longitude"] = chart_request.longitude
     if chart_request.time_unknown:
         request_meta["time_unknown"] = True
+    # Valid optional inbox copy — same key the paid generator already emails.
+    # Invalid/blank emails are already None on ChartRequest and are skipped.
+    if chart_request.email:
+        request_meta["customer_email"] = chart_request.email
 
     task = AsyncReportTask(
         id=task_id,
@@ -136,6 +148,14 @@ async def request_premium_guest_reading(
 
     db.add(event)
     db.add(task)
+    if chart_request.email:
+        db.add(
+            ReadingEmailOptIn(
+                chart_event_id=event.id,
+                email=chart_request.email,
+                consented_at=datetime.now(timezone.utc),
+            )
+        )
     db.commit()
     db.refresh(event)
     db.refresh(task)

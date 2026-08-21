@@ -445,6 +445,10 @@ function setupForm() {
             chartPayload.latitude = parseFloat(latVal);
             chartPayload.longitude = parseFloat(lonVal);
         }
+        const email = (document.getElementById("readingEmail")?.value || "").trim();
+        if (email) {
+            chartPayload.email = email;
+        }
 
         // Save so report feedback and browser refreshes can preserve context.
         localStorage.setItem("ta_chart_payload", JSON.stringify(chartPayload));

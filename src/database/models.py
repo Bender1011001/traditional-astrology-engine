@@ -323,6 +323,33 @@ class ChartEvent(Base):
     )
 
     feedback = relationship("ReadingFeedbackEvent", back_populates="chart_event")
+    email_opt_ins = relationship("ReadingEmailOptIn", back_populates="chart_event")
+
+
+class ReadingEmailOptIn(Base):
+    """
+    Optional inbox copy of a free natal reading.
+
+    This is not an account. Birth data is not stored here — only the email
+    the visitor asked us to send the finished reading to, linked to the
+    chart event that produced it.
+    """
+
+    __tablename__ = "reading_email_opt_ins"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    chart_event_id = Column(
+        String, ForeignKey("chart_events.id"), nullable=False, index=True
+    )
+    email = Column(String, nullable=False, index=True)
+    consented_at = Column(
+        DateTime, default=lambda: datetime.now(timezone.utc), nullable=False
+    )
+    created_at = Column(
+        DateTime, default=lambda: datetime.now(timezone.utc), index=True
+    )
+
+    chart_event = relationship("ChartEvent", back_populates="email_opt_ins")
 
 
 class ReadingFeedbackEvent(Base):

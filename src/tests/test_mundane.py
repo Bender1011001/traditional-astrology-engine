@@ -124,3 +124,18 @@ def test_mundane_engine_aries_ingress():
     # The Sun longitude should be very close to 0 (or 360)
     lon = result["longitude"]
     assert lon < 1.0 or lon > 359.0
+
+
+def test_hierarchy_report_arctic_latitude_does_not_crash():
+    """Placidus is undefined above the Arctic Circle; mundane report must degrade."""
+    engine = MundaneEngine(jd=2447965.5, lat=69.65, lon=18.95)
+    report = engine.get_hierarchy_report()
+    assert report
+    rank_1 = [item for item in report if item["rank"] == 1]
+    assert rank_1
+    note = rank_1[0]["data"].get("note", "")
+    assert "Placidus cusps were unavailable" in note
+
+    victor = engine.calculate_al_mubtazz(engine.get_aries_ingress(1990)["jd"])
+    assert "victor" in victor
+    assert "Placidus cusps were unavailable" in victor.get("note", "")

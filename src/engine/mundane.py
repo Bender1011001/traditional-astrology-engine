@@ -60,6 +60,32 @@ class MundaneEngine:
         self.lon = lon
         self.comets = []  # type: ignore
 
+    def _houses_placidus_or_whole_sign(self, jd: float):
+        """Placidus cusps when defined; whole-sign fallback at extreme latitudes."""
+        try:
+            return swe.houses(jd, self.lat, self.lon, b"P"), None
+        except swe.Error as exc:
+            logger.warning(
+                "Placidus swe.houses failed at latitude %.4f: %s. Falling back to whole-sign.",
+                self.lat,
+                exc,
+            )
+            try:
+                return swe.houses(jd, self.lat, self.lon, b"W"), (
+                    "Placidus cusps were unavailable at this latitude; "
+                    "used whole-sign houses."
+                )
+            except swe.Error as fallback_exc:
+                logger.warning(
+                    "Whole-sign swe.houses also failed at latitude %.4f: %s.",
+                    self.lat,
+                    fallback_exc,
+                )
+                return None, (
+                    "Placidus cusps were unavailable at this latitude; "
+                    "house cusps could not be computed."
+                )
+
     def add_comet(self, name: str, color: str, tail_direction: str):
         """
         Classification of comets by color and tail direction.
@@ -401,7 +427,39 @@ class MundaneEngine:
 
         # 2. Timing Rule (Quadrants of Intensification)
         # Calculate local chart for eclipse time
-        houses, ascmc = swe.houses(eclipse["jd"], self.lat, self.lon, b"P")
+        houses_result, house_note = self._houses_placidus_or_whole_sign(eclipse["jd"])
+        if houses_result is None:
+            y, m, d, _h = swe.revjul(eclipse["jd"])
+            date_utc = f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+            sign = eclipse["sign"]
+            tri_name = SIGN_TO_TRI_NAME.get(sign, "Unknown")
+            regions = CHOROGRAPHY.get(tri_name, [])
+            return {
+                "jd": eclipse["jd"],
+                "date_utc": date_utc,
+                "longitude": eclipse["longitude"],
+                "sign": (
+                    eclipse["sign"].value
+                    if hasattr(eclipse["sign"], "value")
+                    else str(eclipse["sign"])
+                ),
+                "degree": round(eclipse["degree"], 2),
+                "longitude_fmt": format_longitude(eclipse["longitude"]),
+                "house_quadrant": None,
+                "duration_hours": None,
+                "central_phase_minutes": None,
+                "influence_years": influence_years,
+                "influence_months": influence_months,
+                "influence_note": influence_note,
+                "quadrant": None,
+                "intensification": None,
+                "chorography_triplicity": tri_name,
+                "chorography_regions": regions,
+                "chorography_note": "Regions are traditional chorography mappings by triplicity, not modern visibility maps.",
+                "note": house_note,
+            }
+
+        houses, ascmc = houses_result
         asc = ascmc[0]
         mc = ascmc[1]
         dsc = (asc + 180) % 360
@@ -454,7 +512,7 @@ class MundaneEngine:
         y, m, d, _h = swe.revjul(eclipse["jd"])
         date_utc = f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
 
-        return {
+        result = {
             "jd": eclipse["jd"],
             "date_utc": date_utc,
             "longitude": eclipse["longitude"],
@@ -479,6 +537,9 @@ class MundaneEngine:
             "chorography_regions": regions,
             "chorography_note": "Regions are traditional chorography mappings by triplicity, not modern visibility maps.",
         }
+        if house_note:
+            result["note"] = house_note
+        return result
 
     def get_latest_great_conjunction(self) -> Optional[Dict]:
         """
@@ -600,7 +661,14 @@ class MundaneEngine:
         from .lots import calculate_lot
 
         # 1. Establish Ingress Chart
-        cusps, ascmc = swe.houses(ingress_jd, self.lat, self.lon, b"P")
+        houses_result, house_note = self._houses_placidus_or_whole_sign(ingress_jd)
+        if houses_result is None:
+            return {
+                "error": "al-mubtazz unavailable",
+                "note": house_note,
+                "ingress_jd": ingress_jd,
+            }
+        cusps, ascmc = houses_result
         asc = ascmc[0]
         sun_pos = swe.calc_ut(ingress_jd, swe.SUN, swe.FLG_SWIEPH)[0][0]
         moon_pos = swe.calc_ut(ingress_jd, swe.MOON, swe.FLG_SWIEPH)[0][0]
@@ -660,13 +728,16 @@ class MundaneEngine:
 
         winner = max(scores, key=scores.get)  # type: ignore
 
-        return {
+        result = {
             "victor": winner,
             "score": scores[winner],
             "breakdown": scores,
             "ingress_jd": ingress_jd,
             "sect": sect,
         }
+        if house_note:
+            result["note"] = house_note
+        return result
 
     def get_mighty_firdaria(self) -> Dict:
         """

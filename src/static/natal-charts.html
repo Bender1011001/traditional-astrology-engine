@@ -160,12 +160,16 @@
           <label for="birthState">State / Country</label>
           <input type="text" id="birthState" name="birthState" placeholder="e.g. CA or United Kingdom" autocomplete="address-level1" />
         </div>
+        <div class="form-field">
+          <label for="readingEmail">Email me a copy (optional)</label>
+          <input type="email" id="readingEmail" name="readingEmail" placeholder="you@example.com" autocomplete="email" />
+        </div>
       </div>
       <button type="submit" class="btn-cta" id="submitBtn">
         <span class="btn-text">✦ Calculate My Free Traditional Chart</span>
         <span class="btn-loading hidden">Starting LLM chart...</span>
       </button>
-      <p class="form-note">Free traditional chart · No account · No email. Keep this tab open while it generates. Calculator-intent users can also start from the <a class="link-gold" href="/traditional-birth-chart-calculator.html">traditional astrology calculator</a>.</p>
+      <p class="form-note">Free traditional chart · No account required. We'll email your reading and nothing else. Keep this tab open while it generates. Calculator-intent users can also start from the <a class="link-gold" href="/traditional-birth-chart-calculator.html">traditional astrology calculator</a>.</p>
       <div class="trust-signals" style="display:flex; justify-content:center; gap:1.5rem; margin-top:1rem; font-size:0.8rem; color:rgba(255,255,255,0.6); align-items:center;">
         <span>🔒 We never sell your data.</span>
         <span>🪐 Swiss Ephemeris · Whole Sign Houses</span>
@@ -306,7 +310,7 @@
 </footer>
 </main>
 <script src="basic.js"></script>
-<script type="module" src="/js/reading-app.js?v=rev20260816convert1"></script>
+<script type="module" src="/js/reading-app.js?v=rev20260821email1"></script>
 
   <script>
     if ('serviceWorker' in navigator) {

@@ -2,6 +2,8 @@
 
 from unittest.mock import patch
 
+import swisseph as swe
+
 from src.engine.models import Chart, Planet, PlanetName
 from src.engine.primary_directions import DirectionResult, PrimaryDirectionsEngine
 
@@ -202,3 +204,60 @@ def test_naibod_key():
     assert abs(PrimaryDirectionsEngine.naibod_key(0.9856) - 1.0) < 0.001
     assert abs(PrimaryDirectionsEngine.get_arc_from_years(1.0, key="Naibod") - 0.9856) < 0.001
     assert abs(PrimaryDirectionsEngine.get_years_from_arc(0.9856, key="Naibod") - 1.0) < 0.001
+
+
+@patch("swisseph.houses_armc")
+def test_circumambulations_placidus_fallback_keeps_years_and_note(mock_armc):
+    sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
+    chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
+
+    def houses_for_armc(_armc, _lat, _epsilon, hsys):
+        if hsys == b"P":
+            raise swe.Error("swisseph.houses_armc: error")
+        return None, [10.0, 280.0]
+
+    mock_armc.side_effect = houses_for_armc
+
+    result = PrimaryDirectionsEngine.calculate_circumambulations(
+        chart, 69.65, max_years=2
+    )
+
+    assert len(result) == 3
+    assert result[0]["age"] == 0
+    assert result[0]["directed_asc_lon"] == 10.0
+    assert "Placidus cusps were unavailable" in result[0]["note"]
+    assert "whole-sign" in result[0]["note"]
+
+
+@patch("swisseph.houses_armc")
+def test_circumambulations_skip_year_when_all_house_systems_fail(mock_armc):
+    sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
+    chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
+    mock_armc.side_effect = swe.Error("swisseph.houses_armc: error")
+
+    result = PrimaryDirectionsEngine.calculate_circumambulations(
+        chart, 69.65, max_years=1
+    )
+
+    assert len(result) == 2
+    assert result[0]["skipped"] is True
+    assert "Placidus cusps were unavailable" in result[0]["note"]
+
+
+@patch("swisseph.houses_armc")
+def test_current_distributor_placidus_fallback_adds_note(mock_armc):
+    sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
+    chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
+
+    def houses_for_armc(_armc, _lat, _epsilon, hsys):
+        if hsys == b"P":
+            raise swe.Error("swisseph.houses_armc: error")
+        return None, [10.0, 280.0]
+
+    mock_armc.side_effect = houses_for_armc
+
+    result = PrimaryDirectionsEngine.calculate_current_distributor(chart, 10.0, 69.65)
+
+    assert result["type"] == "Distributor (Term Ruler)"
+    assert result["directed_ascendant_deg"] == 10.0
+    assert "Placidus cusps were unavailable" in result["note"]

@@ -264,7 +264,12 @@
               <label for="birthState">State / Country</label>
               <input type="text" id="birthState" name="birthState" placeholder="e.g. CA or United Kingdom" autocomplete="address-level1" />
             </div>
+            <div class="form-field">
+              <label for="readingEmail">Email me a copy (optional)</label>
+              <input type="email" id="readingEmail" name="readingEmail" placeholder="you@example.com" autocomplete="email" />
+            </div>
           </div>
+          <p class="form-note">We'll email your reading and nothing else. No spam, unsubscribe anytime.</p>
           <p id="formError" class="form-error" role="alert" aria-live="assertive" hidden style="color:#ff8a8a;font-size:0.9rem;margin:0.25rem 0 0.75rem;"></p>
           <button type="submit" class="btn-cta" id="submitBtn">
             <span class="btn-text">✦ Calculate My Free Reading</span>
@@ -705,7 +710,7 @@
     </footer>
   </main>
 
-  <script type="module" src="js/reading-app.js?v=rev20260816convert1"></script>
+  <script type="module" src="js/reading-app.js?v=rev20260821email1"></script>
   <script>
     (function setupHomepageProfectionTool() {
       var form = document.getElementById('quickProfectionForm');

@@ -1,7 +1,7 @@
 import logging
 import math
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import swisseph as swe
 
@@ -220,6 +220,30 @@ class PrimaryDirectionsEngine:
             mundane_pos=m_pos,
         )
 
+    _PLACIDUS_FALLBACK_NOTE = (
+        "Placidus cusps were unavailable at this latitude; "
+        "directed Ascendant used whole-sign houses."
+    )
+    _PLACIDUS_UNAVAILABLE_NOTE = (
+        "Placidus cusps were unavailable at this latitude; "
+        "directed Ascendant could not be computed for the affected year(s)."
+    )
+
+    @classmethod
+    def _ascmc_from_armc(
+        cls, ramc: float, geo_lat: float, epsilon: float
+    ) -> Tuple[Optional[object], Optional[str]]:
+        """Directed angles from RAMC. Placidus first; whole-sign if Placidus is undefined."""
+        try:
+            _cusps, ascmc = swe.houses_armc(ramc, geo_lat, epsilon, b"P")
+            return ascmc, None
+        except swe.Error:
+            try:
+                _cusps, ascmc = swe.houses_armc(ramc, geo_lat, epsilon, b"W")
+                return ascmc, cls._PLACIDUS_FALLBACK_NOTE
+            except swe.Error:
+                return None, cls._PLACIDUS_UNAVAILABLE_NOTE
+
     @classmethod
     def calculate_current_distributor(
         cls, chart: Chart, age_years: float, geo_lat: float, key: str = "Naibod"
@@ -258,9 +282,25 @@ class PrimaryDirectionsEngine:
 
         # Calculate new Ascendant for this RAMC
         # swe.houses_armc(armc, lat, eps, hsys) - armc is in deg
+        ascmc, placidus_note = cls._ascmc_from_armc(ramc_directed, geo_lat, epsilon)
+        if ascmc is None:
+            logger.warning(
+                "Placidus distributor unavailable at latitude %.4f: %s",
+                geo_lat,
+                placidus_note,
+            )
+            return {
+                "error": "distributor unavailable",
+                "note": placidus_note or cls._PLACIDUS_UNAVAILABLE_NOTE,
+            }
+        if placidus_note:
+            logger.warning(
+                "Placidus distributor fell back to whole-sign at latitude %.4f",
+                geo_lat,
+            )
+
         try:
             # armc is RAMC.
-            cusps, ascmc = swe.houses_armc(ramc_directed, geo_lat, epsilon, b"P")
             asc_directed_lon = ascmc[0]
 
             # Get Term Ruler
@@ -290,7 +330,7 @@ class PrimaryDirectionsEngine:
                 partner = dignities["domicile"]
                 partner_reason = "Configured natal fallback before first directed ray"
 
-            return {
+            result = {
                 "type": "Distributor (Term Ruler)",
                 "planet": (
                     term_ruler.value
@@ -303,6 +343,9 @@ class PrimaryDirectionsEngine:
                 "arc": arc,
                 "description": f"The Directed Ascendant is at {asc_directed_lon:.2f}°, in the Terms of {term_ruler.value if hasattr(term_ruler, 'value') else term_ruler}. Partner: {partner.value if hasattr(partner, 'value') else partner} ({partner_reason}).",
             }
+            if placidus_note:
+                result["note"] = placidus_note
+            return result
         except Exception as e:
             return {"error": str(e)}
 
@@ -338,6 +381,9 @@ class PrimaryDirectionsEngine:
 
         table = []
         prev_ruler = None
+        placidus_note = None
+        any_fallback_occurred = False
+        skipped_years = []
         asc_rays = sorted(
             (
                 direction
@@ -349,16 +395,24 @@ class PrimaryDirectionsEngine:
             key=lambda direction: direction.years,
         )
 
-        def _directed_asc_at_age(age_years: float) -> float:
+        def _directed_asc_at_age(age_years: float) -> Optional[float]:
+            nonlocal placidus_note, any_fallback_occurred
             arc_at_age = cls.get_arc_from_years(age_years, key)
             ramc_at_age = (mc_ra + arc_at_age) % 360.0
-            _cusps_at_age, ascmc_at_age = swe.houses_armc(
-                ramc_at_age, geo_lat, epsilon, b"P"
+            ascmc_at_age, note = cls._ascmc_from_armc(
+                ramc_at_age, geo_lat, epsilon
             )
+            if note:
+                placidus_note = note
+                any_fallback_occurred = True
+            if ascmc_at_age is None:
+                return None
             return float(ascmc_at_age[0])
 
-        def _bound_ruler_at_age(age_years: float) -> PlanetName:
+        def _bound_ruler_at_age(age_years: float) -> Optional[PlanetName]:
             longitude = _directed_asc_at_age(age_years)
+            if longitude is None:
+                return None
             sign_at_age = list(Sign)[int(longitude / 30.0) % 12]
             degree_at_age = longitude % 30.0
             for ruler_at_age, end_degree in EGYPTIAN_TERMS[sign_at_age]:
@@ -370,17 +424,25 @@ class PrimaryDirectionsEngine:
             arc = cls.get_arc_from_years(float(year), key)
             ramc_dir = (mc_ra + arc) % 360.0
 
-            try:
-                _cusps, ascmc = swe.houses_armc(ramc_dir, geo_lat, epsilon, b"P")
-                asc_dir_lon = ascmc[0]
-            except Exception as e:
-                logger.warning(
-                    "Directed house calc failed for year %d: %s",
-                    year,
-                    repr(e),
-                    exc_info=True,
+            # Scoped per year: empirically this is a clean latitude gate, not
+            # RAMC-dependent, so a stale note from an earlier year can't reach
+            # a later one today - but don't rely on that holding forever.
+            placidus_note = None
+            ascmc, note = cls._ascmc_from_armc(ramc_dir, geo_lat, epsilon)
+            if note:
+                placidus_note = note
+                any_fallback_occurred = True
+            if ascmc is None:
+                skipped_years.append(year)
+                table.append(
+                    {
+                        "age": year,
+                        "skipped": True,
+                        "note": note or cls._PLACIDUS_UNAVAILABLE_NOTE,
+                    }
                 )
                 continue
+            asc_dir_lon = ascmc[0]
 
             # Determine which bound the directed Asc falls in
             sign_idx = int(asc_dir_lon / 30) % 12
@@ -414,13 +476,18 @@ class PrimaryDirectionsEngine:
                 # model. Bisect the first instant at which the new bound ruler
                 # replaces the prior ruler instead of reporting only the next
                 # whole-year sample.
+                exact_ok = True
                 for _ in range(48):
                     middle = (low + high) / 2.0
-                    if _bound_ruler_at_age(middle) == prior_ruler:
+                    ruler_at_middle = _bound_ruler_at_age(middle)
+                    if ruler_at_middle is None:
+                        exact_ok = False
+                        break
+                    if ruler_at_middle == prior_ruler:
                         low = middle
                     else:
                         high = middle
-                exact_transition_age = high
+                exact_transition_age = high if exact_ok else None
             prev_ruler = bound_ruler
 
             # Partner: the most recent ray to reach the Ascendant prorogation.
@@ -457,7 +524,21 @@ class PrimaryDirectionsEngine:
                     else None
                 ),
             }
+            if placidus_note:
+                entry["note"] = placidus_note
             table.append(entry)
+
+        if skipped_years:
+            logger.warning(
+                "Placidus circumambulations unavailable at latitude %.4f for year(s) %s",
+                geo_lat,
+                skipped_years,
+            )
+        elif any_fallback_occurred:
+            logger.warning(
+                "Placidus circumambulations fell back to whole-sign at latitude %.4f",
+                geo_lat,
+            )
 
         return table
 

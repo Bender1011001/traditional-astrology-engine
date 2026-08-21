@@ -274,6 +274,11 @@ TIER_EMAIL_CONFIG = {
         "report_name": "Full Natal Chart Reading",
         "description": "sect, planetary condition, whole-sign topics, sourced timing techniques, and explicit doctrinal limits",
     },
+    "free_llm_chart": {
+        "report_name": "Natal Chart Reading",
+        "description": "who you are and how your life has gone",
+        "cover_line": "This reading covers who you are and how your life has gone.",
+    },
 }
 TIER_EMAIL_DEFAULT = TIER_EMAIL_CONFIG["forensic_nativity"]
 
@@ -288,6 +293,10 @@ def _send_report_email(
     email_cfg = TIER_EMAIL_CONFIG.get(tier, TIER_EMAIL_DEFAULT)
     report_name = email_cfg["report_name"]
     description = email_cfg["description"]
+    cover_line = email_cfg.get(
+        "cover_line",
+        f"This source-cited edition covers {description}.",
+    )
 
     html = f"""
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #222;">
@@ -301,7 +310,7 @@ def _send_report_email(
         </p>
         <p>The PDF is attached to this email. Save it to your device — this is your permanent copy.</p>
         <p style="margin-top: 1.5rem; color: #555; font-size: 0.9rem;">
-          This source-cited edition covers {description}.
+          {cover_line}
         </p>
         <p style="margin-top: 1.5rem; color: #555; font-size: 0.9rem;">
           Questions or calculation corrections:
